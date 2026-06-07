@@ -24,12 +24,12 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
         aria-label="Main navigation"
         className="mx-auto flex w-full max-w-4xl flex-row items-center justify-between p-12"
       >
-        <div className="flex flex-row items-center gap-1 md:gap-4">
+        <div className="flex flex-row items-center gap-1 lg:gap-4">
           <Link to="/" aria-label="Home">
             <CalculatorIcon size={28} aria-hidden="true" />
           </Link>
           <NavigationMenu>
-            <NavigationMenuList className="flex-nowrap gap-1 md:gap-4">
+            <NavigationMenuList className="flex-nowrap gap-1 lg:gap-4">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.to}>
                   <NavigationMenuLink

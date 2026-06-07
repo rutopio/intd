@@ -9,55 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AlgoRouteImport } from './routes/algo'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlgoIndexRouteImport } from './routes/algo/index'
 
-const AlgoRoute = AlgoRouteImport.update({
-  id: '/algo',
-  path: '/algo',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlgoIndexRoute = AlgoIndexRouteImport.update({
+  id: '/algo/',
+  path: '/algo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/algo': typeof AlgoRoute
+  '/algo/': typeof AlgoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/algo': typeof AlgoRoute
+  '/algo': typeof AlgoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/algo': typeof AlgoRoute
+  '/algo/': typeof AlgoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/algo'
+  fullPaths: '/' | '/algo/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/algo'
-  id: '__root__' | '/' | '/algo'
+  id: '__root__' | '/' | '/algo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AlgoRoute: typeof AlgoRoute
+  AlgoIndexRoute: typeof AlgoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/algo': {
-      id: '/algo'
-      path: '/algo'
-      fullPath: '/algo'
-      preLoaderRoute: typeof AlgoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/algo/': {
+      id: '/algo/'
+      path: '/algo'
+      fullPath: '/algo/'
+      preLoaderRoute: typeof AlgoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AlgoRoute: AlgoRoute,
+  AlgoIndexRoute: AlgoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

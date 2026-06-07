@@ -19,11 +19,18 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { DEFAULT_ITEMS, useSettings } from "@/hooks/use-settings"
@@ -31,11 +38,18 @@ import type { ItemConfig } from "@/lib/decompose"
 
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
-const NEW_ITEM: ItemConfig = { name: "", min: 1, max: 100, digits: [0, 5] }
+const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
+
+const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" })
+const graphemeCount = (s: string) => [...segmenter.segment(s)].length
 
 const rangeSchema = z
   .object({
-    name: z.string().trim().min(1, "請輸入品名"),
+    name: z
+      .string()
+      .trim()
+      .min(1, "請輸入品名")
+      .refine((s) => graphemeCount(s) <= 10, "至多10個字"),
     min: z.number().int().min(1, "需為正整數"),
     max: z.number().int().min(1, "需為正整數"),
     digits: z.array(z.number()).min(1, "至少選一個尾數"),
@@ -126,37 +140,47 @@ export function SettingsDialog() {
                   <div className="flex">
                     <form.Field name={`items[${index}].min`}>
                       {(minField) => (
-                        <Input
-                          aria-label={`${label} 最小值`}
-                          className={`${numInputClass} rounded-e-none`}
-                          id={`${fieldId}-${index}-min`}
-                          placeholder="價格下限"
-                          type="number"
-                          value={minField.state.value || ""}
-                          onBlur={minField.handleBlur}
-                          onChange={(e) =>
-                            minField.handleChange(
-                              e.target.value === ""
-                                ? 0
-                                : Number(e.target.value),
-                            )
-                          }
-                        />
+                        <InputGroup className="rounded-e-none">
+                          <InputGroupAddon>
+                            <InputGroupText>$</InputGroupText>
+                          </InputGroupAddon>
+                          <InputGroupInput
+                            aria-label={`${label} 最小值`}
+                            className={numInputClass}
+                            id={`${fieldId}-${index}-min`}
+                            placeholder="價格下限"
+                            type="number"
+                            value={minField.state.value || ""}
+                            onBlur={minField.handleBlur}
+                            onChange={(e) =>
+                              minField.handleChange(
+                                e.target.value === ""
+                                  ? 0
+                                  : Number(e.target.value),
+                              )
+                            }
+                          />
+                        </InputGroup>
                       )}
                     </form.Field>
-                    <Input
-                      aria-label={`${label} 最大值`}
-                      className={`${numInputClass} -ms-px rounded-s-none`}
-                      placeholder="價格上限"
-                      type="number"
-                      value={maxField.state.value || ""}
-                      onBlur={maxField.handleBlur}
-                      onChange={(e) =>
-                        maxField.handleChange(
-                          e.target.value === "" ? 0 : Number(e.target.value),
-                        )
-                      }
-                    />
+                    <InputGroup className="-ms-px rounded-s-none">
+                      <InputGroupAddon>
+                        <InputGroupText>$</InputGroupText>
+                      </InputGroupAddon>
+                      <InputGroupInput
+                        aria-label={`${label} 最大值`}
+                        className={numInputClass}
+                        placeholder="價格上限"
+                        type="number"
+                        value={maxField.state.value || ""}
+                        onBlur={maxField.handleBlur}
+                        onChange={(e) =>
+                          maxField.handleChange(
+                            e.target.value === "" ? 0 : Number(e.target.value),
+                          )
+                        }
+                      />
+                    </InputGroup>
                   </div>
                   <FieldError errors={maxField.state.meta.errors} />
                 </Field>
@@ -170,21 +194,22 @@ export function SettingsDialog() {
                 className="flex-1"
                 data-invalid={field.state.meta.errors.length > 0}
               >
-                <FieldLabel>可用尾數</FieldLabel>
+                <FieldLabel>價格尾數</FieldLabel>
                 <ToggleGroup
                   multiple
                   variant="outline"
                   spacing={0}
+                  className="w-full"
                   value={field.state.value.map(String)}
                   onValueChange={(v) => field.handleChange(v.map(Number))}
-                  aria-label={`${label}可用尾數`}
+                  aria-label={`${label}價格尾數`}
                 >
                   {DIGITS.map((d) => (
                     <ToggleGroupItem
                       key={d}
                       value={String(d)}
                       aria-label={`尾數 ${d}`}
-                      className="w-9 aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground"
+                      className="flex-1 shrink basis-0 px-0 aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground"
                     >
                       {d}
                     </ToggleGroupItem>
@@ -200,7 +225,7 @@ export function SettingsDialog() {
   }
 
   const body = (
-    <div className="-mx-6 flex flex-col gap-4 overflow-y-auto px-6 py-1 max-sm:max-h-none sm:max-h-[50vh]">
+    <div className="-mx-6 flex flex-col gap-4 overflow-y-auto px-6 py-1 max-lg:max-h-none lg:max-h-[50vh]">
       <form.Field name="items" mode="array">
         {(itemsField) => (
           <>
@@ -225,27 +250,22 @@ export function SettingsDialog() {
     </div>
   )
 
-  const footer = (
+  const desktopFooter = (
     <div className="-mx-6 -mb-6 flex items-center rounded-b-xl border-t bg-muted/50 px-6 py-4">
       <Button
         variant="ghost"
         className="text-destructive text-xs"
-        onClick={() => setConfirmReset(true)}
+        onClick={() => {
+          setOpen(false)
+          setConfirmReset(true)
+        }}
       >
         重設
       </Button>
       <div className="ml-auto flex gap-4">
-        {isMobile ? (
-          <DrawerClose asChild>
-            <Button variant="ghost" className="text-xs">
-              取消
-            </Button>
-          </DrawerClose>
-        ) : (
-          <AlertDialogCancel variant="ghost" className="text-xs">
-            取消
-          </AlertDialogCancel>
-        )}
+        <AlertDialogCancel variant="ghost" className="text-xs">
+          取消
+        </AlertDialogCancel>
         <Button
           className="min-w-24 text-xs"
           onClick={() => form.handleSubmit()}
@@ -255,6 +275,18 @@ export function SettingsDialog() {
         </Button>
       </div>
     </div>
+  )
+
+  const mobileFooter = (
+    <DrawerFooter>
+      <Button onClick={() => form.handleSubmit()}>
+        <CheckIcon className="size-3" aria-hidden="true" />
+        儲存
+      </Button>
+      <DrawerClose asChild>
+        <Button variant="outline">取消</Button>
+      </DrawerClose>
+    </DrawerFooter>
   )
 
   const resetConfirm = (
@@ -270,6 +302,7 @@ export function SettingsDialog() {
           <AlertDialogCancel>取消</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
+              setItems(DEFAULT_ITEMS)
               form.reset({ items: DEFAULT_ITEMS })
               setConfirmReset(false)
             }}
@@ -294,30 +327,31 @@ export function SettingsDialog() {
             設定
           </DrawerTitle>
           {body}
-          {footer}
-          {resetConfirm}
+          {mobileFooter}
         </DrawerContent>
       </Drawer>
     )
   }
 
   return (
-    <AlertDialog open={open} onOpenChange={handleOpenChange}>
-      <AlertDialogTrigger
-        render={
-          <Button variant="outline" size="icon" aria-label="設定">
-            <GearIcon />
-          </Button>
-        }
-      />
-      <AlertDialogContent className="gap-4 text-left sm:max-w-md">
-        <AlertDialogTitle className="font-heading font-medium leading-none">
-          設定
-        </AlertDialogTitle>
-        {body}
-        {footer}
-        {resetConfirm}
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      <AlertDialog open={open} onOpenChange={handleOpenChange}>
+        <AlertDialogTrigger
+          render={
+            <Button variant="outline" size="icon" aria-label="設定">
+              <GearIcon />
+            </Button>
+          }
+        />
+        <AlertDialogContent className="gap-4 text-left sm:max-w-md">
+          <AlertDialogTitle className="font-heading font-medium leading-none">
+            設定
+          </AlertDialogTitle>
+          {body}
+          {desktopFooter}
+        </AlertDialogContent>
+      </AlertDialog>
+      {resetConfirm}
+    </>
   )
 }

@@ -128,9 +128,12 @@ function App() {
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
-      <div className="flex items-start gap-2">
-        <div className="flex flex-col gap-1">
-          <InputGroup className="w-auto" aria-invalid={error !== null}>
+      <div className="flex w-full items-start justify-center gap-2 lg:w-auto">
+        <div className="flex flex-1 flex-col gap-1 lg:flex-none">
+          <InputGroup
+            className="w-full lg:w-auto"
+            aria-invalid={error !== null}
+          >
             <InputGroupAddon>
               <CurrencyCircleDollarIcon />
             </InputGroupAddon>
@@ -175,7 +178,7 @@ function App() {
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={nonce}
-                  className="flex flex-col items-stretch justify-center gap-4 lg:flex-row"
+                  className="flex w-full flex-col items-stretch justify-center gap-4 lg:w-auto lg:flex-row"
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? undefined : { opacity: 0, y: -8 }}
@@ -191,9 +194,9 @@ function App() {
                         delay: reduce ? 0 : idx * 0.06,
                         ease: "easeOut",
                       }}
-                      className="flex"
+                      className="flex w-full lg:w-auto"
                     >
-                      <Card className="h-full w-72">
+                      <Card className="h-full w-full lg:w-auto lg:min-w-72">
                         <CardHeader>
                           <CardTitle>
                             <Badge className="rounded-full">
@@ -206,13 +209,13 @@ function App() {
                             <TableHeader>
                               <TableRow>
                                 <TableHead>品名</TableHead>
-                                <TableHead className="text-right">
+                                <TableHead className="pl-4 text-right">
                                   數量
                                 </TableHead>
-                                <TableHead className="text-right">
+                                <TableHead className="pl-4 text-right">
                                   單價
                                 </TableHead>
-                                <TableHead className="text-right">
+                                <TableHead className="pl-4 text-right">
                                   總價
                                 </TableHead>
                               </TableRow>
@@ -220,14 +223,16 @@ function App() {
                             <TableBody>
                               {toRows(item).map((row) => (
                                 <TableRow key={row.name}>
-                                  <TableCell>{row.name}</TableCell>
-                                  <TableCell className="text-right font-mono">
+                                  <TableCell className="lg:whitespace-nowrap">
+                                    {row.name}
+                                  </TableCell>
+                                  <TableCell className="pl-4 text-right font-mono">
                                     {fmt(row.qty)}
                                   </TableCell>
-                                  <TableCell className="text-right font-mono">
+                                  <TableCell className="pl-4 text-right font-mono">
                                     {fmt(row.price)}
                                   </TableCell>
-                                  <TableCell className="text-right font-mono">
+                                  <TableCell className="pl-4 text-right font-mono">
                                     {fmt(row.total)}
                                   </TableCell>
                                 </TableRow>
@@ -282,8 +287,10 @@ function App() {
                       {cells.map((c) => (
                         <span
                           key={c.id}
-                          className={`-ms-px flex size-18 items-center justify-center border text-3xl first:ms-0 ${
-                            c.unit ? "font-light" : "font-bold text-primary/80"
+                          className={`-ms-px flex size-9 items-center justify-center border text-lg first:ms-0 lg:size-18 lg:text-3xl ${
+                            c.unit
+                              ? "bg-secondary font-light"
+                              : "font-bold text-foreground"
                           }`}
                         >
                           {c.char}
