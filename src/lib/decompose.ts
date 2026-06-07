@@ -9,11 +9,11 @@ export type Item = {
 }
 
 const BENTO_PRICES = Array.from({ length: 61 }, (_, i) => i + 90).filter(
-  (p) => p % 10 === 0 || p % 10 === 5 || p % 10 === 9
+  (p) => p % 10 === 0 || p % 10 === 5 || p % 10 === 9,
 )
 
 const DRINK_PRICES = Array.from({ length: 51 }, (_, i) => i + 40).filter(
-  (p) => p % 10 === 0 || p % 10 === 5
+  (p) => p % 10 === 0 || p % 10 === 5,
 )
 
 function solve(target: number): Item[] {
@@ -91,7 +91,7 @@ function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
     for (const c of both.slice(1)) {
       if (picks.some((p) => keyOf(p) === keyOf(c))) continue
       const sameCombo = picks.some(
-        (p) => p.bentoPrice === c.bentoPrice && p.drinkPrice === c.drinkPrice
+        (p) => p.bentoPrice === c.bentoPrice && p.drinkPrice === c.drinkPrice,
       )
       if (!sameCombo) {
         picks.push(c)

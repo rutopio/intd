@@ -1,14 +1,9 @@
-import { useRef, useState } from "react"
+import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
 import { createFileRoute } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
+import { useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -19,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { decompose, keyOf, type Item } from "@/lib/decompose"
+import { decompose, type Item, keyOf } from "@/lib/decompose"
 
 export const Route = createFileRoute("/")({ component: App })
 
@@ -48,6 +43,25 @@ function toRows(item: Item): Row[] {
 
 const fmt = (n: number) => n.toLocaleString("en-US")
 
+const CN_DIGITS = ["", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
+
+const cnDigit = (d: number) => CN_DIGITS[d] ?? ""
+
+function cnSlots(n: number) {
+  const yuan = n % 10
+  const shi = Math.floor(n / 10) % 10
+  const bai = Math.floor(n / 100) % 10
+  const qian = Math.floor(n / 1000) % 10
+  const wan = Math.floor(n / 10000)
+  return {
+    wan: wan > 0 ? String(wan).split("").map(Number).map(cnDigit).join("") : "",
+    qian: cnDigit(qian),
+    bai: cnDigit(bai),
+    shi: cnDigit(shi),
+    yuan: cnDigit(yuan),
+  }
+}
+
 function App() {
   const [amount, setAmount] = useState("")
   const [results, setResults] = useState<Item[] | null>(null)
@@ -62,7 +76,7 @@ function App() {
     targetRef.current = target
     seenRef.current = new Set()
     const picks = decompose(target)
-    picks.forEach((p) => seenRef.current.add(keyOf(p)))
+    for (const p of picks) seenRef.current.add(keyOf(p))
     setResults(picks)
     setNonce((n) => n + 1)
   }
@@ -71,7 +85,7 @@ function App() {
     if (targetRef.current === null) return
     const picks = decompose(targetRef.current, seenRef.current)
     if (picks.length === 0) return
-    picks.forEach((p) => seenRef.current.add(keyOf(p)))
+    for (const p of picks) seenRef.current.add(keyOf(p))
     setResults(picks)
     setNonce((n) => n + 1)
   }
@@ -110,66 +124,85 @@ function App() {
         (results.length === 0 ? (
           <p className="text-muted-foreground text-sm">無法湊出此價格</p>
         ) : (
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={nonce}
-              className="flex flex-wrap justify-center gap-4"
-              initial={reduce ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.18, ease: "easeOut" }}
-            >
-              {results.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={reduce ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.18,
-                    delay: reduce ? 0 : idx * 0.06,
-                    ease: "easeOut",
-                  }}
-                >
-                  <Card className="w-72">
-                <CardHeader>
-                  <CardTitle>
-                    方案 {idx + 1}（合計{" "}
-                    <span className="font-mono">{fmt(item.total)}</span> 元）
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>品名</TableHead>
-                        <TableHead className="text-right">數量</TableHead>
-                        <TableHead className="text-right">單價</TableHead>
-                        <TableHead className="text-right">總價</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {toRows(item).map((row) => (
-                        <TableRow key={row.name}>
-                          <TableCell>{row.name}</TableCell>
-                          <TableCell className="text-right font-mono">
-                            {fmt(row.qty)}
-                          </TableCell>
-                          <TableCell className="text-right font-mono">
-                            {fmt(row.price)}
-                          </TableCell>
-                          <TableCell className="text-right font-mono">
-                            {fmt(row.total)}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-                </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          <>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={nonce}
+                className="flex flex-wrap items-stretch justify-center gap-4"
+                initial={reduce ? false : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                transition={{ duration: 0.18, ease: "easeOut" }}
+              >
+                {results.map((item, idx) => (
+                  <motion.div
+                    key={keyOf(item)}
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.18,
+                      delay: reduce ? 0 : idx * 0.06,
+                      ease: "easeOut",
+                    }}
+                    className="flex"
+                  >
+                    <Card className="h-full w-72">
+                      <CardHeader>
+                        <CardTitle>
+                          方案 {idx + 1}（合計{" "}
+                          <span className="font-mono">{fmt(item.total)}</span>{" "}
+                          元）
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>品名</TableHead>
+                              <TableHead className="text-right">數量</TableHead>
+                              <TableHead className="text-right">單價</TableHead>
+                              <TableHead className="text-right">總價</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {toRows(item).map((row) => (
+                              <TableRow key={row.name}>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell className="text-right font-mono">
+                                  {fmt(row.qty)}
+                                </TableCell>
+                                <TableCell className="text-right font-mono">
+                                  {fmt(row.price)}
+                                </TableCell>
+                                <TableCell className="text-right font-mono">
+                                  {fmt(row.total)}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+            {(() => {
+              const s = cnSlots(results[0].total)
+              const slot = (v: string) =>
+                v ? (
+                  <span className="text-primary/80">{v}</span>
+                ) : (
+                  <span>─</span>
+                )
+              return (
+                <p className="text-sm leading-loose">
+                  合計 新台幣 {slot(s.wan)}萬 {slot(s.qian)}仟 {slot(s.bai)}佰{" "}
+                  {slot(s.shi)}拾 {slot(s.yuan)}元整
+                </p>
+              )
+            })()}
+          </>
         ))}
     </div>
   )
