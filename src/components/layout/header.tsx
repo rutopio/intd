@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 const GITHUB_URL = "https://github.com/ChingRu/idc"
 
 const navItems = [
+  // "/" is a prefix of every path, so it needs exact matching to avoid always being active
   { label: "分解", to: "/", exact: true },
   { label: "說明", to: "/algo", exact: false },
 ] as const

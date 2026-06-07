@@ -38,10 +38,12 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { DEFAULT_ITEMS, useSettings } from "@/hooks/use-settings"
 import type { ItemConfig } from "@/lib/decompose"
 
+// Display order of the last-digit toggles: 1-9 then 0.
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
 
+// Count by grapheme so emoji and surrogate pairs count as one character.
 const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" })
 const graphemeCount = (s: string) => [...segmenter.segment(s)].length
 
@@ -152,6 +154,7 @@ export function SettingsDialog() {
                             id={`${fieldId}-${index}-min`}
                             placeholder="價格下限"
                             type="number"
+                            // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
                             value={minField.state.value || ""}
                             onBlur={minField.handleBlur}
                             onChange={(e) =>
@@ -174,6 +177,7 @@ export function SettingsDialog() {
                         className={numInputClass}
                         placeholder="價格上限"
                         type="number"
+                        // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
                         value={maxField.state.value || ""}
                         onBlur={maxField.handleBlur}
                         onChange={(e) =>
@@ -203,6 +207,7 @@ export function SettingsDialog() {
                     variant="outline"
                     spacing={0}
                     className="w-max lg:w-full"
+                    // base-ui Toggle only accepts string values; convert at the boundary and keep number state internally.
                     value={field.state.value.map(String)}
                     onValueChange={(v) => field.handleChange(v.map(Number))}
                     aria-label={`${label}價格尾數`}
@@ -264,6 +269,7 @@ export function SettingsDialog() {
         variant="ghost"
         className="text-destructive text-xs"
         onClick={() => {
+          // Close settings first so only the reset confirmation dialog is open at once.
           setOpen(false)
           setConfirmReset(true)
         }}
@@ -367,6 +373,7 @@ export function SettingsDialog() {
                 variant="ghost"
                 className="shrink-0 text-destructive text-xs"
                 onClick={() => {
+                  // Close the settings drawer first so only one drawer is open at once.
                   setOpen(false)
                   setConfirmReset(true)
                 }}

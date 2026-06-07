@@ -1,15 +1,15 @@
 import {
   ArrowsClockwiseIcon,
-  CheckIcon,
   CopyIcon,
   CurrencyCircleDollarIcon,
 } from "@phosphor-icons/react"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import { useState } from "react"
-import { toast } from "sonner"
+import { useEffect, useRef, useState } from "react"
 import { z } from "zod"
+import { CopyDialog } from "@/components/copy-dialog"
 import { SettingsDialog } from "@/components/settings-dialog"
+import { ShareButton } from "@/components/share-button"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -30,10 +30,16 @@ import {
 import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useSettings } from "@/hooks/use-settings"
 import { decompose, type Item, keyOf } from "@/lib/decompose"
+import { fmt, toRows } from "@/lib/rows"
 
-export const Route = createFileRoute("/")({ component: App })
+const searchSchema = z.object({
+  p: z.coerce.number().int().positive().max(99999).optional().catch(undefined),
+})
 
-type Row = { name: string; qty: number; price: number; total: number }
+export const Route = createFileRoute("/")({
+  component: App,
+  validateSearch: searchSchema,
+})
 
 const amountSchema = z.coerce
   .number({ message: "請輸入金額" })
@@ -41,48 +47,22 @@ const amountSchema = z.coerce
   .positive("金額必須大於 0")
   .max(99999, "金額上限為99999")
 
+// Old persisted data has no lines field; filter it out so rendering does not crash.
 function isItem(x: unknown): x is Item {
   return typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
-}
-
-function toRows(item: Item): Row[] {
-  const rows: Row[] = []
-  for (const line of item.lines) {
-    if (line.qty > 0)
-      rows.push({
-        name: line.name,
-        qty: line.qty,
-        price: line.price,
-        total: line.price * line.qty,
-      })
-  }
-  if (item.bags > 0)
-    rows.push({ name: "塑膠袋", qty: item.bags, price: 1, total: item.bags })
-  return rows
-}
-
-const fmt = (n: number) => n.toLocaleString("en-US")
-
-function toMarkdown(item: Item): string {
-  const rows = toRows(item)
-  const header = "| 品名 | 數量 | 單價 | 總價 |"
-  const divider = "| --- | ---: | ---: | ---: |"
-  const body = rows.map(
-    (r) => `| ${r.name} | ${fmt(r.qty)} | ${fmt(r.price)} | ${fmt(r.total)} |`,
-  )
-  return [header, divider, ...body].join("\n")
 }
 
 const CN_DIGITS = ["", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
 
 const cnDigit = (d: number) => CN_DIGITS[d] ?? ""
 
+// Split into the wan/qian/bai/shi/yuan slots; the wan slot holds every digit at the 10000s place and above.
 function cnSlots(n: number) {
   const yuan = n % 10
   const shi = Math.floor(n / 10) % 10
   const bai = Math.floor(n / 100) % 10
   const qian = Math.floor(n / 1000) % 10
-  const wan = Math.floor(n / 10000)
+  const wan = Math.floor(n / 10000) // 10000s place and above
   return {
     wan: wan > 0 ? String(wan).split("").map(Number).map(cnDigit).join("") : "",
     qian: cnDigit(qian),
@@ -98,19 +78,33 @@ function App() {
     "idc:results",
     null,
   )
-  const [nonce, setNonce] = useState(0)
+  const [nonce, setNonce] = useState(0) // bump per result to replay the enter animation
   const [error, setError] = useState<string | null>(null)
-  const [copiedKey, setCopiedKey] = useState<string | null>(null)
+  const [shareItem, setShareItem] = useState<Item | null>(null)
+  // Persist target and seen too, so returning to the page can shuffle forward without repeating old combos.
   const [target, setTarget] = useLocalStorage<number | null>(
     "idc:target",
     null,
   )
   const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
+  // Starting offset for badge numbers accumulated across batches.
   const [offset, setOffset] = useLocalStorage<number>("idc:offset", 0)
   const { items } = useSettings()
   const reduce = useReducedMotion()
+  const navigate = useNavigate({ from: Route.fullPath })
+  const { p } = Route.useSearch()
 
+  // Drop leftover results in the old format (no lines field) to avoid render crashes.
   const safeResults = results?.every(isItem) ? results : null
+
+  const runDecompose = (t: number) => {
+    const picks = decompose(t, items)
+    setTarget(t)
+    setSeen(picks.map(keyOf))
+    setResults(picks)
+    setOffset(0) // new run, numbering restarts from 1
+    setNonce((n) => n + 1)
+  }
 
   const handleSubmit = () => {
     const parsed = amountSchema.safeParse(amount.trim())
@@ -120,36 +114,34 @@ function App() {
     }
     setError(null)
     const t = parsed.data
-    const picks = decompose(t, items)
-    setTarget(t)
-    setSeen(picks.map(keyOf))
-    setResults(picks)
-    setOffset(0)
-    setNonce((n) => n + 1)
+    runDecompose(t)
+    // Write the amount into the query string so it can be shared and restored on reload.
+    navigate({ search: { p: t }, replace: true })
   }
+
+  // On entry, if ?p= is a valid positive integer, prefill and auto-decompose once.
+  const didInit = useRef(false)
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runs once on entry, not on dependency changes
+  useEffect(() => {
+    if (didInit.current) return
+    didInit.current = true
+    if (p === undefined) return
+    setAmount(String(p))
+    setError(null)
+    runDecompose(p)
+  }, [])
 
   const handleShuffle = () => {
     if (target === null) return
     const seenSet = new Set(seen)
     const picks = decompose(target, items, seenSet)
-    if (picks.length === 0) return
-    for (const p of picks) seenSet.add(keyOf(p))
+    if (picks.length === 0) return // no other combos left, keep current results
+    for (const pick of picks) seenSet.add(keyOf(pick))
     setSeen([...seenSet])
+    // Continue numbering from the previous batch by adding the current count.
     setOffset((o) => o + (results?.length ?? 0))
     setResults(picks)
     setNonce((n) => n + 1)
-  }
-
-  const handleCopy = async (item: Item) => {
-    const key = keyOf(item)
-    try {
-      await navigator.clipboard.writeText(toMarkdown(item))
-      toast.success("已複製")
-      setCopiedKey(key)
-      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1500)
-    } catch {
-      toast.error("複製失敗")
-    }
   }
 
   return (
@@ -193,6 +185,7 @@ function App() {
           )}
         </div>
         <SettingsDialog />
+        <ShareButton />
       </div>
 
       <div className="flex min-h-[20rem] w-full flex-col items-center gap-6">
@@ -232,15 +225,11 @@ function App() {
                           <Button
                             variant="ghost"
                             size="icon-sm"
-                            aria-label="以 Markdown 複製表格"
+                            aria-label="複製表格"
                             className="text-muted-foreground"
-                            onClick={() => handleCopy(item)}
+                            onClick={() => setShareItem(item)}
                           >
-                            {copiedKey === keyOf(item) ? (
-                              <CheckIcon aria-hidden="true" />
-                            ) : (
-                              <CopyIcon aria-hidden="true" />
-                            )}
+                            <CopyIcon aria-hidden="true" />
                           </Button>
                         </CardHeader>
                         <CardContent>
@@ -302,6 +291,8 @@ function App() {
               </Button>
               {(() => {
                 const s = cnSlots(safeResults[0].total)
+                // One cell per character forming a grid: [digit, unit, digit, unit, ...].
+                // Digit cells are bold, unit cells font-light, empty stays blank. id is a stable key.
                 const cells: {
                   id: string
                   char: string
@@ -322,7 +313,10 @@ function App() {
                   { id: "yuan", char: "元", unit: true },
                   { id: "zheng", char: "整", unit: true },
                 ]
+                // On mobile, wrap after "仟": first row is NTD (3 cells) plus the first 4, rest on the second row.
                 const rows = [cells.slice(0, 7), cells.slice(7)]
+                // ms rule: the very first cell is not pulled in; each row's first cell is left-aligned on mobile
+                // and shares an edge on desktop; all others use -ms-px.
                 const msClass = (ri: number, ci: number) => {
                   if (ri === 0 && ci === 0) return ""
                   if (ci === 0) return "ms-0 lg:-ms-px"
@@ -333,6 +327,7 @@ function App() {
                     <p className="text-muted-foreground text-sm">合計</p>
                     <div className="flex flex-col items-start lg:flex-row">
                       {rows.map((row, ri) => (
+                        // biome-ignore lint/suspicious/noArrayIndexKey: fixed two rows, index is a stable key
                         <div key={ri} className="flex">
                           {row.map((c, ci) => (
                             <span
@@ -355,6 +350,8 @@ function App() {
             </>
           ))}
       </div>
+
+      <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
     </div>
   )
 }

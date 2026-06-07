@@ -41,10 +41,6 @@ const PSEUDOCODE = `function decompose(T, items):       # items[1..n]，每項�
   # 驗算：每組必滿足 Σ p_i * q_i + q_* = T
   return picks`
 
-{
-  /* <main className="mx-auto flex w-full min-w-0 flex-auto flex-col p-6  sm:p-12"> */
-}
-
 function Algo() {
   return (
     <main className="mx-auto w-full p-6 sm:max-w-4xl sm:p-12">

@@ -75,6 +75,7 @@ export function Pseudocode({ code }: { code: string }) {
     <pre className="overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-xs leading-relaxed">
       <code>
         {lines.map((line, i) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: line order is fixed, index is a stable key
           <Fragment key={i}>
             {highlightCode(line)}
             {i < lines.length - 1 && "\n"}

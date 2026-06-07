@@ -8,14 +8,15 @@ export type ItemConfig = {
 export type Line = { name: string; price: number; qty: number }
 
 export type Item = {
-  lines: Line[]
-  bags: number
+  lines: Line[] // includes qty=0 lines; filtered when displayed
+  bags: number // built-in plastic bags, $1 each, 0..4
   total: number
-  balanceScore: number
+  balanceScore: number // max-min of the quantities; smaller is more balanced
 }
 
 const MAX_BAGS = 4
 
+// Legal prices for an item: values in [min,max] whose last digit is in digits.
 function pricesFor(config: ItemConfig): number[] {
   const prices: number[] = []
   for (let p = config.min; p <= config.max; p++) {
@@ -34,19 +35,21 @@ function solve(target: number, items: ItemConfig[]): Item[] {
     qty: 0,
   }))
 
+  // For each item, pick "skip (qty=0)" or "a price x a positive quantity".
+  // Whatever remains is covered by plastic bags (0..MAX_BAGS).
   function dfs(i: number, remaining: number) {
     if (i === items.length) {
       const bags = remaining
       if (bags < 0 || bags > MAX_BAGS) return
       const qtys = lines.map((l) => l.qty)
       const totalQty = qtys.reduce((a, b) => a + b, 0)
-      if (totalQty === 0) return
-      if (bags > totalQty) return
+      if (totalQty === 0) return // bags alone is not allowed
+      if (bags > totalQty) return // bags must not outnumber the items
       const balanceScore = Math.max(...qtys) - Math.min(...qtys)
       results.push({
         lines: lines.map((l) => ({ ...l })),
         bags,
-        total: target,
+        total: target, // Σ price*qty + bags always equals target
         balanceScore,
       })
       return
@@ -78,6 +81,7 @@ export function keyOf(item: Item): string {
   return `${parts.join("_")}|bags${item.bags}`
 }
 
+// Price-only signature (ignores quantities), used for diversity when picking.
 function comboOf(item: Item): string {
   return item.lines
     .filter((l) => l.qty > 0)
@@ -87,6 +91,7 @@ function comboOf(item: Item): string {
 }
 
 function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
+  // Drop already-seen solutions, then sort by balance (then fewer bags) first.
   const avail = candidates
     .filter((c) => !exclude.has(keyOf(c)))
     .sort((a, b) => {
@@ -96,6 +101,7 @@ function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
     })
   if (avail.length === 0) return []
 
+  // Take three, preferring distinct price combos; relax that to fill if short.
   const picks: Item[] = []
   const fill = (allowSameCombo: boolean) => {
     for (const c of avail) {
@@ -112,6 +118,7 @@ function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
   return picks
 }
 
+// exclude holds already-seen solution keys; pass it to get a fresh batch.
 export function decompose(
   target: number,
   items: ItemConfig[],

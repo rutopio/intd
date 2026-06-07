@@ -1,5 +1,8 @@
 import * as React from "react"
 
+// useState-shaped hook that persists to localStorage. Instances on the same
+// page sharing a key stay in sync via a custom event, so one writer's update is
+// seen by the others immediately.
 export function useLocalStorage<T>(key: string, initial: T) {
   const event = `local-storage:${key}`
 
@@ -24,6 +27,7 @@ export function useLocalStorage<T>(key: string, initial: T) {
           window.localStorage.setItem(key, JSON.stringify(next))
           window.dispatchEvent(new CustomEvent(event))
         } catch {
+          // Quota exceeded or private mode; ignore, it does not affect the UI.
         }
         return next
       })
