@@ -62,45 +62,31 @@ export function keyOf(item: Item): string {
 }
 
 function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
-  const avail = candidates.filter((c) => !exclude.has(keyOf(c)))
+  const avail = candidates
+    .filter((c) => !exclude.has(keyOf(c)))
+    .sort((a, b) => {
+      if (a.balanceScore !== b.balanceScore)
+        return a.balanceScore - b.balanceScore
+      return a.bags - b.bags
+    })
   if (avail.length === 0) return []
 
-  const both = avail.filter((c) => c.bentoQty > 0 && c.drinkQty > 0)
-  const bentoOnly = avail.filter((c) => c.bentoQty > 0 && c.drinkQty === 0)
-  const drinkOnly = avail.filter((c) => c.bentoQty === 0 && c.drinkQty > 0)
-
-  const byBalance = (a: Item, b: Item) => {
-    if (a.balanceScore !== b.balanceScore)
-      return a.balanceScore - b.balanceScore
-    return a.bags - b.bags
-  }
-
-  both.sort(byBalance)
-  bentoOnly.sort(byBalance)
-  drinkOnly.sort(byBalance)
-
   const picks: Item[] = []
-
-  if (both.length > 0) picks.push(both[0])
-
-  if (bentoOnly.length > 0) picks.push(bentoOnly[0])
-
-  if (drinkOnly.length > 0) picks.push(drinkOnly[0])
-
-  if (picks.length < 3 && both.length > 1) {
-    for (const c of both.slice(1)) {
+  const fill = (allowSameCombo: boolean) => {
+    for (const c of avail) {
+      if (picks.length >= 3) return
       if (picks.some((p) => keyOf(p) === keyOf(c))) continue
       const sameCombo = picks.some(
         (p) => p.bentoPrice === c.bentoPrice && p.drinkPrice === c.drinkPrice,
       )
-      if (!sameCombo) {
-        picks.push(c)
-        break
-      }
+      if (!allowSameCombo && sameCombo) continue
+      picks.push(c)
     }
   }
+  fill(false)
+  fill(true)
 
-  return picks.slice(0, 3)
+  return picks
 }
 
 export function decompose(target: number, exclude?: Set<string>): Item[] {
