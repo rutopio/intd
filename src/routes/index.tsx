@@ -2,6 +2,7 @@ import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
 import { createFileRoute } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { useState } from "react"
+import { SettingsDialog } from "@/components/settings-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,28 +17,28 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useLocalStorage } from "@/hooks/use-local-storage"
+import { useSettings } from "@/hooks/use-settings"
 import { decompose, type Item, keyOf } from "@/lib/decompose"
 
 export const Route = createFileRoute("/")({ component: App })
 
 type Row = { name: string; qty: number; price: number; total: number }
 
+function isItem(x: unknown): x is Item {
+  return typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
+}
+
 function toRows(item: Item): Row[] {
   const rows: Row[] = []
-  if (item.bentoQty > 0)
-    rows.push({
-      name: "便當",
-      qty: item.bentoQty,
-      price: item.bentoPrice,
-      total: item.bentoPrice * item.bentoQty,
-    })
-  if (item.drinkQty > 0)
-    rows.push({
-      name: "飲料",
-      qty: item.drinkQty,
-      price: item.drinkPrice,
-      total: item.drinkPrice * item.drinkQty,
-    })
+  for (const line of item.lines) {
+    if (line.qty > 0)
+      rows.push({
+        name: line.name,
+        qty: line.qty,
+        price: line.price,
+        total: line.price * line.qty,
+      })
+  }
   if (item.bags > 0)
     rows.push({ name: "塑膠袋", qty: item.bags, price: 1, total: item.bags })
   return rows
@@ -76,12 +77,15 @@ function App() {
     null,
   )
   const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
+  const { items } = useSettings()
   const reduce = useReducedMotion()
+
+  const safeResults = results?.every(isItem) ? results : null
 
   const handleSubmit = () => {
     const t = Number(amount)
     if (!Number.isInteger(t) || t <= 0) return
-    const picks = decompose(t)
+    const picks = decompose(t, items)
     setTarget(t)
     setSeen(picks.map(keyOf))
     setResults(picks)
@@ -91,7 +95,7 @@ function App() {
   const handleShuffle = () => {
     if (target === null) return
     const seenSet = new Set(seen)
-    const picks = decompose(target, seenSet)
+    const picks = decompose(target, items, seenSet)
     if (picks.length === 0) return
     for (const p of picks) seenSet.add(keyOf(p))
     setSeen([...seenSet])
@@ -128,11 +132,12 @@ function App() {
             <ArrowsClockwiseIcon />
           </motion.span>
         </Button>
+        <SettingsDialog />
       </Field>
 
       <div className="flex min-h-[20rem] w-full flex-col items-center gap-6">
-        {results !== null &&
-          (results.length === 0 ? (
+        {safeResults !== null &&
+          (safeResults.length === 0 ? (
             <p className="text-muted-foreground text-sm">無法湊出此價格</p>
           ) : (
             <>
@@ -145,7 +150,7 @@ function App() {
                   exit={reduce ? undefined : { opacity: 0, y: -8 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
                 >
-                  {results.map((item, idx) => (
+                  {safeResults.map((item, idx) => (
                     <motion.div
                       key={keyOf(item)}
                       initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -203,18 +208,53 @@ function App() {
                 </motion.div>
               </AnimatePresence>
               {(() => {
-                const s = cnSlots(results[0].total)
-                const slot = (v: string) =>
-                  v ? (
-                    <span className="text-primary/80">{v}</span>
-                  ) : (
-                    <span>─</span>
-                  )
+                const s = cnSlots(safeResults[0].total)
+                const cells: {
+                  id: string
+                  char: string
+                  unit?: boolean
+                }[] = [
+                  { id: "wan-n", char: s.wan },
+                  { id: "wan", char: "萬", unit: true },
+                  { id: "qian-n", char: s.qian },
+                  { id: "qian", char: "仟", unit: true },
+                  { id: "bai-n", char: s.bai },
+                  { id: "bai", char: "佰", unit: true },
+                  { id: "shi-n", char: s.shi },
+                  { id: "shi", char: "拾", unit: true },
+                  { id: "yuan-n", char: s.yuan },
+                  { id: "yuan", char: "元", unit: true },
+                  { id: "zheng", char: "整", unit: true },
+                ]
                 return (
-                  <p className="text-sm leading-loose">
-                    合計 新台幣 {slot(s.wan)}萬 {slot(s.qian)}仟 {slot(s.bai)}佰{" "}
-                    {slot(s.shi)}拾 {slot(s.yuan)}元整
-                  </p>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-muted-foreground text-sm">合計 新台幣</p>
+                    <div className="flex">
+                      {cells.map((c) => {
+                        const empty = !c.unit && !c.char
+                        return (
+                          <span
+                            key={c.id}
+                            style={
+                              empty
+                                ? {
+                                    backgroundImage:
+                                      "linear-gradient(to bottom left, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px))",
+                                  }
+                                : undefined
+                            }
+                            className={`-ms-px flex size-9 items-center justify-center border text-sm first:ms-0 ${
+                              c.unit
+                                ? "font-bold"
+                                : "font-medium text-primary/80"
+                            }`}
+                          >
+                            {empty ? "" : c.char}
+                          </span>
+                        )
+                      })}
+                    </div>
+                  </div>
                 )
               })()}
             </>
