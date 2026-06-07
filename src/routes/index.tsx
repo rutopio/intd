@@ -92,6 +92,7 @@ function App() {
     null,
   )
   const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
+  const [offset, setOffset] = useLocalStorage<number>("idc:offset", 0)
   const { items } = useSettings()
   const reduce = useReducedMotion()
 
@@ -109,6 +110,7 @@ function App() {
     setTarget(t)
     setSeen(picks.map(keyOf))
     setResults(picks)
+    setOffset(0)
     setNonce((n) => n + 1)
   }
 
@@ -119,6 +121,7 @@ function App() {
     if (picks.length === 0) return
     for (const p of picks) seenSet.add(keyOf(p))
     setSeen([...seenSet])
+    setOffset((o) => o + (results?.length ?? 0))
     setResults(picks)
     setNonce((n) => n + 1)
   }
@@ -193,7 +196,9 @@ function App() {
                       <Card className="h-full w-72">
                         <CardHeader>
                           <CardTitle>
-                            <Badge className="rounded-full">{idx + 1}</Badge>
+                            <Badge className="rounded-full">
+                              {offset + idx + 1}
+                            </Badge>
                           </CardTitle>
                         </CardHeader>
                         <CardContent>

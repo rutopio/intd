@@ -15,9 +15,17 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { DEFAULT_ITEMS, useSettings } from "@/hooks/use-settings"
 import type { ItemConfig } from "@/lib/decompose"
 
@@ -48,6 +56,7 @@ export function SettingsDialog() {
   const { items, setItems } = useSettings()
   const [open, setOpen] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
+  const isMobile = useIsMobile()
   const fieldId = useId()
 
   const form = useForm({
@@ -190,6 +199,108 @@ export function SettingsDialog() {
     )
   }
 
+  const body = (
+    <div className="-mx-6 flex flex-col gap-4 overflow-y-auto px-6 py-1 max-sm:max-h-none sm:max-h-[50vh]">
+      <form.Field name="items" mode="array">
+        {(itemsField) => (
+          <>
+            {itemsField.state.value.map((_, index) =>
+              renderItem(
+                index,
+                () => itemsField.removeValue(index),
+                itemsField.state.value.length > 1,
+              ),
+            )}
+            <Button
+              variant="outline"
+              className="shrink-0 border-dashed"
+              onClick={() => itemsField.pushValue(NEW_ITEM)}
+            >
+              <PlusIcon aria-hidden="true" />
+              新增品項
+            </Button>
+          </>
+        )}
+      </form.Field>
+    </div>
+  )
+
+  const footer = (
+    <div className="-mx-6 -mb-6 flex items-center rounded-b-xl border-t bg-muted/50 px-6 py-4">
+      <Button
+        variant="ghost"
+        className="text-destructive text-xs"
+        onClick={() => setConfirmReset(true)}
+      >
+        重設
+      </Button>
+      <div className="ml-auto flex gap-4">
+        {isMobile ? (
+          <DrawerClose asChild>
+            <Button variant="ghost" className="text-xs">
+              取消
+            </Button>
+          </DrawerClose>
+        ) : (
+          <AlertDialogCancel variant="ghost" className="text-xs">
+            取消
+          </AlertDialogCancel>
+        )}
+        <Button
+          className="min-w-24 text-xs"
+          onClick={() => form.handleSubmit()}
+        >
+          <CheckIcon className="size-3" aria-hidden="true" />
+          儲存
+        </Button>
+      </div>
+    </div>
+  )
+
+  const resetConfirm = (
+    <AlertDialog open={confirmReset} onOpenChange={setConfirmReset}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>確定重設？</AlertDialogTitle>
+          <AlertDialogDescription>
+            將還原所有品項為預設值，此操作無法復原。
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>取消</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => {
+              form.reset({ items: DEFAULT_ITEMS })
+              setConfirmReset(false)
+            }}
+          >
+            重設
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  )
+
+  if (isMobile) {
+    return (
+      <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
+        <DrawerTrigger asChild>
+          <Button variant="outline" size="icon" aria-label="設定">
+            <GearIcon />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent className="gap-4 px-6 pt-2 pb-0 text-left">
+          <DrawerTitle className="font-heading font-medium leading-none">
+            設定
+          </DrawerTitle>
+          {body}
+          {footer}
+          {resetConfirm}
+        </DrawerContent>
+      </Drawer>
+    )
+  }
+
   return (
     <AlertDialog open={open} onOpenChange={handleOpenChange}>
       <AlertDialogTrigger
@@ -203,74 +314,9 @@ export function SettingsDialog() {
         <AlertDialogTitle className="font-heading font-medium leading-none">
           設定
         </AlertDialogTitle>
-
-        <div className="-mx-6 flex max-h-[50vh] flex-col gap-4 overflow-y-auto px-6 py-1">
-          <form.Field name="items" mode="array">
-            {(itemsField) => (
-              <>
-                {itemsField.state.value.map((_, index) =>
-                  renderItem(
-                    index,
-                    () => itemsField.removeValue(index),
-                    itemsField.state.value.length > 1,
-                  ),
-                )}
-                <Button
-                  variant="outline"
-                  className="shrink-0 border-dashed"
-                  onClick={() => itemsField.pushValue(NEW_ITEM)}
-                >
-                  <PlusIcon aria-hidden="true" />
-                  新增品項
-                </Button>
-              </>
-            )}
-          </form.Field>
-        </div>
-
-        <div className="-mx-6 -mb-6 flex items-center rounded-b-xl border-t bg-muted/50 px-6 py-4">
-          <Button
-            variant="ghost"
-            className="text-destructive text-xs"
-            onClick={() => setConfirmReset(true)}
-          >
-            重設
-          </Button>
-          <div className="ml-auto flex gap-4">
-            <AlertDialogCancel variant="ghost" className="text-xs">
-              取消
-            </AlertDialogCancel>
-            <Button
-              className="min-w-24 text-xs"
-              onClick={() => form.handleSubmit()}
-            >
-              <CheckIcon className="size-3" aria-hidden="true" />
-              儲存
-            </Button>
-          </div>
-        </div>
-
-        <AlertDialog open={confirmReset} onOpenChange={setConfirmReset}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>確定重設？</AlertDialogTitle>
-              <AlertDialogDescription>
-                將還原所有品項為預設值，此操作無法復原。
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>取消</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => {
-                  form.reset({ items: DEFAULT_ITEMS })
-                  setConfirmReset(false)
-                }}
-              >
-                重設
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        {body}
+        {footer}
+        {resetConfirm}
       </AlertDialogContent>
     </AlertDialog>
   )
