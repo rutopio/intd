@@ -19,9 +19,7 @@ export function useLocalStorage<T>(key: string, initial: T) {
     (action) => {
       setValue((prev) => {
         const next =
-          typeof action === "function"
-            ? (action as (p: T) => T)(prev)
-            : action
+          typeof action === "function" ? (action as (p: T) => T)(prev) : action
         try {
           window.localStorage.setItem(key, JSON.stringify(next))
           window.dispatchEvent(new CustomEvent(event))

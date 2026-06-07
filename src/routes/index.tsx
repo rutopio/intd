@@ -1,13 +1,21 @@
-import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
+import {
+  ArrowsClockwiseIcon,
+  CurrencyCircleDollarIcon,
+} from "@phosphor-icons/react"
 import { createFileRoute } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { useState } from "react"
+import { z } from "zod"
 import { SettingsDialog } from "@/components/settings-dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import {
   Table,
   TableBody,
@@ -23,6 +31,12 @@ import { decompose, type Item, keyOf } from "@/lib/decompose"
 export const Route = createFileRoute("/")({ component: App })
 
 type Row = { name: string; qty: number; price: number; total: number }
+
+const amountSchema = z.coerce
+  .number({ message: "請輸入金額" })
+  .int("金額必須為整數")
+  .positive("金額必須大於 0")
+  .max(99999, "金額上限為99999")
 
 function isItem(x: unknown): x is Item {
   return typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
@@ -72,6 +86,7 @@ function App() {
     null,
   )
   const [nonce, setNonce] = useState(0)
+  const [error, setError] = useState<string | null>(null)
   const [target, setTarget] = useLocalStorage<number | null>(
     "idc:target",
     null,
@@ -83,8 +98,13 @@ function App() {
   const safeResults = results?.every(isItem) ? results : null
 
   const handleSubmit = () => {
-    const t = Number(amount)
-    if (!Number.isInteger(t) || t <= 0) return
+    const parsed = amountSchema.safeParse(amount.trim())
+    if (!parsed.success) {
+      setError(parsed.error.issues[0].message)
+      return
+    }
+    setError(null)
+    const t = parsed.data
     const picks = decompose(t, items)
     setTarget(t)
     setSeen(picks.map(keyOf))
@@ -105,35 +125,43 @@ function App() {
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
-      <Field orientation="horizontal" className="w-auto">
-        <Input
-          autoFocus
-          type="number"
-          placeholder="輸入金額"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-        />
-        <Button onClick={handleSubmit}>分解</Button>
-        <Button
-          variant="outline"
-          size="icon"
-          aria-label="換一批組合"
-          disabled={results === null}
-          onClick={handleShuffle}
-        >
-          <motion.span
-            key={nonce}
-            initial={{ rotate: 0 }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="inline-flex"
-          >
-            <ArrowsClockwiseIcon />
-          </motion.span>
-        </Button>
+      <div className="flex items-start gap-2">
+        <div className="flex flex-col gap-1">
+          <InputGroup className="w-auto" aria-invalid={error !== null}>
+            <InputGroupAddon>
+              <CurrencyCircleDollarIcon />
+            </InputGroupAddon>
+            <InputGroupInput
+              autoFocus
+              type="text"
+              inputMode="numeric"
+              placeholder="輸入金額"
+              aria-invalid={error !== null}
+              value={amount}
+              onChange={(e) => {
+                setAmount(e.target.value)
+                if (error) setError(null)
+              }}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                variant="default"
+                className="text-xs"
+                onClick={handleSubmit}
+              >
+                分解
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
+          {error && (
+            <p className="px-1 text-destructive text-xs" role="alert">
+              {error}
+            </p>
+          )}
+        </div>
         <SettingsDialog />
-      </Field>
+      </div>
 
       <div className="flex min-h-[20rem] w-full flex-col items-center gap-6">
         {safeResults !== null &&
@@ -207,6 +235,22 @@ function App() {
                   ))}
                 </motion.div>
               </AnimatePresence>
+              <Button
+                variant="outline"
+                disabled={results === null}
+                onClick={handleShuffle}
+              >
+                <motion.span
+                  key={nonce}
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="inline-flex"
+                >
+                  <ArrowsClockwiseIcon />
+                </motion.span>
+                新組合
+              </Button>
               {(() => {
                 const s = cnSlots(safeResults[0].total)
                 const cells: {
@@ -230,29 +274,16 @@ function App() {
                   <div className="flex flex-col gap-2">
                     <p className="text-muted-foreground text-sm">合計 新台幣</p>
                     <div className="flex">
-                      {cells.map((c) => {
-                        const empty = !c.unit && !c.char
-                        return (
-                          <span
-                            key={c.id}
-                            style={
-                              empty
-                                ? {
-                                    backgroundImage:
-                                      "linear-gradient(to bottom left, transparent calc(50% - 0.5px), currentColor calc(50% - 0.5px), currentColor calc(50% + 0.5px), transparent calc(50% + 0.5px))",
-                                  }
-                                : undefined
-                            }
-                            className={`-ms-px flex size-9 items-center justify-center border text-sm first:ms-0 ${
-                              c.unit
-                                ? "font-bold"
-                                : "font-medium text-primary/80"
-                            }`}
-                          >
-                            {empty ? "" : c.char}
-                          </span>
-                        )
-                      })}
+                      {cells.map((c) => (
+                        <span
+                          key={c.id}
+                          className={`-ms-px flex size-18 items-center justify-center border text-3xl first:ms-0 ${
+                            c.unit ? "font-light" : "font-bold text-primary/80"
+                          }`}
+                        >
+                          {c.char}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 )
