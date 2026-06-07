@@ -139,3 +139,13 @@
     @apply font-sans;
     }
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  clip-path: var(--theme-vt-clip-from, circle(0px at 50% 50%));
+}

@@ -94,6 +94,7 @@ function App() {
     <div className="flex h-dvh flex-col items-center justify-center gap-6 p-6">
       <Field orientation="horizontal" className="w-auto">
         <Input
+          autoFocus
           type="number"
           placeholder="輸入金額"
           value={amount}
