@@ -22,17 +22,18 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
     <header className={cn("w-full", className)}>
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex w-full max-w-4xl flex-row items-center justify-between p-12"
+        className="mx-auto flex w-full max-w-4xl flex-row items-center justify-between p-6 sm:p-12"
       >
         <div className="flex flex-row items-center gap-1 lg:gap-4">
           <Link to="/" aria-label="Home">
-            <CalculatorIcon size={28} aria-hidden="true" />
+            <CalculatorIcon size={28} aria-hidden="true" weight="duotone" />
           </Link>
           <NavigationMenu>
             <NavigationMenuList className="flex-nowrap gap-1 lg:gap-4">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.to}>
                   <NavigationMenuLink
+                    className="px-4"
                     render={
                       <Link
                         to={item.to}

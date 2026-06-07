@@ -11,7 +11,7 @@ const router = getRouter()
 // biome-ignore lint/style/noNonNullAssertion: #root is defined in index.html
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>,

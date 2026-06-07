@@ -1,10 +1,13 @@
 import {
   ArrowsClockwiseIcon,
+  CheckIcon,
+  CopyIcon,
   CurrencyCircleDollarIcon,
 } from "@phosphor-icons/react"
 import { createFileRoute } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { useState } from "react"
+import { toast } from "sonner"
 import { z } from "zod"
 import { SettingsDialog } from "@/components/settings-dialog"
 import { Badge } from "@/components/ui/badge"
@@ -60,6 +63,16 @@ function toRows(item: Item): Row[] {
 
 const fmt = (n: number) => n.toLocaleString("en-US")
 
+function toMarkdown(item: Item): string {
+  const rows = toRows(item)
+  const header = "| 品名 | 數量 | 單價 | 總價 |"
+  const divider = "| --- | ---: | ---: | ---: |"
+  const body = rows.map(
+    (r) => `| ${r.name} | ${fmt(r.qty)} | ${fmt(r.price)} | ${fmt(r.total)} |`,
+  )
+  return [header, divider, ...body].join("\n")
+}
+
 const CN_DIGITS = ["", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
 
 const cnDigit = (d: number) => CN_DIGITS[d] ?? ""
@@ -87,6 +100,7 @@ function App() {
   )
   const [nonce, setNonce] = useState(0)
   const [error, setError] = useState<string | null>(null)
+  const [copiedKey, setCopiedKey] = useState<string | null>(null)
   const [target, setTarget] = useLocalStorage<number | null>(
     "idc:target",
     null,
@@ -124,6 +138,18 @@ function App() {
     setOffset((o) => o + (results?.length ?? 0))
     setResults(picks)
     setNonce((n) => n + 1)
+  }
+
+  const handleCopy = async (item: Item) => {
+    const key = keyOf(item)
+    try {
+      await navigator.clipboard.writeText(toMarkdown(item))
+      toast.success("已複製")
+      setCopiedKey(key)
+      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1500)
+    } catch {
+      toast.error("複製失敗")
+    }
   }
 
   return (
@@ -197,12 +223,25 @@ function App() {
                       className="flex w-full lg:w-auto"
                     >
                       <Card className="h-full w-full lg:w-auto lg:min-w-72">
-                        <CardHeader>
+                        <CardHeader className="flex flex-row items-center justify-between">
                           <CardTitle>
                             <Badge className="rounded-full">
                               {offset + idx + 1}
                             </Badge>
                           </CardTitle>
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            aria-label="以 Markdown 複製表格"
+                            className="text-muted-foreground"
+                            onClick={() => handleCopy(item)}
+                          >
+                            {copiedKey === keyOf(item) ? (
+                              <CheckIcon aria-hidden="true" />
+                            ) : (
+                              <CopyIcon aria-hidden="true" />
+                            )}
+                          </Button>
                         </CardHeader>
                         <CardContent>
                           <Table>
@@ -268,6 +307,9 @@ function App() {
                   char: string
                   unit?: boolean
                 }[] = [
+                  { id: "ntd-1", char: "新", unit: true },
+                  { id: "ntd-2", char: "台", unit: true },
+                  { id: "ntd-3", char: "幣", unit: true },
                   { id: "wan-n", char: s.wan },
                   { id: "wan", char: "萬", unit: true },
                   { id: "qian-n", char: s.qian },
@@ -280,21 +322,31 @@ function App() {
                   { id: "yuan", char: "元", unit: true },
                   { id: "zheng", char: "整", unit: true },
                 ]
+                const rows = [cells.slice(0, 7), cells.slice(7)]
+                const msClass = (ri: number, ci: number) => {
+                  if (ri === 0 && ci === 0) return ""
+                  if (ci === 0) return "ms-0 lg:-ms-px"
+                  return "-ms-px"
+                }
                 return (
                   <div className="flex flex-col gap-2">
-                    <p className="text-muted-foreground text-sm">合計 新台幣</p>
-                    <div className="flex">
-                      {cells.map((c) => (
-                        <span
-                          key={c.id}
-                          className={`-ms-px flex size-9 items-center justify-center border text-lg first:ms-0 lg:size-18 lg:text-3xl ${
-                            c.unit
-                              ? "bg-secondary font-light"
-                              : "font-bold text-foreground"
-                          }`}
-                        >
-                          {c.char}
-                        </span>
+                    <p className="text-muted-foreground text-sm">合計</p>
+                    <div className="flex flex-col items-start lg:flex-row">
+                      {rows.map((row, ri) => (
+                        <div key={ri} className="flex">
+                          {row.map((c, ci) => (
+                            <span
+                              key={c.id}
+                              className={`flex size-9 items-center justify-center border text-lg lg:size-16 lg:text-3xl ${msClass(ri, ci)} ${
+                                c.unit
+                                  ? "bg-secondary font-light"
+                                  : "font-bold text-foreground"
+                              }`}
+                            >
+                              {c.char}
+                            </span>
+                          ))}
+                        </div>
                       ))}
                     </div>
                   </div>

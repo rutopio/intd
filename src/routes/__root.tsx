@@ -1,7 +1,8 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router"
-import { Footer } from "@/components/footer"
-import { Header } from "@/components/header"
+import { Footer } from "@/components/layout/footer"
+import { Header } from "@/components/layout/header"
 import { ScreenSize } from "@/components/screen-size"
+import { Toaster } from "@/components/ui/sonner"
 
 export const Route = createRootRoute({
   component: () => (
@@ -12,6 +13,7 @@ export const Route = createRootRoute({
       {/* </main> */}
       <Footer className="bg-background" />
       <ScreenSize />
+      <Toaster position="top-center" />
     </div>
   ),
   notFoundComponent: () => (

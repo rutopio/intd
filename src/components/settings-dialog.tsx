@@ -19,7 +19,9 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
+  DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
@@ -195,26 +197,28 @@ export function SettingsDialog() {
                 data-invalid={field.state.meta.errors.length > 0}
               >
                 <FieldLabel>價格尾數</FieldLabel>
-                <ToggleGroup
-                  multiple
-                  variant="outline"
-                  spacing={0}
-                  className="w-full"
-                  value={field.state.value.map(String)}
-                  onValueChange={(v) => field.handleChange(v.map(Number))}
-                  aria-label={`${label}價格尾數`}
-                >
-                  {DIGITS.map((d) => (
-                    <ToggleGroupItem
-                      key={d}
-                      value={String(d)}
-                      aria-label={`尾數 ${d}`}
-                      className="flex-1 shrink basis-0 px-0 aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground"
-                    >
-                      {d}
-                    </ToggleGroupItem>
-                  ))}
-                </ToggleGroup>
+                <div className="overflow-x-auto">
+                  <ToggleGroup
+                    multiple
+                    variant="outline"
+                    spacing={0}
+                    className="w-max lg:w-full"
+                    value={field.state.value.map(String)}
+                    onValueChange={(v) => field.handleChange(v.map(Number))}
+                    aria-label={`${label}價格尾數`}
+                  >
+                    {DIGITS.map((d) => (
+                      <ToggleGroupItem
+                        key={d}
+                        value={String(d)}
+                        aria-label={`尾數 ${d}`}
+                        className="w-9 px-0 aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
+                      >
+                        {d}
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                </div>
                 <FieldError errors={field.state.meta.errors} />
               </Field>
             )}
@@ -224,34 +228,38 @@ export function SettingsDialog() {
     )
   }
 
+  const formFields = (
+    <form.Field name="items" mode="array">
+      {(itemsField) => (
+        <>
+          {itemsField.state.value.map((_, index) =>
+            renderItem(
+              index,
+              () => itemsField.removeValue(index),
+              itemsField.state.value.length > 1,
+            ),
+          )}
+          <Button
+            variant="outline"
+            className="shrink-0 border-dashed"
+            onClick={() => itemsField.pushValue(NEW_ITEM)}
+          >
+            <PlusIcon aria-hidden="true" />
+            新增品項
+          </Button>
+        </>
+      )}
+    </form.Field>
+  )
+
   const body = (
-    <div className="-mx-6 flex flex-col gap-4 overflow-y-auto px-6 py-1 max-lg:max-h-none lg:max-h-[50vh]">
-      <form.Field name="items" mode="array">
-        {(itemsField) => (
-          <>
-            {itemsField.state.value.map((_, index) =>
-              renderItem(
-                index,
-                () => itemsField.removeValue(index),
-                itemsField.state.value.length > 1,
-              ),
-            )}
-            <Button
-              variant="outline"
-              className="shrink-0 border-dashed"
-              onClick={() => itemsField.pushValue(NEW_ITEM)}
-            >
-              <PlusIcon aria-hidden="true" />
-              新增品項
-            </Button>
-          </>
-        )}
-      </form.Field>
+    <div className="flex flex-col gap-4 overflow-y-auto px-1 py-1 max-lg:max-h-none lg:max-h-[50vh]">
+      {formFields}
     </div>
   )
 
   const desktopFooter = (
-    <div className="-mx-6 -mb-6 flex items-center rounded-b-xl border-t bg-muted/50 px-6 py-4">
+    <AlertDialogFooter className="sm:justify-between">
       <Button
         variant="ghost"
         className="text-destructive text-xs"
@@ -262,7 +270,7 @@ export function SettingsDialog() {
       >
         重設
       </Button>
-      <div className="ml-auto flex gap-4">
+      <div className="flex gap-4">
         <AlertDialogCancel variant="ghost" className="text-xs">
           取消
         </AlertDialogCancel>
@@ -274,7 +282,7 @@ export function SettingsDialog() {
           儲存
         </Button>
       </div>
-    </div>
+    </AlertDialogFooter>
   )
 
   const mobileFooter = (
@@ -289,6 +297,37 @@ export function SettingsDialog() {
     </DrawerFooter>
   )
 
+  const doReset = () => {
+    setItems(DEFAULT_ITEMS)
+    form.reset({ items: DEFAULT_ITEMS })
+    setConfirmReset(false)
+  }
+
+  const mobileResetConfirm = (
+    <Drawer
+      open={confirmReset}
+      onOpenChange={setConfirmReset}
+      dismissible={false}
+    >
+      <DrawerContent className="text-left">
+        <DrawerHeader className="text-left">
+          <DrawerTitle>確定重設？</DrawerTitle>
+          <DrawerDescription>
+            將還原所有品項為預設值，此操作無法復原。
+          </DrawerDescription>
+        </DrawerHeader>
+        <DrawerFooter>
+          <Button variant="destructive" onClick={doReset}>
+            重設
+          </Button>
+          <DrawerClose asChild>
+            <Button variant="outline">取消</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  )
+
   const resetConfirm = (
     <AlertDialog open={confirmReset} onOpenChange={setConfirmReset}>
       <AlertDialogContent>
@@ -300,15 +339,7 @@ export function SettingsDialog() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>取消</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => {
-              setItems(DEFAULT_ITEMS)
-              form.reset({ items: DEFAULT_ITEMS })
-              setConfirmReset(false)
-            }}
-          >
-            重設
-          </AlertDialogAction>
+          <AlertDialogAction onClick={doReset}>重設</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -316,20 +347,38 @@ export function SettingsDialog() {
 
   if (isMobile) {
     return (
-      <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
-        <DrawerTrigger asChild>
-          <Button variant="outline" size="icon" aria-label="設定">
-            <GearIcon />
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent className="gap-4 px-6 pt-2 pb-0 text-left">
-          <DrawerTitle className="font-heading font-medium leading-none">
-            設定
-          </DrawerTitle>
-          {body}
-          {mobileFooter}
-        </DrawerContent>
-      </Drawer>
+      <>
+        <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
+          <DrawerTrigger asChild>
+            <Button variant="outline" size="icon" aria-label="設定">
+              <GearIcon />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent className="max-h-[80vh] text-left">
+            <DrawerHeader className="text-left">
+              <DrawerTitle>設定</DrawerTitle>
+              <DrawerDescription>
+                調整各品項的價格區間與尾數（至少需有一組）
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="flex flex-col gap-4 overflow-y-auto px-4 py-1">
+              {formFields}
+              <Button
+                variant="ghost"
+                className="shrink-0 text-destructive text-xs"
+                onClick={() => {
+                  setOpen(false)
+                  setConfirmReset(true)
+                }}
+              >
+                重設
+              </Button>
+            </div>
+            {mobileFooter}
+          </DrawerContent>
+        </Drawer>
+        {mobileResetConfirm}
+      </>
     )
   }
 
@@ -344,9 +393,12 @@ export function SettingsDialog() {
           }
         />
         <AlertDialogContent className="gap-4 text-left sm:max-w-md">
-          <AlertDialogTitle className="font-heading font-medium leading-none">
-            設定
-          </AlertDialogTitle>
+          <AlertDialogHeader>
+            <AlertDialogTitle>設定</AlertDialogTitle>
+            <AlertDialogDescription>
+              調整各品項的價格區間與尾數（至少需有一組）
+            </AlertDialogDescription>
+          </AlertDialogHeader>
           {body}
           {desktopFooter}
         </AlertDialogContent>
