@@ -32,7 +32,7 @@ export const Route = createRootRoute({
       <AnimatedOutlet />
       <Footer className="bg-background" />
       <ScreenSize />
-      <Toaster position="top-center" />
+      <Toaster position="top-center" closeButton />
     </div>
   ),
   notFoundComponent: () => (

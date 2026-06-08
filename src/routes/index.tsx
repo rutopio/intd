@@ -7,6 +7,7 @@ import {
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { useEffect, useRef, useState } from "react"
+import { toast } from "sonner"
 import { z } from "zod"
 import { CopyDialog } from "@/components/copy-dialog"
 import { SettingsDialog } from "@/components/settings-dialog"
@@ -40,6 +41,7 @@ import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useSettings } from "@/hooks/use-settings"
 import { decompose, type Item, keyOf, type SortMode } from "@/lib/decompose"
 import { fmt, toRows } from "@/lib/rows"
+import { clearSession } from "@/lib/session"
 
 const searchSchema = z.object({
   p: z.coerce.number().int().positive().max(99999).optional().catch(undefined),
@@ -127,6 +129,14 @@ function App() {
   }
 
   const handleSubmit = () => {
+    // Pressing 分解 with an empty input clears the session back to its initial state.
+    if (amount.trim() === "") {
+      clearSession()
+      setError(null)
+      navigate({ search: {}, replace: true })
+      toast.success("已清除所有分解結果")
+      return
+    }
     const parsed = amountSchema.safeParse(amount.trim())
     if (!parsed.success) {
       setError(parsed.error.issues[0].message)
@@ -249,12 +259,12 @@ function App() {
         </RadioGroup>
         <p className="px-1 text-center text-muted-foreground text-xs leading-relaxed">
           {sortMode === "bags"
-            ? "優先湊出塑膠袋（$1）數量最少的組合，數量平衡為次要考量。"
-            : "優先湊出各品項數量盡量平均的組合，塑膠袋數量為次要考量。"}
+            ? "優先湊出塑膠袋數量最少的組合，數量平衡為次要考量。"
+            : "優先湊出各品項數量盡量平均的組合，塑膠袋數量次之。"}
         </p>
       </div>
 
-      <div className="flex min-h-[20rem] w-full flex-col items-center gap-6">
+      <div className="flex min-h-[26rem] w-full flex-col items-center gap-6">
         {safeResults !== null &&
           (safeResults.length === 0 ? (
             <Empty>
@@ -353,6 +363,7 @@ function App() {
                 variant="outline"
                 disabled={results === null}
                 onClick={handleShuffle}
+                className="w-full lg:w-auto"
               >
                 <motion.span
                   key={nonce}
@@ -399,16 +410,18 @@ function App() {
                   return "-ms-px"
                 }
                 return (
-                  <div className="flex flex-col gap-2">
+                  <div className="flex w-full flex-col gap-2 lg:w-auto">
                     {/* <p className="text-muted-foreground text-sm">合計</p> */}
-                    <div className="flex flex-col items-start lg:flex-row">
+                    <div className="flex w-full flex-col items-start lg:w-auto lg:flex-row">
                       {rows.map((row, ri) => (
                         // biome-ignore lint/suspicious/noArrayIndexKey: fixed two rows, index is a stable key
-                        <div key={ri} className="flex">
+                        <div key={ri} className="flex w-full lg:w-auto">
                           {row.map((c, ci) => (
                             <span
                               key={c.id}
-                              className={`flex size-9 items-center justify-center border text-lg lg:size-16 lg:text-3xl ${msClass(ri, ci)} ${
+                              // Mobile: each cell flexes to fill the row width (square via aspect ratio),
+                              // so the whole strip is full-width like the shuffle button. Desktop: fixed size.
+                              className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
                                 c.unit
                                   ? "bg-secondary font-light"
                                   : "font-bold text-foreground"

@@ -124,6 +124,14 @@ const formats = {
   json: toJson,
 }
 
+// Display names for the copied-format toast, keyed by tab value.
+const FORMAT_LABELS: Record<string, string> = {
+  markdown: "Markdown",
+  table: "表格",
+  list: "列表",
+  json: "JSON",
+}
+
 export function CopyDialog({
   item,
   onClose,
@@ -147,7 +155,7 @@ export function CopyDialog({
     )
     try {
       await navigator.clipboard.writeText(text)
-      toast.success("已複製")
+      toast.success("已複製", { description: `格式：${FORMAT_LABELS[tab]}` })
       onClose()
     } catch {
       toast.error("複製失敗")

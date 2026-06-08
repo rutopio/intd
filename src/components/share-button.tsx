@@ -30,7 +30,7 @@ export function ShareButton() {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl)
-      toast.success("已複製連結")
+      toast.success("已複製連結", { description: shareUrl })
     } catch {
       toast.error("複製失敗")
     }

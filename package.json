@@ -1,6 +1,8 @@
 {
   "name": "idc",
   "private": true,
+  "license": "MIT",
+  "author": "ChingRu <contact@chingru.me>",
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000 --host",
