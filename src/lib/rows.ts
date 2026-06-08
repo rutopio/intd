@@ -2,7 +2,7 @@ import type { Item } from "@/lib/decompose"
 
 export type Row = { name: string; qty: number; price: number; total: number }
 
-export function toRows(item: Item): Row[] {
+export function toRows(item: Item, bagName = "塑膠袋"): Row[] {
   const rows: Row[] = []
   for (const line of item.lines) {
     if (line.qty > 0)
@@ -14,7 +14,7 @@ export function toRows(item: Item): Row[] {
       })
   }
   if (item.bags > 0)
-    rows.push({ name: "塑膠袋", qty: item.bags, price: 1, total: item.bags })
+    rows.push({ name: bagName, qty: item.bags, price: 1, total: item.bags })
   return rows
 }
 

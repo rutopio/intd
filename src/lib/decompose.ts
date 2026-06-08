@@ -90,11 +90,22 @@ function comboOf(item: Item): string {
     .join("_")
 }
 
-function pickThree(candidates: Item[], exclude: Set<string>): Item[] {
-  // Drop already-seen solutions, then sort by balance (then fewer bags) first.
+// Sort priority: "bags" prefers fewer plastic bags; "balance" prefers more even quantities.
+export type SortMode = "bags" | "balance"
+
+function pickThree(
+  candidates: Item[],
+  exclude: Set<string>,
+  mode: SortMode,
+): Item[] {
+  // Drop already-seen solutions, then sort by the chosen primary key (the other is the tiebreaker).
   const avail = candidates
     .filter((c) => !exclude.has(keyOf(c)))
     .sort((a, b) => {
+      if (mode === "bags") {
+        if (a.bags !== b.bags) return a.bags - b.bags
+        return a.balanceScore - b.balanceScore
+      }
       if (a.balanceScore !== b.balanceScore)
         return a.balanceScore - b.balanceScore
       return a.bags - b.bags
@@ -123,6 +134,7 @@ export function decompose(
   target: number,
   items: ItemConfig[],
   exclude?: Set<string>,
+  mode: SortMode = "bags",
 ): Item[] {
-  return pickThree(solve(target, items), exclude ?? new Set())
+  return pickThree(solve(target, items), exclude ?? new Set(), mode)
 }

@@ -19,12 +19,18 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { useSettings } from "@/hooks/use-settings"
 import type { Item } from "@/lib/decompose"
 import { toRows } from "@/lib/rows"
 
-function toMarkdown(item: Item, showTotal: boolean, showUnit: boolean): string {
+function toMarkdown(
+  item: Item,
+  showTotal: boolean,
+  showUnit: boolean,
+  bagName: string,
+): string {
   const d = showUnit ? "$" : ""
-  const rows = toRows(item)
+  const rows = toRows(item, bagName)
   const header = "| 品名 | 數量 | 單價 | 總價 |"
   const divider = "| --- | ---: | ---: | ---: |"
   const body = rows.map(
@@ -48,11 +54,16 @@ function pad(s: string, width: number, align: "left" | "right"): string {
   return align === "right" ? fill + s : s + fill
 }
 
-function toBoxTable(item: Item, showTotal: boolean, showUnit: boolean): string {
+function toBoxTable(
+  item: Item,
+  showTotal: boolean,
+  showUnit: boolean,
+  bagName: string,
+): string {
   const d = showUnit ? "$" : ""
   const headers = ["品名", "數量", "單價", "總價"]
   const aligns = ["left", "right", "right", "right"] as const
-  const body = toRows(item).map((r) => [
+  const body = toRows(item, bagName).map((r) => [
     r.name,
     String(r.qty),
     `${d}${r.price}`,
@@ -77,9 +88,14 @@ function toBoxTable(item: Item, showTotal: boolean, showUnit: boolean): string {
   ].join("\n")
 }
 
-function toList(item: Item, showTotal: boolean, showUnit: boolean): string {
+function toList(
+  item: Item,
+  showTotal: boolean,
+  showUnit: boolean,
+  bagName: string,
+): string {
   const d = showUnit ? "$" : ""
-  const lines = toRows(item).map(
+  const lines = toRows(item, bagName).map(
     (r) => `- ${r.name}: ${r.qty} x ${d}${r.price} = ${d}${r.total}`,
   )
   if (showTotal) lines.push(`- 合計: ${d}${item.total}`)
@@ -87,8 +103,13 @@ function toList(item: Item, showTotal: boolean, showUnit: boolean): string {
 }
 
 // JSON output has no total row, so showTotal is ignored.
-function toJson(item: Item, _showTotal: boolean, showUnit: boolean): string {
-  const data = toRows(item).map((r) => ({
+function toJson(
+  item: Item,
+  _showTotal: boolean,
+  showUnit: boolean,
+  bagName: string,
+): string {
+  const data = toRows(item, bagName).map((r) => ({
     item: r.name,
     price: showUnit ? `$${r.price}` : r.price,
     amount: showUnit ? `$${r.qty}` : r.qty,
@@ -114,10 +135,16 @@ export function CopyDialog({
   const [showTotal, setShowTotal] = useState(true)
   const [showUnit, setShowUnit] = useState(true)
   const isMobile = useIsMobile()
+  const { bagName } = useSettings()
 
   const handleCopy = async () => {
     if (!item) return
-    const text = formats[tab as keyof typeof formats](item, showTotal, showUnit)
+    const text = formats[tab as keyof typeof formats](
+      item,
+      showTotal,
+      showUnit,
+      bagName,
+    )
     try {
       await navigator.clipboard.writeText(text)
       toast.success("已複製")
@@ -140,33 +167,35 @@ export function CopyDialog({
           <TabsContent key={v} value={v}>
             {item &&
               (v === "json" ? (
-                <JsonHighlight code={formats[v](item, showTotal, showUnit)} />
+                <JsonHighlight
+                  code={formats[v](item, showTotal, showUnit, bagName)}
+                />
               ) : (
                 <pre className="max-h-64 overflow-auto rounded-md bg-muted p-3 font-mono text-xs">
-                  {formats[v](item, showTotal, showUnit)}
+                  {formats[v](item, showTotal, showUnit, bagName)}
                 </pre>
               ))}
           </TabsContent>
         ))}
       </Tabs>
       <div
-        className={`flex items-center justify-between ${tab === "json" ? "opacity-50" : ""}`}
+        className={`flex items-center gap-2 ${tab === "json" ? "opacity-50" : ""}`}
       >
-        <Label htmlFor="show-total">顯示「合計」列</Label>
         <Switch
           id="show-total"
           checked={showTotal}
           onCheckedChange={setShowTotal}
           disabled={tab === "json"}
         />
+        <Label htmlFor="show-total">顯示「合計」列</Label>
       </div>
-      <div className="flex items-center justify-between">
-        <Label htmlFor="show-unit">顯示 $ 符號</Label>
+      <div className="flex items-center gap-2">
         <Switch
           id="show-unit"
           checked={showUnit}
           onCheckedChange={setShowUnit}
         />
+        <Label htmlFor="show-unit">顯示 $ 符號</Label>
       </div>
       <Button className="w-full" onClick={handleCopy}>
         <CopyIcon aria-hidden="true" />

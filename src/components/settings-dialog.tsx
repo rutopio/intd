@@ -35,7 +35,12 @@ import {
 } from "@/components/ui/input-group"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useIsMobile } from "@/hooks/use-mobile"
-import { DEFAULT_ITEMS, useSettings } from "@/hooks/use-settings"
+import {
+  DEFAULT_BAG_NAME,
+  DEFAULT_ITEMS,
+  MAX_ITEMS,
+  useSettings,
+} from "@/hooks/use-settings"
 import type { ItemConfig } from "@/lib/decompose"
 
 // Display order of the last-digit toggles: 1-9 then 0.
@@ -64,30 +69,39 @@ const rangeSchema = z
   })
 
 const settingsSchema = z.object({
-  items: z.array(rangeSchema).min(1, "至少需一個品項"),
+  bagName: z
+    .string()
+    .trim()
+    .min(1, "請輸入品名")
+    .refine((s) => graphemeCount(s) <= 10, "至多10個字"),
+  items: z
+    .array(rangeSchema)
+    .min(1, "至少需一個品項")
+    .max(MAX_ITEMS, `至多${MAX_ITEMS}個品項`),
 })
 
 const numInputClass =
   "flex-1 [-moz-appearance:_textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
 
 export function SettingsDialog() {
-  const { items, setItems } = useSettings()
+  const { items, setItems, bagName, setBagName } = useSettings()
   const [open, setOpen] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
   const isMobile = useIsMobile()
   const fieldId = useId()
 
   const form = useForm({
-    defaultValues: { items },
+    defaultValues: { items, bagName },
     validators: { onSubmit: settingsSchema },
     onSubmit: ({ value }) => {
       setItems(value.items)
+      setBagName(value.bagName)
       setOpen(false)
     },
   })
 
   const handleOpenChange = (next: boolean) => {
-    if (next) form.reset({ items })
+    if (next) form.reset({ items, bagName })
     setOpen(next)
   }
 
@@ -107,7 +121,7 @@ export function SettingsDialog() {
           onClick={onRemove}
           className="absolute top-2 right-2 text-muted-foreground hover:text-destructive"
         >
-          <XIcon />
+          <XIcon aria-hidden="true" />
         </Button>
         <CardContent className="flex flex-col gap-3">
           <div className="flex gap-3">
@@ -233,10 +247,51 @@ export function SettingsDialog() {
     )
   }
 
+  // Built-in $1 filler item: only the display name is editable; no delete, no digit toggles.
+  const bagCard = (
+    <Card size="sm" className="relative shrink-0">
+      <CardContent className="flex gap-3">
+        <form.Field name="bagName">
+          {(field) => (
+            <Field
+              className="flex-1"
+              data-invalid={field.state.meta.errors.length > 0}
+            >
+              <FieldLabel htmlFor={`${fieldId}-bag-name`}>品名</FieldLabel>
+              <Input
+                id={`${fieldId}-bag-name`}
+                aria-label="塑膠袋 品名"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+              />
+              <FieldError errors={field.state.meta.errors} />
+            </Field>
+          )}
+        </form.Field>
+        <Field className="flex-1">
+          <FieldLabel htmlFor={`${fieldId}-bag-price`}>價格</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon>
+              <InputGroupText>$</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupInput
+              id={`${fieldId}-bag-price`}
+              value="1（固定）"
+              disabled
+              readOnly
+            />
+          </InputGroup>
+        </Field>
+      </CardContent>
+    </Card>
+  )
+
   const formFields = (
     <form.Field name="items" mode="array">
       {(itemsField) => (
         <>
+          {bagCard}
           {itemsField.state.value.map((_, index) =>
             renderItem(
               index,
@@ -247,10 +302,12 @@ export function SettingsDialog() {
           <Button
             variant="outline"
             className="shrink-0 border-dashed"
+            disabled={itemsField.state.value.length >= MAX_ITEMS}
             onClick={() => itemsField.pushValue(NEW_ITEM)}
           >
             <PlusIcon aria-hidden="true" />
-            新增品項
+            {/* Count includes the built-in plastic bag: custom items + 1 over the total cap. */}
+            新增品項 ({itemsField.state.value.length + 1}/{MAX_ITEMS + 1})
           </Button>
         </>
       )}
@@ -258,13 +315,13 @@ export function SettingsDialog() {
   )
 
   const body = (
-    <div className="flex flex-col gap-4 overflow-y-auto px-1 py-1 max-lg:max-h-none lg:max-h-[50vh]">
+    <div className="flex flex-col gap-4 overflow-y-auto p-6 max-lg:max-h-none lg:max-h-[50vh]">
       {formFields}
     </div>
   )
 
   const desktopFooter = (
-    <AlertDialogFooter className="sm:justify-between">
+    <AlertDialogFooter className="px-6 py-4 sm:justify-between">
       <Button
         variant="ghost"
         className="text-destructive text-xs"
@@ -305,7 +362,8 @@ export function SettingsDialog() {
 
   const doReset = () => {
     setItems(DEFAULT_ITEMS)
-    form.reset({ items: DEFAULT_ITEMS })
+    setBagName(DEFAULT_BAG_NAME)
+    form.reset({ items: DEFAULT_ITEMS, bagName: DEFAULT_BAG_NAME })
     setConfirmReset(false)
   }
 
@@ -357,14 +415,14 @@ export function SettingsDialog() {
         <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
           <DrawerTrigger asChild>
             <Button variant="outline" size="icon" aria-label="設定">
-              <GearIcon />
+              <GearIcon aria-hidden="true" />
             </Button>
           </DrawerTrigger>
           <DrawerContent className="max-h-[80vh] text-left">
             <DrawerHeader className="text-left">
               <DrawerTitle>設定</DrawerTitle>
               <DrawerDescription>
-                調整各品項的價格區間與尾數（至少需有一組）
+                調整各品項的價格區間與尾數（至多七個品項）
               </DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col gap-4 overflow-y-auto px-4 py-1">
@@ -395,19 +453,19 @@ export function SettingsDialog() {
         <AlertDialogTrigger
           render={
             <Button variant="outline" size="icon" aria-label="設定">
-              <GearIcon />
+              <GearIcon aria-hidden="true" />
             </Button>
           }
         />
-        <AlertDialogContent className="gap-4 text-left sm:max-w-md">
-          <AlertDialogHeader>
-            <AlertDialogTitle>設定</AlertDialogTitle>
+        <AlertDialogContent className="gap-4 p-0 text-left sm:max-w-md">
+          <AlertDialogHeader className="px-6 py-4">
+            <AlertDialogTitle className="text-base">設定</AlertDialogTitle>
             <AlertDialogDescription>
-              調整各品項的價格區間與尾數（至少需有一組）
+              調整各品項的價格區間與尾數（至多七個品項）
             </AlertDialogDescription>
           </AlertDialogHeader>
           {body}
-          {desktopFooter}
+          <div className="border-t">{desktopFooter}</div>
         </AlertDialogContent>
       </AlertDialog>
       {resetConfirm}

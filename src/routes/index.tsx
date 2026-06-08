@@ -2,6 +2,7 @@ import {
   ArrowsClockwiseIcon,
   CopyIcon,
   CurrencyCircleDollarIcon,
+  ReceiptXIcon,
 } from "@phosphor-icons/react"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
@@ -14,11 +15,19 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import {
   Table,
   TableBody,
@@ -29,7 +38,7 @@ import {
 } from "@/components/ui/table"
 import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useSettings } from "@/hooks/use-settings"
-import { decompose, type Item, keyOf } from "@/lib/decompose"
+import { decompose, type Item, keyOf, type SortMode } from "@/lib/decompose"
 import { fmt, toRows } from "@/lib/rows"
 
 const searchSchema = z.object({
@@ -89,7 +98,12 @@ function App() {
   const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
   // Starting offset for badge numbers accumulated across batches.
   const [offset, setOffset] = useLocalStorage<number>("idc:offset", 0)
-  const { items } = useSettings()
+  // Decomposition preference: fewer plastic bags vs. more balanced quantities.
+  const [sortMode, setSortMode] = useLocalStorage<SortMode>(
+    "idc:sortMode",
+    "bags",
+  )
+  const { items, bagName } = useSettings()
   const reduce = useReducedMotion()
   const navigate = useNavigate({ from: Route.fullPath })
   const { p } = Route.useSearch()
@@ -97,13 +111,19 @@ function App() {
   // Drop leftover results in the old format (no lines field) to avoid render crashes.
   const safeResults = results?.every(isItem) ? results : null
 
-  const runDecompose = (t: number) => {
-    const picks = decompose(t, items)
+  const runDecompose = (t: number, mode: SortMode = sortMode) => {
+    const picks = decompose(t, items, undefined, mode)
     setTarget(t)
     setSeen(picks.map(keyOf))
     setResults(picks)
     setOffset(0) // new run, numbering restarts from 1
     setNonce((n) => n + 1)
+  }
+
+  // Switch the decomposition strategy and re-run immediately if a target exists.
+  const handleSortModeChange = (mode: SortMode) => {
+    setSortMode(mode)
+    if (target !== null) runDecompose(target, mode)
   }
 
   const handleSubmit = () => {
@@ -119,22 +139,30 @@ function App() {
     navigate({ search: { p: t }, replace: true })
   }
 
-  // On entry, if ?p= is a valid positive integer, prefill and auto-decompose once.
+  // On entry, reconcile the URL and the persisted state so they always agree:
+  // - ?p= present: prefill and auto-decompose once (the URL wins).
+  // - ?p= absent but a previously decomposed amount is persisted: write it back
+  //   into the URL so the address matches the results already on screen.
   const didInit = useRef(false)
   // biome-ignore lint/correctness/useExhaustiveDependencies: runs once on entry, not on dependency changes
   useEffect(() => {
     if (didInit.current) return
     didInit.current = true
-    if (p === undefined) return
-    setAmount(String(p))
-    setError(null)
-    runDecompose(p)
+    if (p !== undefined) {
+      setAmount(String(p))
+      setError(null)
+      runDecompose(p)
+      return
+    }
+    if (target !== null) {
+      navigate({ search: { p: target }, replace: true })
+    }
   }, [])
 
   const handleShuffle = () => {
     if (target === null) return
     const seenSet = new Set(seen)
-    const picks = decompose(target, items, seenSet)
+    const picks = decompose(target, items, seenSet, sortMode)
     if (picks.length === 0) return // no other combos left, keep current results
     for (const pick of picks) seenSet.add(keyOf(pick))
     setSeen([...seenSet])
@@ -145,53 +173,101 @@ function App() {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
-      <div className="flex w-full items-start justify-center gap-2 lg:w-auto">
-        <div className="flex flex-1 flex-col gap-1 lg:flex-none">
-          <InputGroup
-            className="w-full lg:w-auto"
-            aria-invalid={error !== null}
-          >
-            <InputGroupAddon>
-              <CurrencyCircleDollarIcon />
-            </InputGroupAddon>
-            <InputGroupInput
-              autoFocus
-              type="text"
-              inputMode="numeric"
-              placeholder="輸入金額"
-              aria-invalid={error !== null}
-              value={amount}
-              onChange={(e) => {
-                setAmount(e.target.value)
-                if (error) setError(null)
-              }}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-            />
-            <InputGroupAddon align="inline-end">
-              <InputGroupButton
-                variant="default"
-                className="text-xs"
-                onClick={handleSubmit}
+    <main className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
+      <h1 className="sr-only">試算器金額分解試算器</h1>
+      <div className="flex w-full flex-col gap-3 lg:max-w-md">
+        <div className="flex w-full items-start justify-center gap-2">
+          <div className="flex flex-1 flex-col gap-1">
+            <InputGroup className="w-full" aria-invalid={error !== null}>
+              <InputGroupAddon>
+                <CurrencyCircleDollarIcon aria-hidden="true" />
+              </InputGroupAddon>
+              <InputGroupInput
+                autoFocus
+                type="text"
+                inputMode="numeric"
+                placeholder="輸入金額"
+                aria-label="金額"
+                aria-invalid={error !== null}
+                aria-describedby={error ? "amount-error" : undefined}
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value)
+                  if (error) setError(null)
+                }}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+              />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  variant="default"
+                  className="text-xs"
+                  onClick={handleSubmit}
+                >
+                  分解
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+            {error && (
+              <p
+                id="amount-error"
+                className="px-1 text-destructive text-xs"
+                role="alert"
               >
-                分解
-              </InputGroupButton>
-            </InputGroupAddon>
-          </InputGroup>
-          {error && (
-            <p className="px-1 text-destructive text-xs" role="alert">
-              {error}
-            </p>
-          )}
+                {error}
+              </p>
+            )}
+          </div>
+          <SettingsDialog />
+          <ShareButton />
         </div>
-        <SettingsDialog />
-        <ShareButton />
+
+        <RadioGroup
+          value={sortMode}
+          onValueChange={(v) => handleSortModeChange(v as SortMode)}
+          aria-label="分解策略"
+          data-mode={sortMode}
+          className="group relative grid h-9 w-full grid-cols-2 items-center gap-0 rounded-md bg-input/50 p-0.5 font-medium text-sm after:absolute after:inset-y-0.5 after:left-0.5 after:w-[calc(50%-2px)] after:rounded-sm after:bg-background after:shadow-xs after:transition-[translate] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] data-[mode=balance]:after:translate-x-full"
+        >
+          <label
+            htmlFor="sort-bags"
+            className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          >
+            塑膠袋最少優先
+            <RadioGroupItem id="sort-bags" className="sr-only" value="bags" />
+          </label>
+          <label
+            htmlFor="sort-balance"
+            className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          >
+            品項數目平衡優先
+            <RadioGroupItem
+              id="sort-balance"
+              className="sr-only"
+              value="balance"
+            />
+          </label>
+        </RadioGroup>
+        <p className="px-1 text-center text-muted-foreground text-xs leading-relaxed">
+          {sortMode === "bags"
+            ? "優先湊出塑膠袋（$1）數量最少的組合，數量平衡為次要考量。"
+            : "優先湊出各品項數量盡量平均的組合，塑膠袋數量為次要考量。"}
+        </p>
       </div>
 
       <div className="flex min-h-[20rem] w-full flex-col items-center gap-6">
         {safeResults !== null &&
           (safeResults.length === 0 ? (
-            <p className="text-muted-foreground text-sm">無法湊出此價格</p>
+            <Empty>
+              <EmptyHeader>
+                <EmptyMedia variant="icon">
+                  <ReceiptXIcon aria-hidden="true" />
+                </EmptyMedia>
+                <EmptyTitle>無法湊出此價格</EmptyTitle>
+                <EmptyDescription>
+                  試著調整金額，或到設定中調整品項價格區間。
+                </EmptyDescription>
+              </EmptyHeader>
+            </Empty>
           ) : (
             <>
               <AnimatePresence mode="wait" initial={false}>
@@ -249,19 +325,19 @@ function App() {
                               </TableRow>
                             </TableHeader>
                             <TableBody>
-                              {toRows(item).map((row) => (
+                              {toRows(item, bagName).map((row) => (
                                 <TableRow key={row.name}>
                                   <TableCell className="lg:whitespace-nowrap">
                                     {row.name}
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono">
+                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
                                     {fmt(row.qty)}
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono">
-                                    {fmt(row.price)}
+                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
+                                    ${fmt(row.price)}
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono">
-                                    {fmt(row.total)}
+                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
+                                    ${fmt(row.total)}
                                   </TableCell>
                                 </TableRow>
                               ))}
@@ -285,7 +361,7 @@ function App() {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                   className="inline-flex"
                 >
-                  <ArrowsClockwiseIcon />
+                  <ArrowsClockwiseIcon aria-hidden="true" />
                 </motion.span>
                 新組合
               </Button>
@@ -324,7 +400,7 @@ function App() {
                 }
                 return (
                   <div className="flex flex-col gap-2">
-                    <p className="text-muted-foreground text-sm">合計</p>
+                    {/* <p className="text-muted-foreground text-sm">合計</p> */}
                     <div className="flex flex-col items-start lg:flex-row">
                       {rows.map((row, ri) => (
                         // biome-ignore lint/suspicious/noArrayIndexKey: fixed two rows, index is a stable key
@@ -352,6 +428,6 @@ function App() {
       </div>
 
       <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
-    </div>
+    </main>
   )
 }

@@ -15,6 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 
 function openShareWindow(url: string) {
   window.open(url, "_blank", "noopener,noreferrer,width=600,height=600")
@@ -63,7 +64,7 @@ export function ShareButton() {
         aria-label="分享"
         onClick={handleShareClick}
       >
-        <ShareNetworkIcon />
+        <ShareNetworkIcon aria-hidden="true" />
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -72,6 +73,12 @@ export function ShareButton() {
             <DialogTitle>分享這個頁面</DialogTitle>
             <DialogDescription>選擇分享方式，或複製連結。</DialogDescription>
           </DialogHeader>
+          <Input
+            value={shareUrl}
+            disabled
+            aria-label="目前網址"
+            className="bg-muted"
+          />
           <div className="grid grid-cols-4 gap-2">
             <Button
               variant="outline"
