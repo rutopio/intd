@@ -93,10 +93,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [shareItem, setShareItem] = useState<Item | null>(null)
   // Persist target and seen too, so returning to the page can shuffle forward without repeating old combos.
-  const [target, setTarget] = useLocalStorage<number | null>(
-    "idc:target",
-    null,
-  )
+  const [target, setTarget] = useLocalStorage<number | null>("idc:target", null)
   const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
   // Starting offset for badge numbers accumulated across batches.
   const [offset, setOffset] = useLocalStorage<number>("idc:offset", 0)
@@ -184,7 +181,7 @@ function App() {
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
-      <h1 className="sr-only">試算器金額分解試算器</h1>
+      <h1 className="sr-only">Integer Decomposition Calculator</h1>
       <div className="flex w-full flex-col gap-3 lg:max-w-md">
         <div className="flex w-full items-start justify-center gap-2">
           <div className="flex flex-1 flex-col gap-1">

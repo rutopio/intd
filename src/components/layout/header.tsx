@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
 
-const GITHUB_URL = "https://github.com/ChingRu/idc"
+const GITHUB_URL = "https://github.com/rutopio/idc"
 
 const navItems = [
   // "/" is a prefix of every path, so it needs exact matching to avoid always being active

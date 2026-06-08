@@ -9,7 +9,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
           href="https://github.com/rutopio"
           target="_blank"
           rel="noreferrer"
-          className="mt-1 block font-mono hover:text-foreground"
+          className="mt-1 block font-mono underline underline-offset-4 hover:text-foreground"
         >
           Created by ChingRu (rutopio@Github)
         </a>
