@@ -1,17 +1,14 @@
-import { Tex } from "@/components/tex"
+import { isValidElement } from "react"
+import { Pseudocode } from "@/components/pseudocode"
 import { cn } from "@/lib/utils"
 
-// Shared typographic primitives for long-form copy (e.g. the /algo page).
-// Modeled after an MDX component map: each element carries its default
-// className and forwards the rest, so call sites stay free of repeated styles.
-//
-// Why strings over JSX text nodes: the formatter reflows raw CJK text in JSX
-// at the print width, and every wrap point becomes a literal space that shows
-// up mid-sentence (CJK has no word spaces). Passing copy as a string child
-// keeps it on one logical token the formatter won't split; interleave <M>
-// (inline math) between adjacent string runs for mixed text + formula lines.
+// Typographic primitives + MDX component map for the /algo page. These were
+// extracted from a shared prose.tsx, but /algo is the only consumer, so they
+// live here. Inline math is handled at build time by rehype-katex ($...$), so
+// no KaTeX runtime component is needed.
 
-function Article({ className, ...props }: React.ComponentProps<"article">) {
+// Wraps the rendered MDX; sets the long-form rhythm (gap, leading) for /algo.
+export function Article({ className, ...props }: React.ComponentProps<"article">) {
   return (
     <article
       className={cn(
@@ -21,10 +18,6 @@ function Article({ className, ...props }: React.ComponentProps<"article">) {
       {...props}
     />
   )
-}
-
-function Section({ className, ...props }: React.ComponentProps<"section">) {
-  return <section className={cn("flex flex-col gap-3", className)} {...props} />
 }
 
 function H1({ className, ...props }: React.ComponentProps<"h1">) {
@@ -104,21 +97,8 @@ function Li(props: React.ComponentProps<"li">) {
   return <li {...props} />
 }
 
-function Formula({ children }: { children: string }) {
-  return (
-    <div className="my-4 overflow-x-auto rounded-md border bg-muted/40 px-4 py-3 text-center">
-      <Tex block>{children}</Tex>
-    </div>
-  )
-}
-
-// Inline display math, sugar over <Tex> for call sites.
-function M({ children }: { children: string }) {
-  return <Tex>{children}</Tex>
-}
-
-// Plain monospace block for ASCII diagrams (e.g. decision trees). Unlike
-// <Pseudocode> it does no syntax highlighting, so digits/arrows render as-is.
+// Plain monospace block for ASCII diagrams (e.g. the decision tree); no syntax
+// highlighting, so digits/arrows render as-is.
 function CodeBlock({ children }: { children: string }) {
   return (
     <pre className="my-4 overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-xs leading-relaxed">
@@ -127,19 +107,25 @@ function CodeBlock({ children }: { children: string }) {
   )
 }
 
-export {
-  A,
-  Article,
-  CodeBlock,
-  Formula,
-  H1,
-  H2,
-  H3,
-  Li,
-  M,
+// A fenced code block arrives as <pre><code>…</code></pre>; pull the raw text
+// out of the inner <code> and render it through CodeBlock.
+function Pre({ children }: { children?: React.ReactNode }) {
+  const code = isValidElement<{ children?: React.ReactNode }>(children)
+    ? children.props.children
+    : children
+  return <CodeBlock>{String(code)}</CodeBlock>
+}
+
+export const mdxComponents = {
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  p: P,
+  a: A,
+  ul: Ul,
+  ol: Ol,
+  li: Li,
+  pre: Pre,
   Muted,
-  Ol,
-  P,
-  Section,
-  Ul,
+  Pseudocode,
 }

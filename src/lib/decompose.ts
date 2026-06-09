@@ -9,12 +9,12 @@ export type Line = { name: string; price: number; qty: number }
 
 export type Item = {
   lines: Line[] // includes qty=0 lines; filtered when displayed
-  bags: number // built-in plastic bags, $1 each, 0..4
+  bags: number // built-in plastic bags, $1 each, 0..9
   total: number
   balanceScore: number // max-min of the quantities; smaller is more balanced
 }
 
-const MAX_BAGS = 4
+const MAX_BAGS = 9
 
 // Legal prices for an item: values in [min,max] whose last digit is in digits.
 function pricesFor(config: ItemConfig): number[] {
