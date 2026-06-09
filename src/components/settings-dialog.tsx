@@ -17,7 +17,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -365,9 +364,10 @@ export function SettingsDialog() {
         <CheckIcon className="size-3" aria-hidden="true" />
         儲存
       </Button>
-      <DrawerClose asChild>
-        <Button variant="outline">取消</Button>
-      </DrawerClose>
+      {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
+      <Button variant="outline" onClick={() => setOpen(false)}>
+        取消
+      </Button>
     </DrawerFooter>
   )
 
@@ -395,9 +395,10 @@ export function SettingsDialog() {
           <Button variant="destructive" onClick={doReset}>
             重設
           </Button>
-          <DrawerClose asChild>
-            <Button variant="outline">取消</Button>
-          </DrawerClose>
+          {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
+          <Button variant="outline" onClick={() => setConfirmReset(false)}>
+            取消
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

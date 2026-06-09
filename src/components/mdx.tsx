@@ -15,7 +15,9 @@ export function Article({
   return (
     <article
       className={cn(
-        "flex flex-col gap-2 text-pretty text-sm leading-loose",
+        // min-w-0 lets flex children shrink so wide math scrolls inside
+        // .katex-display instead of widening the page.
+        "flex min-w-0 flex-col gap-2 text-pretty text-sm leading-loose",
         className,
       )}
       {...props}

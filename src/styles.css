@@ -140,6 +140,12 @@
     @apply font-sans;
     scrollbar-gutter: stable;
     }
+  /* Long display math must scroll within itself, not widen the whole page. */
+  .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    }
 }
 
 ::view-transition-old(root),

@@ -112,7 +112,7 @@ function toJson(
   const data = toRows(item, bagName).map((r) => ({
     item: r.name,
     price: showUnit ? `$${r.price}` : r.price,
-    amount: showUnit ? `$${r.qty}` : r.qty,
+    amount: r.qty,
   }))
   return JSON.stringify(data, null, 2)
 }
@@ -179,9 +179,24 @@ export function CopyDialog({
                   code={formats[v](item, showTotal, showUnit, bagName)}
                 />
               ) : (
-                <pre className="max-h-64 overflow-auto rounded-md bg-muted p-3 font-mono text-xs">
-                  {formats[v](item, showTotal, showUnit, bagName)}
-                </pre>
+                <>
+                  <pre
+                    className="max-h-64 overflow-auto rounded-md bg-muted p-3 text-xs"
+                    // CJK glyphs are only width-consistent in a CJK-aware monospace
+                    // font; fall back through common ones before the generic mono.
+                    style={{
+                      fontFamily:
+                        '"Sarasa Mono TC", "Noto Sans Mono CJK TC", "PingFang TC", "Microsoft JhengHei", ui-monospace, monospace',
+                    }}
+                  >
+                    {formats[v](item, showTotal, showUnit, bagName)}
+                  </pre>
+                  {v === "table" && (
+                    <p className="mt-2 text-muted-foreground text-xs leading-relaxed">
+                      框線表格需在等寬字型下檢視才會對齊。
+                    </p>
+                  )}
+                </>
               ))}
           </TabsContent>
         ))}

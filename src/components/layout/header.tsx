@@ -26,16 +26,23 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
         aria-label="Main navigation"
         className="mx-auto flex w-full max-w-4xl flex-row items-center justify-between p-6 sm:p-12"
       >
-        <div className="flex flex-row items-center gap-1 lg:gap-4">
-          <Link to="/" aria-label="Home">
+        <div className="flex flex-row items-center gap-2 lg:gap-4">
+          <Link
+            to="/"
+            aria-label="IntD - Integer Decomposition Calculator"
+            className="flex flex-row items-center gap-2"
+          >
             <CalculatorIcon size={28} aria-hidden="true" weight="duotone" />
+            <span className="hidden font-semibold text-base sm:inline sm:text-lg">
+              IntD
+            </span>
           </Link>
           <NavigationMenu>
             <NavigationMenuList className="flex-nowrap gap-1 lg:gap-4">
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.to}>
                   <NavigationMenuLink
-                    className="px-4"
+                    className="px-3 sm:px-4"
                     render={
                       <Link
                         to={item.to}

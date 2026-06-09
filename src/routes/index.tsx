@@ -2,7 +2,7 @@ import {
   ArrowsClockwiseIcon,
   CopyIcon,
   CurrencyCircleDollarIcon,
-  ReceiptXIcon,
+  XCircleIcon,
 } from "@phosphor-icons/react"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
@@ -316,7 +316,7 @@ function App() {
               <Empty>
                 <EmptyHeader>
                   <EmptyMedia variant="icon">
-                    <ReceiptXIcon aria-hidden="true" />
+                    <XCircleIcon aria-hidden="true" />
                   </EmptyMedia>
                   <EmptyTitle>無法湊出此價格</EmptyTitle>
                   <EmptyDescription>
