@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { Article, mdxComponents } from "@/components/mdx"
-import Content from "@/content/zh_tw/algo.mdx"
+import Content from "@/content/zh_tw/about.mdx"
 
-export const Route = createFileRoute("/algo/")({ component: Algo })
+export const Route = createFileRoute("/about/")({ component: About })
 
-function Algo() {
+function About() {
   return (
     <main className="mx-auto w-full p-6 sm:max-w-4xl sm:p-12">
       <Article>

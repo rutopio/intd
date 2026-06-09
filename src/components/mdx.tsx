@@ -8,11 +8,14 @@ import { cn } from "@/lib/utils"
 // no KaTeX runtime component is needed.
 
 // Wraps the rendered MDX; sets the long-form rhythm (gap, leading) for /algo.
-export function Article({ className, ...props }: React.ComponentProps<"article">) {
+export function Article({
+  className,
+  ...props
+}: React.ComponentProps<"article">) {
   return (
     <article
       className={cn(
-        "flex flex-col gap-6 text-pretty text-sm leading-loose",
+        "flex flex-col gap-2 text-pretty text-sm leading-loose",
         className,
       )}
       {...props}
@@ -32,7 +35,7 @@ function H1({ className, ...props }: React.ComponentProps<"h1">) {
 function H2({ className, ...props }: React.ComponentProps<"h2">) {
   return (
     <h2
-      className={cn("text-balance font-medium text-lg", className)}
+      className={cn("text-balance pt-8 font-semibold text-xl", className)}
       {...props}
     />
   )
@@ -41,7 +44,7 @@ function H2({ className, ...props }: React.ComponentProps<"h2">) {
 function H3({ className, ...props }: React.ComponentProps<"h3">) {
   return (
     <h3
-      className={cn("mt-2 text-balance font-medium text-base", className)}
+      className={cn("text-balance pt-6 font-semibold text-lg", className)}
       {...props}
     />
   )
@@ -57,7 +60,7 @@ function A({ className, href, ...props }: React.ComponentProps<"a">) {
     <a
       href={href}
       className={cn(
-        "break-words font-medium text-primary underline underline-offset-4 hover:no-underline",
+        "wrap-break-word font-medium text-primary underline underline-offset-4 hover:no-underline",
         className,
       )}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}

@@ -15,7 +15,8 @@ const GITHUB_URL = "https://github.com/rutopio/intd"
 const navItems = [
   // "/" is a prefix of every path, so it needs exact matching to avoid always being active
   { label: "分解", to: "/", exact: true },
-  { label: "說明", to: "/algo", exact: false },
+  { label: "演算法", to: "/algo", exact: false },
+  { label: "關於", to: "/about", exact: false },
 ] as const
 
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
