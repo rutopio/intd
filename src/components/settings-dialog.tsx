@@ -52,6 +52,9 @@ const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
 const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" })
 const graphemeCount = (s: string) => [...segmenter.segment(s)].length
 
+// Prices are bounded by the calculator's max target amount.
+const MAX_AMOUNT = 99999
+
 const rangeSchema = z
   .object({
     name: z
@@ -59,12 +62,20 @@ const rangeSchema = z
       .trim()
       .min(1, "請輸入品名")
       .refine((s) => graphemeCount(s) <= 10, "至多10個字"),
-    min: z.number().int().min(1, "需為正整數"),
-    max: z.number().int().min(1, "需為正整數"),
+    min: z
+      .number()
+      .int()
+      .min(1, "需為正整數")
+      .max(MAX_AMOUNT, `上限為 ${MAX_AMOUNT}`),
+    max: z
+      .number()
+      .int()
+      .min(1, "需為正整數")
+      .max(MAX_AMOUNT, `上限為 ${MAX_AMOUNT}`),
     digits: z.array(z.number()).min(1, "至少選一個尾數"),
   })
-  .refine((d) => d.min <= d.max, {
-    message: "最小值需小於等於最大值",
+  .refine((d) => d.max >= d.min, {
+    message: "上限需大於等於下限",
     path: ["max"],
   })
 
@@ -112,7 +123,7 @@ export function SettingsDialog() {
   ) => {
     const label = `品項 ${index + 1}`
     return (
-      <Card size="sm" className="relative shrink-0">
+      <Card size="sm" className="relative shrink-0 rounded-md">
         <Button
           variant="ghost"
           size="icon-sm"
@@ -249,7 +260,7 @@ export function SettingsDialog() {
 
   // Built-in $1 filler item: only the display name is editable; no delete, no digit toggles.
   const bagCard = (
-    <Card size="sm" className="relative shrink-0">
+    <Card size="sm" className="relative shrink-0 rounded-md">
       <CardContent className="flex gap-3">
         <form.Field name="bagName">
           {(field) => (

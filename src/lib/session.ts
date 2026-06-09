@@ -1,13 +1,7 @@
 // Per-session calculation state persisted in localStorage. User preferences
 // (sortMode) and settings (items, bagName) are intentionally excluded so that
 // clearing a session keeps the user's configuration.
-const SESSION_KEYS = [
-  "idc:amount",
-  "idc:results",
-  "idc:target",
-  "idc:seen",
-  "idc:offset",
-] as const
+const SESSION_KEYS = ["idc:amount", "idc:target", "idc:byMode"] as const
 
 // Clear the current calculation back to its initial state. Removing each key and
 // dispatching its custom event makes every mounted useLocalStorage instance

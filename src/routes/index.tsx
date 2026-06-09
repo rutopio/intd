@@ -10,6 +10,8 @@ import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 import { z } from "zod"
 import { CopyDialog } from "@/components/copy-dialog"
+import { ResultCard } from "@/components/result-card"
+import { RollNumber } from "@/components/roll-number"
 import { SettingsDialog } from "@/components/settings-dialog"
 import { ShareButton } from "@/components/share-button"
 import { Badge } from "@/components/ui/badge"
@@ -40,7 +42,7 @@ import {
 import { useLocalStorage } from "@/hooks/use-local-storage"
 import { useSettings } from "@/hooks/use-settings"
 import { decompose, type Item, keyOf, type SortMode } from "@/lib/decompose"
-import { fmt, toRows } from "@/lib/rows"
+import { toRows } from "@/lib/rows"
 import { clearSession } from "@/lib/session"
 
 const searchSchema = z.object({
@@ -83,26 +85,43 @@ function cnSlots(n: number) {
   }
 }
 
+// Per-mode batch state. Each sort mode keeps its own results/seen/offset so
+// switching the strategy tab restores what was last shown there instead of
+// recomputing from index 1.
+type ModeState = { results: Item[]; seen: string[]; offset: number }
+type ByMode = Record<SortMode, ModeState | null>
+const EMPTY_BY_MODE: ByMode = { bags: null, balance: null }
+
 function App() {
   const [amount, setAmount] = useLocalStorage("idc:amount", "")
-  const [results, setResults] = useLocalStorage<Item[] | null>(
-    "idc:results",
-    null,
-  )
-  const [nonce, setNonce] = useState(0) // bump per result to replay the enter animation
+  // runId bumps only on a fresh 分解 (new amount): replays card enter + amount-box flip.
+  // Shuffle / strategy change keep the same runId so cards update in place (numbers roll).
+  const [runId, setRunId] = useState(0)
+  const [spin, setSpin] = useState(0) // bumps on every refresh to replay the shuffle-icon spin
   const [error, setError] = useState<string | null>(null)
   const [shareItem, setShareItem] = useState<Item | null>(null)
-  // Persist target and seen too, so returning to the page can shuffle forward without repeating old combos.
+  // Persist target so returning to the page can shuffle forward without repeating old combos.
   const [target, setTarget] = useLocalStorage<number | null>("idc:target", null)
-  const [seen, setSeen] = useLocalStorage<string[]>("idc:seen", [])
-  // Starting offset for badge numbers accumulated across batches.
-  const [offset, setOffset] = useLocalStorage<number>("idc:offset", 0)
   // Decomposition preference: fewer plastic bags vs. more balanced quantities.
   const [sortMode, setSortMode] = useLocalStorage<SortMode>(
     "idc:sortMode",
     "bags",
   )
+  // The single source of truth for batch state, keyed by mode.
+  const [byMode, setByMode] = useLocalStorage<ByMode>(
+    "idc:byMode",
+    EMPTY_BY_MODE,
+  )
+  const current = byMode[sortMode]
+  const results = current?.results ?? null
+  const seen = current?.seen ?? []
+  const offset = current?.offset ?? 0
   const { items, bagName } = useSettings()
+  // Fix the name column to the widest possible item name under the current
+  // settings, so toggling strategies (which add/remove the bag row) never
+  // reflows column widths. Recomputes only when a setting name changes.
+  const nameColCh =
+    Math.max(...items.map((it) => it.name.length), bagName.length) + 1
   const reduce = useReducedMotion()
   const navigate = useNavigate({ from: Route.fullPath })
   const { p } = Route.useSearch()
@@ -110,19 +129,34 @@ function App() {
   // Drop leftover results in the old format (no lines field) to avoid render crashes.
   const safeResults = results?.every(isItem) ? results : null
 
-  const runDecompose = (t: number, mode: SortMode = sortMode) => {
+  // bumpRun: true for a fresh 分解 (replay enter + flip); false for strategy change (update in place).
+  // A fresh 分解 resets every mode; a strategy change only fills the target mode.
+  const runDecompose = (
+    t: number,
+    mode: SortMode = sortMode,
+    bumpRun = true,
+  ) => {
     const picks = decompose(t, items, undefined, mode)
+    const next: ModeState = {
+      results: picks,
+      seen: picks.map(keyOf),
+      offset: 0,
+    }
     setTarget(t)
-    setSeen(picks.map(keyOf))
-    setResults(picks)
-    setOffset(0) // new run, numbering restarts from 1
-    setNonce((n) => n + 1)
+    setByMode((prev) =>
+      bumpRun ? { ...EMPTY_BY_MODE, [mode]: next } : { ...prev, [mode]: next },
+    )
+    if (bumpRun) setRunId((n) => n + 1)
+    setSpin((n) => n + 1)
   }
 
-  // Switch the decomposition strategy and re-run immediately if a target exists.
+  // Switch the decomposition strategy. Restore that mode's last batch if it has
+  // one; otherwise compute its first batch (index starts at 1).
   const handleSortModeChange = (mode: SortMode) => {
     setSortMode(mode)
-    if (target !== null) runDecompose(target, mode)
+    if (target !== null && byMode[mode] === null)
+      runDecompose(target, mode, false)
+    else setSpin((n) => n + 1)
   }
 
   const handleSubmit = () => {
@@ -172,11 +206,17 @@ function App() {
     const picks = decompose(target, items, seenSet, sortMode)
     if (picks.length === 0) return // no other combos left, keep current results
     for (const pick of picks) seenSet.add(keyOf(pick))
-    setSeen([...seenSet])
-    // Continue numbering from the previous batch by adding the current count.
-    setOffset((o) => o + (results?.length ?? 0))
-    setResults(picks)
-    setNonce((n) => n + 1)
+    setByMode((prev) => ({
+      ...prev,
+      // Continue numbering from the previous batch by adding the current count.
+      [sortMode]: {
+        results: picks,
+        seen: [...seenSet],
+        offset: offset + (results?.length ?? 0),
+      },
+    }))
+    // Keep runId: cards update in place and table numbers roll; only spin the icon.
+    setSpin((n) => n + 1)
   }
 
   return (
@@ -261,25 +301,35 @@ function App() {
         </p>
       </div>
 
-      <div className="flex min-h-[26rem] w-full flex-col items-center gap-6">
+      <motion.div
+        layout={!reduce}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="flex min-h-[26rem] w-full flex-col items-center gap-6"
+      >
         {safeResults !== null &&
           (safeResults.length === 0 ? (
-            <Empty>
-              <EmptyHeader>
-                <EmptyMedia variant="icon">
-                  <ReceiptXIcon aria-hidden="true" />
-                </EmptyMedia>
-                <EmptyTitle>無法湊出此價格</EmptyTitle>
-                <EmptyDescription>
-                  試著調整金額，或到設定中調整品項價格區間。
-                </EmptyDescription>
-              </EmptyHeader>
-            </Empty>
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <Empty>
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <ReceiptXIcon aria-hidden="true" />
+                  </EmptyMedia>
+                  <EmptyTitle>無法湊出此價格</EmptyTitle>
+                  <EmptyDescription>
+                    試著調整金額，或到設定中調整品項價格區間。
+                  </EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            </motion.div>
           ) : (
             <>
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div
-                  key={nonce}
+                  key={runId}
                   className="flex w-full flex-col items-stretch justify-center gap-4 lg:w-auto lg:flex-row"
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -287,18 +337,13 @@ function App() {
                   transition={{ duration: 0.18, ease: "easeOut" }}
                 >
                   {safeResults.map((item, idx) => (
-                    <motion.div
-                      key={keyOf(item)}
-                      initial={reduce ? false : { opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.18,
-                        delay: reduce ? 0 : idx * 0.06,
-                        ease: "easeOut",
-                      }}
-                      className="flex w-full lg:w-auto"
+                    <ResultCard
+                      // Stable by position so shuffle updates content in place (no remount/enter).
+                      // biome-ignore lint/suspicious/noArrayIndexKey: position is the stable identity here
+                      key={idx}
+                      signature={keyOf(item)}
                     >
-                      <Card className="h-full w-full lg:w-auto lg:min-w-72">
+                      <Card className="h-full w-full rounded-md lg:w-auto lg:min-w-72">
                         <CardHeader className="flex flex-row items-center justify-between">
                           <CardTitle>
                             <Badge className="rounded-full">
@@ -319,7 +364,12 @@ function App() {
                           <Table>
                             <TableHeader>
                               <TableRow>
-                                <TableHead>品名</TableHead>
+                                <TableHead
+                                  className="whitespace-nowrap"
+                                  style={{ minWidth: `${nameColCh}em` }}
+                                >
+                                  品名
+                                </TableHead>
                                 <TableHead className="pl-4 text-right">
                                   數量
                                 </TableHead>
@@ -334,17 +384,17 @@ function App() {
                             <TableBody>
                               {toRows(item, bagName).map((row) => (
                                 <TableRow key={row.name}>
-                                  <TableCell className="lg:whitespace-nowrap">
+                                  <TableCell className="whitespace-nowrap">
                                     {row.name}
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
-                                    {fmt(row.qty)}
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.qty} />
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
-                                    ${fmt(row.price)}
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.price} prefix="$" />
                                   </TableCell>
-                                  <TableCell className="pl-4 text-right font-mono tabular-nums">
-                                    ${fmt(row.total)}
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.total} prefix="$" />
                                   </TableCell>
                                 </TableRow>
                               ))}
@@ -352,27 +402,33 @@ function App() {
                           </Table>
                         </CardContent>
                       </Card>
-                    </motion.div>
+                    </ResultCard>
                   ))}
                 </motion.div>
               </AnimatePresence>
-              <Button
-                variant="outline"
-                disabled={results === null}
-                onClick={handleShuffle}
-                className="w-full lg:w-auto"
+              <motion.div
+                layout={!reduce}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="flex w-full justify-center lg:w-auto"
               >
-                <motion.span
-                  key={nonce}
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="inline-flex"
+                <Button
+                  variant="outline"
+                  disabled={results === null}
+                  onClick={handleShuffle}
+                  className="w-full lg:w-auto"
                 >
-                  <ArrowsClockwiseIcon aria-hidden="true" />
-                </motion.span>
-                新組合
-              </Button>
+                  <motion.span
+                    key={spin}
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="inline-flex"
+                  >
+                    <ArrowsClockwiseIcon aria-hidden="true" />
+                  </motion.span>
+                  新組合
+                </Button>
+              </motion.div>
               {(() => {
                 const s = cnSlots(safeResults[0].total)
                 // One cell per character forming a grid: [digit, unit, digit, unit, ...].
@@ -407,7 +463,15 @@ function App() {
                   return "-ms-px"
                 }
                 return (
-                  <div className="flex w-full flex-col gap-2 lg:w-auto">
+                  <motion.div
+                    // Replay the enter on a fresh 分解, like the cards above.
+                    key={runId}
+                    layout={!reduce}
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="flex w-full flex-col gap-2 lg:w-auto"
+                  >
                     {/* <p className="text-muted-foreground text-sm">合計</p> */}
                     <div className="flex w-full flex-col items-start lg:w-auto lg:flex-row">
                       {rows.map((row, ri) => (
@@ -430,12 +494,12 @@ function App() {
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 )
               })()}
             </>
           ))}
-      </div>
+      </motion.div>
 
       <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
     </main>
