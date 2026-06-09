@@ -1,38 +1,67 @@
-# TanStack Start + shadcn/ui
+<div align="center">
 
-This is a template for a new TanStack Start project with React, TypeScript, and shadcn/ui.
+# IntD — Integer Decomposition Calculator
 
-## Adding components
+An algorithm demo about Constrained **Int**eger **D**ecomposition Problem.
 
-To add components to your app, run the following command:
+Live at [https://intd.pages.dev](https://intd.pages.dev).
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![TanStack Router](https://img.shields.io/badge/TanStack_Router-1.170.15-FF4154?logo=react-query&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-Base_UI-000000?logo=shadcnui&logoColor=white)
+![Motion](https://img.shields.io/badge/Motion-12-EE4B96?logo=framer&logoColor=white)
+![Cloudflare Pages](https://img.shields.io/badge/Host_on-Cloudflare_Pages-F38020?logo=cloudflare&logoColor=white)
+
+</div>
+
+## Project Structure
+
+```
+src/
+├── components/       # UI components (pages/, layout/, ui/)
+├── content/          # Per-locale MDX content (zh_tw/, en/)
+├── hooks/            # Custom hooks
+├── lib/              # Pure logic (decompose, schema, format, …)
+├── locales/          # i18n strings (zh.json, en.json)
+└── routes/           # File-based routes (TanStack Router)
+```
+
+## i18n Routing
+
+Chinese is the bare path (`/`, `/algo`, `/about`); English is prefixed with `/en`.
+The URL is the single source of truth for language — `use-lang.ts` derives it from
+the path, and `LangSync` in `__root.tsx` keeps i18next and `document.lang` in sync.
+
+UI strings live in `src/locales/{zh,en}.json`; long-form content lives as per-locale
+MDX under `src/content/{zh_tw,en}/`.
+
+## Development
+
+Requires Node.js 22+ and pnpm.
 
 ```bash
-npx shadcn@latest add button
+pnpm install  # install dependencies
+pnpm dev      # start dev server at localhost:3000
+pnpm build    # production build
+pnpm check    # format + type-check
 ```
 
-This will place the ui components in the `components` directory.
+## Algorithm Note
 
-## Using components
+See [https://intd.pages.dev/algo](https://intd.pages.dev/algo)
 
-To use the components in your app, import them as follows:
+## Contributing
 
-```tsx
-import { Button } from "@/components/ui/button";
-```
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-## Internationalization (i18n)
+- **Bug reports** — please include steps to reproduce and the expected behavior.
+- **New features** — open an issue first to discuss before sending a PR.
+- **i18n** — UI strings are in `src/locales/{zh,en}.json`; keep both files in key parity.
+- **Code style** — run `pnpm check` before submitting; the project uses Biome for linting and formatting.
 
-The app is bilingual (Traditional Chinese / English) via i18next.
+## License
 
-- **Routing is asymmetric**: Chinese is the bare path (`/`, `/algo`, `/about`);
-  English is prefixed with `/en` (`/en`, `/en/algo`, `/en/about`).
-- The URL is the single source of truth for language. `src/hooks/use-lang.ts`
-  derives it from the path; `src/routes/__root.tsx` (`LangSync`) syncs i18next
-  and `document.lang` on navigation.
-- UI strings live in `src/locales/{zh,en}.json`. Keep the two files in key parity.
-- Long-form content (algo/about) lives as per-locale MDX under
-  `src/content/{zh_tw,en}/`. The shared page components in
-  `src/components/pages/` pick the MDX body by language.
-
-Known limitation: `index.html` `canonical`/`og:locale` are static (`zh_TW`); this
-SPA has no SSR, so per-locale head tags are not emitted.
+MIT - See https://github.com/rutopio/intd/LICENSE

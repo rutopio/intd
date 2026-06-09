@@ -1,10 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { z } from "zod"
 import { App } from "@/components/pages/app"
-
-const searchSchema = z.object({
-  p: z.coerce.number().int().positive().max(99999).optional().catch(undefined),
-})
+import { searchSchema } from "@/lib/schema"
 
 export const Route = createFileRoute("/")({
   component: App,

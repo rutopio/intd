@@ -11,9 +11,8 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { useLang } from "@/hooks/use-lang"
+import { GITHUB_URL } from "@/lib/constants"
 import { cn } from "@/lib/utils"
-
-const GITHUB_URL = "https://github.com/rutopio/intd"
 
 // Bare paths (zh). The en routes mirror these under /en, so links prefix at render.
 const navItems = [
@@ -98,7 +97,10 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
             aria-label="GitHub"
             className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
           >
-            <GithubLogoIcon className="size-5" aria-hidden="true" />
+            <GithubLogoIcon
+              className="size-5 transition-transform duration-150 ease-in-out group-hover/button:scale-110"
+              aria-hidden="true"
+            />
           </a>
         </div>
       </nav>

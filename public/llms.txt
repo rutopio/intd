@@ -1,0 +1,14 @@
+# IntD - Integer Decomposition Calculator
+
+> A web tool that decomposes a target integer into item-and-quantity combinations using a constrained DFS algorithm. Given a total amount and a set of item price ranges, it enumerates valid decompositions and ranks them by two strategies: fewest plastic bags (minimize item count) or most balanced quantities.
+
+## Pages
+
+- [Calculator](https://intd.pages.dev/): Enter a target amount and get decomposition results. Supports shuffle to explore alternative combinations.
+- [Algorithm](https://intd.pages.dev/algo): Explains the constrained DFS approach, pruning strategy, and ranking modes with pseudocode.
+- [About](https://intd.pages.dev/about): Project background and motivation.
+
+## Notes
+
+- Available in Traditional Chinese (zh-Hant) and English.
+- Source code: https://github.com/rutopio/intd

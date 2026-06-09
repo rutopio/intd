@@ -77,6 +77,7 @@
     "showTotal": "Show total row",
     "showUnit": "Show $ sign",
     "copy": "Copy",
+    "close": "Close",
     "copied": "Copied",
     "copyFailed": "Copy failed",
     "formatLabel": "Format: {{format}}",

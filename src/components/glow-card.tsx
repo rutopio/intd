@@ -10,7 +10,7 @@ import { useEffect, useRef } from "react"
 // motion, so animating a plain opacity is what gives a real fade in/out.
 const ROLL_DURATION = 0.4 // keep in sync with RollNumber
 
-export function ResultCard({
+export function GlowCard({
   signature,
   children,
 }: {

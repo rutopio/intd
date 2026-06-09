@@ -1,3 +1,5 @@
+import { MAX_BAGS } from "@/lib/constants"
+
 export type ItemConfig = {
   name: string
   min: number
@@ -14,7 +16,11 @@ export type Item = {
   balanceScore: number // max-min of the quantities; smaller is more balanced
 }
 
-const MAX_BAGS = 9
+// Guard against old persisted data that predates the lines field, so rendering
+// such leftovers does not crash.
+export function isItem(x: unknown): x is Item {
+  return typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
+}
 
 // Legal prices for an item: values in [min,max] whose last digit is in digits.
 function pricesFor(config: ItemConfig): number[] {

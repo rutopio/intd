@@ -1,9 +1,7 @@
 import { CheckIcon, GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
 import { useForm } from "@tanstack/react-form"
-import type { TFunction } from "i18next"
 import { useId, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { z } from "zod"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,63 +34,15 @@ import {
 } from "@/components/ui/input-group"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useIsMobile } from "@/hooks/use-mobile"
-import {
-  DEFAULT_BAG_NAME,
-  DEFAULT_ITEMS,
-  MAX_ITEMS,
-  useSettings,
-} from "@/hooks/use-settings"
+import { useSettings } from "@/hooks/use-settings"
+import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants"
 import type { ItemConfig } from "@/lib/decompose"
+import { createSettingsSchema } from "@/lib/schema"
 
 // Display order of the last-digit toggles: 1-9 then 0.
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
-
-// Count by grapheme so emoji and surrogate pairs count as one character.
-const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" })
-const graphemeCount = (s: string) => [...segmenter.segment(s)].length
-
-// Prices are bounded by the calculator's max target amount.
-const MAX_AMOUNT = 99999
-
-const makeSettingsSchema = (t: TFunction) => {
-  const rangeSchema = z
-    .object({
-      name: z
-        .string()
-        .trim()
-        .min(1, t("settings.errName"))
-        .refine((s) => graphemeCount(s) <= 10, t("settings.errNameMax")),
-      min: z
-        .number()
-        .int()
-        .min(1, t("settings.errPosInt"))
-        .max(MAX_AMOUNT, t("settings.errMaxLimit", { max: MAX_AMOUNT })),
-      max: z
-        .number()
-        .int()
-        .min(1, t("settings.errPosInt"))
-        .max(MAX_AMOUNT, t("settings.errMaxLimit", { max: MAX_AMOUNT })),
-      digits: z.array(z.number()).min(1, t("settings.errDigitMin")),
-    })
-    .refine((d) => d.max >= d.min, {
-      message: t("settings.errMaxGteMin"),
-      path: ["max"],
-    })
-
-  return z.object({
-    bagName: z
-      .string()
-      .trim()
-      .min(1, t("settings.errName"))
-      .refine((s) => graphemeCount(s) <= 10, t("settings.errNameMax")),
-    items: z
-      .array(rangeSchema)
-      .min(1, t("settings.errAtLeastOne"))
-      .max(MAX_ITEMS, t("settings.errAtMost", { max: MAX_ITEMS })),
-  })
-}
 
 const numInputClass =
   "flex-1 [-moz-appearance:_textfield] font-mono focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
@@ -105,7 +55,7 @@ export function SettingsDialog() {
   const isMobile = useIsMobile()
   const fieldId = useId()
 
-  const settingsSchema = useMemo(() => makeSettingsSchema(t), [t])
+  const settingsSchema = useMemo(() => createSettingsSchema(t), [t])
 
   const form = useForm({
     defaultValues: { items, bagName },

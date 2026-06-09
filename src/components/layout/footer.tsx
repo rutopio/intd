@@ -1,3 +1,4 @@
+import { AUTHOR_GITHUB_URL } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
@@ -6,7 +7,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
       <div className="mx-auto w-full max-w-4xl p-12 text-center text-muted-foreground text-xs">
         本工具僅為演算法的實作演示
         <a
-          href="https://github.com/rutopio"
+          href={AUTHOR_GITHUB_URL}
           target="_blank"
           rel="noreferrer"
           className="mt-1 block font-mono underline underline-offset-4 hover:text-foreground"

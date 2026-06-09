@@ -32,7 +32,11 @@ export function LanguageToggle({
       className={cn(className)}
       {...props}
     >
-      <TranslateIcon size={16} aria-hidden="true" />
+      <TranslateIcon
+        size={16}
+        aria-hidden="true"
+        className="transition-transform duration-150 ease-in-out group-hover/button:scale-110"
+      />
       <span className="sr-only">{isEn ? "中" : "EN"}</span>
     </Button>
   )
