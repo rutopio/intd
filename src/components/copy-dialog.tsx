@@ -1,5 +1,7 @@
 import { CopyIcon } from "@phosphor-icons/react"
+import type { TFunction } from "i18next"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { JsonHighlight } from "@/components/json-highlight"
 import { Button } from "@/components/ui/button"
@@ -28,15 +30,16 @@ function toMarkdown(
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
+  t: TFunction,
 ): string {
   const d = showUnit ? "$" : ""
   const rows = toRows(item, bagName)
-  const header = "| 品名 | 數量 | 單價 | 總價 |"
+  const header = `| ${t("copy.colName")} | ${t("copy.colQty")} | ${t("copy.colPrice")} | ${t("copy.colTotal")} |`
   const divider = "| --- | ---: | ---: | ---: |"
   const body = rows.map(
     (r) => `| ${r.name} | ${r.qty} | ${d}${r.price} | ${d}${r.total} |`,
   )
-  const total = `| 合計 |  |  | ${d}${item.total} |`
+  const total = `| ${t("copy.total")} |  |  | ${d}${item.total} |`
   return [header, divider, ...body, ...(showTotal ? [total] : [])].join("\n")
 }
 
@@ -59,9 +62,15 @@ function toBoxTable(
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
+  t: TFunction,
 ): string {
   const d = showUnit ? "$" : ""
-  const headers = ["品名", "數量", "單價", "總價"]
+  const headers = [
+    t("copy.colName"),
+    t("copy.colQty"),
+    t("copy.colPrice"),
+    t("copy.colTotal"),
+  ]
   const aligns = ["left", "right", "right", "right"] as const
   const body = toRows(item, bagName).map((r) => [
     r.name,
@@ -69,7 +78,7 @@ function toBoxTable(
     `${d}${r.price}`,
     `${d}${r.total}`,
   ])
-  const totalRow = ["合計", "", "", `${d}${item.total}`]
+  const totalRow = [t("copy.total"), "", "", `${d}${item.total}`]
   const all = [headers, ...body, ...(showTotal ? [totalRow] : [])]
   const widths = headers.map((_, c) =>
     Math.max(...all.map((row) => displayWidth(row[c]))),
@@ -93,12 +102,13 @@ function toList(
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
+  t: TFunction,
 ): string {
   const d = showUnit ? "$" : ""
   const lines = toRows(item, bagName).map(
     (r) => `- ${r.name}: ${r.qty} x ${d}${r.price} = ${d}${r.total}`,
   )
-  if (showTotal) lines.push(`- 合計: ${d}${item.total}`)
+  if (showTotal) lines.push(`- ${t("copy.total")}: ${d}${item.total}`)
   return lines.join("\n")
 }
 
@@ -108,6 +118,7 @@ function toJson(
   _showTotal: boolean,
   showUnit: boolean,
   bagName: string,
+  _t: TFunction,
 ): string {
   const data = toRows(item, bagName).map((r) => ({
     item: r.name,
@@ -124,14 +135,6 @@ const formats = {
   json: toJson,
 }
 
-// Display names for the copied-format toast, keyed by tab value.
-const FORMAT_LABELS: Record<string, string> = {
-  markdown: "Markdown",
-  table: "表格",
-  list: "列表",
-  json: "JSON",
-}
-
 export function CopyDialog({
   item,
   onClose,
@@ -139,11 +142,20 @@ export function CopyDialog({
   item: Item | null
   onClose: () => void
 }) {
+  const { t } = useTranslation()
   const [tab, setTab] = useState("markdown")
   const [showTotal, setShowTotal] = useState(true)
   const [showUnit, setShowUnit] = useState(true)
   const isMobile = useIsMobile()
   const { bagName } = useSettings()
+
+  // Display names for the copied-format toast, keyed by tab value.
+  const FORMAT_LABELS: Record<string, string> = {
+    markdown: t("copy.tabMarkdown"),
+    table: t("copy.tabTable"),
+    list: t("copy.tabList"),
+    json: t("copy.tabJson"),
+  }
 
   const handleCopy = async () => {
     if (!item) return
@@ -152,13 +164,16 @@ export function CopyDialog({
       showTotal,
       showUnit,
       bagName,
+      t,
     )
     try {
       await navigator.clipboard.writeText(text)
-      toast.success("已複製", { description: `格式：${FORMAT_LABELS[tab]}` })
+      toast.success(t("copy.copied"), {
+        description: t("copy.formatLabel", { format: FORMAT_LABELS[tab] }),
+      })
       onClose()
     } catch {
-      toast.error("複製失敗")
+      toast.error(t("copy.copyFailed"))
     }
   }
 
@@ -166,17 +181,17 @@ export function CopyDialog({
     <>
       <Tabs value={tab} onValueChange={setTab}>
         <TabsList className="w-full">
-          <TabsTrigger value="markdown">Markdown</TabsTrigger>
-          <TabsTrigger value="table">表格</TabsTrigger>
-          <TabsTrigger value="list">列表</TabsTrigger>
-          <TabsTrigger value="json">JSON</TabsTrigger>
+          <TabsTrigger value="markdown">{t("copy.tabMarkdown")}</TabsTrigger>
+          <TabsTrigger value="table">{t("copy.tabTable")}</TabsTrigger>
+          <TabsTrigger value="list">{t("copy.tabList")}</TabsTrigger>
+          <TabsTrigger value="json">{t("copy.tabJson")}</TabsTrigger>
         </TabsList>
         {(["markdown", "table", "list", "json"] as const).map((v) => (
           <TabsContent key={v} value={v}>
             {item &&
               (v === "json" ? (
                 <JsonHighlight
-                  code={formats[v](item, showTotal, showUnit, bagName)}
+                  code={formats[v](item, showTotal, showUnit, bagName, t)}
                 />
               ) : (
                 <>
@@ -189,11 +204,11 @@ export function CopyDialog({
                         '"Sarasa Mono TC", "Noto Sans Mono CJK TC", "PingFang TC", "Microsoft JhengHei", ui-monospace, monospace',
                     }}
                   >
-                    {formats[v](item, showTotal, showUnit, bagName)}
+                    {formats[v](item, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (
                     <p className="mt-2 text-muted-foreground text-xs leading-relaxed">
-                      框線表格需在等寬字型下檢視才會對齊。
+                      {t("copy.monoHint")}
                     </p>
                   )}
                 </>
@@ -210,7 +225,7 @@ export function CopyDialog({
           onCheckedChange={setShowTotal}
           disabled={tab === "json"}
         />
-        <Label htmlFor="show-total">顯示「合計」列</Label>
+        <Label htmlFor="show-total">{t("copy.showTotal")}</Label>
       </div>
       <div className="flex items-center gap-2">
         <Switch
@@ -218,11 +233,11 @@ export function CopyDialog({
           checked={showUnit}
           onCheckedChange={setShowUnit}
         />
-        <Label htmlFor="show-unit">顯示 $ 符號</Label>
+        <Label htmlFor="show-unit">{t("copy.showUnit")}</Label>
       </div>
       <Button className="w-full" onClick={handleCopy}>
         <CopyIcon aria-hidden="true" />
-        複製
+        {t("copy.copy")}
       </Button>
     </>
   )
@@ -232,7 +247,7 @@ export function CopyDialog({
       <Drawer open={item !== null} onOpenChange={(o) => !o && onClose()}>
         <DrawerContent className="text-left">
           <DrawerHeader className="text-left">
-            <DrawerTitle>複製表格</DrawerTitle>
+            <DrawerTitle>{t("copy.title")}</DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col gap-4 px-4 pb-6">{body}</div>
         </DrawerContent>
@@ -244,7 +259,7 @@ export function CopyDialog({
     <Dialog open={item !== null} onOpenChange={(o) => !o && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>複製表格</DialogTitle>
+          <DialogTitle>{t("copy.title")}</DialogTitle>
         </DialogHeader>
         {body}
       </DialogContent>

@@ -3,6 +3,7 @@ import { motion } from "motion/react"
 import { useTheme } from "next-themes"
 import { useCallback, useRef } from "react"
 import { flushSync } from "react-dom"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
@@ -26,6 +27,7 @@ export function ThemeToggle({
   duration = 300,
   ...props
 }: ThemeToggleProps) {
+  const { t } = useTranslation()
   const { resolvedTheme, setTheme } = useTheme()
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isDark = resolvedTheme === "dark"
@@ -126,7 +128,7 @@ export function ThemeToggle({
         </motion.span>
       </div>
       <span className="sr-only">
-        {isDark ? "Switch to light mode" : "Switch to dark mode"}
+        {isDark ? t("theme.toLight") : t("theme.toDark")}
       </span>
     </Button>
   )

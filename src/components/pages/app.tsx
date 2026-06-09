@@ -1,0 +1,505 @@
+import {
+  ArrowsClockwiseIcon,
+  CopyIcon,
+  CurrencyCircleDollarIcon,
+  XCircleIcon,
+} from "@phosphor-icons/react"
+import { useNavigate, useSearch } from "@tanstack/react-router"
+import { AnimatePresence, motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
+import { z } from "zod"
+import { CopyDialog } from "@/components/copy-dialog"
+import { ResultCard } from "@/components/result-card"
+import { RollNumber } from "@/components/roll-number"
+import { SettingsDialog } from "@/components/settings-dialog"
+import { ShareButton } from "@/components/share-button"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { useLang } from "@/hooks/use-lang"
+import { useLocalStorage } from "@/hooks/use-local-storage"
+import { useSettings } from "@/hooks/use-settings"
+import { decompose, type Item, keyOf, type SortMode } from "@/lib/decompose"
+import { toRows } from "@/lib/rows"
+import { clearSession } from "@/lib/session"
+
+// Old persisted data has no lines field; filter it out so rendering does not crash.
+function isItem(x: unknown): x is Item {
+  return typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
+}
+
+const CN_DIGITS = ["", "壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
+
+const cnDigit = (d: number) => CN_DIGITS[d] ?? ""
+
+// Split into the wan/qian/bai/shi/yuan slots; the wan slot holds every digit at the 10000s place and above.
+function cnSlots(n: number) {
+  const yuan = n % 10
+  const shi = Math.floor(n / 10) % 10
+  const bai = Math.floor(n / 100) % 10
+  const qian = Math.floor(n / 1000) % 10
+  const wan = Math.floor(n / 10000) // 10000s place and above
+  return {
+    wan: wan > 0 ? String(wan).split("").map(Number).map(cnDigit).join("") : "",
+    qian: cnDigit(qian),
+    bai: cnDigit(bai),
+    shi: cnDigit(shi),
+    yuan: cnDigit(yuan),
+  }
+}
+
+// Per-mode batch state. Each sort mode keeps its own results/seen/offset so
+// switching the strategy tab restores what was last shown there instead of
+// recomputing from index 1.
+type ModeState = { results: Item[]; seen: string[]; offset: number }
+type ByMode = Record<SortMode, ModeState | null>
+const EMPTY_BY_MODE: ByMode = { bags: null, balance: null }
+
+// Shared home page, rendered by both the zh (/) and en (/en) routes. Language is
+// read from the path via useLang; search params are read route-agnostically.
+export function App() {
+  const { t } = useTranslation()
+  const lang = useLang()
+  const isEn = lang === "en"
+  // Validation messages depend on t, so build the schema with localized messages.
+  const amountSchema = z.coerce
+    .number({ message: t("home.errRequired") })
+    .int(t("home.errInt"))
+    .positive(t("home.errPositive"))
+    .max(99999, t("home.errMax"))
+  const [amount, setAmount] = useLocalStorage("idc:amount", "")
+  // runId bumps only on a fresh decompose (new amount): replays card enter + amount-box flip.
+  // Shuffle / strategy change keep the same runId so cards update in place (numbers roll).
+  const [runId, setRunId] = useState(0)
+  const [spin, setSpin] = useState(0) // bumps on every refresh to replay the shuffle-icon spin
+  const [error, setError] = useState<string | null>(null)
+  const [shareItem, setShareItem] = useState<Item | null>(null)
+  // Persist target so returning to the page can shuffle forward without repeating old combos.
+  const [target, setTarget] = useLocalStorage<number | null>("idc:target", null)
+  // Decomposition preference: fewer plastic bags vs. more balanced quantities.
+  const [sortMode, setSortMode] = useLocalStorage<SortMode>(
+    "idc:sortMode",
+    "bags",
+  )
+  // The single source of truth for batch state, keyed by mode.
+  const [byMode, setByMode] = useLocalStorage<ByMode>(
+    "idc:byMode",
+    EMPTY_BY_MODE,
+  )
+  const current = byMode[sortMode]
+  const results = current?.results ?? null
+  const seen = current?.seen ?? []
+  const offset = current?.offset ?? 0
+  const { items, bagName } = useSettings()
+  // Fix the name column to the widest possible item name under the current
+  // settings, so toggling strategies (which add/remove the bag row) never
+  // reflows column widths. Recomputes only when a setting name changes.
+  const nameColCh =
+    Math.max(...items.map((it) => it.name.length), bagName.length) + 1
+  const reduce = useReducedMotion()
+  const navigate = useNavigate()
+  const { p } = useSearch({ strict: false }) as { p?: number }
+
+  // Drop leftover results in the old format (no lines field) to avoid render crashes.
+  const safeResults = results?.every(isItem) ? results : null
+
+  // bumpRun: true for a fresh decompose (replay enter + flip); false for strategy change (update in place).
+  // A fresh decompose resets every mode; a strategy change only fills the target mode.
+  const runDecompose = (
+    tt: number,
+    mode: SortMode = sortMode,
+    bumpRun = true,
+  ) => {
+    const picks = decompose(tt, items, undefined, mode)
+    const next: ModeState = {
+      results: picks,
+      seen: picks.map(keyOf),
+      offset: 0,
+    }
+    setTarget(tt)
+    setByMode((prev) =>
+      bumpRun ? { ...EMPTY_BY_MODE, [mode]: next } : { ...prev, [mode]: next },
+    )
+    if (bumpRun) setRunId((n) => n + 1)
+    setSpin((n) => n + 1)
+  }
+
+  // Switch the decomposition strategy. Restore that mode's last batch if it has
+  // one; otherwise compute its first batch (index starts at 1).
+  const handleSortModeChange = (mode: SortMode) => {
+    setSortMode(mode)
+    if (target !== null && byMode[mode] === null)
+      runDecompose(target, mode, false)
+    else setSpin((n) => n + 1)
+  }
+
+  const handleSubmit = () => {
+    // Pressing decompose with an empty input clears the session back to its initial state.
+    if (amount.trim() === "") {
+      clearSession()
+      setError(null)
+      navigate({ to: ".", search: {}, replace: true })
+      toast.success(t("home.clearedToast"))
+      return
+    }
+    const parsed = amountSchema.safeParse(amount.trim())
+    if (!parsed.success) {
+      setError(parsed.error.issues[0].message)
+      return
+    }
+    setError(null)
+    const tt = parsed.data
+    runDecompose(tt)
+    // Write the amount into the query string so it can be shared and restored on reload.
+    navigate({ to: ".", search: { p: tt }, replace: true })
+  }
+
+  // On entry, reconcile the URL and the persisted state so they always agree:
+  // - ?p= present: prefill and auto-decompose once (the URL wins).
+  // - ?p= absent but a previously decomposed amount is persisted: write it back
+  //   into the URL so the address matches the results already on screen.
+  const didInit = useRef(false)
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runs once on entry, not on dependency changes
+  useEffect(() => {
+    if (didInit.current) return
+    didInit.current = true
+    if (p !== undefined) {
+      setAmount(String(p))
+      setError(null)
+      runDecompose(p)
+      return
+    }
+    if (target !== null) {
+      navigate({ to: ".", search: { p: target }, replace: true })
+    }
+  }, [])
+
+  const handleShuffle = () => {
+    if (target === null) return
+    const seenSet = new Set(seen)
+    const picks = decompose(target, items, seenSet, sortMode)
+    if (picks.length === 0) return // no other combos left, keep current results
+    for (const pick of picks) seenSet.add(keyOf(pick))
+    setByMode((prev) => ({
+      ...prev,
+      // Continue numbering from the previous batch by adding the current count.
+      [sortMode]: {
+        results: picks,
+        seen: [...seenSet],
+        offset: offset + (results?.length ?? 0),
+      },
+    }))
+    // Keep runId: cards update in place and table numbers roll; only spin the icon.
+    setSpin((n) => n + 1)
+  }
+
+  return (
+    <main className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
+      <h1 className="sr-only">Integer Decomposition Calculator</h1>
+      <div className="flex w-full flex-col gap-3 lg:max-w-md">
+        <div className="flex w-full items-start justify-center gap-2">
+          <div className="flex flex-1 flex-col gap-1">
+            <InputGroup className="w-full" aria-invalid={error !== null}>
+              <InputGroupAddon>
+                <CurrencyCircleDollarIcon aria-hidden="true" />
+              </InputGroupAddon>
+              <InputGroupInput
+                autoFocus
+                type="text"
+                inputMode="numeric"
+                placeholder={t("home.amountPlaceholder")}
+                aria-label={t("home.amountLabel")}
+                aria-invalid={error !== null}
+                aria-describedby={error ? "amount-error" : undefined}
+                value={amount}
+                onChange={(e) => {
+                  setAmount(e.target.value)
+                  if (error) setError(null)
+                }}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                className="font-mono"
+              />
+              <InputGroupAddon align="inline-end">
+                <InputGroupButton
+                  variant="default"
+                  className="text-xs"
+                  onClick={handleSubmit}
+                >
+                  {t("home.decompose")}
+                </InputGroupButton>
+              </InputGroupAddon>
+            </InputGroup>
+            {error && (
+              <p
+                id="amount-error"
+                className="px-1 text-destructive text-xs"
+                role="alert"
+              >
+                {error}
+              </p>
+            )}
+          </div>
+          <SettingsDialog />
+          <ShareButton />
+        </div>
+
+        <RadioGroup
+          value={sortMode}
+          onValueChange={(v) => handleSortModeChange(v as SortMode)}
+          aria-label={t("home.strategyLabel")}
+          data-mode={sortMode}
+          className="group relative grid h-9 w-full grid-cols-2 items-center gap-0 rounded-md bg-input/50 p-0.5 font-medium text-sm after:absolute after:inset-y-0.5 after:left-0.5 after:w-[calc(50%-2px)] after:rounded-sm after:bg-background after:shadow-xs after:transition-[translate] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] data-[mode=balance]:after:translate-x-full"
+        >
+          <label
+            htmlFor="sort-bags"
+            className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          >
+            {t("home.strategyBags")}
+            <RadioGroupItem id="sort-bags" className="sr-only" value="bags" />
+          </label>
+          <label
+            htmlFor="sort-balance"
+            className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          >
+            {t("home.strategyBalance")}
+            <RadioGroupItem
+              id="sort-balance"
+              className="sr-only"
+              value="balance"
+            />
+          </label>
+        </RadioGroup>
+        <p className="px-1 text-center text-muted-foreground text-xs leading-relaxed">
+          {sortMode === "bags"
+            ? t("home.strategyBagsHint")
+            : t("home.strategyBalanceHint")}
+        </p>
+      </div>
+
+      <motion.div
+        layout={!reduce}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="flex min-h-[26rem] w-full flex-col items-center gap-6"
+      >
+        {safeResults !== null &&
+          (safeResults.length === 0 ? (
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+            >
+              <Empty>
+                <EmptyHeader>
+                  <EmptyMedia variant="icon">
+                    <XCircleIcon aria-hidden="true" />
+                  </EmptyMedia>
+                  <EmptyTitle>{t("home.emptyTitle")}</EmptyTitle>
+                  <EmptyDescription>{t("home.emptyDesc")}</EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            </motion.div>
+          ) : (
+            <>
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.div
+                  key={runId}
+                  className="flex w-full flex-col items-stretch justify-center gap-4 lg:w-auto lg:flex-row"
+                  initial={reduce ? false : { opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                >
+                  {safeResults.map((item, idx) => (
+                    <ResultCard
+                      // Stable by position so shuffle updates content in place (no remount/enter).
+                      // biome-ignore lint/suspicious/noArrayIndexKey: position is the stable identity here
+                      key={idx}
+                      signature={keyOf(item)}
+                    >
+                      <Card className="h-full w-full rounded-md lg:w-auto lg:min-w-72">
+                        <CardHeader className="flex flex-row items-center justify-between">
+                          <CardTitle>
+                            <Badge className="rounded-full">
+                              {offset + idx + 1}
+                            </Badge>
+                          </CardTitle>
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            aria-label={t("home.copyTable")}
+                            className="text-muted-foreground"
+                            onClick={() => setShareItem(item)}
+                          >
+                            <CopyIcon aria-hidden="true" />
+                          </Button>
+                        </CardHeader>
+                        <CardContent>
+                          <Table>
+                            <TableHeader>
+                              <TableRow>
+                                <TableHead
+                                  className="whitespace-nowrap"
+                                  style={{ minWidth: `${nameColCh}em` }}
+                                >
+                                  {t("home.colName")}
+                                </TableHead>
+                                <TableHead className="pl-4 text-right">
+                                  {t("home.colQty")}
+                                </TableHead>
+                                <TableHead className="pl-4 text-right">
+                                  {t("home.colPrice")}
+                                </TableHead>
+                                <TableHead className="pl-4 text-right">
+                                  {t("home.colTotal")}
+                                </TableHead>
+                              </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                              {toRows(item, bagName).map((row) => (
+                                <TableRow key={row.name}>
+                                  <TableCell className="whitespace-nowrap">
+                                    {row.name}
+                                  </TableCell>
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.qty} />
+                                  </TableCell>
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.price} prefix="$" />
+                                  </TableCell>
+                                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                                    <RollNumber value={row.total} prefix="$" />
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </Table>
+                        </CardContent>
+                      </Card>
+                    </ResultCard>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+              <motion.div
+                layout={!reduce}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="flex w-full justify-center lg:w-auto"
+              >
+                <Button
+                  variant="outline"
+                  disabled={results === null}
+                  onClick={handleShuffle}
+                  className="w-full lg:w-auto"
+                >
+                  <motion.span
+                    key={spin}
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="inline-flex"
+                  >
+                    <ArrowsClockwiseIcon aria-hidden="true" />
+                  </motion.span>
+                  {t("home.shuffle")}
+                </Button>
+              </motion.div>
+              {/* Chinese uppercase amount block: a zh-only convention, hidden in English. */}
+              {!isEn &&
+                (() => {
+                  const s = cnSlots(safeResults[0].total)
+                  // One cell per character forming a grid: [digit, unit, digit, unit, ...].
+                  // Digit cells are bold, unit cells font-light, empty stays blank. id is a stable key.
+                  const cells: {
+                    id: string
+                    char: string
+                    unit?: boolean
+                  }[] = [
+                    { id: "ntd-1", char: "新", unit: true },
+                    { id: "ntd-2", char: "台", unit: true },
+                    { id: "ntd-3", char: "幣", unit: true },
+                    { id: "wan-n", char: s.wan },
+                    { id: "wan", char: "萬", unit: true },
+                    { id: "qian-n", char: s.qian },
+                    { id: "qian", char: "仟", unit: true },
+                    { id: "bai-n", char: s.bai },
+                    { id: "bai", char: "佰", unit: true },
+                    { id: "shi-n", char: s.shi },
+                    { id: "shi", char: "拾", unit: true },
+                    { id: "yuan-n", char: s.yuan },
+                    { id: "yuan", char: "元", unit: true },
+                    { id: "zheng", char: "整", unit: true },
+                  ]
+                  // On mobile, wrap after "仟": first row is NTD (3 cells) plus the first 4, rest on the second row.
+                  const rows = [cells.slice(0, 7), cells.slice(7)]
+                  // ms rule: the very first cell is not pulled in; each row's first cell is left-aligned on mobile
+                  // and shares an edge on desktop; all others use -ms-px.
+                  const msClass = (ri: number, ci: number) => {
+                    if (ri === 0 && ci === 0) return ""
+                    if (ci === 0) return "ms-0 lg:-ms-px"
+                    return "-ms-px"
+                  }
+                  return (
+                    <motion.div
+                      // Replay the enter on a fresh decompose, like the cards above.
+                      key={runId}
+                      layout={!reduce}
+                      initial={reduce ? false : { opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.18, ease: "easeOut" }}
+                      className="flex w-full flex-col gap-2 lg:w-auto"
+                    >
+                      <div className="flex w-full flex-col items-start lg:w-auto lg:flex-row">
+                        {rows.map((row, ri) => (
+                          // biome-ignore lint/suspicious/noArrayIndexKey: fixed two rows, index is a stable key
+                          <div key={ri} className="flex w-full lg:w-auto">
+                            {row.map((c, ci) => (
+                              <span
+                                key={c.id}
+                                // Mobile: each cell flexes to fill the row width (square via aspect ratio),
+                                // so the whole strip is full-width like the shuffle button. Desktop: fixed size.
+                                className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
+                                  c.unit
+                                    ? "bg-secondary font-light"
+                                    : "font-bold text-foreground"
+                                }`}
+                              >
+                                {c.char}
+                              </span>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )
+                })()}
+            </>
+          ))}
+      </motion.div>
+
+      <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
+    </main>
+  )
+}

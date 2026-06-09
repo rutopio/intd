@@ -1,6 +1,8 @@
 import { CheckIcon, GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
 import { useForm } from "@tanstack/react-form"
-import { useId, useState } from "react"
+import type { TFunction } from "i18next"
+import { useId, useMemo, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { z } from "zod"
 import {
   AlertDialog,
@@ -54,51 +56,56 @@ const graphemeCount = (s: string) => [...segmenter.segment(s)].length
 // Prices are bounded by the calculator's max target amount.
 const MAX_AMOUNT = 99999
 
-const rangeSchema = z
-  .object({
-    name: z
+const makeSettingsSchema = (t: TFunction) => {
+  const rangeSchema = z
+    .object({
+      name: z
+        .string()
+        .trim()
+        .min(1, t("settings.errName"))
+        .refine((s) => graphemeCount(s) <= 10, t("settings.errNameMax")),
+      min: z
+        .number()
+        .int()
+        .min(1, t("settings.errPosInt"))
+        .max(MAX_AMOUNT, t("settings.errMaxLimit", { max: MAX_AMOUNT })),
+      max: z
+        .number()
+        .int()
+        .min(1, t("settings.errPosInt"))
+        .max(MAX_AMOUNT, t("settings.errMaxLimit", { max: MAX_AMOUNT })),
+      digits: z.array(z.number()).min(1, t("settings.errDigitMin")),
+    })
+    .refine((d) => d.max >= d.min, {
+      message: t("settings.errMaxGteMin"),
+      path: ["max"],
+    })
+
+  return z.object({
+    bagName: z
       .string()
       .trim()
-      .min(1, "請輸入品名")
-      .refine((s) => graphemeCount(s) <= 10, "至多10個字"),
-    min: z
-      .number()
-      .int()
-      .min(1, "需為正整數")
-      .max(MAX_AMOUNT, `上限為 ${MAX_AMOUNT}`),
-    max: z
-      .number()
-      .int()
-      .min(1, "需為正整數")
-      .max(MAX_AMOUNT, `上限為 ${MAX_AMOUNT}`),
-    digits: z.array(z.number()).min(1, "至少選一個尾數"),
+      .min(1, t("settings.errName"))
+      .refine((s) => graphemeCount(s) <= 10, t("settings.errNameMax")),
+    items: z
+      .array(rangeSchema)
+      .min(1, t("settings.errAtLeastOne"))
+      .max(MAX_ITEMS, t("settings.errAtMost", { max: MAX_ITEMS })),
   })
-  .refine((d) => d.max >= d.min, {
-    message: "上限需大於等於下限",
-    path: ["max"],
-  })
-
-const settingsSchema = z.object({
-  bagName: z
-    .string()
-    .trim()
-    .min(1, "請輸入品名")
-    .refine((s) => graphemeCount(s) <= 10, "至多10個字"),
-  items: z
-    .array(rangeSchema)
-    .min(1, "至少需一個品項")
-    .max(MAX_ITEMS, `至多${MAX_ITEMS}個品項`),
-})
+}
 
 const numInputClass =
-  "flex-1 [-moz-appearance:_textfield] focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+  "flex-1 [-moz-appearance:_textfield] font-mono focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
 
 export function SettingsDialog() {
+  const { t } = useTranslation()
   const { items, setItems, bagName, setBagName } = useSettings()
   const [open, setOpen] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
   const isMobile = useIsMobile()
   const fieldId = useId()
+
+  const settingsSchema = useMemo(() => makeSettingsSchema(t), [t])
 
   const form = useForm({
     defaultValues: { items, bagName },
@@ -120,13 +127,13 @@ export function SettingsDialog() {
     onRemove: () => void,
     canRemove: boolean,
   ) => {
-    const label = `品項 ${index + 1}`
+    const label = t("settings.itemLabel", { index: index + 1 })
     return (
       <Card size="sm" className="relative shrink-0 rounded-md">
         <Button
           variant="ghost"
           size="icon-sm"
-          aria-label={`刪除${label}`}
+          aria-label={t("settings.deleteItem", { label })}
           disabled={!canRemove}
           onClick={onRemove}
           className="absolute top-2 right-2 text-muted-foreground hover:text-destructive"
@@ -142,11 +149,11 @@ export function SettingsDialog() {
                   data-invalid={nameField.state.meta.errors.length > 0}
                 >
                   <FieldLabel htmlFor={`${fieldId}-${index}-name`}>
-                    品名
+                    {t("settings.itemName")}
                   </FieldLabel>
                   <Input
                     id={`${fieldId}-${index}-name`}
-                    aria-label={`${label} 品名`}
+                    aria-label={t("settings.aNameOf", { label })}
                     value={nameField.state.value}
                     onBlur={nameField.handleBlur}
                     onChange={(e) => nameField.handleChange(e.target.value)}
@@ -163,7 +170,7 @@ export function SettingsDialog() {
                   data-invalid={maxField.state.meta.errors.length > 0}
                 >
                   <FieldLabel htmlFor={`${fieldId}-${index}-min`}>
-                    價格區間
+                    {t("settings.priceRange")}
                   </FieldLabel>
                   <div className="flex">
                     <form.Field name={`items[${index}].min`}>
@@ -173,10 +180,10 @@ export function SettingsDialog() {
                             <InputGroupText>$</InputGroupText>
                           </InputGroupAddon>
                           <InputGroupInput
-                            aria-label={`${label} 最小值`}
+                            aria-label={t("settings.aMinOf", { label })}
                             className={numInputClass}
                             id={`${fieldId}-${index}-min`}
-                            placeholder="價格下限"
+                            placeholder={t("settings.priceMin")}
                             type="number"
                             // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
                             value={minField.state.value || ""}
@@ -197,9 +204,9 @@ export function SettingsDialog() {
                         <InputGroupText>$</InputGroupText>
                       </InputGroupAddon>
                       <InputGroupInput
-                        aria-label={`${label} 最大值`}
+                        aria-label={t("settings.aMaxOf", { label })}
                         className={numInputClass}
-                        placeholder="價格上限"
+                        placeholder={t("settings.priceMax")}
                         type="number"
                         // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
                         value={maxField.state.value || ""}
@@ -224,7 +231,7 @@ export function SettingsDialog() {
                 className="flex-1"
                 data-invalid={field.state.meta.errors.length > 0}
               >
-                <FieldLabel>價格尾數</FieldLabel>
+                <FieldLabel>{t("settings.priceDigits")}</FieldLabel>
                 <div className="overflow-x-auto">
                   <ToggleGroup
                     multiple
@@ -234,14 +241,14 @@ export function SettingsDialog() {
                     // base-ui Toggle only accepts string values; convert at the boundary and keep number state internally.
                     value={field.state.value.map(String)}
                     onValueChange={(v) => field.handleChange(v.map(Number))}
-                    aria-label={`${label}價格尾數`}
+                    aria-label={t("settings.aDigitsOf", { label })}
                   >
                     {DIGITS.map((d) => (
                       <ToggleGroupItem
                         key={d}
                         value={String(d)}
-                        aria-label={`尾數 ${d}`}
-                        className="w-9 px-0 aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
+                        aria-label={t("settings.aDigit", { digit: d })}
+                        className="w-9 px-0 font-mono aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
                       >
                         {d}
                       </ToggleGroupItem>
@@ -267,10 +274,12 @@ export function SettingsDialog() {
               className="flex-1"
               data-invalid={field.state.meta.errors.length > 0}
             >
-              <FieldLabel htmlFor={`${fieldId}-bag-name`}>品名</FieldLabel>
+              <FieldLabel htmlFor={`${fieldId}-bag-name`}>
+                {t("settings.itemName")}
+              </FieldLabel>
               <Input
                 id={`${fieldId}-bag-name`}
-                aria-label="塑膠袋 品名"
+                aria-label={t("settings.aBagName")}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
@@ -280,16 +289,19 @@ export function SettingsDialog() {
           )}
         </form.Field>
         <Field className="flex-1">
-          <FieldLabel htmlFor={`${fieldId}-bag-price`}>價格</FieldLabel>
+          <FieldLabel htmlFor={`${fieldId}-bag-price`}>
+            {t("settings.price")}
+          </FieldLabel>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupText>$</InputGroupText>
             </InputGroupAddon>
             <InputGroupInput
               id={`${fieldId}-bag-price`}
-              value="1（固定）"
+              value={t("settings.bagPriceFixed")}
               disabled
               readOnly
+              className="font-mono"
             />
           </InputGroup>
         </Field>
@@ -317,7 +329,8 @@ export function SettingsDialog() {
           >
             <PlusIcon aria-hidden="true" />
             {/* Count includes the built-in plastic bag: custom items + 1 over the total cap. */}
-            新增品項 ({itemsField.state.value.length + 1}/{MAX_ITEMS + 1})
+            {t("settings.addItem")} ({itemsField.state.value.length + 1}/
+            {MAX_ITEMS + 1})
           </Button>
         </>
       )}
@@ -341,18 +354,18 @@ export function SettingsDialog() {
           setConfirmReset(true)
         }}
       >
-        重設
+        {t("settings.reset")}
       </Button>
       <div className="flex gap-4">
         <AlertDialogCancel variant="ghost" className="text-xs">
-          取消
+          {t("settings.cancel")}
         </AlertDialogCancel>
         <Button
           className="min-w-24 text-xs"
           onClick={() => form.handleSubmit()}
         >
           <CheckIcon className="size-3" aria-hidden="true" />
-          儲存
+          {t("settings.save")}
         </Button>
       </div>
     </AlertDialogFooter>
@@ -362,11 +375,11 @@ export function SettingsDialog() {
     <DrawerFooter>
       <Button onClick={() => form.handleSubmit()}>
         <CheckIcon className="size-3" aria-hidden="true" />
-        儲存
+        {t("settings.save")}
       </Button>
       {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
       <Button variant="outline" onClick={() => setOpen(false)}>
-        取消
+        {t("settings.cancel")}
       </Button>
     </DrawerFooter>
   )
@@ -386,18 +399,18 @@ export function SettingsDialog() {
     >
       <DrawerContent className="text-left">
         <DrawerHeader className="text-left">
-          <DrawerTitle>確定重設？</DrawerTitle>
+          <DrawerTitle>{t("settings.resetConfirmTitle")}</DrawerTitle>
           <DrawerDescription>
-            將還原所有品項為預設值，此操作無法復原。
+            {t("settings.resetConfirmDesc")}
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <Button variant="destructive" onClick={doReset}>
-            重設
+            {t("settings.reset")}
           </Button>
           {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
           <Button variant="outline" onClick={() => setConfirmReset(false)}>
-            取消
+            {t("settings.cancel")}
           </Button>
         </DrawerFooter>
       </DrawerContent>
@@ -408,14 +421,16 @@ export function SettingsDialog() {
     <AlertDialog open={confirmReset} onOpenChange={setConfirmReset}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>確定重設？</AlertDialogTitle>
+          <AlertDialogTitle>{t("settings.resetConfirmTitle")}</AlertDialogTitle>
           <AlertDialogDescription>
-            將還原所有品項為預設值，此操作無法復原。
+            {t("settings.resetConfirmDesc")}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>取消</AlertDialogCancel>
-          <AlertDialogAction onClick={doReset}>重設</AlertDialogAction>
+          <AlertDialogCancel>{t("settings.cancel")}</AlertDialogCancel>
+          <AlertDialogAction onClick={doReset}>
+            {t("settings.reset")}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -426,16 +441,18 @@ export function SettingsDialog() {
       <>
         <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
           <DrawerTrigger asChild>
-            <Button variant="outline" size="icon" aria-label="設定">
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label={t("settings.title")}
+            >
               <GearIcon aria-hidden="true" />
             </Button>
           </DrawerTrigger>
           <DrawerContent className="max-h-[80vh] text-left">
             <DrawerHeader className="text-left">
-              <DrawerTitle>設定</DrawerTitle>
-              <DrawerDescription>
-                調整各品項的價格區間與尾數（至多七個品項）
-              </DrawerDescription>
+              <DrawerTitle>{t("settings.title")}</DrawerTitle>
+              <DrawerDescription>{t("settings.desc")}</DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col gap-4 overflow-y-auto px-4 py-1">
               {formFields}
@@ -448,7 +465,7 @@ export function SettingsDialog() {
                   setConfirmReset(true)
                 }}
               >
-                重設
+                {t("settings.reset")}
               </Button>
             </div>
             {mobileFooter}
@@ -464,16 +481,22 @@ export function SettingsDialog() {
       <AlertDialog open={open} onOpenChange={handleOpenChange}>
         <AlertDialogTrigger
           render={
-            <Button variant="outline" size="icon" aria-label="設定">
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label={t("settings.title")}
+            >
               <GearIcon aria-hidden="true" />
             </Button>
           }
         />
         <AlertDialogContent className="gap-4 p-0 text-left sm:max-w-md">
           <AlertDialogHeader className="px-6 py-4">
-            <AlertDialogTitle className="text-base">設定</AlertDialogTitle>
+            <AlertDialogTitle className="text-base">
+              {t("settings.title")}
+            </AlertDialogTitle>
             <AlertDialogDescription>
-              調整各品項的價格區間與尾數（至多七個品項）
+              {t("settings.desc")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           {body}

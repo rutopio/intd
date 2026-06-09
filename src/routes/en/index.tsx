@@ -6,7 +6,7 @@ const searchSchema = z.object({
   p: z.coerce.number().int().positive().max(99999).optional().catch(undefined),
 })
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/en/")({
   component: App,
   validateSearch: searchSchema,
 })

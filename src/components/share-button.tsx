@@ -6,6 +6,7 @@ import {
   XLogoIcon,
 } from "@phosphor-icons/react"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
@@ -22,6 +23,7 @@ function openShareWindow(url: string) {
 }
 
 export function ShareButton() {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : ""
@@ -30,9 +32,9 @@ export function ShareButton() {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareUrl)
-      toast.success("已複製連結", { description: shareUrl })
+      toast.success(t("share.copied"), { description: shareUrl })
     } catch {
-      toast.error("複製失敗")
+      toast.error(t("share.copyFailed"))
     }
   }
 
@@ -61,7 +63,7 @@ export function ShareButton() {
       <Button
         variant="outline"
         size="icon"
-        aria-label="分享"
+        aria-label={t("share.label")}
         onClick={handleShareClick}
       >
         <ShareNetworkIcon aria-hidden="true" />
@@ -70,13 +72,13 @@ export function ShareButton() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>分享這個頁面</DialogTitle>
-            <DialogDescription>選擇分享方式，或複製連結。</DialogDescription>
+            <DialogTitle>{t("share.title")}</DialogTitle>
+            <DialogDescription>{t("share.desc")}</DialogDescription>
           </DialogHeader>
           <Input
             value={shareUrl}
             disabled
-            aria-label="目前網址"
+            aria-label={t("share.currentUrl")}
             className="bg-muted"
           />
           <div className="grid grid-cols-4 gap-2">
@@ -122,7 +124,7 @@ export function ShareButton() {
               onClick={handleCopy}
             >
               <LinkIcon aria-hidden="true" />
-              <span className="text-xs">複製連結</span>
+              <span className="text-xs">{t("share.copyLink")}</span>
             </Button>
           </div>
         </DialogContent>

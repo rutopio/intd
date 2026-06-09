@@ -1,0 +1,197 @@
+import { algoPseudocode } from "./algo-pseudocode";
+
+# Algorithm Notes
+
+This is a **constrained integer decomposition** problem: **given an arbitrary total, find combinations that split it into several items (such as a bento or a drink) and a one-dollar item (such as a plastic bag)**, subject to the following constraints:
+
+- Within a single order, each item has exactly one price.
+- The one-dollar item is optional.
+
+## Items and Price Constraints
+
+Suppose there are $n$ items available for making up the total. Item $i$ (for $i = 1, 2, \dots, n$) has its own set of valid prices $P_i \subseteq \mathbb{Z}^+$ (prices are obviously positive integers). From this set we pick a price $p_i \in P_i$ that satisfies a given last-digit rule, together with a quantity $q_i \in \mathbb{N}_0$ (each item may be used or skipped). For example:
+
+- Bento (item 1, $i = 1$, price $p_1$, quantity $q_1$): price range $P_1$ between `90` and `150`, with $p_1$ ending in `0`, `5`, or `9`, e.g. `99`, `120`, `135`.
+- Drink (item 2, $i = 2$, price $p_2$, quantity $q_2$): price range $P_2$ between `40` and `90`, with $p_2$ ending in `0` or `5`, e.g. `45`, `60`, `85`.
+
+There is also a one-dollar item (such as a plastic bag, price $p_* = 1$, quantity $q_*$): each costs `1`, with quantity `0` to `9`, intended to make up the remaining change:
+
+$$
+\begin{aligned}
+p_1 &\in P_1 = \{\, p \in \mathbb{Z} : 90 \le p \le 150,\; p \bmod 10 \in \{0,5,9\} \,\} \\
+p_2 &\in P_2 = \{\, p \in \mathbb{Z} : 40 \le p \le 90,\; p \bmod 10 \in \{0,5\} \,\} \\
+&q_1, q_2 \in \mathbb{N}_0 \\
+p_* &= 1, \quad q_* \in \{0, 1, \dots, 9\} \\
+\end{aligned}
+$$
+
+- The same generalizes to items 3, 4, and so on.
+- Including the one-dollar item, there are at most 7 items total (i.e. $n \le 6$ make-up items; in fact it could extend to arbitrarily many, but too many items are meaningless for this constrained decomposition problem).
+
+## Problem Definition
+
+Let the target total be $T \in \mathbb{Z}^+$. For each item $i \in \{1, 2, \dots, n\}$ we seek a price $p_i$ and quantity $q_i$, plus the quantity $q_*$ of the one-dollar item (unit price $p_* = 1$), such that the combination satisfies:
+
+$$
+\sum_{i=1}^{n} \big(p_i \cdot q_i\big) + q_* = T
+$$
+
+If we want to make up the total using two items, a bento and a drink ($n = 2$), plus the plastic bag, this is:
+
+$$
+\underbrace{\big(p_1 \cdot q_1\big)}_{\text{bento}} + \underbrace{\big(p_2 \cdot q_2\big)}_{\text{drink}} + \underbrace{q_*}_{\text{bag}} = T
+$$
+
+Let $\mathcal{F}$ be the feasible set of all solutions satisfying the equation and constraints above. We sort $\mathcal{F}$ by the strategy the user selects and return the best one:
+
+- **Fewest bags first**: based on the assumption that "plastic bags at a bento shop are free, and one bag can hold several bentos and drinks", we first minimize the number of bags used, then balance quantities across items.
+
+$$
+\operatorname*{arg\,min}_{\mathcal{F}}\; q_*
+$$
+
+- **Balance items first**: based on the assumption that "someone buying a bento will also grab a drink, so the items should be roughly equal", we first balance item quantities, then minimize the number of bags.
+
+$$
+\operatorname*{arg\,min}_{\mathcal{F}}\bigl(\max_i q_i - \min_i q_i\bigr)
+$$
+
+## Constraints
+
+1. Within a single order, each item $i$ uses a single price $p_i$. If a pork-chop bento and a chicken-leg bento have different prices, they must be treated as different items.
+2. The chosen strategy decides the primary preference: "fewest bags first" minimizes the bag count $q_*$, while "balance items first" makes the quantities $q_i$ as even as possible (avoiding combinations like `20` bentos with `4` drinks).
+3. The plastic bag is optional ($q_* \ge 0$).
+4. Each item may be used or skipped ($q_i \ge 0$), but not all skipped, so the order is not just plastic bags ($\sum_i q_i \ge 1$).
+5. For a reasonable solution, the bag count should not exceed the total number of items ($q_* \le \sum_i q_i$); after all, nobody buys `2` bentos and then `10` extra plastic bags.
+6. After obtaining a combination, verify again that the total equals $T$.
+
+## Why a One-Dollar Item?
+
+Because the target total $T$ can be any positive integer, but each item's price $p_i$ may be subject to a last-digit rule (e.g. bentos end in `0`, `5`, `9` and drinks end in `0`, `5`), the amounts $\sum_i p_i q_i$ reachable with these items alone are discrete and sparse, and may not hit $T$ exactly.
+
+Without the one-dollar item, solving degrades into "hit $T$ exactly under restricted prices", which for many values of $T$ has no feasible solution at all. For example, if bentos must end in `0` or `5` and drinks always end in `0`, then every combination is a multiple of `5`, and a total like `114` can never be reached.
+
+The one-dollar item (like a plastic bag or disposable utensils) provides the fine-tuning room here: first approximate the total $T$ with a few items, then top up the remaining change with plastic bags.
+
+## Solving Strategy
+
+The overall idea condenses into three steps: enumerate every possible way to buy, filter out the unreasonable ones, then sort by preference and pick the best few.
+
+Picture a multi-level decision tree: the first level decides "buy a bento or not? at which price? how many?", the second level decides the drink, and so on. Expanding every choice at each level produces a branching tree; each top-to-bottom path corresponds to one complete purchase, after which we check whether the remainder is reasonable.
+
+We traverse this tree with depth-first search (DFS): follow one path all the way down (all items decided), record the result, then backtrack to the nearest branch and try the next choice, until all paths are explored.
+
+For $T = 253$, with the bento at `100` and the drink at `75`, the tree looks roughly like this:
+
+```
+T = 253
+├─ bento ×0 ┬ drink ×0 → left 253 → bag 253  (✗ exceeds bag limit)
+│           ├ drink ×1 → left 178 → bag 178  (✗ exceeds bag limit)
+│           ├ drink ×2 → left 103 → bag 103  (✗ exceeds bag limit)
+│           └ drink ×3 → left  28 → bag  28  (✗ exceeds bag limit)
+├─ bento ×1 ┬ drink ×0 → left 153 → bag 153  (✗ exceeds bag limit)
+│           ├ drink ×1 → left  78 → bag  78  (✗ exceeds bag limit)
+│           └ drink ×2 → left   3 → bag   3  (✓ a feasible solution)
+└─ bento ×2 ┬ drink ×0 → left  53 → bag  53  (✗ exceeds bag limit)
+            └ ...
+```
+
+## A Worked Example
+
+Suppose the target total is $T = 253$, with the bento priced at `100` and the drink at `75`. DFS tries every quantity of bentos and drinks, for example:
+
+- `2` bentos, `0` drinks: $100 \times 2 = 200$, leaving `53` → would need `53` bags, over the limit of `9`, rejected.
+- `1` bento, `1` drink: $100 + 75 = 175$, leaving `78` → would need `78` bags, rejected.
+- `1` bento, `2` drinks: $100 + 75 \times 2 = 250$, leaving `3` → take `3` bags, exactly fills it, **passes**, becomes a candidate.
+
+Substituting the last set back into the original equation to verify:
+
+$$
+\underbrace{\$100 \cdot 1}_{\text{bento}} + \underbrace{\$75 \cdot 2}_{\text{drink}} + \underbrace{\$1\cdot 3}_{\text{bag}} = \$253
+$$
+
+As you can see, although `253` cannot be made from bentos and drinks alone, topping up the `3` change with plastic bags makes it work. Trying every price-and-quantity combination of bentos and drinks this way collects all the candidates.
+
+Once all candidates are collected, they are sorted by the chosen strategy ("fewest bags first" or "balance items first"), and the top three plans with distinct price combinations are shown. Pressing "New set" excludes the plans already shown and lists the next batch of feasible solutions.
+
+## Pseudocode
+
+<Pseudocode code={algoPseudocode} />
+
+## Time and Space Complexity
+
+The complexity of this algorithm is essentially "how many nodes are visited in the decision tree". The key is the average branching factor at each level; multiplying the branch counts across levels gives the total number of nodes visited.
+
+### Step 1: Branches per Level
+
+Let the target total be $T$. When DFS descends to level $i$, levels $1 \dots i-1$ have already spent some money. Let $R_i$ be the amount still left to reach $T$ on entering level $i$:
+
+$$
+R_i = T - \sum_{k=1}^{i-1} p_k q_k \leq T
+$$
+
+The price set $P_i$ of item $i$ has cardinality $|P_i|$. At each visit to level $i$, the choices for this item are:
+
+- Skip the item: that is $q_i = 0$, giving just this `1` possibility;
+- For each price $p_i \in P_i$ (there are $|P_i|$ of them), try quantities $q_i$ from `1` up to $\lfloor R_i / p_i \rfloor$. Since $R_i \le T$ and $p_i \ge 1$, the quantity count is at most $T / p_i$, an upper bound of $O(T)$.
+
+Combining the two, the branch count at level $i$ is about $1 + |P_i| \cdot O(T) = O(|P_i| \cdot T)$.
+
+### Step 2: Multiply Across $n$ Levels
+
+Since DFS makes a choice at each level on its way down, the total node count is the product of the per-level branch counts:
+
+$$
+O\!\left(\prod_{i=1}^{n} |P_i| \cdot T\right)
+$$
+
+Once the price ranges and last-digit rules are set, they do not change. For example, if a bento's price is restricted to `90`–`110` with last digits `0, 5, 9`, then $P_1$ is just the six values $\{90, 95, 99, 100, 105, 109\}$. In other words, every $|P_i|$ here is a constant that does not grow with $T$ and can be treated as a constant $K$; the only thing that grows with the input is the $T$ at each level:
+
+$$
+O\!\left(\prod_{i=1}^{n} |P_i| \cdot T\right) = O\big(|P_1|\cdot T\cdot|P_2|\cdot T\cdots\big) =O(\underbrace{|P_1|\cdot|P_2|}_{K}\cdots T^n) =O\!\left(T^{n}\right)
+$$
+
+Note that $n$ is in the **exponent** and $T$ is the **base** (not $O(n^{T})$): each extra item adds a DFS level and raises the order by one. For example, with two items plus the plastic bag, $n = 2$ gives $O(T^2)$; reaching the limit $n = 6$ blows up to $O(T^{6})$. This is exactly why the item count $n$ is restricted to a small constant here.
+
+### Step 3: Candidates Are One Order Fewer Than Nodes Visited
+
+The above counts the **nodes visited**, $O(T^n)$. But a path reaching the bottom is not necessarily feasible; it must also pass the constraint that the remainder lies in $0 \le q_* \le 9$.
+
+From another angle: the plastic bag fills the remainder after all $n$ items are decided, so this constraint requires the amount $\sum_{i=1}^{n} p_i q_i$ from the first $n$ items to land in the interval $[\,T-9,\; T\,]$. Thus even though the first $n - 1$ items can be chosen freely ($O(T^{n-1})$ combinations), the last item is almost locked in by the earlier choices in order to squeeze the total into this interval, leaving only $O(1)$ degrees of freedom. Multiplying the two, the number that actually becomes candidates is $O(T^{n-1})$, one order fewer than the nodes visited.
+
+### Step 4: Sorting and Summary
+
+After collecting $O(T^{n-1})$ candidates, sorting costs $O(T^{n-1} \log T)$. Overall:
+
+- Time complexity: $O(T^{n})$, dominated by the enumeration (sorting is subsumed).
+- Space complexity: $O(T^{n-1})$, mostly for storing candidates; the DFS recursion stack depth is only $O(n)$ and negligible.
+
+One last point that is easy to misread: $T^n$ looks polynomial, but $T$ here is the "numeric value of the amount", not the "number of input elements". By the standards of algorithm theory (measuring by input bit length), the amount $T$ needs only $\log T$ bits to represent (polynomial in the input value), yet the runtime is $T^n$ (exponential in the input length). This is in fact pseudo-polynomial, similar to the knapsack problem's $O(nW)$.
+
+That said, since we fix the item count $n$ to a small constant and cap the amount $T$, solving is very fast in practice, and the polynomial growth can be ignored.
+
+## Relation to Other Integer Programming Problems
+
+Overall, this problem belongs to the **bounded change-making** family: make up a target amount $T$ from several "coins" (here, items and plastic bags) that have restricted denominations and bounded quantities. It is related to subset-sum, knapsack, and the Frobenius (coin) problem, and is **weakly NP-hard**.
+
+Mathematically it can also be written as a pure integer program (IP): all variables $q_i, q_*$ are non-negative integers, subject to linear equality and inequality constraints. In general, standard IP methods take two directions:
+
+- **Branch-and-Bound (BB)**: first solve the LP relaxation that drops the integrality constraints; for a quantity $q_i$ whose relaxed value $q_i^*$ is non-integer, branch into $q_i \le \lfloor q_i^* \rfloor$ and $q_i \ge \lceil q_i^* \rceil$, then prune subproblems that cannot be better using bounds.
+- **Cutting-plane / Gomory**: at the optimum of the LP relaxation, add an inequality that cuts off the fractional solution while keeping all integer solutions, and re-solve repeatedly until everything is integral.
+
+This implementation deliberately avoids these two methods and uses an exhaustive DFS instead, because:
+
+1. **The item scale is tiny**: $n$ is usually 2, and the price sets and bag limit are fixed constants, so exhaustive search is already in milliseconds with no performance bottleneck.
+2. **The need is to list as many solutions as possible, not a single optimum**: this application lists the top three balanced and diverse combinations and supports "give me another batch" that excludes shown solutions; once branch-and-bound prunes, it discards the suboptimal solutions under that branch, making enumeration harder.
+3. **Simplicity**: branch-and-bound and cutting-plane require an LP solver (such as the simplex method) and a branch tree, greatly increasing dependencies and complexity.
+
+It is worth noting that if the question were only "can $T$ be made (yes/no)" or "how many ways are there", dynamic programming (DP) solves it in $O(nT)$ time, asymptotically better than this implementation's $O(T^{n})$.
+
+But our need is not just to decide or count; it is to "list several concrete solutions, with balance scores, and be able to list other feasible ones". Backtracking all combinations that match the multi-objective ordering from a DP table is in fact more cumbersome, and at $n = 2$ both run in milliseconds. So this implementation is not asymptotically optimal, but at this scale it is the most fitting choice balancing correctness and simplicity.
+
+## References
+
+1. T. K. Ralphs and M. V. Galati, _Decomposition in Integer Linear Programming_, Optimization Online, 2004. [optimization-online.org/2004/12/1029](https://optimization-online.org/2004/12/1029/)
+2. M. V. Galati, _Decomposition Methods for Integer Linear Programming_, PhD dissertation, Lehigh University, 2009. [coral.ise.lehigh.edu](https://coral.ise.lehigh.edu/~ted/files/papers/MatthewGalatiDissertation09.pdf)
+3. C. Ge, F. Ma, et al., _Decomposition Strategies to Count Integer Solutions over Linear Constraints_, IJCAI, 2021. [ijcai.org/proceedings/2021/0192](https://www.ijcai.org/proceedings/2021/0192.pdf)
+4. Weinan E and Tiejun Li, _Lecture 8: Constrained Optimization and Integer Programming_, Peking University. [math.pku.edu.cn](https://math.pku.edu.cn/teachers/litj/notes/num_meth/lect8.pdf)

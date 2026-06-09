@@ -10,12 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EnIndexRouteImport } from './routes/en/index'
 import { Route as AlgoIndexRouteImport } from './routes/algo/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
+import { Route as EnAlgoIndexRouteImport } from './routes/en/algo/index'
+import { Route as EnAboutIndexRouteImport } from './routes/en/about/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en/',
+  path: '/en/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AlgoIndexRoute = AlgoIndexRouteImport.update({
@@ -28,35 +36,64 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
   path: '/about/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnAlgoIndexRoute = EnAlgoIndexRouteImport.update({
+  id: '/en/algo/',
+  path: '/en/algo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAboutIndexRoute = EnAboutIndexRouteImport.update({
+  id: '/en/about/',
+  path: '/en/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about/': typeof AboutIndexRoute
   '/algo/': typeof AlgoIndexRoute
+  '/en/': typeof EnIndexRoute
+  '/en/about/': typeof EnAboutIndexRoute
+  '/en/algo/': typeof EnAlgoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutIndexRoute
   '/algo': typeof AlgoIndexRoute
+  '/en': typeof EnIndexRoute
+  '/en/about': typeof EnAboutIndexRoute
+  '/en/algo': typeof EnAlgoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about/': typeof AboutIndexRoute
   '/algo/': typeof AlgoIndexRoute
+  '/en/': typeof EnIndexRoute
+  '/en/about/': typeof EnAboutIndexRoute
+  '/en/algo/': typeof EnAlgoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about/' | '/algo/'
+  fullPaths: '/' | '/about/' | '/algo/' | '/en/' | '/en/about/' | '/en/algo/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/algo'
-  id: '__root__' | '/' | '/about/' | '/algo/'
+  to: '/' | '/about' | '/algo' | '/en' | '/en/about' | '/en/algo'
+  id:
+    | '__root__'
+    | '/'
+    | '/about/'
+    | '/algo/'
+    | '/en/'
+    | '/en/about/'
+    | '/en/algo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutIndexRoute: typeof AboutIndexRoute
   AlgoIndexRoute: typeof AlgoIndexRoute
+  EnIndexRoute: typeof EnIndexRoute
+  EnAboutIndexRoute: typeof EnAboutIndexRoute
+  EnAlgoIndexRoute: typeof EnAlgoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +103,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/en'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algo/': {
@@ -82,6 +126,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en/algo/': {
+      id: '/en/algo/'
+      path: '/en/algo'
+      fullPath: '/en/algo/'
+      preLoaderRoute: typeof EnAlgoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/about/': {
+      id: '/en/about/'
+      path: '/en/about'
+      fullPath: '/en/about/'
+      preLoaderRoute: typeof EnAboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +147,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutIndexRoute: AboutIndexRoute,
   AlgoIndexRoute: AlgoIndexRoute,
+  EnIndexRoute: EnIndexRoute,
+  EnAboutIndexRoute: EnAboutIndexRoute,
+  EnAlgoIndexRoute: EnAlgoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

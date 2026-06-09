@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { getRouter } from "./router"
+import "./lib/i18n"
 import "katex/dist/katex.min.css"
 import "./styles.css"
 
