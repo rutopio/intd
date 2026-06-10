@@ -6,13 +6,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000 --host",
-    "build": "vite build",
+    "build": "tsc -p functions/tsconfig.json && vite build",
     "preview": "vite preview",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
-    "format": "biome check --write .",
-    "check-types": "tsc --noEmit",
-    "check": "pnpm format && pnpm check-types"
+    "format": "biome format --write .",
+    "check-types": "tsc --noEmit && tsc -p functions/tsconfig.json",
+    "check": "biome check --write . && pnpm lint && pnpm check-types"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">=22"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

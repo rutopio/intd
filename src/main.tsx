@@ -9,6 +9,14 @@ import "./styles.css"
 
 const router = getRouter()
 
+// Track SPA navigations as GA page_view events (initial load is sent by gtag config).
+router.subscribe("onResolved", ({ toLocation }) => {
+  window.gtag?.("event", "page_view", {
+    page_path: toLocation.pathname,
+    page_location: window.location.href,
+  })
+})
+
 // biome-ignore lint/style/noNonNullAssertion: #root is defined in index.html
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

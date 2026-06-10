@@ -10,6 +10,9 @@
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://intd.pages.dev/" />
+    <link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/" />
+    <link rel="alternate" hreflang="en" href="https://intd.pages.dev/en" />
+    <link rel="alternate" hreflang="x-default" href="https://intd.pages.dev/" />
     <title>IntD - Integer Decomposition Calculator</title>
     <meta
       name="description"
@@ -33,6 +36,19 @@
       name="twitter:description"
       content="A demo of a constrained integer decomposition algorithm: given a target total, enumerate item-and-quantity combinations via DFS and rank them by balance."
     />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9ZY6ZM426"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        // biome-ignore lint/complexity/noArguments: required by Google's official gtag.js snippet
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      // page_view is sent manually on each route resolve (see src/main.tsx).
+      gtag("config", "G-T9ZY6ZM426", { send_page_view: false });
+    </script>
   </head>
   <body>
     <div id="root"></div>

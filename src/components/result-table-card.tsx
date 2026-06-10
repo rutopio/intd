@@ -59,13 +59,22 @@ export function ResultTableCard({
                 >
                   {t("home.colName")}
                 </TableHead>
-                <TableHead className="pl-4 text-right">
+                <TableHead
+                  className="pl-4 text-right"
+                  style={{ minWidth: "6ch" }}
+                >
                   {t("home.colQty")}
                 </TableHead>
-                <TableHead className="pl-4 text-right">
+                <TableHead
+                  className="pl-4 text-right"
+                  style={{ minWidth: "7ch" }}
+                >
                   {t("home.colPrice")}
                 </TableHead>
-                <TableHead className="pl-4 text-right">
+                <TableHead
+                  className="pl-4 text-right"
+                  style={{ minWidth: "7ch" }}
+                >
                   {t("home.colTotal")}
                 </TableHead>
               </TableRow>

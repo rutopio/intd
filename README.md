@@ -48,7 +48,7 @@ Requires Node.js 22+ and pnpm.
 pnpm install  # install dependencies
 pnpm dev      # start dev server at localhost:3000
 pnpm build    # production build
-pnpm check    # format + type-check
+pnpm check    # format + lint + type-check
 ```
 
 ## Algorithm Note
@@ -66,4 +66,4 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## License
 
-MIT - See https://github.com/rutopio/intd/LICENSE
+MIT - See [LICENSE](https://github.com/rutopio/intd/blob/master/LICENSE)

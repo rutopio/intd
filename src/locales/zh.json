@@ -35,8 +35,8 @@
     "desc": "調整各品項的價格區間與尾數（至多七個品項）",
     "itemName": "品名",
     "priceRange": "價格區間",
-    "priceMin": "價格下限",
-    "priceMax": "價格上限",
+    "priceMin": "下限",
+    "priceMax": "上限",
     "priceDigits": "價格尾數",
     "price": "價格",
     "bagPriceFixed": "1（固定）",
@@ -103,5 +103,8 @@
   "notFound": {
     "title": "404",
     "desc": "找不到此頁面。"
+  },
+  "footer": {
+    "disclaimer": "本工具僅為演算法的實作演示"
   }
 }

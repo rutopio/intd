@@ -8,7 +8,7 @@
     "aboutShort": "About"
   },
   "home": {
-    "amountPlaceholder": "Enter an amount",
+    "amountPlaceholder": "Enter...",
     "amountLabel": "Amount",
     "decompose": "Decompose",
     "strategyLabel": "Decomposition strategy",
@@ -103,5 +103,8 @@
   "notFound": {
     "title": "404",
     "desc": "The requested page could not be found."
+  },
+  "footer": {
+    "disclaimer": "For algorithm demo purposes only"
   }
 }
