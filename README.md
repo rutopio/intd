@@ -2,6 +2,8 @@
 
 # IntD — Integer Decomposition Calculator
 
+![](public/og.png)
+
 An algorithm demo about Constrained **Int**eger **D**ecomposition Problem.
 
 Live at [https://intd.pages.dev](https://intd.pages.dev).

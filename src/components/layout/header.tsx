@@ -56,7 +56,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
             className="flex flex-row items-center gap-2"
           >
             <CalculatorIcon size={28} aria-hidden="true" weight="duotone" />
-            <span className="hidden font-semibold text-base sm:inline sm:text-lg">
+            <span className="hidden font-bold font-mono text-base sm:inline sm:text-lg">
               IntD
             </span>
           </Link>
