@@ -67,7 +67,27 @@ export function SettingsDialog() {
     },
   })
 
-  const handleOpenChange = (next: boolean) => {
+  // base-ui Drawer has no `dismissible` prop; instead it reports the close
+  // reason. Reject user-driven dismissals (outside press, Esc, swipe) so the
+  // settings form can only be closed via its own buttons, matching the old
+  // vaul `dismissible={false}`.
+  const NON_DISMISSIBLE_REASONS = new Set([
+    "outside-press",
+    "escape-key",
+    "swipe",
+  ])
+
+  const handleOpenChange = (
+    next: boolean,
+    eventDetails?: { reason?: string },
+  ) => {
+    if (
+      !next &&
+      eventDetails &&
+      NON_DISMISSIBLE_REASONS.has(eventDetails.reason ?? "")
+    ) {
+      return
+    }
     if (next) form.reset({ items, bagName })
     setOpen(next)
   }
@@ -327,7 +347,7 @@ export function SettingsDialog() {
         <CheckIcon className="size-3" aria-hidden="true" />
         {t("settings.save")}
       </Button>
-      {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
+      {/* User-gesture dismissals are rejected, so close via state directly. */}
       <Button variant="outline" onClick={() => setOpen(false)}>
         {t("settings.cancel")}
       </Button>
@@ -344,8 +364,16 @@ export function SettingsDialog() {
   const mobileResetConfirm = (
     <Drawer
       open={confirmReset}
-      onOpenChange={setConfirmReset}
-      dismissible={false}
+      onOpenChange={(next, eventDetails) => {
+        if (
+          !next &&
+          eventDetails &&
+          NON_DISMISSIBLE_REASONS.has(eventDetails.reason ?? "")
+        ) {
+          return
+        }
+        setConfirmReset(next)
+      }}
     >
       <DrawerContent className="text-left">
         <DrawerHeader className="text-left">
@@ -358,7 +386,7 @@ export function SettingsDialog() {
           <Button variant="destructive" onClick={doReset}>
             {t("settings.reset")}
           </Button>
-          {/* dismissible={false} blocks DrawerClose, so close via state directly. */}
+          {/* User-gesture dismissals are rejected, so close via state directly. */}
           <Button variant="outline" onClick={() => setConfirmReset(false)}>
             {t("settings.cancel")}
           </Button>
@@ -389,16 +417,18 @@ export function SettingsDialog() {
   if (isMobile) {
     return (
       <>
-        <Drawer open={open} onOpenChange={handleOpenChange} dismissible={false}>
-          <DrawerTrigger asChild>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label={t("settings.title")}
-            >
-              <GearIcon aria-hidden="true" />
-            </Button>
-          </DrawerTrigger>
+        <Drawer open={open} onOpenChange={handleOpenChange}>
+          <DrawerTrigger
+            render={
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label={t("settings.title")}
+              >
+                <GearIcon aria-hidden="true" />
+              </Button>
+            }
+          />
           <DrawerContent className="max-h-[80vh] text-left">
             <DrawerHeader className="text-left">
               <DrawerTitle>{t("settings.title")}</DrawerTitle>

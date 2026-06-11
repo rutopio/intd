@@ -18,7 +18,7 @@ export function StrategySelector({
         onValueChange={(v) => onChange(v as SortMode)}
         aria-label={t("home.strategyLabel")}
         data-mode={sortMode}
-        className="group relative grid h-9 w-full grid-cols-2 items-center gap-0 rounded-md bg-input/50 p-0.5 font-medium text-sm after:absolute after:inset-y-0.5 after:left-0.5 after:w-[calc(50%-2px)] after:rounded-sm after:bg-background after:shadow-xs after:transition-[translate] after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] data-[mode=balance]:after:translate-x-full"
+        className="group relative grid h-9 w-full grid-cols-2 items-center gap-0 rounded-md bg-input/50 p-0.5 font-medium text-sm after:absolute after:inset-y-0.5 after:left-0.5 after:w-[calc(50%-2px)] after:rounded-sm after:bg-background after:shadow-xs after:transition-[translate] after:duration-200 after:ease-out data-[mode=balance]:after:translate-x-full motion-reduce:after:transition-none"
       >
         <label
           htmlFor="sort-bags"
