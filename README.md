@@ -10,8 +10,8 @@ Live at [https://intd.pages.dev](https://intd.pages.dev).
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
-![TanStack Router](https://img.shields.io/badge/TanStack_Router-1.170.15-FF4154?logo=react-query&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
+![TanStack Router](https://img.shields.io/badge/TanStack_Router-1-FF4154?logo=react-query&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
 ![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-Base_UI-000000?logo=shadcnui&logoColor=white)
 ![Motion](https://img.shields.io/badge/Motion-12-EE4B96?logo=framer&logoColor=white)

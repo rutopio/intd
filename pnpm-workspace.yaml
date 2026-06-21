@@ -1,7 +1,15 @@
-packages: []
-
 allowBuilds:
   esbuild: true
-  lightningcss: true
-  unrs-resolver: true
-  msw: false
+  sharp: true
+  workerd: true
+
+verifyDepsBeforeRun: false
+
+overrides:
+  # Transitive-only advisories (via wrangler / dev tooling); upstream unpatched.
+  undici: ">=7.28.0"
+  ws: ">=8.21.0"
+  esbuild: ">=0.28.1"
+
+minimumReleaseAgeExclude:
+  - '@cloudflare/workers-types@4.20260621.1'

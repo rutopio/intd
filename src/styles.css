@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/albert-sans";
+@import "@fontsource-variable/host-grotesk";
 @import "@fontsource-variable/noto-sans-tc";
 
 @custom-variant dark (&:is(.dark *));
@@ -13,8 +14,8 @@
 }
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Inter Variable', 'Noto Sans TC Variable', sans-serif;
+    --font-sans: 'Albert Sans Variable', 'Noto Sans TC Variable', sans-serif;
+    --font-heading: 'Host Grotesk Variable', 'Noto Sans TC Variable', sans-serif;
     --font-mono: 'Paper Mono', monospace;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -145,6 +146,16 @@
     overflow-x: auto;
     overflow-y: hidden;
     }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 ::view-transition-old(root),
