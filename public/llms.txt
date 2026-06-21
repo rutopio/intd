@@ -4,9 +4,9 @@
 
 ## Pages
 
-- [Calculator](https://intd.pages.dev/): Enter a target amount and get decomposition results. Supports shuffle to explore alternative combinations.
-- [Algorithm](https://intd.pages.dev/algo): Explains the constrained DFS approach, pruning strategy, and ranking modes with pseudocode.
-- [About](https://intd.pages.dev/about): Project background and motivation.
+- [Calculator](https://intd.chingru.com/): Enter a target amount and get decomposition results. Supports shuffle to explore alternative combinations.
+- [Algorithm](https://intd.chingru.com/algo): Explains the constrained DFS approach, pruning strategy, and ranking modes with pseudocode.
+- [About](https://intd.chingru.com/about): Project background and motivation.
 
 ## Notes
 

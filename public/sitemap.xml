@@ -2,44 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://intd.pages.dev/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en"/>
+    <loc>https://intd.chingru.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://intd.pages.dev/en</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en"/>
+    <loc>https://intd.chingru.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://intd.pages.dev/algo</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/algo"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en/algo"/>
+    <loc>https://intd.chingru.com/algo</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/algo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en/algo"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://intd.pages.dev/en/algo</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/algo"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en/algo"/>
+    <loc>https://intd.chingru.com/en/algo</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/algo"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en/algo"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://intd.pages.dev/about</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en/about"/>
+    <loc>https://intd.chingru.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en/about"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://intd.pages.dev/en/about</loc>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.pages.dev/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://intd.pages.dev/en/about"/>
+    <loc>https://intd.chingru.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://intd.chingru.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://intd.chingru.com/en/about"/>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

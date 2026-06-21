@@ -6,7 +6,7 @@
 
 An algorithm demo about Constrained **Int**eger **D**ecomposition Problem.
 
-Live at [https://intd.pages.dev](https://intd.pages.dev).
+Live at [https://intd.chingru.com](https://intd.chingru.com).
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
@@ -53,7 +53,7 @@ pnpm check    # format + lint + type-check
 
 ## Algorithm Note
 
-See [https://intd.pages.dev/algo](https://intd.pages.dev/algo)
+See [https://intd.chingru.com/algo](https://intd.chingru.com/algo)
 
 ## Contributing
 

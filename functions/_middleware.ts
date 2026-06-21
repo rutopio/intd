@@ -37,6 +37,17 @@ const setHref = (v: string) => new AttrRewriter("href", v)
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url)
 
+  // Canonical-host redirect. Any *.pages.dev host (<project>.pages.dev and every
+  // <hash>.<project>.pages.dev preview URL) is 301'd to the custom domain, path +
+  // query preserved, so the pages.dev origin never gets indexed or linked.
+  if (url.hostname.endsWith(".pages.dev")) {
+    const target = new URL(
+      url.pathname + url.search,
+      "https://intd.chingru.com",
+    )
+    return Response.redirect(target.toString(), 301)
+  }
+
   // Don't touch the image function or anything that isn't the HTML shell.
   if (url.pathname.startsWith("/og")) return next()
 
@@ -59,8 +70,8 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const imageUrl = hasAmount
     ? `${url.origin}/og?p=${encodeURIComponent(brand)}`
     : `${url.origin}/og.png`
-  const imageW = hasAmount ? OG_WIDTH : 2400
-  const imageH = hasAmount ? OG_HEIGHT : 1260
+  const imageW = OG_WIDTH
+  const imageH = OG_HEIGHT
   // og:url reflects the actual shared URL (keeps the ?p so the unfurl is exact).
   const ogUrl = hasAmount ? url.href : canonical
 

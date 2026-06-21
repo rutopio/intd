@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://intd.pages.dev/sitemap.xml
+Sitemap: https://intd.chingru.com/sitemap.xml
