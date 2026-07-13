@@ -1,0 +1,11 @@
+# Self-hosted font is content-stable (manual woff2, path not hashed) → immutable.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Icons and OG image may be regenerated under the same name → long max-age, no immutable.
+/favicon.ico
+  Cache-Control: public, max-age=604800
+/favicon.svg
+  Cache-Control: public, max-age=604800
+/og.png
+  Cache-Control: public, max-age=604800
