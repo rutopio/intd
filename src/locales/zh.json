@@ -28,7 +28,7 @@
     "errRequired": "請輸入金額",
     "errInt": "金額必須為整數",
     "errPositive": "金額必須大於 0",
-    "errMax": "金額上限為99999"
+    "errMax": "金額上限為 99999"
   },
   "settings": {
     "title": "設定",
