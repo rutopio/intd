@@ -42,7 +42,7 @@ function AnimatedOutlet() {
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="flex min-h-dvh flex-col">
+    <div className="flex min-h-full flex-col">
       <LangSync />
       <Header className="bg-background" />
       <AnimatedOutlet />
