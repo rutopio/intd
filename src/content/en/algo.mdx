@@ -157,7 +157,7 @@ Note that $n$ is in the **exponent** and $T$ is the **base** (not $O(n^{T})$): e
 
 The above counts the **nodes visited**, $O(T^n)$. But a path reaching the bottom is not necessarily feasible; it must also pass the constraint that the remainder lies in $0 \le q_* \le 9$.
 
-From another angle: the plastic bag fills the remainder after all $n$ items are decided, so this constraint requires the amount $\sum_{i=1}^{n} p_i q_i$ from the first $n$ items to land in the interval $[\,T-9,\; T\,]$. Thus even though the first $n - 1$ items can be chosen freely ($O(T^{n-1})$ combinations), the last item is almost locked in by the earlier choices in order to squeeze the total into this interval, leaving only $O(1)$ degrees of freedom. Multiplying the two, the number that actually becomes candidates is $O(T^{n-1})$, one order fewer than the nodes visited.
+From another angle: the plastic bag fills the remainder after all $n$ items are decided, so this constraint requires the amount $\sum_{i=1}^{n} p_i q_i$ from the first $n$ items to land in the interval $[\,T-9,\; T\,]$. Thus even though the first $n - 1$ items can be chosen freely ($O(T^{n-1})$ combinations), the last item is almost locked in by the earlier choices to squeeze the total into this interval, leaving only $O(1)$ degrees of freedom. Multiplying the two, the number that actually becomes candidates is $O(T^{n-1})$, one order fewer than the nodes visited.
 
 ### Step 4: Sorting and Summary
 
