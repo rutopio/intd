@@ -60,7 +60,7 @@ function H3({ className, id, children, ...props }: React.ComponentProps<"h3">) {
     <h3
       id={id}
       className={cn(
-        "group flex scroll-m-20 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
+        "group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
         className,
       )}
       {...props}
