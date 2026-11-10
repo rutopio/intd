@@ -1,7 +1,12 @@
 import { ArrowBendRightUpIcon } from "@phosphor-icons/react"
-import { useEffect, useState } from "react"
+import { motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { FluidHoverControls } from "@/components/fluid-hover-controls"
+import {
+  OutlineDropdown,
+  type OutlineItem,
+} from "@/components/outline-dropdown"
 import { ShareButton } from "@/components/share-button"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,17 +14,13 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from "@/components/ui/drawer"
 
-type OutlineItem = {
-  id: string
-  label: string
-  depth: 2 | 3
-}
+const circumference = 2 * Math.PI * 6.25
 
 function ReadingProgressRing({ progress }: { progress: number }) {
-  const circumference = 2 * Math.PI * 6.25
-
+  const reducedMotion = useReducedMotion()
   return (
     <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 -rotate-90">
       <circle
@@ -31,7 +32,7 @@ function ReadingProgressRing({ progress }: { progress: number }) {
         strokeWidth="2.5"
         className="opacity-20"
       />
-      <circle
+      <motion.circle
         cx="8"
         cy="8"
         r="6.25"
@@ -40,8 +41,13 @@ function ReadingProgressRing({ progress }: { progress: number }) {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeDasharray={circumference}
-        strokeDashoffset={(1 - progress) * circumference}
-        className="transition-[stroke-dashoffset] duration-150"
+        initial={false}
+        animate={{ strokeDashoffset: (1 - progress) * circumference }}
+        transition={
+          reducedMotion
+            ? { duration: 0 }
+            : { type: "spring", stiffness: 200, damping: 30, mass: 0.4 }
+        }
       />
     </svg>
   )
@@ -57,26 +63,28 @@ export function PageActions() {
   const [activeId, setActiveId] = useState("")
   const [progress, setProgress] = useState(0)
   const [outlineOpen, setOutlineOpen] = useState(false)
+  const drawerScrollRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const article = document.querySelector("main article")
     if (!article) return
-
     const update = () => {
-      const headings = Array.from(
-        article.querySelectorAll<HTMLElement>("h2[id], h3[id]"),
-      )
       setItems(
-        headings
-          .map((heading) => ({
-            id: heading.id,
-            label: heading.textContent?.trim() ?? "",
-            depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
-          }))
+        Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
+          .map((heading) => {
+            const visibleHeading = heading.cloneNode(true) as HTMLElement
+            visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
+              node.remove()
+            })
+            return {
+              id: heading.id,
+              label: visibleHeading.textContent?.trim() ?? "",
+              depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
+            }
+          })
           .filter((item) => item.label),
       )
     }
-
     update()
     const observer = new MutationObserver(update)
     observer.observe(article, { childList: true, subtree: true })
@@ -87,32 +95,21 @@ export function PageActions() {
     let frame = 0
     const update = () => {
       frame = 0
+      if (document.body.style.position === "fixed") return
+      const scrollY = window.scrollY
       const scrollable =
         document.documentElement.scrollHeight - window.innerHeight
       setProgress(
-        scrollable > 0
-          ? Math.min(1, Math.max(0, window.scrollY / scrollable))
-          : 1,
+        scrollable > 0 ? Math.min(1, Math.max(0, scrollY / scrollable)) : 1,
       )
-
-      const line =
-        window.scrollY + Math.max(120, Math.round(window.innerHeight / 3))
+      const line = scrollY + Math.max(120, Math.round(window.innerHeight / 3))
       let current = ""
       for (const item of items) {
         const heading = document.getElementById(item.id)
-        if (
-          heading &&
-          heading.getBoundingClientRect().top + window.scrollY <= line
-        ) {
+        if (heading && heading.getBoundingClientRect().top + scrollY <= line)
           current = item.id
-        }
       }
-      if (
-        window.scrollY >=
-        document.documentElement.scrollHeight - window.innerHeight - 2
-      ) {
-        current = items.at(-1)?.id ?? current
-      }
+      if (scrollY >= scrollable - 2) current = items.at(-1)?.id ?? current
       setActiveId(current)
     }
     const schedule = () => {
@@ -131,6 +128,23 @@ export function PageActions() {
     }
   }, [items])
 
+  useEffect(() => {
+    if (!outlineOpen) return
+    const frame = requestAnimationFrame(() => {
+      const viewport = drawerScrollRef.current
+      const active = viewport?.querySelector<HTMLElement>("[data-active]")
+      if (!viewport || !active) return
+      const viewportRect = viewport.getBoundingClientRect()
+      const activeRect = active.getBoundingClientRect()
+      viewport.scrollTop +=
+        activeRect.top -
+        viewportRect.top -
+        viewport.clientHeight / 2 +
+        activeRect.height / 2
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [outlineOpen])
+
   const navigateToHeading = (id: string) => {
     setOutlineOpen(false)
     const reduceMotion = prefersReducedMotion()
@@ -141,22 +155,12 @@ export function PageActions() {
         heading.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" })
         history.replaceState(null, "", `#${encodeURIComponent(id)}`)
       },
-      reduceMotion ? 0 : 320,
+      reduceMotion ? 0 : 350,
     )
   }
 
-  const actions = (
+  const utilities = (
     <>
-      {items.length > 0 && (
-        <Button
-          variant="outline"
-          size="icon-lg"
-          aria-label={`${Math.round(progress * 100)}% · ${t("pageActions.outline")}`}
-          onClick={() => setOutlineOpen(true)}
-        >
-          <ReadingProgressRing progress={progress} />
-        </Button>
-      )}
       <ShareButton size="icon-lg" />
       <Button
         variant="outline"
@@ -182,57 +186,78 @@ export function PageActions() {
         label={t("pageActions.label")}
         className="fixed right-4 bottom-[calc(2rem+env(safe-area-inset-bottom))] z-10 h-fit min-[50rem]:hidden"
       >
-        {actions}
+        {items.length > 0 && (
+          <Drawer open={outlineOpen} onOpenChange={setOutlineOpen}>
+            <DrawerTrigger
+              render={
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  aria-label={`${Math.round(progress * 100)}% · ${t("pageActions.outline")}`}
+                />
+              }
+            >
+              <ReadingProgressRing progress={progress} />
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader className="border-border border-b pb-4">
+                <DrawerTitle>{t("nav.algo")}</DrawerTitle>
+              </DrawerHeader>
+              <nav
+                ref={drawerScrollRef}
+                aria-label={t("pageActions.outline")}
+                className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
+              >
+                <ul className="flex flex-col">
+                  {items.map((item) => (
+                    <li
+                      key={item.id}
+                      className={
+                        item.depth === 3
+                          ? "ml-3 border-primary/20 border-l pl-3"
+                          : undefined
+                      }
+                    >
+                      <a
+                        href={`#${encodeURIComponent(item.id)}`}
+                        data-active={activeId === item.id || undefined}
+                        onClick={(event) => {
+                          event.preventDefault()
+                          navigateToHeading(item.id)
+                        }}
+                        className={`block py-1 text-base transition-colors ${activeId === item.id ? "font-semibold text-primary" : "text-foreground"}`}
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </DrawerContent>
+          </Drawer>
+        )}
+        {utilities}
       </FluidHoverControls>
+
       <FluidHoverControls
         buttonGroup
         orientation="vertical"
         label={t("pageActions.label")}
-        className="fixed top-1/2 z-10 hidden h-fit -translate-y-1/2 [right:calc((100vw_-_39rem)/2_-_3rem)] min-[50rem]:flex"
+        className="fixed top-1/2 left-[var(--gutter-offset)] z-10 hidden h-fit -translate-y-1/2 min-[50rem]:flex"
       >
-        {actions}
-      </FluidHoverControls>
-
-      <Drawer open={outlineOpen} onOpenChange={setOutlineOpen}>
-        <DrawerContent>
-          <DrawerHeader className="border-border border-b pb-4">
-            <DrawerTitle>{t("pageActions.outline")}</DrawerTitle>
-          </DrawerHeader>
-          <nav
-            aria-label={t("pageActions.outline")}
-            className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
+        {items.length > 0 && (
+          <OutlineDropdown
+            items={items}
+            activeId={activeId}
+            progress={progress}
+            label={t("pageActions.outline")}
+            onNavigate={navigateToHeading}
           >
-            <ul className="flex flex-col">
-              {items.map((item) => (
-                <li
-                  key={item.id}
-                  className={
-                    item.depth === 3
-                      ? "ml-3 border-primary/20 border-l pl-3"
-                      : undefined
-                  }
-                >
-                  <a
-                    href={`#${encodeURIComponent(item.id)}`}
-                    data-active={activeId === item.id || undefined}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      navigateToHeading(item.id)
-                    }}
-                    className={`block py-1 text-base transition-colors ${
-                      activeId === item.id
-                        ? "font-semibold text-primary"
-                        : "text-foreground"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </DrawerContent>
-      </Drawer>
+            <ReadingProgressRing progress={progress} />
+          </OutlineDropdown>
+        )}
+        {utilities}
+      </FluidHoverControls>
     </>
   )
 }

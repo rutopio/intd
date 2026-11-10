@@ -1,4 +1,4 @@
-import { CheckIcon, GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
+import { GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
 import { useForm } from "@tanstack/react-form"
 import { useId, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -334,7 +334,6 @@ export function SettingsDialog() {
                     className="min-w-24 text-base"
                     onClick={() => form.handleSubmit()}
                 >
-                    <CheckIcon className="size-3" aria-hidden="true" />
                     {t("settings.save")}
                 </Button>
             </div>
@@ -344,7 +343,6 @@ export function SettingsDialog() {
     const mobileFooter = (
         <DrawerFooter>
             <Button onClick={() => form.handleSubmit()}>
-                <CheckIcon className="size-3" aria-hidden="true" />
                 {t("settings.save")}
             </Button>
             {/* User-gesture dismissals are rejected, so close via state directly. */}

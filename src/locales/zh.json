@@ -108,8 +108,5 @@
   "notFound": {
     "title": "404",
     "desc": "找不到此頁面。"
-  },
-  "footer": {
-    "disclaimer": "本工具僅為演算法的實作演示"
   }
 }

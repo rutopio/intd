@@ -1,5 +1,6 @@
 import { type ReactNode, useLayoutEffect, useRef } from "react"
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight"
+import { ButtonGroup } from "@/components/ui/button-group"
 import { useFluidHover } from "@/hooks/use-fluid-hover"
 import { cn } from "@/lib/utils"
 
@@ -77,7 +78,12 @@ export function FluidHoverControls({
 
   const handleFocus = (target: EventTarget) => {
     const items = itemsRef.current
-    if (!(target instanceof Node) || !items) return
+    if (
+      !(target instanceof Node) ||
+      !items ||
+      (target instanceof Element && target.closest("[role=menu]"))
+    )
+      return
     const index = Array.from(items.children).findIndex((element) =>
       element.contains(target),
     )
@@ -96,6 +102,15 @@ export function FluidHoverControls({
         className,
       )}
       {...hover.handlers}
+      onMouseMove={(event) => {
+        if (
+          !(
+            event.target instanceof Element &&
+            event.target.closest("[role=menu]")
+          )
+        )
+          hover.handlers.onMouseMove(event)
+      }}
       onFocusCapture={(event) => handleFocus(event.target)}
       onBlurCapture={(event) => {
         if (
@@ -109,21 +124,26 @@ export function FluidHoverControls({
         hover={hover}
         className={cn("z-10", highlightRadius)}
       />
-      <div
-        ref={itemsRef}
-        className={cn(
-          "relative z-20 flex items-center gap-2",
-          compact && "gap-0 min-[360px]:gap-2",
-          buttonGroup &&
-            orientation === "horizontal" &&
-            "gap-0 [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none",
-          buttonGroup &&
-            orientation === "vertical" &&
-            "flex-col gap-0 [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none",
-        )}
-      >
-        {children}
-      </div>
+      {buttonGroup ? (
+        <ButtonGroup
+          ref={itemsRef}
+          orientation={orientation}
+          aria-label={label}
+          className="relative z-20"
+        >
+          {children}
+        </ButtonGroup>
+      ) : (
+        <div
+          ref={itemsRef}
+          className={cn(
+            "relative z-20 flex items-center gap-2",
+            compact && "gap-0 min-[360px]:gap-2",
+          )}
+        >
+          {children}
+        </div>
+      )}
     </div>
   )
 }

@@ -108,8 +108,5 @@
   "notFound": {
     "title": "404",
     "desc": "The requested page could not be found."
-  },
-  "footer": {
-    "disclaimer": "For algorithm demo purposes only"
   }
 }
