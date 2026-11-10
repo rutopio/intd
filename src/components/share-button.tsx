@@ -22,7 +22,7 @@ function openShareWindow(url: string) {
     window.open(url, "_blank", "noopener,noreferrer,width=600,height=600")
 }
 
-export function ShareButton() {
+export function ShareButton({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
     const { t } = useTranslation()
     const [open, setOpen] = useState(false)
 
@@ -62,7 +62,7 @@ export function ShareButton() {
         <>
             <Button
                 variant="outline"
-                size="icon"
+                size={size}
                 aria-label={t("share.label")}
                 onClick={handleShareClick}
             >

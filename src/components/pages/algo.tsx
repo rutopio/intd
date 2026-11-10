@@ -1,4 +1,5 @@
 import { Article, mdxComponents } from "@/components/mdx"
+import { PageActions } from "@/components/page-actions"
 import EnContent from "@/content/en/algo.mdx"
 import ZhContent from "@/content/zh_tw/algo.mdx"
 import { useLang } from "@/hooks/use-lang"
@@ -13,6 +14,7 @@ export function Algo() {
       <Article>
         <Content components={mdxComponents} />
       </Article>
+      <PageActions />
     </main>
   )
 }

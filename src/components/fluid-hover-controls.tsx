@@ -8,19 +8,39 @@ export function FluidHoverControls({
   className,
   label,
   compact = false,
+  orientation = "horizontal",
+  buttonGroup = false,
 }: {
   children: ReactNode
   className?: string
   label?: string
   compact?: boolean
+  orientation?: "horizontal" | "vertical"
+  buttonGroup?: boolean
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const itemsRef = useRef<HTMLDivElement>(null)
   const hover = useFluidHover(containerRef, {
-    axis: "x",
+    axis: orientation === "vertical" ? "y" : "x",
     nearest: true,
     gapClick: false,
   })
+
+  const lastIndex = hover.itemRects.length - 1
+  const highlightRadius =
+    !buttonGroup || lastIndex <= 0
+      ? "rounded-lg"
+      : orientation === "vertical"
+        ? hover.activeIndex === 0
+          ? "rounded-t-lg"
+          : hover.activeIndex === lastIndex
+            ? "rounded-b-lg"
+            : "rounded-none"
+        : hover.activeIndex === 0
+          ? "rounded-l-lg"
+          : hover.activeIndex === lastIndex
+            ? "rounded-r-lg"
+            : "rounded-none"
 
   useLayoutEffect(() => {
     const items = itemsRef.current
@@ -70,7 +90,11 @@ export function FluidHoverControls({
       role="group"
       aria-label={label}
       ref={containerRef}
-      className={cn("relative rounded-lg", className)}
+      className={cn(
+        "relative rounded-lg",
+        buttonGroup && "bg-background dark:bg-neutral-800",
+        className,
+      )}
       {...hover.handlers}
       onFocusCapture={(event) => handleFocus(event.target)}
       onBlurCapture={(event) => {
@@ -81,12 +105,21 @@ export function FluidHoverControls({
         }
       }}
     >
-      <FluidHoverHighlight hover={hover} className="z-10 rounded-lg" />
+      <FluidHoverHighlight
+        hover={hover}
+        className={cn("z-10", highlightRadius)}
+      />
       <div
         ref={itemsRef}
         className={cn(
           "relative z-20 flex items-center gap-2",
           compact && "gap-0 min-[360px]:gap-2",
+          buttonGroup &&
+            orientation === "horizontal" &&
+            "gap-0 [&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none",
+          buttonGroup &&
+            orientation === "vertical" &&
+            "flex-col gap-0 [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none",
         )}
       >
         {children}

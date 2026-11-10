@@ -92,6 +92,11 @@
     "copyFailed": "Copy failed",
     "label": "Share"
   },
+  "pageActions": {
+    "label": "Page actions",
+    "outline": "On this page",
+    "scrollToTop": "Scroll to top"
+  },
   "theme": {
     "toLight": "Switch to light mode",
     "toDark": "Switch to dark mode"
