@@ -1,7 +1,7 @@
 import { CheckIcon, TranslateIcon } from "@phosphor-icons/react"
+import { ActionMenu } from "@rutopio/base-component/action-menu"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
-import { HeaderActionDropdown } from "@/components/header-action-dropdown"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -76,14 +76,26 @@ export function LanguageToggle({ className }: { className?: string }) {
       </DrawerContent>
     </Drawer>
   ) : (
-    <HeaderActionDropdown
+    <ActionMenu
       label={label}
-      icon={<TranslateIcon className="size-4" aria-hidden="true" />}
-      className={className}
-      selectedId={isEn ? "en" : "zh"}
+      trigger={<TranslateIcon className="size-4" aria-hidden="true" />}
+      triggerClassName={className}
+      indicator={<CheckIcon className="size-4" aria-hidden="true" />}
       items={[
-        { id: "zh", label: "繁體中文", onSelect: () => changeLanguage("zh") },
-        { id: "en", label: "English", onSelect: () => changeLanguage("en") },
+        {
+          id: "zh",
+          label: "繁體中文",
+          active: !isEn,
+          ariaCurrent: !isEn ? "true" : undefined,
+          onSelect: () => changeLanguage("zh"),
+        },
+        {
+          id: "en",
+          label: "English",
+          active: isEn,
+          ariaCurrent: isEn ? "true" : undefined,
+          onSelect: () => changeLanguage("en"),
+        },
       ]}
     />
   )

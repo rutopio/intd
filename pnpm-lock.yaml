@@ -24,6 +24,9 @@ importers:
       '@resvg/resvg-wasm':
         specifier: 2.6.2
         version: 2.6.2
+      '@rutopio/base-component':
+        specifier: github:rutopio/base-component#v0.1.1
+        version: https://codeload.github.com/rutopio/base-component/tar.gz/e22546e27ed5b330d7ad6d75a38aad66904bae22(@base-ui/react@1.6.0(@date-fns/tz@1.5.0)(@types/react@19.2.17)(date-fns@4.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       '@tailwindcss/vite':
         specifier: 4.3.1
         version: 4.3.1(vite@8.3.7(@types/node@26.0.0)(esbuild@0.28.1)(jiti@2.7.0))
@@ -993,6 +996,14 @@ packages:
     resolution: {integrity: sha512-X+zaP2x+j4RXGfbp/seSoRHWnPxzApilDszisZxbYH5C/jTxFhCtDNdPGZb9lJyYPs24wGxruPF7Y+sIXt9Gzw==}
     cpu: [x64]
     os: [win32]
+
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/e22546e27ed5b330d7ad6d75a38aad66904bae22':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/rutopio/base-component/tar.gz/e22546e27ed5b330d7ad6d75a38aad66904bae22}
+    version: 0.1.1
+    peerDependencies:
+      '@base-ui/react': ^1.6.0
+      motion: ^12.40.0
+      react: ^19.2.0
 
   '@sindresorhus/is@7.2.0':
     resolution: {integrity: sha512-P1Cz1dWaFfR4IR+U13mqqiGsLFf1KbayybWwdd2vfctdV6hDpUkgCY0nKOLLTMSoRd/jJNjtbqzf13K8DCCXQw==}
@@ -2937,6 +2948,14 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.61.1':
     optional: true
+
+  '@rutopio/base-component@https://codeload.github.com/rutopio/base-component/tar.gz/e22546e27ed5b330d7ad6d75a38aad66904bae22(@base-ui/react@1.6.0(@date-fns/tz@1.5.0)(@types/react@19.2.17)(date-fns@4.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(motion@12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      '@base-ui/react': 1.6.0(@date-fns/tz@1.5.0)(@types/react@19.2.17)(date-fns@4.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      clsx: 2.1.1
+      motion: 12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react: 19.2.7
+      tailwind-merge: 3.6.0
 
   '@sindresorhus/is@7.2.0': {}
 
