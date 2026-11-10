@@ -69,15 +69,15 @@ export function CopyDialog({
 
   const body = (
     <>
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="w-full">
+      <Tabs value={tab} onValueChange={setTab} className="w-full min-w-0">
+        <TabsList className="w-full min-w-0">
           <TabsTrigger value="markdown">{t("copy.tabMarkdown")}</TabsTrigger>
           <TabsTrigger value="table">{t("copy.tabTable")}</TabsTrigger>
           <TabsTrigger value="list">{t("copy.tabList")}</TabsTrigger>
           <TabsTrigger value="json">{t("copy.tabJson")}</TabsTrigger>
         </TabsList>
         {(["markdown", "table", "list", "json"] as const).map((v) => (
-          <TabsContent key={v} value={v}>
+          <TabsContent key={v} value={v} className="w-full min-w-0">
             {item &&
               (v === "json" ? (
                 <JsonHighlight
@@ -85,7 +85,7 @@ export function CopyDialog({
                 />
               ) : (
                 <>
-                  <pre className="max-h-64 overflow-auto rounded-md bg-muted p-3 font-mono text-xs">
+                  <pre className="max-h-64 max-w-full overflow-auto rounded-md bg-muted p-3 font-mono text-xs">
                     {formats[v](item, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (

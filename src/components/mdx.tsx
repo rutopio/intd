@@ -109,18 +109,28 @@ function Muted({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 function Ul({ className, ...props }: React.ComponentProps<"ul">) {
-  return <ul className={cn("my-4 ml-6 list-disc", className)} {...props} />
+  return (
+    <ul
+      className={cn("ml-6 flex list-disc flex-col gap-1", className)}
+      {...props}
+    />
+  )
 }
 
 function Ol({ className, ...props }: React.ComponentProps<"ol">) {
-  return <ol className={cn("my-4 ml-6 list-decimal", className)} {...props} />
+  return (
+    <ol
+      className={cn("ml-6 flex list-decimal flex-col gap-1", className)}
+      {...props}
+    />
+  )
 }
 
 function Li({ className, ...props }: React.ComponentProps<"li">) {
   return (
     <li
       className={cn(
-        "mt-2 text-pretty text-base text-neutral-800 leading-[1.65] dark:text-neutral-300",
+        "text-pretty text-base text-neutral-800 leading-[1.65] dark:text-neutral-300",
         className,
       )}
       {...props}
@@ -138,7 +148,7 @@ function Strong({ className, ...props }: React.ComponentProps<"strong">) {
 // highlighting, so digits/arrows render as-is.
 function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="my-4 overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-base leading-relaxed">
+    <pre className="overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-base leading-relaxed">
       <code>{children}</code>
     </pre>
   )
