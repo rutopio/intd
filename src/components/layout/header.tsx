@@ -88,7 +88,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                 </DrawerHeader>
                 <nav
                   aria-label={t("nav.menu")}
-                  className="flex flex-col gap-1 px-4 pb-6"
+                  className="flex flex-col gap-1 px-4 pt-4 pb-6"
                 >
                   <Link
                     to={lang === "en" ? "/en" : "/"}
