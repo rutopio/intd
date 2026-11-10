@@ -99,8 +99,8 @@
     "scrollToTop": "回到頂端"
   },
   "theme": {
-    "toLight": "Switch to light mode",
-    "toDark": "Switch to dark mode"
+    "toLight": "切換為淺色模式",
+    "toDark": "切換為深色模式"
   },
   "lang": {
     "toEnglish": "Switch language to English",

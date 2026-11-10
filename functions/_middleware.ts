@@ -31,6 +31,13 @@ class TextRewriter {
   }
 }
 
+class LangRewriter {
+  constructor(private readonly lang: string) {}
+  element(el: Element) {
+    el.setAttribute("lang", this.lang)
+  }
+}
+
 const setContent = (v: string) => new AttrRewriter("content", v)
 const setHref = (v: string) => new AttrRewriter("href", v)
 
@@ -74,8 +81,13 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const imageH = OG_HEIGHT
   // og:url reflects the actual shared URL (keeps the ?p so the unfurl is exact).
   const ogUrl = hasAmount ? url.href : canonical
+  const imageAlt =
+    route.lang === "en"
+      ? "IntD integer decomposition calculator"
+      : "IntD 整數拆解計算器"
 
   return new HTMLRewriter()
+    .on("html", new LangRewriter(route.lang === "en" ? "en" : "zh-Hant"))
     .on("title", new TextRewriter(title))
     .on('meta[name="description"]', setContent(description))
     .on('link[rel="canonical"]', setHref(canonical))
@@ -87,10 +99,12 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     .on('meta[property="og:url"]', setContent(ogUrl))
     .on('meta[property="og:locale"]', setContent(locale))
     .on('meta[property="og:image"]', setContent(imageUrl))
+    .on('meta[property="og:image:alt"]', setContent(imageAlt))
     .on('meta[property="og:image:width"]', setContent(String(imageW)))
     .on('meta[property="og:image:height"]', setContent(String(imageH)))
     .on('meta[name="twitter:title"]', setContent(title))
     .on('meta[name="twitter:description"]', setContent(description))
     .on('meta[name="twitter:image"]', setContent(imageUrl))
+    .on('meta[name="twitter:image:alt"]', setContent(imageAlt))
     .transform(response)
 }

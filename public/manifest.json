@@ -1,6 +1,6 @@
 {
-  "short_name": "Decompose",
-  "name": "Integer Decomposition Calculator",
+  "short_name": "IntD",
+  "name": "IntD - Integer Decomposition Calculator",
   "icons": [
     {
       "src": "favicon.ico",

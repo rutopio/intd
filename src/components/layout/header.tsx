@@ -32,7 +32,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <header className={cn("w-full font-heading", className)}>
       <nav
-        aria-label="Main navigation"
+        aria-label={lang === "en" ? "Main navigation" : "主要導覽"}
         className="relative flex w-full items-center justify-between pt-6 sm:pt-12"
       >
         <div className="flex min-w-0 items-center gap-1 sm:gap-2">
