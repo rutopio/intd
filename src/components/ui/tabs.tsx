@@ -3,15 +3,20 @@
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import {
-  type SegmentedControlSize,
-  segmentedControlIndicatorSurfaceClassName,
-  segmentedControlItemLayoutClassName,
-  segmentedControlItemSizeClassNames,
-} from "@/components/ui/segmented-control";
-
 type TabsVariant = "default" | "underline";
-type TabsSize = SegmentedControlSize;
+type TabsSize = "default" | "lg" | "sm";
+
+const tabSizeClassNames: Record<TabsSize, string> = {
+  default: "h-8.5 px-[calc(--spacing(2.5)-1px)] sm:h-7.5",
+  lg: "h-9.5 px-[calc(--spacing(3)-1px)] sm:h-8.5",
+  sm: "h-7.5 px-[calc(--spacing(2)-1px)] sm:h-6.5",
+};
+
+const tabItemLayoutClassName =
+  "gap-1.5 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-mx-0.5 [&_svg]:shrink-0";
+
+const tabIndicatorSurfaceClassName =
+  "rounded-md bg-background shadow-sm/5 dark:bg-input";
 
 const TabsListContext: React.Context<TabsSize> =
   React.createContext<TabsSize>("default");
@@ -64,7 +69,7 @@ export function TabsList({
           "absolute bottom-0 left-0 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom) transition-[width,translate] duration-200 ease-in-out motion-reduce:transition-none",
           variant === "underline"
             ? "z-10 bg-primary data-[orientation=horizontal]:h-0.5 data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-px data-[orientation=horizontal]:translate-y-px"
-            : cn("-z-1", segmentedControlIndicatorSurfaceClassName),
+            : cn("-z-1", tabIndicatorSurfaceClassName),
         )}
         data-slot="tab-indicator"
       />
@@ -86,8 +91,8 @@ export function TabsTab({
     <TabsPrimitive.Tab
       className={cn(
         "relative flex shrink-0 grow cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent font-medium text-base outline-none transition-[color,background-color,box-shadow] hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring data-disabled:pointer-events-none data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start data-active:text-foreground data-disabled:opacity-64 sm:text-sm",
-        segmentedControlItemLayoutClassName,
-        segmentedControlItemSizeClassNames[resolvedSize],
+        tabItemLayoutClassName,
+        tabSizeClassNames[resolvedSize],
         className,
       )}
       data-size={resolvedSize}

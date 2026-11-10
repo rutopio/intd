@@ -99,7 +99,8 @@ export function SettingsDialog() {
   ) => {
     const label = t("settings.itemLabel", { index: index + 1 })
     return (
-      <Card size="sm" className="relative shrink-0 rounded-md">
+      // Form fields are addressed by array index; keep the React key in sync.
+      <Card key={index} size="sm" className="relative shrink-0 rounded-md">
         <Button
           variant="ghost"
           size="icon-sm"

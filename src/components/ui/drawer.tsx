@@ -11,10 +11,6 @@ function DrawerTrigger({ ...props }: DrawerPrimitive.Trigger.Props) {
   return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
-function DrawerClose({ ...props }: DrawerPrimitive.Close.Props) {
-  return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
-}
-
 function DrawerOverlay({
   className,
   ...props
@@ -109,12 +105,10 @@ function DrawerDescription({
 
 export {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   DrawerTitle,
   DrawerTrigger,
 }
