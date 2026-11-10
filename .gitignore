@@ -14,3 +14,5 @@ todos.json
 # typescript
 *.tsbuildinfo
 /tasks
+.font-source-cache/
+__pycache__/

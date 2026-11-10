@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@base-ui/react": "1.6.0",
-    "@fontsource-variable/noto-sans-tc": "5.2.10",
     "@phosphor-icons/react": "2.1.10",
     "@resvg/resvg-wasm": "2.6.2",
     "@tailwindcss/vite": "4.3.1",

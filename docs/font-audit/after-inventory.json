@@ -1,0 +1,573 @@
+[
+  {
+    "file": "KaTeX_AMS-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 28076,
+    "glyphs": 260,
+    "mapped_codepoints": 257,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 36
+  },
+  {
+    "file": "KaTeX_Caligraphic-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 6912,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Caligraphic-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 6908,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Fraktur-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 11348,
+    "glyphs": 95,
+    "mapped_codepoints": 92,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 83
+  },
+  {
+    "file": "KaTeX_Fraktur-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 11316,
+    "glyphs": 96,
+    "mapped_codepoints": 93,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 83
+  },
+  {
+    "file": "KaTeX_Main-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 25324,
+    "glyphs": 280,
+    "mapped_codepoints": 277,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 141
+  },
+  {
+    "file": "KaTeX_Main-BoldItalic.woff2",
+    "family": "KaTeX",
+    "bytes": 16780,
+    "glyphs": 130,
+    "mapped_codepoints": 127,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 125
+  },
+  {
+    "file": "KaTeX_Main-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 16988,
+    "glyphs": 131,
+    "mapped_codepoints": 128,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 125
+  },
+  {
+    "file": "KaTeX_Main-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 26272,
+    "glyphs": 286,
+    "mapped_codepoints": 283,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 143
+  },
+  {
+    "file": "KaTeX_Math-BoldItalic.woff2",
+    "family": "KaTeX",
+    "bytes": 16400,
+    "glyphs": 110,
+    "mapped_codepoints": 107,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 103
+  },
+  {
+    "file": "KaTeX_Math-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 16440,
+    "glyphs": 110,
+    "mapped_codepoints": 107,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 103
+  },
+  {
+    "file": "KaTeX_SansSerif-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 12216,
+    "glyphs": 123,
+    "mapped_codepoints": 120,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 118
+  },
+  {
+    "file": "KaTeX_SansSerif-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 12028,
+    "glyphs": 124,
+    "mapped_codepoints": 121,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 119
+  },
+  {
+    "file": "KaTeX_SansSerif-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 10344,
+    "glyphs": 124,
+    "mapped_codepoints": 121,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 119
+  },
+  {
+    "file": "KaTeX_Script-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 9644,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Size1-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 5468,
+    "glyphs": 48,
+    "mapped_codepoints": 45,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size2-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 5208,
+    "glyphs": 40,
+    "mapped_codepoints": 37,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size3-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 3624,
+    "glyphs": 24,
+    "mapped_codepoints": 21,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size4-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 4928,
+    "glyphs": 51,
+    "mapped_codepoints": 48,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Typewriter-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 13568,
+    "glyphs": 130,
+    "mapped_codepoints": 127,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 124
+  },
+  {
+    "file": "PaperMono[wght].woff2",
+    "family": "Paper Mono",
+    "bytes": 38720,
+    "glyphs": 566,
+    "mapped_codepoints": 486,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 800.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "aalt",
+        "case",
+        "ccmp",
+        "dnom",
+        "frac",
+        "locl",
+        "numr",
+        "ordn",
+        "rvrn",
+        "sinf",
+        "ss01",
+        "ss02",
+        "ss07",
+        "subs",
+        "sups",
+        "zero"
+      ],
+      "GPOS": [
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-italic-core.woff2",
+    "family": "Inter",
+    "bytes": 68332,
+    "glyphs": 464,
+    "mapped_codepoints": 327,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "calt",
+        "locl",
+        "tnum"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-italic-extended.woff2",
+    "family": "Inter",
+    "bytes": 1880,
+    "glyphs": 2,
+    "mapped_codepoints": 1,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": []
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-normal-core.woff2",
+    "family": "Inter",
+    "bytes": 62436,
+    "glyphs": 464,
+    "mapped_codepoints": 327,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "calt",
+        "locl",
+        "tnum"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-normal-extended.woff2",
+    "family": "Inter",
+    "bytes": 1796,
+    "glyphs": 2,
+    "mapped_codepoints": 1,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": []
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-tc-core.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 33296,
+    "glyphs": 257,
+    "mapped_codepoints": 237,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "locl"
+      ],
+      "GPOS": [
+        "halt",
+        "palt"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-tc-extended.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 164036,
+    "glyphs": 609,
+    "mapped_codepoints": 607,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "halt",
+        "palt"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-tc-legacy.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 3051032,
+    "glyphs": 11310,
+    "mapped_codepoints": 11308,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "locl"
+      ],
+      "GPOS": [
+        "halt",
+        "palt"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  }
+]

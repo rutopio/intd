@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "./inter.css";
-@import "@fontsource-variable/noto-sans-tc";
+@import "./generated-fonts.css";
 
 @custom-variant dark (&:is(.dark, .dark *));
 

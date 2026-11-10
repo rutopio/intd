@@ -1,0 +1,750 @@
+{
+  "home": {
+    "before": {
+      "bytes": 1042976,
+      "font_requests": 16,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-118-wght-normal.woff2",
+          "bytes": 60296,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-116-wght-normal.woff2",
+          "bytes": 71712,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-117-wght-normal.woff2",
+          "bytes": 65440,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-113-wght-normal.woff2",
+          "bytes": 71484,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-110-wght-normal.woff2",
+          "bytes": 79360,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-112-wght-normal.woff2",
+          "bytes": 73548,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-106-wght-normal.woff2",
+          "bytes": 72524,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-115-wght-normal.woff2",
+          "bytes": 74332,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-84-wght-normal.woff2",
+          "bytes": 18844,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-101-wght-normal.woff2",
+          "bytes": 62576,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-105-wght-normal.woff2",
+          "bytes": 68216,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-107-wght-normal.woff2",
+          "bytes": 73020,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-108-wght-normal.woff2",
+          "bytes": 72540,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 298488,
+      "font_requests": 4,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-extended.woff2",
+          "bytes": 164036,
+          "status": 200
+        }
+      ]
+    }
+  },
+  "en": {
+    "before": {
+      "bytes": 524184,
+      "font_requests": 8,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-118-wght-normal.woff2",
+          "bytes": 60296,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-117-wght-normal.woff2",
+          "bytes": 65440,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-115-wght-normal.woff2",
+          "bytes": 74332,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-113-wght-normal.woff2",
+          "bytes": 71484,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-112-wght-normal.woff2",
+          "bytes": 73548,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 298488,
+      "font_requests": 4,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-extended.woff2",
+          "bytes": 164036,
+          "status": 200
+        }
+      ]
+    }
+  },
+  "algo": {
+    "before": {
+      "bytes": 1664956,
+      "font_requests": 30,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Math-Italic.woff2",
+          "bytes": 16440,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Main-Regular.woff2",
+          "bytes": 26272,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_AMS-Regular.woff2",
+          "bytes": 28076,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size2-Regular.woff2",
+          "bytes": 5208,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size1-Regular.woff2",
+          "bytes": 5468,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Caligraphic-Regular.woff2",
+          "bytes": 6908,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size4-Regular.woff2",
+          "bytes": 4928,
+          "status": 200
+        },
+        {
+          "file": "inter-4.1-latin-italic.woff2",
+          "bytes": 116856,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-118-wght-normal.woff2",
+          "bytes": 60296,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-116-wght-normal.woff2",
+          "bytes": 71712,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-117-wght-normal.woff2",
+          "bytes": 65440,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-111-wght-normal.woff2",
+          "bytes": 74860,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-113-wght-normal.woff2",
+          "bytes": 71484,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-112-wght-normal.woff2",
+          "bytes": 73548,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-115-wght-normal.woff2",
+          "bytes": 74332,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-110-wght-normal.woff2",
+          "bytes": 79360,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-106-wght-normal.woff2",
+          "bytes": 72524,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-107-wght-normal.woff2",
+          "bytes": 73020,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-114-wght-normal.woff2",
+          "bytes": 85112,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-108-wght-normal.woff2",
+          "bytes": 72540,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-109-wght-normal.woff2",
+          "bytes": 72004,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-102-wght-normal.woff2",
+          "bytes": 63296,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-73-wght-normal.woff2",
+          "bytes": 27596,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-103-wght-normal.woff2",
+          "bytes": 70408,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-71-wght-normal.woff2",
+          "bytes": 37392,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-105-wght-normal.woff2",
+          "bytes": 68216,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-101-wght-normal.woff2",
+          "bytes": 62576,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 460120,
+      "font_requests": 12,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2",
+        "inter-italic-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "inter-italic-core.woff2",
+          "bytes": 68332,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Math-Italic.woff2",
+          "bytes": 16440,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Main-Regular.woff2",
+          "bytes": 26272,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_AMS-Regular.woff2",
+          "bytes": 28076,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size2-Regular.woff2",
+          "bytes": 5208,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size1-Regular.woff2",
+          "bytes": 5468,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Caligraphic-Regular.woff2",
+          "bytes": 6908,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size4-Regular.woff2",
+          "bytes": 4928,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-extended.woff2",
+          "bytes": 164036,
+          "status": 200
+        }
+      ]
+    }
+  },
+  "en-algo": {
+    "before": {
+      "bytes": 389240,
+      "font_requests": 11,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Math-Italic.woff2",
+          "bytes": 16440,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Main-Regular.woff2",
+          "bytes": 26272,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_AMS-Regular.woff2",
+          "bytes": 28076,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size2-Regular.woff2",
+          "bytes": 5208,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size1-Regular.woff2",
+          "bytes": 5468,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Caligraphic-Regular.woff2",
+          "bytes": 6908,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size4-Regular.woff2",
+          "bytes": 4928,
+          "status": 200
+        },
+        {
+          "file": "inter-4.1-latin-italic.woff2",
+          "bytes": 116856,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 296084,
+      "font_requests": 11,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2",
+        "inter-italic-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "inter-italic-core.woff2",
+          "bytes": 68332,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Math-Italic.woff2",
+          "bytes": 16440,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Main-Regular.woff2",
+          "bytes": 26272,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_AMS-Regular.woff2",
+          "bytes": 28076,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size1-Regular.woff2",
+          "bytes": 5468,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size2-Regular.woff2",
+          "bytes": 5208,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Caligraphic-Regular.woff2",
+          "bytes": 6908,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "KaTeX_Size4-Regular.woff2",
+          "bytes": 4928,
+          "status": 200
+        }
+      ]
+    }
+  },
+  "about": {
+    "before": {
+      "bytes": 980252,
+      "font_requests": 14,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-118-wght-normal.woff2",
+          "bytes": 60296,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-116-wght-normal.woff2",
+          "bytes": 71712,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-117-wght-normal.woff2",
+          "bytes": 65440,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-111-wght-normal.woff2",
+          "bytes": 74860,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-115-wght-normal.woff2",
+          "bytes": 74332,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-113-wght-normal.woff2",
+          "bytes": 71484,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-112-wght-normal.woff2",
+          "bytes": 73548,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-109-wght-normal.woff2",
+          "bytes": 72004,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-110-wght-normal.woff2",
+          "bytes": 79360,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-114-wght-normal.woff2",
+          "bytes": 85112,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-107-wght-normal.woff2",
+          "bytes": 73020,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 298488,
+      "font_requests": 4,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-extended.woff2",
+          "bytes": 164036,
+          "status": 200
+        }
+      ]
+    }
+  },
+  "en-about": {
+    "before": {
+      "bytes": 390340,
+      "font_requests": 6,
+      "preloads": [
+        "inter-4.1-latin-normal.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-4.1-latin-normal.woff2",
+          "bytes": 105812,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-119-wght-normal.woff2",
+          "bytes": 34552,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-117-wght-normal.woff2",
+          "bytes": 65440,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-113-wght-normal.woff2",
+          "bytes": 71484,
+          "status": 200
+        },
+        {
+          "file": "noto-sans-tc-115-wght-normal.woff2",
+          "bytes": 74332,
+          "status": 200
+        }
+      ]
+    },
+    "after": {
+      "bytes": 298488,
+      "font_requests": 4,
+      "preloads": [
+        "inter-normal-core.woff2",
+        "noto-tc-core.woff2"
+      ],
+      "files": [
+        {
+          "file": "inter-normal-core.woff2",
+          "bytes": 62436,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-core.woff2",
+          "bytes": 33296,
+          "status": 200
+        },
+        {
+          "file": "PaperMono[wght].woff2",
+          "bytes": 38720,
+          "status": 200
+        },
+        {
+          "file": "noto-tc-extended.woff2",
+          "bytes": 164036,
+          "status": 200
+        }
+      ]
+    }
+  }
+}

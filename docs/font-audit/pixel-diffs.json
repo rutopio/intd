@@ -1,0 +1,77 @@
+{
+  "home": {
+    "width": 1280,
+    "height": 861,
+    "different_pixels": 35,
+    "max_channel_delta": 4,
+    "difference_bounds": [
+      824,
+      312,
+      831,
+      319
+    ]
+  },
+  "en": {
+    "width": 1280,
+    "height": 861,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "algo": {
+    "width": 1280,
+    "height": 7444,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "en-algo": {
+    "width": 1280,
+    "height": 8094,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "about": {
+    "width": 1280,
+    "height": 931,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "en-about": {
+    "width": 1280,
+    "height": 1070,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "settings": {
+    "width": 1280,
+    "height": 861,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "result-steady": {
+    "width": 1280,
+    "height": 867,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "specimen-viewport": {
+    "width": 1280,
+    "height": 720,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  },
+  "custom-cjk": {
+    "width": 1280,
+    "height": 720,
+    "different_pixels": 0,
+    "max_channel_delta": 0,
+    "difference_bounds": null
+  }
+}

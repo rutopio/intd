@@ -1,0 +1,3951 @@
+[
+  {
+    "file": "KaTeX_AMS-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 28076,
+    "glyphs": 260,
+    "mapped_codepoints": 257,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 36
+  },
+  {
+    "file": "KaTeX_Caligraphic-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 6912,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Caligraphic-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 6908,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Fraktur-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 11348,
+    "glyphs": 95,
+    "mapped_codepoints": 92,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 83
+  },
+  {
+    "file": "KaTeX_Fraktur-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 11316,
+    "glyphs": 96,
+    "mapped_codepoints": 93,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 83
+  },
+  {
+    "file": "KaTeX_Main-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 25324,
+    "glyphs": 280,
+    "mapped_codepoints": 277,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 141
+  },
+  {
+    "file": "KaTeX_Main-BoldItalic.woff2",
+    "family": "KaTeX",
+    "bytes": 16780,
+    "glyphs": 130,
+    "mapped_codepoints": 127,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 125
+  },
+  {
+    "file": "KaTeX_Main-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 16988,
+    "glyphs": 131,
+    "mapped_codepoints": 128,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 125
+  },
+  {
+    "file": "KaTeX_Main-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 26272,
+    "glyphs": 286,
+    "mapped_codepoints": 283,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 143
+  },
+  {
+    "file": "KaTeX_Math-BoldItalic.woff2",
+    "family": "KaTeX",
+    "bytes": 16400,
+    "glyphs": 110,
+    "mapped_codepoints": 107,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 103
+  },
+  {
+    "file": "KaTeX_Math-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 16440,
+    "glyphs": 110,
+    "mapped_codepoints": 107,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 103
+  },
+  {
+    "file": "KaTeX_SansSerif-Bold.woff2",
+    "family": "KaTeX",
+    "bytes": 12216,
+    "glyphs": 123,
+    "mapped_codepoints": 120,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 118
+  },
+  {
+    "file": "KaTeX_SansSerif-Italic.woff2",
+    "family": "KaTeX",
+    "bytes": 12028,
+    "glyphs": 124,
+    "mapped_codepoints": 121,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 119
+  },
+  {
+    "file": "KaTeX_SansSerif-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 10344,
+    "glyphs": 124,
+    "mapped_codepoints": 121,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 119
+  },
+  {
+    "file": "KaTeX_Script-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 9644,
+    "glyphs": 31,
+    "mapped_codepoints": 28,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 26
+  },
+  {
+    "file": "KaTeX_Size1-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 5468,
+    "glyphs": 48,
+    "mapped_codepoints": 45,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size2-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 5208,
+    "glyphs": 40,
+    "mapped_codepoints": 37,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size3-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 3624,
+    "glyphs": 24,
+    "mapped_codepoints": 21,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Size4-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 4928,
+    "glyphs": 51,
+    "mapped_codepoints": 48,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "KaTeX_Typewriter-Regular.woff2",
+    "family": "KaTeX",
+    "bytes": 13568,
+    "glyphs": 130,
+    "mapped_codepoints": 127,
+    "axes": [],
+    "features": {},
+    "hinting_tables": [
+      "fpgm",
+      "prep",
+      "cvt ",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 124
+  },
+  {
+    "file": "PaperMono[wght].woff2",
+    "family": "Paper Mono",
+    "bytes": 38720,
+    "glyphs": 566,
+    "mapped_codepoints": 486,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 800.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "aalt",
+        "case",
+        "ccmp",
+        "dnom",
+        "frac",
+        "locl",
+        "numr",
+        "ordn",
+        "rvrn",
+        "sinf",
+        "ss01",
+        "ss02",
+        "ss07",
+        "subs",
+        "sups",
+        "zero"
+      ],
+      "GPOS": [
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-cyrillic-ext-italic.woff2",
+    "family": "Inter",
+    "bytes": 43528,
+    "glyphs": 223,
+    "mapped_codepoints": 156,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-cyrillic-ext-normal.woff2",
+    "family": "Inter",
+    "bytes": 40944,
+    "glyphs": 223,
+    "mapped_codepoints": 156,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-cyrillic-italic.woff2",
+    "family": "Inter",
+    "bytes": 31408,
+    "glyphs": 146,
+    "mapped_codepoints": 102,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-cyrillic-normal.woff2",
+    "family": "Inter",
+    "bytes": 28728,
+    "glyphs": 146,
+    "mapped_codepoints": 102,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-greek-ext-italic.woff2",
+    "family": "Inter",
+    "bytes": 17328,
+    "glyphs": 256,
+    "mapped_codepoints": 233,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-greek-ext-normal.woff2",
+    "family": "Inter",
+    "bytes": 16156,
+    "glyphs": 256,
+    "mapped_codepoints": 233,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-greek-italic.woff2",
+    "family": "Inter",
+    "bytes": 32072,
+    "glyphs": 138,
+    "mapped_codepoints": 105,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-greek-normal.woff2",
+    "family": "Inter",
+    "bytes": 29300,
+    "glyphs": 138,
+    "mapped_codepoints": 105,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-latin-ext-italic.woff2",
+    "family": "Inter",
+    "bytes": 141464,
+    "glyphs": 848,
+    "mapped_codepoints": 726,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "locl"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-latin-ext-normal.woff2",
+    "family": "Inter",
+    "bytes": 128020,
+    "glyphs": 851,
+    "mapped_codepoints": 726,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "locl"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-latin-italic.woff2",
+    "family": "Inter",
+    "bytes": 116856,
+    "glyphs": 806,
+    "mapped_codepoints": 284,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "aalt",
+        "calt",
+        "case",
+        "ccmp",
+        "cv01",
+        "cv02",
+        "cv03",
+        "cv04",
+        "cv05",
+        "cv06",
+        "cv07",
+        "cv08",
+        "cv09",
+        "cv10",
+        "cv12",
+        "cv13",
+        "dlig",
+        "dnom",
+        "frac",
+        "locl",
+        "numr",
+        "ordn",
+        "pnum",
+        "salt",
+        "sinf",
+        "ss01",
+        "ss02",
+        "ss03",
+        "ss04",
+        "ss05",
+        "ss06",
+        "ss07",
+        "ss08",
+        "subs",
+        "sups",
+        "tnum",
+        "zero"
+      ],
+      "GPOS": [
+        "cpsp",
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-latin-normal.woff2",
+    "family": "Inter",
+    "bytes": 105812,
+    "glyphs": 815,
+    "mapped_codepoints": 284,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "aalt",
+        "calt",
+        "case",
+        "ccmp",
+        "cv01",
+        "cv02",
+        "cv03",
+        "cv04",
+        "cv05",
+        "cv06",
+        "cv07",
+        "cv08",
+        "cv09",
+        "cv10",
+        "cv11",
+        "cv12",
+        "cv13",
+        "dlig",
+        "dnom",
+        "frac",
+        "locl",
+        "numr",
+        "ordn",
+        "pnum",
+        "salt",
+        "sinf",
+        "ss01",
+        "ss02",
+        "ss03",
+        "ss04",
+        "ss05",
+        "ss06",
+        "ss07",
+        "ss08",
+        "subs",
+        "sups",
+        "tnum",
+        "zero"
+      ],
+      "GPOS": [
+        "cpsp",
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-vietnamese-italic.woff2",
+    "family": "Inter",
+    "bytes": 15036,
+    "glyphs": 140,
+    "mapped_codepoints": 110,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "inter-4.1-vietnamese-normal.woff2",
+    "family": "Inter",
+    "bytes": 14156,
+    "glyphs": 140,
+    "mapped_codepoints": 110,
+    "axes": [
+      {
+        "tag": "opsz",
+        "min": 14.0,
+        "default": 14.0,
+        "max": 32.0
+      },
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 400.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp"
+      ],
+      "GPOS": [
+        "kern",
+        "mark",
+        "mkmk"
+      ]
+    },
+    "hinting_tables": [],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-0-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 8908,
+    "glyphs": 25,
+    "mapped_codepoints": 24,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-100-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 63280,
+    "glyphs": 186,
+    "mapped_codepoints": 182,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-101-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 62576,
+    "glyphs": 181,
+    "mapped_codepoints": 177,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-102-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 63296,
+    "glyphs": 190,
+    "mapped_codepoints": 187,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-103-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 70408,
+    "glyphs": 204,
+    "mapped_codepoints": 200,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-104-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 68776,
+    "glyphs": 195,
+    "mapped_codepoints": 192,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-105-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 68216,
+    "glyphs": 194,
+    "mapped_codepoints": 191,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-106-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 72524,
+    "glyphs": 203,
+    "mapped_codepoints": 202,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-107-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 73020,
+    "glyphs": 212,
+    "mapped_codepoints": 211,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-108-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 72540,
+    "glyphs": 206,
+    "mapped_codepoints": 203,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-109-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 72004,
+    "glyphs": 210,
+    "mapped_codepoints": 207,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-110-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 79360,
+    "glyphs": 217,
+    "mapped_codepoints": 216,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-111-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 74860,
+    "glyphs": 216,
+    "mapped_codepoints": 215,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-112-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 73548,
+    "glyphs": 223,
+    "mapped_codepoints": 218,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-113-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 71484,
+    "glyphs": 224,
+    "mapped_codepoints": 218,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-114-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 85112,
+    "glyphs": 356,
+    "mapped_codepoints": 217,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vkrn",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-115-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 74332,
+    "glyphs": 223,
+    "mapped_codepoints": 217,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-116-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 71712,
+    "glyphs": 218,
+    "mapped_codepoints": 217,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-117-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 65440,
+    "glyphs": 223,
+    "mapped_codepoints": 218,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-118-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 60296,
+    "glyphs": 224,
+    "mapped_codepoints": 215,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-119-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 34552,
+    "glyphs": 250,
+    "mapped_codepoints": 214,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "liga",
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "mark",
+        "palt",
+        "vert",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-19-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 29140,
+    "glyphs": 65,
+    "mapped_codepoints": 64,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-20-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 53100,
+    "glyphs": 100,
+    "mapped_codepoints": 99,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-21-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43420,
+    "glyphs": 98,
+    "mapped_codepoints": 97,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-22-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 42712,
+    "glyphs": 106,
+    "mapped_codepoints": 105,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-23-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 40552,
+    "glyphs": 91,
+    "mapped_codepoints": 90,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-24-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 37764,
+    "glyphs": 94,
+    "mapped_codepoints": 93,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-25-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43516,
+    "glyphs": 116,
+    "mapped_codepoints": 115,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-26-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 22808,
+    "glyphs": 79,
+    "mapped_codepoints": 78,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-27-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 26580,
+    "glyphs": 53,
+    "mapped_codepoints": 52,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-28-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 52196,
+    "glyphs": 132,
+    "mapped_codepoints": 131,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-29-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 44620,
+    "glyphs": 135,
+    "mapped_codepoints": 134,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-30-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43652,
+    "glyphs": 125,
+    "mapped_codepoints": 124,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-31-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 35556,
+    "glyphs": 102,
+    "mapped_codepoints": 101,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-32-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43944,
+    "glyphs": 118,
+    "mapped_codepoints": 117,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-33-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 30608,
+    "glyphs": 89,
+    "mapped_codepoints": 88,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-34-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 20984,
+    "glyphs": 54,
+    "mapped_codepoints": 53,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-35-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 41732,
+    "glyphs": 129,
+    "mapped_codepoints": 128,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-36-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 49296,
+    "glyphs": 125,
+    "mapped_codepoints": 124,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-37-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 50944,
+    "glyphs": 131,
+    "mapped_codepoints": 130,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-38-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43968,
+    "glyphs": 121,
+    "mapped_codepoints": 120,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-39-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 49908,
+    "glyphs": 127,
+    "mapped_codepoints": 126,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-40-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 39268,
+    "glyphs": 127,
+    "mapped_codepoints": 126,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-41-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 29336,
+    "glyphs": 120,
+    "mapped_codepoints": 119,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-42-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43708,
+    "glyphs": 121,
+    "mapped_codepoints": 120,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-43-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 40192,
+    "glyphs": 113,
+    "mapped_codepoints": 112,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-44-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 21052,
+    "glyphs": 62,
+    "mapped_codepoints": 61,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-45-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 56888,
+    "glyphs": 115,
+    "mapped_codepoints": 114,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-46-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 55004,
+    "glyphs": 128,
+    "mapped_codepoints": 127,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-47-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 42440,
+    "glyphs": 122,
+    "mapped_codepoints": 121,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-48-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43428,
+    "glyphs": 117,
+    "mapped_codepoints": 116,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-49-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 40616,
+    "glyphs": 122,
+    "mapped_codepoints": 121,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-50-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 35808,
+    "glyphs": 123,
+    "mapped_codepoints": 122,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-51-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 44120,
+    "glyphs": 119,
+    "mapped_codepoints": 118,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-52-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 42348,
+    "glyphs": 120,
+    "mapped_codepoints": 119,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-53-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 40328,
+    "glyphs": 131,
+    "mapped_codepoints": 130,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-54-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 42344,
+    "glyphs": 117,
+    "mapped_codepoints": 116,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-55-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 47812,
+    "glyphs": 125,
+    "mapped_codepoints": 124,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-56-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 49844,
+    "glyphs": 120,
+    "mapped_codepoints": 119,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-57-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 51320,
+    "glyphs": 127,
+    "mapped_codepoints": 126,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-58-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43052,
+    "glyphs": 122,
+    "mapped_codepoints": 121,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-59-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 32768,
+    "glyphs": 113,
+    "mapped_codepoints": 112,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-6-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 15328,
+    "glyphs": 86,
+    "mapped_codepoints": 84,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-60-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 37332,
+    "glyphs": 124,
+    "mapped_codepoints": 123,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-61-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 54084,
+    "glyphs": 124,
+    "mapped_codepoints": 123,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-62-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 45384,
+    "glyphs": 126,
+    "mapped_codepoints": 125,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-63-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 38360,
+    "glyphs": 120,
+    "mapped_codepoints": 119,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-64-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 33124,
+    "glyphs": 113,
+    "mapped_codepoints": 112,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-65-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 35356,
+    "glyphs": 116,
+    "mapped_codepoints": 115,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-66-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 48896,
+    "glyphs": 119,
+    "mapped_codepoints": 118,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-67-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 34324,
+    "glyphs": 105,
+    "mapped_codepoints": 104,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-68-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 34864,
+    "glyphs": 110,
+    "mapped_codepoints": 109,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-69-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 45124,
+    "glyphs": 126,
+    "mapped_codepoints": 125,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-7-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 14372,
+    "glyphs": 121,
+    "mapped_codepoints": 119,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-70-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 30836,
+    "glyphs": 109,
+    "mapped_codepoints": 108,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-71-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 37392,
+    "glyphs": 112,
+    "mapped_codepoints": 111,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-72-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 37764,
+    "glyphs": 113,
+    "mapped_codepoints": 112,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-73-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 27596,
+    "glyphs": 104,
+    "mapped_codepoints": 103,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-74-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 50796,
+    "glyphs": 129,
+    "mapped_codepoints": 128,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-75-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 35908,
+    "glyphs": 115,
+    "mapped_codepoints": 114,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-76-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 39688,
+    "glyphs": 123,
+    "mapped_codepoints": 122,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-77-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 34100,
+    "glyphs": 110,
+    "mapped_codepoints": 109,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-78-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 41124,
+    "glyphs": 126,
+    "mapped_codepoints": 125,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-79-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 28064,
+    "glyphs": 112,
+    "mapped_codepoints": 111,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-8-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 9548,
+    "glyphs": 36,
+    "mapped_codepoints": 35,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-80-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 27048,
+    "glyphs": 105,
+    "mapped_codepoints": 104,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-81-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 31328,
+    "glyphs": 102,
+    "mapped_codepoints": 101,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-82-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 43040,
+    "glyphs": 123,
+    "mapped_codepoints": 122,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-83-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 29524,
+    "glyphs": 114,
+    "mapped_codepoints": 113,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-84-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 18844,
+    "glyphs": 84,
+    "mapped_codepoints": 83,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-85-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 36744,
+    "glyphs": 157,
+    "mapped_codepoints": 127,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern",
+        "palt",
+        "vert",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-86-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 12196,
+    "glyphs": 73,
+    "mapped_codepoints": 65,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-87-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 5792,
+    "glyphs": 26,
+    "mapped_codepoints": 25,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-88-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 7560,
+    "glyphs": 82,
+    "mapped_codepoints": 81,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-89-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 10644,
+    "glyphs": 140,
+    "mapped_codepoints": 139,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-90-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 9384,
+    "glyphs": 84,
+    "mapped_codepoints": 83,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-91-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 8856,
+    "glyphs": 82,
+    "mapped_codepoints": 72,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vert"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-92-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 3584,
+    "glyphs": 26,
+    "mapped_codepoints": 25,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-97-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 1656,
+    "glyphs": 10,
+    "mapped_codepoints": 9,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-98-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 3052,
+    "glyphs": 18,
+    "mapped_codepoints": 15,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-99-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 8808,
+    "glyphs": 73,
+    "mapped_codepoints": 72,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-cyrillic-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 9980,
+    "glyphs": 73,
+    "mapped_codepoints": 72,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-latin-ext-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 8268,
+    "glyphs": 82,
+    "mapped_codepoints": 80,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-latin-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 25136,
+    "glyphs": 256,
+    "mapped_codepoints": 218,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "ccmp",
+        "liga",
+        "locl",
+        "vert",
+        "vrt2"
+      ],
+      "GPOS": [
+        "halt",
+        "kern",
+        "palt",
+        "vhal",
+        "vpal"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  },
+  {
+    "file": "noto-sans-tc-vietnamese-wght-normal.woff2",
+    "family": "Noto Sans TC",
+    "bytes": 9040,
+    "glyphs": 111,
+    "mapped_codepoints": 110,
+    "axes": [
+      {
+        "tag": "wght",
+        "min": 100.0,
+        "default": 100.0,
+        "max": 900.0
+      }
+    ],
+    "features": {
+      "GSUB": [
+        "locl"
+      ],
+      "GPOS": [
+        "kern"
+      ]
+    },
+    "hinting_tables": [
+      "prep",
+      "gasp"
+    ],
+    "glyphs_with_instructions": 0
+  }
+]
