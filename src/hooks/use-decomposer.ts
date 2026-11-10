@@ -1,10 +1,10 @@
+import { useMountEffect } from "@rutopio/base-component/use-mount-effect"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useLang } from "@/hooks/use-lang"
 import { useLocalStorage } from "@/hooks/use-local-storage"
-import { useMountEffect } from "@/hooks/use-mount-effect"
 import { useSettings } from "@/hooks/use-settings"
 import {
   decompose,

@@ -1,22 +1,22 @@
 import { CopyIcon } from "@phosphor-icons/react"
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { toast } from "sonner"
-import { JsonHighlight } from "@/components/json-highlight"
-import { Button } from "@/components/ui/button"
+import { Button } from "@rutopio/base-component/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from "@rutopio/base-component/dialog"
 import {
   Drawer,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer"
+} from "@rutopio/base-component/drawer"
+import { useState } from "react"
+import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
+import { JsonHighlight } from "@/components/json-highlight"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -129,7 +129,9 @@ export function CopyDialog({
       <Drawer open={item !== null} onOpenChange={(o) => !o && onClose()}>
         <DrawerContent className="text-left">
           <DrawerHeader className="text-left">
-            <DrawerTitle>{t("copy.title")}</DrawerTitle>
+            <DrawerTitle className="font-heading">
+              {t("copy.title")}
+            </DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col gap-4 px-4">{body}</div>
           <DrawerFooter>
@@ -146,7 +148,7 @@ export function CopyDialog({
     <Dialog open={item !== null} onOpenChange={(o) => !o && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t("copy.title")}</DialogTitle>
+          <DialogTitle className="font-heading">{t("copy.title")}</DialogTitle>
         </DialogHeader>
         {body}
       </DialogContent>

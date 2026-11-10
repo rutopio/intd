@@ -1,4 +1,14 @@
 import { GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
+import { Button } from "@rutopio/base-component/button"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@rutopio/base-component/drawer"
 import { useForm } from "@tanstack/react-form"
 import { useId, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -13,17 +23,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import {
@@ -374,7 +374,9 @@ export function SettingsDialog() {
     >
       <DrawerContent className="text-left">
         <DrawerHeader className="text-left">
-          <DrawerTitle>{t("settings.resetConfirmTitle")}</DrawerTitle>
+          <DrawerTitle className="font-heading">
+            {t("settings.resetConfirmTitle")}
+          </DrawerTitle>
           <DrawerDescription>
             {t("settings.resetConfirmDesc")}
           </DrawerDescription>
@@ -428,7 +430,9 @@ export function SettingsDialog() {
           />
           <DrawerContent className="max-h-[80vh] text-left">
             <DrawerHeader className="text-left">
-              <DrawerTitle>{t("settings.title")}</DrawerTitle>
+              <DrawerTitle className="font-heading">
+                {t("settings.title")}
+              </DrawerTitle>
               <DrawerDescription>{t("settings.desc")}</DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col gap-4 overflow-y-auto px-4 py-1">

@@ -1,9 +1,9 @@
 import { CopyIcon } from "@phosphor-icons/react"
+import { Button } from "@rutopio/base-component/button"
 import { useTranslation } from "react-i18next"
 import { GlowCard } from "@/components/glow-card"
 import { RollNumber } from "@/components/roll-number"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,

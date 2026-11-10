@@ -5,20 +5,20 @@ import {
   ThreadsLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react"
-import {
-  openShareWindow,
-  usePageShare,
-} from "@rutopio/base-component/page-share"
-import { useTranslation } from "react-i18next"
-import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
+import { Button } from "@rutopio/base-component/button"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from "@rutopio/base-component/dialog"
+import {
+  openShareWindow,
+  usePageShare,
+} from "@rutopio/base-component/page-share"
+import { useTranslation } from "react-i18next"
+import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
 
 export function ShareButton({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
@@ -42,7 +42,9 @@ export function ShareButton({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t("share.title")}</DialogTitle>
+            <DialogTitle className="font-heading">
+              {t("share.title")}
+            </DialogTitle>
             <DialogDescription>{t("share.desc")}</DialogDescription>
           </DialogHeader>
           <Input

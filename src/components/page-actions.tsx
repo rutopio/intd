@@ -1,24 +1,24 @@
 import { ArrowBendRightUpIcon, ArrowLeftIcon } from "@phosphor-icons/react"
 import { ActionMenu } from "@rutopio/base-component/action-menu"
-import {
-  OutlineList,
-  type OutlineListItem,
-} from "@rutopio/base-component/outline-list"
-import { PageActionRail } from "@rutopio/base-component/page-action-rail"
-import { navigateToSection } from "@rutopio/base-component/section-navigation"
-import { motion, useReducedMotion } from "motion/react"
-import { useEffect, useRef, useState } from "react"
-import { useTranslation } from "react-i18next"
-import { ShareButton } from "@/components/share-button"
-import { Button } from "@/components/ui/button"
+import { Button } from "@rutopio/base-component/button"
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
-import { useMountEffect } from "@/hooks/use-mount-effect"
+} from "@rutopio/base-component/drawer"
+import {
+  OutlineList,
+  type OutlineListItem,
+} from "@rutopio/base-component/outline-list"
+import { PageActionRail } from "@rutopio/base-component/page-action-rail"
+import { navigateToSection } from "@rutopio/base-component/section-navigation"
+import { useMountEffect } from "@rutopio/base-component/use-mount-effect"
+import { motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
+import { ShareButton } from "@/components/share-button"
 
 const circumference = 2 * Math.PI * 6.25
 
@@ -190,7 +190,9 @@ export function PageActions({
               </DrawerTrigger>
               <DrawerContent>
                 <DrawerHeader className="border-border border-b pb-4">
-                  <DrawerTitle>{t(drawerTitleKey)}</DrawerTitle>
+                  <DrawerTitle className="font-heading">
+                    {t(drawerTitleKey)}
+                  </DrawerTitle>
                 </DrawerHeader>
                 <nav
                   ref={drawerScrollRef}

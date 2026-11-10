@@ -1,6 +1,6 @@
+import { GithubMarkIcon } from "@rutopio/base-component/github-mark-icon"
 import { SectionHeadingAnchor } from "@rutopio/base-component/section-heading-anchor"
 import { isValidElement } from "react"
-import { GithubMarkIcon } from "@/components/github-mark-icon"
 import { Pseudocode } from "@/components/pseudocode"
 import { cn } from "@/lib/utils"
 

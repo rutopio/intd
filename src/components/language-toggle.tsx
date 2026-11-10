@@ -1,15 +1,15 @@
 import { CheckIcon, TranslateIcon } from "@phosphor-icons/react"
 import { ActionMenu } from "@rutopio/base-component/action-menu"
-import { useLocation, useNavigate } from "@tanstack/react-router"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
+import { Button } from "@rutopio/base-component/button"
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from "@rutopio/base-component/drawer"
+import { useLocation, useNavigate } from "@tanstack/react-router"
+import { useState } from "react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { getLangFromPath } from "@/lib/language"
 
@@ -48,7 +48,7 @@ export function LanguageToggle({ className }: { className?: string }) {
       />
       <DrawerContent>
         <DrawerHeader className="border-border border-b pb-4">
-          <DrawerTitle>{label}</DrawerTitle>
+          <DrawerTitle className="font-heading">{label}</DrawerTitle>
         </DrawerHeader>
         <div className="flex flex-col gap-1 px-4 pt-4 pb-6">
           {(

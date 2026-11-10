@@ -1,4 +1,5 @@
 import { CheckIcon, GithubLogoIcon, ListIcon } from "@phosphor-icons/react"
+import { buttonVariants } from "@rutopio/base-component/button"
 import {
   HeaderNavigation,
   SiteHeader,
@@ -7,7 +8,6 @@ import { Link, useLocation } from "@tanstack/react-router"
 import { useTranslation } from "react-i18next"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { buttonVariants } from "@/components/ui/button"
 import { useLang } from "@/hooks/use-lang"
 import { INTD_ICON_PATH } from "@/lib/brand-icon"
 import { GITHUB_URL } from "@/lib/constants"
