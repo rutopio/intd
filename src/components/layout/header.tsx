@@ -1,11 +1,18 @@
-import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 import { CheckIcon, GithubLogoIcon, ListIcon } from "@phosphor-icons/react"
-import { Link, useLocation, useNavigate } from "@tanstack/react-router"
+import { Link, useLocation } from "@tanstack/react-router"
+import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { FluidHoverControls } from "@/components/fluid-hover-controls"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button, buttonVariants } from "@/components/ui/button"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import { useLang } from "@/hooks/use-lang"
 import { INTD_ICON_PATH } from "@/lib/brand-icon"
 import { GITHUB_URL } from "@/lib/constants"
@@ -15,13 +22,13 @@ const headerActionClass =
   "cursor-default transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0!"
 const routeLinkClass =
   "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted"
-const routeMenuItemClass =
-  "flex cursor-default items-center justify-between gap-2 rounded-sm px-3 py-1.5 text-base text-foreground outline-none focus:bg-accent focus:text-accent-foreground"
+const drawerLinkClass =
+  "flex min-h-12 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted"
 
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
   const lang = useLang()
   const pathname = useLocation({ select: (location) => location.pathname })
-  const navigate = useNavigate()
+  const [navOpen, setNavOpen] = useState(false)
   const isHome =
     pathname === (lang === "en" ? "/en" : "/") ||
     (lang === "en" && pathname === "/en/")
@@ -61,8 +68,8 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
             </span>
           </Link>
           <div className="md:hidden">
-            <MenuPrimitive.Root>
-              <MenuPrimitive.Trigger
+            <Drawer open={navOpen} onOpenChange={setNavOpen}>
+              <DrawerTrigger
                 render={
                   <Button
                     variant="ghost"
@@ -75,47 +82,44 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                   </Button>
                 }
               />
-              <MenuPrimitive.Portal>
-                <MenuPrimitive.Positioner
-                  align="start"
-                  side="bottom"
-                  sideOffset={4}
-                  className="isolate z-50 outline-none"
+              <DrawerContent>
+                <DrawerHeader className="border-border border-b pb-4">
+                  <DrawerTitle>IntD</DrawerTitle>
+                </DrawerHeader>
+                <nav
+                  aria-label={t("nav.menu")}
+                  className="flex flex-col gap-1 px-4 pb-6"
                 >
-                  <MenuPrimitive.Popup
-                    aria-label={t("nav.menu")}
-                    className="z-50 min-w-40 rounded-md bg-popover p-1 text-popover-foreground shadow-md outline-none ring-1 ring-foreground/10"
+                  <Link
+                    to={lang === "en" ? "/en" : "/"}
+                    aria-current={isHome ? "page" : undefined}
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
                   >
-                    <MenuPrimitive.Item
-                      aria-current={isHome ? "page" : undefined}
-                      className={routeMenuItemClass}
-                      onClick={() =>
-                        navigate({ to: lang === "en" ? "/en" : "/" })
-                      }
-                    >
-                      {t("nav.decompose")}
-                      {isHome && <CheckIcon aria-hidden="true" />}
-                    </MenuPrimitive.Item>
-                    <MenuPrimitive.Item
-                      aria-current={isAlgo ? "page" : undefined}
-                      className={routeMenuItemClass}
-                      onClick={() => navigate({ to: algoPath })}
-                    >
-                      {t("nav.algo")}
-                      {isAlgo && <CheckIcon aria-hidden="true" />}
-                    </MenuPrimitive.Item>
-                    <MenuPrimitive.Item
-                      aria-current={isAbout ? "page" : undefined}
-                      className={routeMenuItemClass}
-                      onClick={() => navigate({ to: aboutPath })}
-                    >
-                      {t("nav.about")}
-                      {isAbout && <CheckIcon aria-hidden="true" />}
-                    </MenuPrimitive.Item>
-                  </MenuPrimitive.Popup>
-                </MenuPrimitive.Positioner>
-              </MenuPrimitive.Portal>
-            </MenuPrimitive.Root>
+                    {t("nav.decompose")}
+                    {isHome && <CheckIcon aria-hidden="true" />}
+                  </Link>
+                  <Link
+                    to={algoPath}
+                    aria-current={isAlgo ? "page" : undefined}
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
+                  >
+                    {t("nav.algo")}
+                    {isAlgo && <CheckIcon aria-hidden="true" />}
+                  </Link>
+                  <Link
+                    to={aboutPath}
+                    aria-current={isAbout ? "page" : undefined}
+                    onClick={() => setNavOpen(false)}
+                    className={drawerLinkClass}
+                  >
+                    {t("nav.about")}
+                    {isAbout && <CheckIcon aria-hidden="true" />}
+                  </Link>
+                </nav>
+              </DrawerContent>
+            </Drawer>
           </div>
           <FluidHoverControls
             label={lang === "en" ? "Pages" : "頁面"}
