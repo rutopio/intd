@@ -45,7 +45,7 @@ const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
 
 const numInputClass =
-    "flex-1 [-moz-appearance:_textfield] font-mono focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+    "flex-1 [-moz-appearance:_textfield] tabular-nums focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
 
 export function SettingsDialog() {
     const { t } = useTranslation()
@@ -218,7 +218,7 @@ export function SettingsDialog() {
                                                 key={d}
                                                 value={String(d)}
                                                 aria-label={t("settings.aDigit", { digit: d })}
-                                                className="w-9 px-0 font-mono aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
+                                                className="w-9 px-0 tabular-nums aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
                                             >
                                                 {d}
                                             </ToggleGroupItem>
@@ -271,7 +271,7 @@ export function SettingsDialog() {
                             value={t("settings.bagPriceFixed")}
                             disabled
                             readOnly
-                            className="font-mono"
+                            className="tabular-nums"
                         />
                     </InputGroup>
                 </Field>
@@ -293,7 +293,7 @@ export function SettingsDialog() {
                     )}
                     <Button
                         variant="outline"
-                        className="shrink-0 border-dashed"
+                        className="shrink-0 border-dashed tabular-nums"
                         disabled={itemsField.state.value.length >= MAX_ITEMS}
                         onClick={() => itemsField.pushValue(NEW_ITEM)}
                     >
@@ -317,7 +317,7 @@ export function SettingsDialog() {
         <AlertDialogFooter className="px-6 py-4 sm:justify-between">
             <Button
                 variant="ghost"
-                className="text-destructive text-base"
+                className="text-base text-destructive"
                 onClick={() => {
                     // Close settings first so only the reset confirmation dialog is open at once.
                     setOpen(false)

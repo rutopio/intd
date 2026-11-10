@@ -37,7 +37,7 @@ export function ResultTableCard({
       <Card className="h-full w-full rounded-md lg:w-auto lg:min-w-72">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
-            <Badge className="rounded-full">{position}</Badge>
+            <Badge className="rounded-full tabular-nums">{position}</Badge>
           </CardTitle>
           <Button
             variant="ghost"
@@ -85,13 +85,13 @@ export function ResultTableCard({
                   <TableCell className="whitespace-nowrap">
                     {row.name}
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
                     <RollNumber value={row.qty} />
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
                     <RollNumber value={row.price} prefix="$" />
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right font-mono tabular-nums">
+                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
                     <RollNumber value={row.total} prefix="$" />
                   </TableCell>
                 </TableRow>

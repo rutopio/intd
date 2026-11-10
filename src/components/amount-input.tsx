@@ -37,7 +37,7 @@ export function AmountInput({
                     value={amount}
                     onChange={(e) => onChange(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && onSubmit()}
-                    className="font-mono"
+                    className="tabular-nums"
                 />
                 <InputGroupAddon align="inline-end">
                     <InputGroupButton

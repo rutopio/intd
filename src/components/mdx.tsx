@@ -15,7 +15,7 @@ export function Article({
       className={cn(
         // min-w-0 lets flex children shrink so wide math scrolls inside
         // .katex-display instead of widening the page.
-        "flex min-w-0 flex-col gap-6 text-base text-neutral-800 leading-[1.65] dark:text-neutral-300",
+        "flex min-w-0 flex-col gap-6 text-base text-neutral-800 tabular-nums leading-[1.65] dark:text-neutral-300",
         className,
       )}
       {...props}
@@ -144,6 +144,10 @@ function Strong({ className, ...props }: React.ComponentProps<"strong">) {
   )
 }
 
+function InlineCode({ className, ...props }: React.ComponentProps<"code">) {
+  return <code className={cn("font-[inherit]", className)} {...props} />
+}
+
 // Plain monospace block for ASCII diagrams (e.g. the decision tree); no syntax
 // highlighting, so digits/arrows render as-is.
 function CodeBlock({ children }: { children: string }) {
@@ -173,6 +177,7 @@ export const mdxComponents = {
   ol: Ol,
   li: Li,
   strong: Strong,
+  code: InlineCode,
   pre: Pre,
   Muted,
   Pseudocode,

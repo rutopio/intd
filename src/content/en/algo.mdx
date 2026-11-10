@@ -11,10 +11,10 @@ This is a **constrained integer decomposition** problem: **given any total, find
 
 Suppose there are $n$ items available for making up the total. Item $i$ (for $i = 1, 2, \dots, n$) has its own set of valid prices $P_i \subseteq \mathbb{Z}^+$ (positive integers). From this set we pick a price $p_i \in P_i$ that satisfies a given last-digit rule, together with a quantity $q_i \in \mathbb{N}_0$ (each item may be used or skipped). For example:
 
-- Bento (item 1, $i = 1$, price $p_1$, quantity $q_1$): price range $P_1$ between `90` and `150`, with $p_1$ ending in `0`, `5`, or `9`, for example `99`, `120`, `135`.
-- Drink (item 2, $i = 2$, price $p_2$, quantity $q_2$): price range $P_2$ between `40` and `90`, with $p_2$ ending in `0` or `5`, for example `45`, `60`, `85`.
+- Bento (item 1, $i = 1$, price $p_1$, quantity $q_1$): price range $P_1$ between 90 and 150, with $p_1$ ending in 0, 5, or 9, for example 99, 120, 135.
+- Drink (item 2, $i = 2$, price $p_2$, quantity $q_2$): price range $P_2$ between 40 and 90, with $p_2$ ending in 0 or 5, for example 45, 60, 85.
 
-There is also a one-dollar item (such as a plastic bag, price $p_* = 1$, quantity $q_*$): each costs `1`, with quantity `0` to `9`, intended to make up the remaining change:
+There is also a one-dollar item (such as a plastic bag, price $p_* = 1$, quantity $q_*$): each costs 1, with quantity 0 to 9, intended to make up the remaining change:
 
 $$
 \begin{aligned}
@@ -59,17 +59,17 @@ $$
 ## Constraints
 
 1. Within a single order, each item $i$ uses a single price $p_i$. If a pork-chop bento and a chicken-leg bento have different prices, they must be treated as separate items.
-2. The chosen strategy decides the primary preference: "fewest bags first" minimises the bag count $q_*$; "balanced quantities first" makes the quantities $q_i$ as even as possible (avoiding combinations like `20` bentos with `4` drinks).
+2. The chosen strategy decides the primary preference: "fewest bags first" minimises the bag count $q_*$; "balanced quantities first" makes the quantities $q_i$ as even as possible (avoiding combinations like 20 bentos with 4 drinks).
 3. The plastic bag is optional ($q_* \ge 0$).
 4. Each item may be used or skipped ($q_i \ge 0$), but they cannot all be skipped — the order cannot consist of plastic bags alone ($\sum_i q_i \ge 1$).
-5. For a reasonable solution, the bag count should not exceed the total number of items ($q_* \le \sum_i q_i$). After all, nobody buys `2` bentos and then `10` extra plastic bags.
+5. For a reasonable solution, the bag count should not exceed the total number of items ($q_* \le \sum_i q_i$). After all, nobody buys 2 bentos and then 10 extra plastic bags.
 6. After obtaining a combination, verify that the total equals $T$.
 
 ## Why a One-Dollar Item?
 
-The target total $T$ can be any positive integer, but each item's price $p_i$ may be subject to a last-digit rule (for example, bentos end in `0`, `5`, `9` and drinks end in `0`, `5`). This means the amounts $\sum_i p_i q_i$ reachable with these items alone are discrete and sparse — they may not hit $T$ exactly.
+The target total $T$ can be any positive integer, but each item's price $p_i$ may be subject to a last-digit rule (for example, bentos end in 0, 5, 9 and drinks end in 0, 5). This means the amounts $\sum_i p_i q_i$ reachable with these items alone are discrete and sparse — they may not hit $T$ exactly.
 
-Without the one-dollar item, the problem becomes "hit $T$ exactly under restricted prices", which for many values of $T$ has no solution at all. For example, if bentos must end in `0` or `5` and drinks always end in `0`, then every combination is a multiple of `5`, and a total like `114` can never be reached.
+Without the one-dollar item, the problem becomes "hit $T$ exactly under restricted prices", which for many values of $T$ has no solution at all. For example, if bentos must end in 0 or 5 and drinks always end in 0, then every combination is a multiple of 5, and a total like 114 can never be reached.
 
 The one-dollar item (like a plastic bag or disposable utensils) fills that gap: first approximate the total $T$ with a few items, then top up the remaining change with plastic bags.
 
@@ -81,7 +81,7 @@ Picture a multi-level decision tree: the first level decides "buy a bento or not
 
 We traverse this tree with depth-first search (DFS): follow one path all the way down (all items decided), record the result, then backtrack to the nearest branch and try the next choice, until every path has been explored.
 
-For $T = 253$, with the bento at `100` and the drink at `75`, the tree looks roughly like this:
+For $T = 253$, with the bento at 100 and the drink at 75, the tree looks roughly like this:
 
 ```
 T = 253
@@ -98,11 +98,11 @@ T = 253
 
 ## A Worked Example
 
-Suppose the target total is $T = 253$, with the bento priced at `100` and the drink at `75`. DFS tries every quantity of bentos and drinks. For example:
+Suppose the target total is $T = 253$, with the bento priced at 100 and the drink at 75. DFS tries every quantity of bentos and drinks. For example:
 
-- `2` bentos, `0` drinks: $100 \times 2 = 200$, leaving `53` — would need `53` bags, over the limit of `9`. Rejected.
-- `1` bento, `1` drink: $100 + 75 = 175$, leaving `78` — would need `78` bags. Rejected.
-- `1` bento, `2` drinks: $100 + 75 \times 2 = 250$, leaving `3` — take `3` bags, exactly fills the gap. **Passes** and becomes a candidate.
+- 2 bentos, 0 drinks: $100 \times 2 = 200$, leaving 53 — would need 53 bags, over the limit of 9. Rejected.
+- 1 bento, 1 drink: $100 + 75 = 175$, leaving 78 — would need 78 bags. Rejected.
+- 1 bento, 2 drinks: $100 + 75 \times 2 = 250$, leaving 3 — take 3 bags, exactly fills the gap. **Passes** and becomes a candidate.
 
 Substituting the last set back into the equation to verify:
 
@@ -110,7 +110,7 @@ $$
 \underbrace{\$100 \cdot 1}_{\text{bento}} + \underbrace{\$75 \cdot 2}_{\text{drink}} + \underbrace{\$1\cdot 3}_{\text{bag}} = \$253
 $$
 
-Although `253` cannot be made from bentos and drinks alone, topping up the `3` in change with plastic bags makes it work. Trying every price-and-quantity combination this way collects all the candidates.
+Although 253 cannot be made from bentos and drinks alone, topping up the 3 in change with plastic bags makes it work. Trying every price-and-quantity combination this way collects all the candidates.
 
 Once all candidates are collected, they are sorted by the chosen strategy ("fewest bags first" or "balanced quantities first"). The top three plans with distinct price combinations are shown. Pressing "New set" excludes the plans already shown and lists the next batch.
 
@@ -132,8 +132,8 @@ $$
 
 The price set $P_i$ of item $i$ has cardinality $|P_i|$. At each visit to level $i$, the choices are:
 
-- Skip this item ($q_i = 0$): just `1` possibility.
-- For each price $p_i \in P_i$ ($|P_i|$ of them), try quantities $q_i$ from `1` up to $\lfloor R_i / p_i \rfloor$. Since $R_i \le T$ and $p_i \ge 1$, the quantity count is at most $T / p_i$, an upper bound of $O(T)$.
+- Skip this item ($q_i = 0$): just 1 possibility.
+- For each price $p_i \in P_i$ ($|P_i|$ of them), try quantities $q_i$ from 1 up to $\lfloor R_i / p_i \rfloor$. Since $R_i \le T$ and $p_i \ge 1$, the quantity count is at most $T / p_i$, an upper bound of $O(T)$.
 
 Combining the two, the branch count at level $i$ is about $1 + |P_i| \cdot O(T) = O(|P_i| \cdot T)$.
 
@@ -145,7 +145,7 @@ $$
 O\!\left(\prod_{i=1}^{n} |P_i| \cdot T\right)
 $$
 
-Once the price ranges and last-digit rules are set, they do not change. For example, if a bento's price is restricted to `90`–`110` with last digits `0, 5, 9`, then $P_1$ is just the six values $\{90, 95, 99, 100, 105, 109\}$. In other words, every $|P_i|$ is a constant that does not grow with $T$ and can be treated as a constant $K$. The only thing that grows with the input is the $T$ at each level:
+Once the price ranges and last-digit rules are set, they do not change. For example, if a bento's price is restricted to 90–110 with last digits 0, 5, 9, then $P_1$ is just the six values $\{90, 95, 99, 100, 105, 109\}$. In other words, every $|P_i|$ is a constant that does not grow with $T$ and can be treated as a constant $K$. The only thing that grows with the input is the $T$ at each level:
 
 $$
 O\!\left(\prod_{i=1}^{n} |P_i| \cdot T\right) = O\big(|P_1|\cdot T\cdot|P_2|\cdot T\cdots\big) =O(\underbrace{|P_1|\cdot|P_2|}_{K}\cdots T^n) =O\!\left(T^{n}\right)

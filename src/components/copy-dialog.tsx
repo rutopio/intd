@@ -89,7 +89,7 @@ export function CopyDialog({
                     {formats[v](item, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (
-                    <p className="mt-2 font-mono text-muted-foreground text-xs leading-relaxed">
+                    <p className="mt-2 text-muted-foreground text-xs leading-relaxed">
                       {t("copy.monoHint")}
                     </p>
                   )}

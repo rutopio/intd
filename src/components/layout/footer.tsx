@@ -9,7 +9,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
           href={AUTHOR_GITHUB_URL}
           target="_blank"
           rel="noreferrer"
-          className="block font-mono hover:text-foreground"
+          className="block hover:text-foreground"
         >
           Created by ChingRu (rutopio@Github)
         </a>
