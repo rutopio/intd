@@ -1,9 +1,10 @@
 import { useNavigate, useSearch } from "@tanstack/react-router"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
 import { useLang } from "@/hooks/use-lang"
 import { useLocalStorage } from "@/hooks/use-local-storage"
+import { useMountEffect } from "@/hooks/use-mount-effect"
 import { useSettings } from "@/hooks/use-settings"
 import {
   decompose,
@@ -120,8 +121,7 @@ export function useDecomposer() {
   }
 
   const didInit = useRef(false)
-  // biome-ignore lint/correctness/useExhaustiveDependencies: runs once on entry, not on dependency changes
-  useEffect(() => {
+  useMountEffect(() => {
     if (didInit.current) return
     didInit.current = true
     if (p !== undefined) {
@@ -133,7 +133,7 @@ export function useDecomposer() {
     if (target !== null) {
       navigate({ to: ".", search: { p: target }, replace: true })
     }
-  }, [])
+  })
 
   return {
     isEn,

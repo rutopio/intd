@@ -2,6 +2,7 @@ import { TranslateIcon } from "@phosphor-icons/react"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
+import { getLangFromPath } from "@/lib/language"
 import { cn } from "@/lib/utils"
 
 // Asymmetric routing: zh is the bare path, en is prefixed with /en. Toggling adds
@@ -13,7 +14,7 @@ export function LanguageToggle({
   const { t } = useTranslation()
   const navigate = useNavigate()
   const pathname = useLocation({ select: (l) => l.pathname })
-  const isEn = pathname === "/en" || pathname.startsWith("/en/")
+  const isEn = getLangFromPath(pathname) === "en"
 
   const toggle = () => {
     const next = isEn

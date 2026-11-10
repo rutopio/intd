@@ -1,24 +1,10 @@
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router"
 import { motion, useReducedMotion } from "motion/react"
-import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Footer } from "@/components/layout/footer"
 import { Header } from "@/components/layout/header"
 import { ScreenSize } from "@/components/screen-size"
 import { Toaster } from "@/components/ui/sonner"
-import { useLang } from "@/hooks/use-lang"
-
-// Keep i18next and the document lang attribute in sync with the URL (the source
-// of truth for language). Runs on every navigation that changes language.
-function LangSync() {
-  const lang = useLang()
-  const { i18n } = useTranslation()
-  useEffect(() => {
-    if (i18n.language !== lang) i18n.changeLanguage(lang)
-    document.documentElement.lang = lang === "en" ? "en" : "zh-Hant"
-  }, [lang, i18n])
-  return null
-}
 
 // Soft fade-in on route change: the new page mounts at opacity 0 and animates to
 // 1. No exit animation and no AnimatePresence, so the old page is never faded to
@@ -43,7 +29,6 @@ function AnimatedOutlet() {
 export const Route = createRootRoute({
   component: () => (
     <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6">
-      <LangSync />
       <Header className="bg-background" />
       <AnimatedOutlet />
       <Footer className="bg-background" />

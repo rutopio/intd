@@ -16,6 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { useMountEffect } from "@/hooks/use-mount-effect"
 
 const circumference = 2 * Math.PI * 6.25
 
@@ -65,31 +66,25 @@ export function PageActions() {
   const [outlineOpen, setOutlineOpen] = useState(false)
   const drawerScrollRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
+  useMountEffect(() => {
     const article = document.querySelector("main article")
     if (!article) return
-    const update = () => {
-      setItems(
-        Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
-          .map((heading) => {
-            const visibleHeading = heading.cloneNode(true) as HTMLElement
-            visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
-              node.remove()
-            })
-            return {
-              id: heading.id,
-              label: visibleHeading.textContent?.trim() ?? "",
-              depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
-            }
+    setItems(
+      Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
+        .map((heading) => {
+          const visibleHeading = heading.cloneNode(true) as HTMLElement
+          visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
+            node.remove()
           })
-          .filter((item) => item.label),
-      )
-    }
-    update()
-    const observer = new MutationObserver(update)
-    observer.observe(article, { childList: true, subtree: true })
-    return () => observer.disconnect()
-  }, [])
+          return {
+            id: heading.id,
+            label: visibleHeading.textContent?.trim() ?? "",
+            depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
+          }
+        })
+        .filter((item) => item.label),
+    )
+  })
 
   useEffect(() => {
     let frame = 0

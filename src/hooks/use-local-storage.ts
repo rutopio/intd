@@ -1,49 +1,81 @@
-import * as React from "react"
+import { useCallback, useMemo, useSyncExternalStore } from "react"
 
-// useState-shaped hook that persists to localStorage. Instances on the same
-// page sharing a key stay in sync via a custom event, so one writer's update is
-// seen by the others immediately.
+// A raw string is a stable snapshot for useSyncExternalStore. Parsed objects
+// would be new on every read and trigger repeated renders.
+const volatileValues = new Map<string, string>()
+
+function readRaw(key: string): string | null {
+  if (volatileValues.has(key)) return volatileValues.get(key) ?? null
+  if (typeof window === "undefined") return null
+  try {
+    return window.localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+function parseValue<T>(raw: string | null, initial: T): T {
+  if (raw === null) return initial
+  try {
+    return JSON.parse(raw) as T
+  } catch {
+    return initial
+  }
+}
+
+function notify(key: string) {
+  window.dispatchEvent(new CustomEvent(`local-storage:${key}`))
+}
+
+export function removeLocalStorageKey(key: string) {
+  volatileValues.delete(key)
+  try {
+    window.localStorage.removeItem(key)
+  } catch {
+    // Storage can be unavailable; the in-memory value is still cleared.
+  }
+  notify(key)
+}
+
+// Subscribe to changes from this tab and other tabs without mirroring storage
+// into React state through an effect.
 export function useLocalStorage<T>(key: string, initial: T) {
-  const event = `local-storage:${key}`
-
-  const read = React.useCallback((): T => {
-    if (typeof window === "undefined") return initial
-    try {
-      const raw = window.localStorage.getItem(key)
-      return raw === null ? initial : (JSON.parse(raw) as T)
-    } catch {
-      return initial
-    }
-  }, [key, initial])
-
-  const [value, setValue] = React.useState<T>(read)
-
-  const set = React.useCallback<React.Dispatch<React.SetStateAction<T>>>(
-    (action) => {
-      setValue((prev) => {
-        const next =
-          typeof action === "function" ? (action as (p: T) => T)(prev) : action
-        try {
-          window.localStorage.setItem(key, JSON.stringify(next))
-          window.dispatchEvent(new CustomEvent(event))
-        } catch {
-          // Quota exceeded or private mode; ignore, it does not affect the UI.
-        }
-        return next
-      })
+  const subscribe = useCallback(
+    (onChange: () => void) => {
+      const onStorage = (event: StorageEvent) => {
+        if (event.key === key || event.key === null) onChange()
+      }
+      window.addEventListener(`local-storage:${key}`, onChange)
+      window.addEventListener("storage", onStorage)
+      return () => {
+        window.removeEventListener(`local-storage:${key}`, onChange)
+        window.removeEventListener("storage", onStorage)
+      }
     },
-    [key, event],
+    [key],
   )
+  const getSnapshot = useCallback(() => readRaw(key), [key])
+  const raw = useSyncExternalStore(subscribe, getSnapshot, () => null)
+  const value = useMemo(() => parseValue(raw, initial), [raw, initial])
 
-  React.useEffect(() => {
-    const sync = () => setValue(read())
-    window.addEventListener(event, sync)
-    window.addEventListener("storage", sync)
-    return () => {
-      window.removeEventListener(event, sync)
-      window.removeEventListener("storage", sync)
-    }
-  }, [event, read])
+  const set = useCallback<React.Dispatch<React.SetStateAction<T>>>(
+    (action) => {
+      const previous = parseValue(readRaw(key), initial)
+      const next =
+        typeof action === "function"
+          ? (action as (previous: T) => T)(previous)
+          : action
+      const serialized = JSON.stringify(next)
+      try {
+        window.localStorage.setItem(key, serialized)
+        volatileValues.delete(key)
+      } catch {
+        volatileValues.set(key, serialized)
+      }
+      notify(key)
+    },
+    [key, initial],
+  )
 
   return [value, set] as const
 }

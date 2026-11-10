@@ -2,12 +2,24 @@ import { RouterProvider } from "@tanstack/react-router"
 import { ThemeProvider } from "next-themes"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
+import i18n from "./lib/i18n"
+import { getLangFromPath } from "./lib/language"
 import { getRouter } from "./router"
-import "./lib/i18n"
 import "katex/dist/katex.min.css"
 import "./styles.css"
 
 const router = getRouter()
+
+function syncLanguage(pathname: string) {
+  const lang = getLangFromPath(pathname)
+  if (i18n.language !== lang) void i18n.changeLanguage(lang)
+  document.documentElement.lang = lang === "en" ? "en" : "zh-Hant"
+}
+
+syncLanguage(window.location.pathname)
+router.subscribe("onBeforeRouteMount", ({ toLocation }) => {
+  syncLanguage(toLocation.pathname)
+})
 
 // Track the initial load and SPA navigations; gtag config disables automatic page views.
 router.subscribe("onResolved", ({ fromLocation, toLocation }) => {

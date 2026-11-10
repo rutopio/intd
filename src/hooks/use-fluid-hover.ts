@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from "react"
+import { useMountEffect } from "@/hooks/use-mount-effect"
 
 export interface ItemRect {
   top: number
@@ -612,7 +613,7 @@ export function useFluidHover<T extends HTMLElement>(
   }, [containerRef, scheduleMeasurement])
 
   // Clean up rAF and the item observer on unmount
-  useEffect(() => {
+  useMountEffect(() => {
     return () => {
       if (rafIdRef.current !== null) {
         cancelAnimationFrame(rafIdRef.current)
@@ -623,7 +624,7 @@ export function useFluidHover<T extends HTMLElement>(
       itemRoRef.current?.disconnect()
       itemRoRef.current = null
     }
-  }, [])
+  })
 
   return {
     activeIndex,

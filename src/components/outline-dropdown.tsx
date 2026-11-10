@@ -3,6 +3,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react"
 import { FluidHoverHighlight } from "@/components/fluid-hover-highlight"
 import { Button } from "@/components/ui/button"
 import { useFluidHover } from "@/hooks/use-fluid-hover"
+import { useMountEffect } from "@/hooks/use-mount-effect"
 import { spring } from "@/lib/springs"
 
 export type OutlineItem = {
@@ -57,7 +58,7 @@ export function OutlineDropdown({
     [hover.setActiveIndex],
   )
 
-  useEffect(() => () => clearTimeout(openTimer.current), [])
+  useMountEffect(() => () => clearTimeout(openTimer.current))
 
   useEffect(() => {
     if (!open) return
