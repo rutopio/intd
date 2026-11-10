@@ -81,7 +81,7 @@ export function renderOgSvg(brand: string): string {
     `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}">` +
     `<rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${BG_COLOR}"/>` +
     `<g transform="translate(${logoX} ${logoY})" fill="${FG_COLOR}">${LOGO}</g>` +
-    `<text x="${brandX}" y="${brandBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="700" font-size="${BRAND_SIZE}" letter-spacing="-2" fill="${FG_COLOR}">${safeBrand}</text>` +
+    `<text x="${brandX}" y="${brandBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="700" font-size="${BRAND_SIZE}" fill="${FG_COLOR}">${safeBrand}</text>` +
     `<text x="${OG_WIDTH / 2}" y="${subBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="400" font-size="${SUB_SIZE}" fill="${SUB_COLOR}" text-anchor="middle">${SUBTITLE}</text>` +
     `</svg>`
   )

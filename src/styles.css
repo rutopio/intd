@@ -24,10 +24,6 @@
     --text-2xl: 1.375rem;
 }
 
-@utility opsz-* {
-    font-variation-settings: "opsz" --value(integer);
-}
-
 @theme inline {
     --font-sans: "Inter Variable", "Noto Sans TC Variable", ui-sans-serif, system-ui, sans-serif;
     --font-heading: var(--font-sans);
@@ -167,11 +163,15 @@
     @apply bg-background text-foreground;
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
-    font-optical-sizing: none;
-    font-variation-settings: "opsz" 14;
-    text-wrap: pretty;
+    font-optical-sizing: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    }
+  p, li, blockquote {
+    text-wrap: pretty;
     }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;

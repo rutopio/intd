@@ -27,7 +27,7 @@ function H1({ className, ...props }: React.ComponentProps<"h1">) {
   return (
     <h1
       className={cn(
-        "opsz-25 scroll-m-20 text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
+        "scroll-m-20 text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
         className,
       )}
       {...props}
@@ -40,7 +40,7 @@ function H2({ className, id, children, ...props }: React.ComponentProps<"h2">) {
     <h2
       id={id}
       className={cn(
-        "group opsz-25 flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
+        "group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
         className,
       )}
       {...props}
@@ -59,7 +59,7 @@ function H3({ className, id, children, ...props }: React.ComponentProps<"h3">) {
     <h3
       id={id}
       className={cn(
-        "group opsz-25 flex scroll-m-20 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
+        "group flex scroll-m-20 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
         className,
       )}
       {...props}
@@ -87,7 +87,7 @@ function A({ className, href, ...props }: React.ComponentProps<"a">) {
     <a
       href={href}
       className={cn(
-        "opsz-14 break-words font-normal text-primary underline decoration-[0.5px] underline-offset-4 transition-[color,text-decoration-thickness] duration-150 hover:text-neutral-950 hover:decoration-[1px] dark:hover:text-neutral-50",
+        "break-words font-normal text-primary underline decoration-[0.5px] underline-offset-4 transition-[color,text-decoration-thickness] duration-150 hover:text-neutral-950 hover:decoration-[1px] dark:hover:text-neutral-50",
         className,
       )}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
@@ -140,7 +140,7 @@ function Li({ className, ...props }: React.ComponentProps<"li">) {
 
 function Strong({ className, ...props }: React.ComponentProps<"strong">) {
   return (
-    <strong className={cn("opsz-18 font-semibold", className)} {...props} />
+    <strong className={cn("font-semibold", className)} {...props} />
   )
 }
 
