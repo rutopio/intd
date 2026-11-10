@@ -5,8 +5,6 @@
 @import "@rutopio/base-component/neutral-theme.css";
 @import "./generated-fonts.css";
 
-@custom-variant dark (&:is(.dark, .dark *));
-
 @font-face {
     font-family: 'Paper Mono';
     font-weight: 100 900;
@@ -20,22 +18,7 @@
     --font-mono: 'Paper Mono', monospace;
 }
 
-:root {
-  text-autospace: normal;
-}
-
 @layer base {
-  body {
-    font-size: var(--text-base);
-    font-weight: var(--font-weight-normal);
-    font-optical-sizing: auto;
-  }
-
-  html {
-    @apply font-sans;
-    scrollbar-gutter: stable;
-  }
-
   /* Long display math must scroll within itself, not widen the whole page. */
   .katex-display {
     max-width: 100%;
