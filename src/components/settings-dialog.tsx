@@ -469,9 +469,7 @@ export function SettingsDialog() {
         />
         <AlertDialogContent className="gap-4 p-0 text-left sm:max-w-md">
           <AlertDialogHeader className="px-6 py-4">
-            <AlertDialogTitle className="text-base">
-              {t("settings.title")}
-            </AlertDialogTitle>
+            <AlertDialogTitle>{t("settings.title")}</AlertDialogTitle>
             <AlertDialogDescription>
               {t("settings.desc")}
             </AlertDialogDescription>

@@ -1,40 +1,34 @@
 import { TranslateIcon } from "@phosphor-icons/react"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { useTranslation } from "react-i18next"
-import { Button } from "@/components/ui/button"
+import { HeaderActionDropdown } from "@/components/header-action-dropdown"
 import { getLangFromPath } from "@/lib/language"
-import { cn } from "@/lib/utils"
 
 // Asymmetric routing: zh is the bare path, en is prefixed with /en. Toggling adds
 // or strips the /en prefix while keeping the rest of the path and search params.
-export function LanguageToggle({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"button">) {
-  const { t } = useTranslation()
+export function LanguageToggle({ className }: { className?: string }) {
   const navigate = useNavigate()
   const pathname = useLocation({ select: (l) => l.pathname })
   const isEn = getLangFromPath(pathname) === "en"
 
-  const toggle = () => {
-    const next = isEn
-      ? pathname.replace(/^\/en/, "") || "/"
-      : `/en${pathname === "/" ? "" : pathname}`
+  const changeLanguage = (language: "en" | "zh") => {
+    if (isEn === (language === "en")) return
+    const next =
+      language === "zh"
+        ? pathname.replace(/^\/en/, "") || "/"
+        : `/en${pathname === "/" ? "" : pathname}`
     navigate({ to: next, search: true })
   }
 
   return (
-    <Button
-      type="button"
-      variant="ghost"
-      size="icon"
-      onClick={toggle}
-      aria-label={isEn ? t("lang.toChinese") : t("lang.toEnglish")}
-      className={cn(className)}
-      {...props}
-    >
-      <TranslateIcon className="size-4" aria-hidden="true" />
-      <span className="sr-only">{isEn ? "中" : "EN"}</span>
-    </Button>
+    <HeaderActionDropdown
+      label={isEn ? "Language" : "語言"}
+      icon={<TranslateIcon className="size-4" aria-hidden="true" />}
+      className={className}
+      selectedId={isEn ? "en" : "zh"}
+      items={[
+        { id: "zh", label: "繁體中文", onSelect: () => changeLanguage("zh") },
+        { id: "en", label: "English", onSelect: () => changeLanguage("en") },
+      ]}
+    />
   )
 }
