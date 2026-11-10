@@ -58,7 +58,11 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
 
-export function PageActions() {
+export function PageActions({
+  drawerTitleKey = "nav.algo",
+}: {
+  drawerTitleKey?: string
+}) {
   const { t } = useTranslation()
   const [items, setItems] = useState<OutlineItem[]>([])
   const [activeId, setActiveId] = useState("")
@@ -196,7 +200,7 @@ export function PageActions() {
             </DrawerTrigger>
             <DrawerContent>
               <DrawerHeader className="border-border border-b pb-4">
-                <DrawerTitle>{t("nav.algo")}</DrawerTitle>
+                <DrawerTitle>{t(drawerTitleKey)}</DrawerTitle>
               </DrawerHeader>
               <nav
                 ref={drawerScrollRef}
