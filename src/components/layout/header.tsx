@@ -92,6 +92,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                 >
                   <Link
                     to={lang === "en" ? "/en" : "/"}
+                    activeOptions={{ exact: true }}
                     aria-current={isHome ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
@@ -101,6 +102,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                   </Link>
                   <Link
                     to={algoPath}
+                    activeOptions={{ exact: true }}
                     aria-current={isAlgo ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
@@ -110,6 +112,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                   </Link>
                   <Link
                     to={aboutPath}
+                    activeOptions={{ exact: true }}
                     aria-current={isAbout ? "page" : undefined}
                     onClick={() => setNavOpen(false)}
                     className={drawerLinkClass}
