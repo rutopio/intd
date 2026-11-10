@@ -26,4 +26,4 @@ export const DEFAULT_BAG_NAME = "塑膠袋"
 export const GITHUB_URL = "https://github.com/rutopio/intd"
 
 // Author's GitHub profile (footer credit).
-export const AUTHOR_GITHUB_URL = "https://github.com/rutopio"
+export const AUTHOR_PROFILE_URL = "https://chingru.com"

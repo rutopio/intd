@@ -19,7 +19,7 @@ export const OG_FONT_FAMILY = "Paper Mono"
 
 const SUBTITLE = "Integer Decomposition Calculator"
 
-/** The calculator logo, same path data as public/favicon.svg, drawn black. */
+/** The calculator logo used for Open Graph images, drawn black. */
 const LOGO = `<g transform="translate(0 0) scale(0.5859375)">\
 <rect x="80" y="64" width="96" height="48" opacity="0.2"/>\
 <rect x="80" y="64" width="96" height="48" fill="none" stroke="${FG_COLOR}" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>\
