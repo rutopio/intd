@@ -41,6 +41,12 @@ The [pixel diff results](pixel-diffs.json) and [before/after PNGs](screenshots/)
 
 Before adding legacy coverage, the custom `鳳梨` input differed in 511 pixels; the extra face reduced that to zero. Before keeping Latin-1/Extended-A in the core, the accented italic specimen differed in 3,826 pixels; it now matches. The Chinese algorithm article needed one inline `halt` override on a closing quote to preserve its original fullwidth advance after sharding; its text did not change.
 
+## Security update after the font comparison
+
+The requested `pnpm audit` initially found 104 advisories. Updating dependencies, removing the unused `shadcn` CLI package, and pinning patched transitive KaTeX and Sharp versions reduced it to **zero known vulnerabilities**. The direct dependencies now include KaTeX 0.18.2, Zod 4.6.7, and Vite 8.3.7. Vite 8.3 required an explicit `@` alias in `vite.config.ts` for the production build.
+
+KaTeX 0.18 shortened the first multiline display equation by 0.3em, shifting all following article content about five pixels. A narrow CSS rule restores the old line box. [Production-build pixel diffs](security-upgrade-diffs.json) and the corresponding `audit-*` screenshots in [screenshots](screenshots/) compare the old locked dependencies with the patched build on identical content: **all six routes are exactly zero different pixels**, including both algorithm pages. This comparison used production builds for both sides, after fonts and result-card animations settled.
+
 ## Font decisions and limits
 
 - The current UI uses normal weights 300, 400, 500, 550, 700, italics through 700, an optical-size range driven by CSS `font-optical-sizing: auto`, and explicit `tabular-nums`. The Chinese amount cells use 300, MDX semibold is 550, and strong inside emphasis needs bold italic. The source scan includes JSX, inline styles, translations, MDX, and the U+2010 hyphen used by `hyphens: auto`.

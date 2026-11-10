@@ -7,12 +7,7 @@
     "mapped_codepoints": 257,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 36
   },
   {
@@ -23,12 +18,7 @@
     "mapped_codepoints": 28,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 26
   },
   {
@@ -39,12 +29,7 @@
     "mapped_codepoints": 28,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 26
   },
   {
@@ -55,12 +40,7 @@
     "mapped_codepoints": 92,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 83
   },
   {
@@ -71,12 +51,7 @@
     "mapped_codepoints": 93,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 83
   },
   {
@@ -87,12 +62,7 @@
     "mapped_codepoints": 277,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 141
   },
   {
@@ -103,12 +73,7 @@
     "mapped_codepoints": 127,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 125
   },
   {
@@ -119,12 +84,7 @@
     "mapped_codepoints": 128,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 125
   },
   {
@@ -135,12 +95,7 @@
     "mapped_codepoints": 283,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 143
   },
   {
@@ -151,12 +106,7 @@
     "mapped_codepoints": 107,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 103
   },
   {
@@ -167,12 +117,7 @@
     "mapped_codepoints": 107,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 103
   },
   {
@@ -183,12 +128,7 @@
     "mapped_codepoints": 120,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 118
   },
   {
@@ -199,12 +139,7 @@
     "mapped_codepoints": 121,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 119
   },
   {
@@ -215,12 +150,7 @@
     "mapped_codepoints": 121,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 119
   },
   {
@@ -231,12 +161,7 @@
     "mapped_codepoints": 28,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 26
   },
   {
@@ -247,12 +172,7 @@
     "mapped_codepoints": 45,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -263,12 +183,7 @@
     "mapped_codepoints": 37,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -279,12 +194,7 @@
     "mapped_codepoints": 21,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -295,12 +205,7 @@
     "mapped_codepoints": 48,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -311,12 +216,7 @@
     "mapped_codepoints": 127,
     "axes": [],
     "features": {},
-    "hinting_tables": [
-      "fpgm",
-      "prep",
-      "cvt ",
-      "gasp"
-    ],
+    "hinting_tables": ["fpgm", "prep", "cvt ", "gasp"],
     "glyphs_with_instructions": 124
   },
   {
@@ -352,15 +252,9 @@
         "sups",
         "zero"
       ],
-      "GPOS": [
-        "mark",
-        "mkmk"
-      ]
+      "GPOS": ["mark", "mkmk"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -385,9 +279,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -414,9 +306,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -442,14 +332,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -475,14 +359,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -509,9 +387,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -538,9 +414,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -567,9 +441,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -596,9 +468,7 @@
     ],
     "features": {
       "GSUB": [],
-      "GPOS": [
-        "kern"
-      ]
+      "GPOS": ["kern"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -624,15 +494,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp",
-        "locl"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp", "locl"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -658,15 +521,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp",
-        "locl"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp", "locl"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -731,12 +587,7 @@
         "tnum",
         "zero"
       ],
-      "GPOS": [
-        "cpsp",
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GPOS": ["cpsp", "kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -802,12 +653,7 @@
         "tnum",
         "zero"
       ],
-      "GPOS": [
-        "cpsp",
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GPOS": ["cpsp", "kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -833,14 +679,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -866,14 +706,8 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp"
-      ],
-      "GPOS": [
-        "kern",
-        "mark",
-        "mkmk"
-      ]
+      "GSUB": ["ccmp"],
+      "GPOS": ["kern", "mark", "mkmk"]
     },
     "hinting_tables": [],
     "glyphs_with_instructions": 0
@@ -893,17 +727,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -921,23 +748,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -955,23 +769,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -989,21 +790,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern", "palt", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1021,23 +811,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1055,21 +832,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern", "palt", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1087,23 +853,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1121,19 +874,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vpal"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern", "palt", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1151,19 +895,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vpal"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern", "palt", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1181,21 +916,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern", "palt", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1213,23 +937,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1247,17 +958,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1275,17 +979,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1303,23 +1000,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1337,23 +1021,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1371,24 +1042,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vkrn",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vkrn", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1406,21 +1063,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1438,17 +1084,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1466,23 +1105,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1500,23 +1126,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1534,27 +1147,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp",
-        "liga",
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "mark",
-        "palt",
-        "vert",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["ccmp", "liga", "locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "mark", "palt", "vert", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1572,17 +1168,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1600,17 +1189,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1628,17 +1210,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1656,17 +1231,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1684,17 +1252,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1712,17 +1273,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1740,17 +1294,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1768,17 +1315,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1796,17 +1336,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1824,17 +1357,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1852,17 +1378,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1880,17 +1399,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1908,17 +1420,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1936,17 +1441,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1964,17 +1462,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -1992,17 +1483,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2020,17 +1504,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2048,17 +1525,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2076,17 +1546,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2104,17 +1567,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2132,17 +1588,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2160,17 +1609,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2188,17 +1630,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2216,17 +1651,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2244,17 +1672,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2272,17 +1693,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2300,17 +1714,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2328,17 +1735,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2356,17 +1756,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2384,17 +1777,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2412,17 +1798,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2440,17 +1819,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2468,17 +1840,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2496,17 +1861,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2524,17 +1882,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2552,17 +1903,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2580,17 +1924,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2608,17 +1945,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2636,17 +1966,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2664,17 +1987,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2692,17 +2008,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2720,19 +2029,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2750,17 +2050,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2778,17 +2071,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2806,17 +2092,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2834,17 +2113,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2862,17 +2134,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2890,17 +2155,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2918,17 +2176,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2946,17 +2197,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -2974,17 +2218,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3002,17 +2239,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3030,23 +2260,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3064,17 +2281,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3092,17 +2302,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3120,17 +2323,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3148,17 +2344,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3176,17 +2365,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3204,17 +2386,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3232,17 +2407,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3260,17 +2428,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3288,17 +2449,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3316,17 +2470,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3344,17 +2491,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3372,17 +2512,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3400,17 +2533,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3428,17 +2554,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3456,17 +2575,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3484,17 +2596,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3512,22 +2617,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern",
-        "palt",
-        "vert",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern", "palt", "vert", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3545,23 +2638,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3579,17 +2659,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3607,17 +2680,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3635,17 +2701,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3663,17 +2722,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3691,23 +2743,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp",
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vert"
-      ]
+      "GSUB": ["ccmp", "locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vert"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3725,17 +2764,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3753,19 +2785,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3783,19 +2806,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3813,17 +2827,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3841,17 +2848,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3869,19 +2869,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl", "vert", "vrt2"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3899,25 +2890,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "ccmp",
-        "liga",
-        "locl",
-        "vert",
-        "vrt2"
-      ],
-      "GPOS": [
-        "halt",
-        "kern",
-        "palt",
-        "vhal",
-        "vpal"
-      ]
+      "GSUB": ["ccmp", "liga", "locl", "vert", "vrt2"],
+      "GPOS": ["halt", "kern", "palt", "vhal", "vpal"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   },
   {
@@ -3935,17 +2911,10 @@
       }
     ],
     "features": {
-      "GSUB": [
-        "locl"
-      ],
-      "GPOS": [
-        "kern"
-      ]
+      "GSUB": ["locl"],
+      "GPOS": ["kern"]
     },
-    "hinting_tables": [
-      "prep",
-      "gasp"
-    ],
+    "hinting_tables": ["prep", "gasp"],
     "glyphs_with_instructions": 0
   }
 ]

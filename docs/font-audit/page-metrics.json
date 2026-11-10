@@ -3,9 +3,7 @@
     "before": {
       "bytes": 1042976,
       "font_requests": 16,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -92,10 +90,7 @@
     "after": {
       "bytes": 298488,
       "font_requests": 4,
-      "preloads": [
-        "inter-normal-core.woff2",
-        "noto-tc-core.woff2"
-      ],
+      "preloads": ["inter-normal-core.woff2", "noto-tc-core.woff2"],
       "files": [
         {
           "file": "inter-normal-core.woff2",
@@ -124,9 +119,7 @@
     "before": {
       "bytes": 524184,
       "font_requests": 8,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -173,10 +166,7 @@
     "after": {
       "bytes": 298488,
       "font_requests": 4,
-      "preloads": [
-        "inter-normal-core.woff2",
-        "noto-tc-core.woff2"
-      ],
+      "preloads": ["inter-normal-core.woff2", "noto-tc-core.woff2"],
       "files": [
         {
           "file": "noto-tc-core.woff2",
@@ -205,9 +195,7 @@
     "before": {
       "bytes": 1664956,
       "font_requests": 30,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -437,9 +425,7 @@
     "before": {
       "bytes": 389240,
       "font_requests": 11,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -569,9 +555,7 @@
     "before": {
       "bytes": 980252,
       "font_requests": 14,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -648,10 +632,7 @@
     "after": {
       "bytes": 298488,
       "font_requests": 4,
-      "preloads": [
-        "inter-normal-core.woff2",
-        "noto-tc-core.woff2"
-      ],
+      "preloads": ["inter-normal-core.woff2", "noto-tc-core.woff2"],
       "files": [
         {
           "file": "noto-tc-core.woff2",
@@ -680,9 +661,7 @@
     "before": {
       "bytes": 390340,
       "font_requests": 6,
-      "preloads": [
-        "inter-4.1-latin-normal.woff2"
-      ],
+      "preloads": ["inter-4.1-latin-normal.woff2"],
       "files": [
         {
           "file": "inter-4.1-latin-normal.woff2",
@@ -719,10 +698,7 @@
     "after": {
       "bytes": 298488,
       "font_requests": 4,
-      "preloads": [
-        "inter-normal-core.woff2",
-        "noto-tc-core.woff2"
-      ],
+      "preloads": ["inter-normal-core.woff2", "noto-tc-core.woff2"],
       "files": [
         {
           "file": "inter-normal-core.woff2",

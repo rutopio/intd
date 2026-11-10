@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url"
 import mdx from "@mdx-js/rollup"
 import tailwindcss from "@tailwindcss/vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
@@ -7,10 +8,13 @@ import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 import { defineConfig } from "vite"
-import { rehypeArticleSections } from "./src/lib/rehype-article-sections"
+import { rehypeArticleSections } from "./src/lib/rehype-article-sections.ts"
 
 export default defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+    alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
+  },
   plugins: [
     // MDX must run before React/TanStack so .mdx is JSX by the time they see it.
     {

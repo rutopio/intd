@@ -4,12 +4,7 @@
     "height": 861,
     "different_pixels": 35,
     "max_channel_delta": 4,
-    "difference_bounds": [
-      824,
-      312,
-      831,
-      319
-    ]
+    "difference_bounds": [824, 312, 831, 319]
   },
   "en": {
     "width": 1280,

@@ -198,6 +198,11 @@
     overflow-x: auto;
     overflow-y: hidden;
     }
+  /* KaTeX 0.18 shortens the aligned equation by 0.3em. Preserve the
+     article's original line box and the position of everything below it. */
+  main .katex-display:has(mtable) > .katex {
+    padding-bottom: 0.3em;
+  }
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

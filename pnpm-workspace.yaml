@@ -6,10 +6,15 @@ allowBuilds:
 verifyDepsBeforeRun: false
 
 overrides:
-  # Transitive-only advisories (via wrangler / dev tooling); upstream unpatched.
+  # Keep transitive dependencies on audited versions.
   undici: ">=7.28.0"
   ws: ">=8.21.0"
   esbuild: ">=0.28.1"
+  katex: 0.18.2
+  sharp: 0.35.5
 
 minimumReleaseAgeExclude:
   - '@cloudflare/workers-types@4.20260621.1'
+  - katex@0.18.2
+  - sharp@0.35.5
+  - source-map-js@1.2.2
