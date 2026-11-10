@@ -13,9 +13,6 @@ import { INTD_ICON_PATH } from "@/lib/brand-icon"
 import { GITHUB_URL } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-const headerActionClass =
-  "transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0!"
-
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
   const lang = useLang()
   const pathname = useLocation({ select: (location) => location.pathname })
@@ -79,7 +76,6 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
           titleClassName="font-heading"
           menuIcon={<ListIcon aria-hidden="true" />}
           selectedIcon={<CheckIcon aria-hidden="true" />}
-          triggerClassName={headerActionClass}
           renderLink={(item, props) => (
             <Link
               to={item.href}
@@ -104,15 +100,12 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
                 ? "GitHub (opens in a new tab)"
                 : "GitHub（在新分頁開啟）"
             }
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "icon" }),
-              headerActionClass,
-            )}
+            className={buttonVariants({ variant: "ghost", size: "icon" })}
           >
             <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
-          <LanguageToggle className={headerActionClass} />
-          <ThemeToggle className={headerActionClass} />
+          <LanguageToggle />
+          <ThemeToggle />
         </>
       }
     />
