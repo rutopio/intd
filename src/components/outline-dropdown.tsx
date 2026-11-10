@@ -32,6 +32,7 @@ export function OutlineDropdown({
   const id = useId()
   const reducedMotion = useReducedMotion()
   const [open, setOpen] = useState(false)
+  const openModeRef = useRef<"hover" | "click" | null>(null)
   const rootRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -53,6 +54,7 @@ export function OutlineDropdown({
   const close = useCallback(
     (restoreFocus = false) => {
       clearTimeout(openTimer.current)
+      openModeRef.current = null
       setOpen(false)
       hover.setActiveIndex(null)
       if (restoreFocus) triggerRef.current?.focus()
@@ -107,6 +109,7 @@ export function OutlineDropdown({
     setFocusedIndex(next)
     hover.setActiveIndex(next)
     focusAfterOpen.current = true
+    openModeRef.current = "click"
     setOpen(true)
   }
 
@@ -138,12 +141,22 @@ export function OutlineDropdown({
       data-slot="button"
       className="relative size-10 rounded-lg border border-border bg-background dark:border-input dark:bg-neutral-800"
       onMouseEnter={() => {
+        if (openModeRef.current === "click") return
         clearTimeout(openTimer.current)
-        openTimer.current = setTimeout(() => setOpen(true), 200)
+        openTimer.current = setTimeout(() => {
+          if (openModeRef.current === "click") return
+          openModeRef.current = "hover"
+          setOpen(true)
+        }, 200)
       }}
-      onMouseLeave={() => close()}
+      onMouseLeave={() => {
+        if (openModeRef.current !== "click") close()
+      }}
       onBlurCapture={(event) => {
-        if (!rootRef.current?.contains(event.relatedTarget as Node | null))
+        if (
+          openModeRef.current !== "click" &&
+          !rootRef.current?.contains(event.relatedTarget as Node | null)
+        )
           close()
       }}
     >
@@ -159,14 +172,20 @@ export function OutlineDropdown({
         aria-controls={open ? id : undefined}
         onClick={() => {
           clearTimeout(openTimer.current)
+          if (open && openModeRef.current === "click") {
+            close()
+            return
+          }
+          openModeRef.current = "click"
           focusAfterOpen.current = true
-          setFocusedIndex(
-            Math.max(
-              0,
-              items.findIndex((item) => item.id === activeId),
-            ),
+          const index = Math.max(
+            0,
+            items.findIndex((item) => item.id === activeId),
           )
+          setFocusedIndex(index)
           setOpen(true)
+          if (open)
+            requestAnimationFrame(() => itemRefs.current[index]?.focus())
         }}
         onKeyDown={onKeyDown}
       >
