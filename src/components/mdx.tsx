@@ -139,9 +139,7 @@ function Li({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 function Strong({ className, ...props }: React.ComponentProps<"strong">) {
-  return (
-    <strong className={cn("font-semibold", className)} {...props} />
-  )
+  return <strong className={cn("font-semibold", className)} {...props} />
 }
 
 function InlineCode({ className, ...props }: React.ComponentProps<"code">) {
