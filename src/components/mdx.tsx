@@ -1,4 +1,5 @@
 import { isValidElement } from "react"
+import { GithubMarkIcon } from "@/components/github-mark-icon"
 import { Pseudocode } from "@/components/pseudocode"
 import { SectionHeadingAnchor } from "@/components/section-heading-anchor"
 import { cn } from "@/lib/utils"
@@ -96,6 +97,20 @@ function A({ className, href, ...props }: React.ComponentProps<"a">) {
   )
 }
 
+function GithubRepoLink({ children, ...props }: React.ComponentProps<"a">) {
+  return (
+    <A className="whitespace-nowrap" {...props}>
+      <span
+        aria-hidden="true"
+        className="mr-1 inline-block h-4 w-4 align-[-0.125em] text-primary [&>svg]:size-full"
+      >
+        <GithubMarkIcon />
+      </span>
+      {children}
+    </A>
+  )
+}
+
 function Muted({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
@@ -179,4 +194,5 @@ export const mdxComponents = {
   pre: Pre,
   Muted,
   Pseudocode,
+  GithubRepoLink,
 }
