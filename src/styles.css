@@ -74,6 +74,7 @@
 }
 
 :root {
+    text-autospace: normal;
     /* Match Writing's right action rail: outside the 42rem content box. */
     --gutter-offset: calc(50% + 21rem + 0.5rem);
     --hover: rgb(0 0 0 / 0.04);
