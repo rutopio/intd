@@ -1,6 +1,7 @@
 @source "../node_modules/@rutopio/base-component/dist";
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@rutopio/base-component/styles.css";
 @import "./generated-fonts.css";
 
 @custom-variant dark (&:is(.dark, .dark *));
@@ -174,9 +175,6 @@
     }
   p, li, blockquote {
     text-wrap: pretty;
-    }
-  button:not(:disabled), [role="button"]:not(:disabled) {
-    cursor: pointer;
     }
   html {
     @apply font-sans;

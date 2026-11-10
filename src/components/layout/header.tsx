@@ -14,7 +14,7 @@ import { GITHUB_URL } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 const headerActionClass =
-  "cursor-default transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0!"
+  "transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0!"
 
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
   const lang = useLang()

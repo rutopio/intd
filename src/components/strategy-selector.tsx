@@ -22,14 +22,14 @@ export function StrategySelector({
       >
         <label
           htmlFor="sort-bags"
-          className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          className="relative z-10 inline-flex h-full select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
         >
           {t("home.strategyBags")}
           <RadioGroupItem id="sort-bags" className="sr-only" value="bags" />
         </label>
         <label
           htmlFor="sort-balance"
-          className="relative z-10 inline-flex h-full cursor-pointer select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
+          className="relative z-10 inline-flex h-full select-none items-center justify-center whitespace-nowrap text-muted-foreground transition-colors has-data-checked:text-foreground"
         >
           {t("home.strategyBalance")}
           <RadioGroupItem
