@@ -5,7 +5,8 @@
     "algo": "Algorithm",
     "algoShort": "Algo",
     "about": "About",
-    "aboutShort": "About"
+    "aboutShort": "About",
+    "menu": "Navigation menu"
   },
   "home": {
     "amountPlaceholder": "Enter amount",
