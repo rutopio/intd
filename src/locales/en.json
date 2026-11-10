@@ -8,31 +8,31 @@
     "aboutShort": "About"
   },
   "home": {
-    "amountPlaceholder": "Enter...",
+    "amountPlaceholder": "Enter amount",
     "amountLabel": "Amount",
     "decompose": "Decompose",
     "strategyLabel": "Decomposition strategy",
     "strategyBags": "Fewest bags first",
-    "strategyBalance": "Balance items first",
-    "strategyBagsHint": "Prefers combinations with the fewest plastic bags.",
-    "strategyBalanceHint": "Prefers combinations with the most even item quantities.",
+    "strategyBalance": "Balanced quantities first",
+    "strategyBagsHint": "Minimises plastic bags first, then balances item quantities.",
+    "strategyBalanceHint": "Balances item quantities first, then minimises plastic bags.",
     "colName": "Item",
     "colQty": "Qty",
-    "colPrice": "Unit",
+    "colPrice": "Price",
     "colTotal": "Total",
-    "emptyTitle": "No combination for this amount",
+    "emptyTitle": "Cannot make this amount",
     "emptyDesc": "Try a different amount, or adjust the price ranges in settings.",
     "shuffle": "New set",
     "copyTable": "Copy table",
     "clearedToast": "Cleared all results",
     "errRequired": "Please enter an amount",
-    "errInt": "Amount must be an integer",
+    "errInt": "Amount must be a whole number",
     "errPositive": "Amount must be greater than 0",
-    "errMax": "Amount must be at most 99999"
+    "errMax": "Amount cannot exceed 99,999"
   },
   "settings": {
     "title": "Settings",
-    "desc": "Adjust each item's price range and last digits",
+    "desc": "Adjust each item's price range and last digits (up to 7 items)",
     "itemName": "Name",
     "priceRange": "Price range",
     "priceMin": "Min",
@@ -44,7 +44,7 @@
     "deleteItem": "Delete {{label}}",
     "reset": "Reset",
     "resetConfirmTitle": "Reset settings?",
-    "resetConfirmDesc": "This restores all items to defaults and cannot be undone.",
+    "resetConfirmDesc": "All items will be restored to their defaults. This cannot be undone.",
     "cancel": "Cancel",
     "save": "Save",
     "itemLabel": "Item {{index}}",
@@ -56,10 +56,10 @@
     "aBagName": "Plastic bag name",
     "errName": "Please enter a name",
     "errNameMax": "At most 10 characters",
-    "errPosInt": "Must be a positive integer",
+    "errPosInt": "Must be a positive whole number",
     "errMaxLimit": "Maximum is {{max}}",
     "errDigitMin": "Select at least one digit",
-    "errMaxGteMin": "Max must be greater than or equal to min",
+    "errMaxGteMin": "Max cannot be less than min",
     "errAtLeastOne": "At least one item is required",
     "errAtMost": "At most {{max}} items"
   },
@@ -71,7 +71,7 @@
     "tabJson": "JSON",
     "colName": "Item",
     "colQty": "Qty",
-    "colPrice": "Unit",
+    "colPrice": "Price",
     "colTotal": "Total",
     "total": "Total",
     "showTotal": "Show total row",
@@ -81,7 +81,7 @@
     "copied": "Copied",
     "copyFailed": "Copy failed",
     "formatLabel": "Format: {{format}}",
-    "monoHint": "The box table only aligns in a monospace font."
+    "monoHint": "The bordered table only aligns correctly in a monospace font."
   },
   "share": {
     "title": "Share this page",
@@ -95,7 +95,7 @@
   "pageActions": {
     "label": "Page actions",
     "outline": "On this page",
-    "scrollToTop": "Scroll to top"
+    "scrollToTop": "Back to top"
   },
   "theme": {
     "toLight": "Switch to light mode",
@@ -107,6 +107,6 @@
   },
   "notFound": {
     "title": "404",
-    "desc": "The requested page could not be found."
+    "desc": "Page not found."
   }
 }

@@ -5,11 +5,11 @@ export const algoPseudocode = `function decompose(T, items):          # items[1.
 
   function dfs(i, remaining):           # decide price and quantity of item i
     if i > n:                           # all items decided
-      q_* ← remaining                   # remaining amount goes to plastic bags
+      q_* ← remaining                   # remaining goes to plastic bags
       if q_* < 0 or q_* > 9: return
-      if sum(q_i) = 0: return           # cannot be bags only
-      if q_* > sum(q_i): return         # bags ≤ total item count
-      balance ← max(q_i) - min(q_i)     # smaller is more balanced
+      if sum(q_i) = 0: return           # order cannot be bags only
+      if q_* > sum(q_i): return         # bags must not outnumber items
+      balance ← max(q_i) - min(q_i)     # smaller means more balanced
       candidates.push({ p_i, q_i, q_*, balance })
       return
 
@@ -22,11 +22,11 @@ export const algoPseudocode = `function decompose(T, items):          # items[1.
 
   dfs(1, T)
 
-  # sort by the chosen strategy, take the first three with distinct prices:
+  # sort by the chosen strategy; take the first 3 with distinct prices:
   # mode = "bags"    → sort by (q_* asc, balance asc)   fewest bags first
-  # mode = "balance" → sort by (balance asc, q_* asc)   balance items first
+  # mode = "balance" → sort by (balance asc, q_* asc)   balanced quantities first
   sort candidates by mode
   picks ← first 3 with distinct prices, relax if fewer
 
-  # verify: each set must satisfy Σ p_i * q_i + q_* = T
+  # verify: each pick must satisfy Σ p_i * q_i + q_* = T
   return picks`

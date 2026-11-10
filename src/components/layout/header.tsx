@@ -28,6 +28,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <Link
             to={lang === "en" ? "/en" : "/"}
+            activeOptions={{ exact: true }}
             aria-label={lang === "en" ? "Home" : "首頁"}
             className="flex h-12 shrink-0 items-center gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
           >
@@ -51,6 +52,7 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
           <FluidHoverControls label={lang === "en" ? "Pages" : "頁面"}>
             <Link
               to={lang === "en" ? "/en" : "/"}
+              activeOptions={{ exact: true }}
               aria-current={isHome ? "page" : undefined}
               className={cn(
                 "flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted sm:px-3",
