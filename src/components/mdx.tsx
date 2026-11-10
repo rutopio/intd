@@ -1,7 +1,7 @@
+import { SectionHeadingAnchor } from "@rutopio/base-component/section-heading-anchor"
 import { isValidElement } from "react"
 import { GithubMarkIcon } from "@/components/github-mark-icon"
 import { Pseudocode } from "@/components/pseudocode"
-import { SectionHeadingAnchor } from "@/components/section-heading-anchor"
 import { cn } from "@/lib/utils"
 
 // Writing's article typography, shared by /algo and /about. Inline math is
