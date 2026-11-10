@@ -3,9 +3,11 @@ import tailwindcss from "@tailwindcss/vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import rehypeKatex from "rehype-katex"
+import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import remarkMath from "remark-math"
 import { defineConfig } from "vite"
+import { rehypeArticleSections } from "./src/lib/rehype-article-sections"
 
 // Injects <link rel="preload"> for the fonts that would otherwise flash on
 // first paint (FOUT with font-display: swap). The body/heading fonts come from
@@ -56,7 +58,7 @@ export default defineConfig({
       enforce: "pre",
       ...mdx({
         remarkPlugins: [remarkGfm, remarkMath],
-        rehypePlugins: [rehypeKatex],
+        rehypePlugins: [rehypeKatex, rehypeSlug, rehypeArticleSections],
       }),
     },
     tanstackRouter({ target: "react", autoCodeSplitting: true }),

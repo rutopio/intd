@@ -6,7 +6,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   const { t } = useTranslation()
   return (
     <footer className={cn("mt-auto w-full", className)}>
-      <div className="mx-auto w-full max-w-4xl p-12 text-center text-muted-foreground/60 text-xs">
+      <div className="w-full py-12 text-center text-muted-foreground/60 text-xs">
         {t("footer.disclaimer")}
         <a
           href={AUTHOR_GITHUB_URL}

@@ -317,7 +317,7 @@ export function SettingsDialog() {
     <AlertDialogFooter className="px-6 py-4 sm:justify-between">
       <Button
         variant="ghost"
-        className="text-destructive text-xs"
+        className="text-destructive text-base"
         onClick={() => {
           // Close settings first so only the reset confirmation dialog is open at once.
           setOpen(false)
@@ -327,11 +327,11 @@ export function SettingsDialog() {
         {t("settings.reset")}
       </Button>
       <div className="flex gap-4">
-        <AlertDialogCancel variant="ghost" className="text-xs">
+        <AlertDialogCancel variant="ghost" className="text-base">
           {t("settings.cancel")}
         </AlertDialogCancel>
         <Button
-          className="min-w-24 text-xs"
+          className="min-w-24 text-base"
           onClick={() => form.handleSubmit()}
         >
           <CheckIcon className="size-3" aria-hidden="true" />

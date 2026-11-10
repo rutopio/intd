@@ -35,7 +35,7 @@ export function App() {
   } = useDecomposer()
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-6 p-6 sm:p-12">
+    <main className="flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-6 py-6 sm:py-12 lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:self-center">
       <h1 className="sr-only">Integer Decomposition Calculator</h1>
       <div className="flex w-full flex-col gap-3 lg:max-w-md">
         <div className="flex w-full items-start justify-center gap-2">
@@ -88,7 +88,7 @@ export function App() {
               <motion.div
                 layout={!reduce}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="flex w-full justify-center lg:w-auto"
+                className="flex w-full justify-center"
               >
                 <ShuffleButton
                   spin={spin}

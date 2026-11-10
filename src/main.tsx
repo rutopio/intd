@@ -23,7 +23,12 @@ router.subscribe("onResolved", ({ fromLocation, toLocation }) => {
 // biome-ignore lint/style/noNonNullAssertion: #root is defined in index.html
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
       <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>,

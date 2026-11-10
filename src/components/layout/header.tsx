@@ -1,108 +1,78 @@
 import { CalculatorIcon, GithubLogoIcon } from "@phosphor-icons/react"
 import { Link } from "@tanstack/react-router"
 import { useTranslation } from "react-i18next"
+import { FluidHoverControls } from "@/components/fluid-hover-controls"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { buttonVariants } from "@/components/ui/button"
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu"
 import { useLang } from "@/hooks/use-lang"
 import { GITHUB_URL } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
-// Bare paths (zh). The en routes mirror these under /en, so links prefix at render.
-const navItems = [
-  // "/" is a prefix of every path, so it needs exact matching to avoid always being active
-  {
-    labelKey: "nav.decompose",
-    shortKey: "nav.decomposeShort",
-    to: "/",
-    exact: true,
-  },
-  {
-    labelKey: "nav.algo",
-    shortKey: "nav.algoShort",
-    to: "/algo",
-    exact: false,
-  },
-  {
-    labelKey: "nav.about",
-    shortKey: "nav.aboutShort",
-    to: "/about",
-    exact: false,
-  },
-] as const
+const headerActionClass =
+  "cursor-default transition-[background-color,border-color,color,opacity,box-shadow,scale] duration-150 ease-in-out active:scale-[0.96] active:translate-y-0!"
 
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
-  const { t } = useTranslation()
   const lang = useLang()
-  // en routes live under /en; map the bare paths to the active language.
-  const localize = (to: string) =>
-    lang === "en" ? (to === "/" ? "/en" : `/en${to}`) : to
+  const { t } = useTranslation()
   return (
-    <header className={cn("w-full", className)}>
+    <header className={cn("w-full font-heading", className)}>
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex w-full max-w-4xl flex-row items-center justify-between p-6 sm:p-12"
+        className="relative flex w-full items-center justify-between pt-6 sm:pt-12"
       >
-        <div className="flex flex-row items-center gap-2 lg:gap-4">
+        <div className="flex min-w-0 items-center gap-1 sm:gap-2">
           <Link
-            to={localize("/")}
-            aria-label="IntD - Integer Decomposition Calculator"
-            className="flex flex-row items-center gap-2"
+            to={lang === "en" ? "/en" : "/"}
+            aria-label={lang === "en" ? "Home" : "首頁"}
+            className="flex h-12 shrink-0 items-center gap-2 rounded-md focus-visible:outline-2 focus-visible:outline-ring"
           >
-            <CalculatorIcon size={28} aria-hidden="true" weight="duotone" />
-            <span className="hidden font-bold font-mono text-base sm:inline sm:text-lg">
+            <span className="flex size-12 items-center justify-center">
+              <CalculatorIcon size={28} aria-hidden="true" weight="duotone" />
+            </span>
+            <span className="hidden font-bold text-base sm:inline sm:text-lg">
               IntD
             </span>
           </Link>
-          <NavigationMenu>
-            <NavigationMenuList className="flex-nowrap gap-1 lg:gap-4">
-              {navItems.map((item) => (
-                <NavigationMenuItem key={item.to}>
-                  <NavigationMenuLink
-                    className="px-3 sm:px-4"
-                    render={
-                      <Link
-                        to={localize(item.to)}
-                        activeOptions={item.exact ? { exact: true } : undefined}
-                        activeProps={{
-                          className: "bg-accent",
-                          "aria-current": "page" as const,
-                        }}
-                      />
-                    }
-                  >
-                    {/* Short label on mobile, full label from sm up. */}
-                    <span className="sm:hidden">{t(item.shortKey)}</span>
-                    <span className="hidden sm:inline">{t(item.labelKey)}</span>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+          <FluidHoverControls label={lang === "en" ? "Pages" : "頁面"}>
+            <Link
+              to={lang === "en" ? "/en/algo" : "/algo"}
+              activeOptions={{ exact: true }}
+              activeProps={{ "aria-current": "page" as const }}
+              className="flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted sm:px-3"
+            >
+              {t("nav.algo")}
+            </Link>
+            <Link
+              to={lang === "en" ? "/en/about" : "/about"}
+              activeOptions={{ exact: true }}
+              activeProps={{ "aria-current": "page" as const }}
+              className="flex h-9 items-center whitespace-nowrap rounded-lg px-1 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted sm:px-3"
+            >
+              {t("nav.about")}
+            </Link>
+          </FluidHoverControls>
         </div>
-
-        <div className="flex flex-row items-center gap-1">
-          <ThemeToggle />
-          <LanguageToggle />
+        <FluidHoverControls compact>
           <a
             href={GITHUB_URL}
             target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-            className={cn(buttonVariants({ variant: "ghost", size: "icon" }))}
+            rel="noopener noreferrer"
+            aria-label={
+              lang === "en"
+                ? "GitHub (opens in a new tab)"
+                : "GitHub（在新分頁開啟）"
+            }
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon" }),
+              headerActionClass,
+            )}
           >
-            <GithubLogoIcon
-              className="size-5 transition-transform duration-150 ease-in-out group-hover/button:scale-110"
-              aria-hidden="true"
-            />
+            <GithubLogoIcon className="size-4" aria-hidden="true" />
           </a>
-        </div>
+          <LanguageToggle className={headerActionClass} />
+          <ThemeToggle className={headerActionClass} />
+        </FluidHoverControls>
       </nav>
     </header>
   )

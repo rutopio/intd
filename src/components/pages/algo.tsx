@@ -9,7 +9,7 @@ export function Algo() {
   const lang = useLang()
   const Content = lang === "en" ? EnContent : ZhContent
   return (
-    <main className="mx-auto w-full p-6 sm:max-w-4xl sm:p-12">
+    <main className="flex w-full min-w-0 flex-col py-6 sm:py-12">
       <Article>
         <Content components={mdxComponents} />
       </Article>

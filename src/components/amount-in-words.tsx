@@ -31,10 +31,9 @@ export function AmountInWords({
     { id: "dollar", char: "元", unit: true },
     { id: "exact", char: "整", unit: true },
   ]
-  // On mobile, wrap after "仟": first row is NTD (3 cells) plus the first 4, rest on the second row.
+  // On mobile, wrap after "仟"; join both rows into one strip on desktop.
   const rows = [cells.slice(0, 7), cells.slice(7)]
-  // ms rule: the very first cell is not pulled in; each row's first cell is left-aligned on mobile
-  // and shares an edge on desktop; all others use -ms-px.
+  // Join adjacent cells across the row boundary on desktop.
   const msClass = (ri: number, ci: number) => {
     if (ri === 0 && ci === 0) return ""
     if (ci === 0) return "ms-0 lg:-ms-px"
@@ -48,7 +47,7 @@ export function AmountInWords({
       initial={reduce ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.18, ease: "easeOut" }}
-      className="flex w-full flex-col gap-2 lg:w-auto"
+      className="flex w-full max-w-md flex-col gap-2 lg:w-auto lg:max-w-none"
     >
       <div className="flex w-full flex-col items-start lg:w-auto lg:flex-row">
         {rows.map((row, ri) => (
@@ -57,8 +56,7 @@ export function AmountInWords({
             {row.map((c, ci) => (
               <span
                 key={c.id}
-                // Mobile: each cell flexes to fill the row width (square via aspect ratio),
-                // so the whole strip is full-width like the shuffle button. Desktop: fixed size.
+                // Mobile cells fill their row; desktop cells have a fixed size.
                 className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
                   c.unit
                     ? "bg-secondary font-light"

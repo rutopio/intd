@@ -72,7 +72,7 @@ function highlightCode(line: string) {
 export function Pseudocode({ code }: { code: string }) {
   const lines = code.split("\n")
   return (
-    <pre className="overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-xs leading-relaxed">
+    <pre className="overflow-x-auto rounded-md border bg-muted/40 p-4 font-mono text-base leading-relaxed">
       <code>
         {lines.map((line, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: line order is fixed, index is a stable key

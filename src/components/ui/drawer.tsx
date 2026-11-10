@@ -42,7 +42,7 @@ function DrawerContent({
       <DrawerPrimitive.Popup
         data-slot="drawer-content"
         className={cn(
-          "group/drawer-content fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col rounded-t-xl border-t bg-popover text-sm text-popover-foreground shadow-lg transition-transform duration-300 ease-out will-change-transform data-ending-style:translate-y-full data-starting-style:translate-y-full",
+          "group/drawer-content fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto max-h-[80vh] flex-col rounded-t-xl border-t bg-popover text-base text-popover-foreground shadow-lg transition-transform duration-300 ease-out will-change-transform data-ending-style:translate-y-full data-starting-style:translate-y-full",
           className,
         )}
         {...props}
@@ -94,7 +94,7 @@ function DrawerDescription({
   return (
     <DrawerPrimitive.Description
       data-slot="drawer-description"
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("text-base text-muted-foreground", className)}
       {...props}
     />
   )

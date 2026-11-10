@@ -33,7 +33,7 @@ function AnimatedOutlet() {
       initial={reduce ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
-      className="flex flex-auto flex-col"
+      className="flex min-w-0 flex-auto flex-col"
     >
       <Outlet />
     </motion.div>
@@ -42,7 +42,7 @@ function AnimatedOutlet() {
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="flex min-h-full flex-col">
+    <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6">
       <LangSync />
       <Header className="bg-background" />
       <AnimatedOutlet />
@@ -57,7 +57,7 @@ export const Route = createRootRoute({
 function NotFound() {
   const { t } = useTranslation()
   return (
-    <main className="container mx-auto p-4 pt-16">
+    <main className="flex w-full min-w-0 flex-col py-16">
       <h1>{t("notFound.title")}</h1>
       <p>{t("notFound.desc")}</p>
     </main>
