@@ -11,7 +11,7 @@ import { INTD_ICON_PATH } from "./brand-icon"
 /** Open Graph recommended 1.91:1 canvas. */
 export const OG_WIDTH = 1200
 export const OG_HEIGHT = 630
-export const OG_IMAGE_VERSION = "3"
+export const OG_IMAGE_VERSION = "4"
 
 const BG_COLOR = "#ffffff"
 const FG_COLOR = "#000000"
@@ -29,7 +29,7 @@ const LOGO = `<g transform="translate(9.28125 0) scale(0.1875)"><path d="${INTD_
 const LOGO_SIZE = 150
 const GAP = 32 // space between logo and brand
 const BRAND_SIZE = 120
-const SUB_SIZE = 39
+const SUB_SIZE = 58.5
 const ROW_SUB_GAP = 42 // vertical space between the logo row and the subtitle
 
 // Inter at 700 weight. Digits in the embedded OG font use the tnum glyphs.
