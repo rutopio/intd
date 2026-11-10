@@ -23,7 +23,7 @@ const headerActionClass =
 const routeLinkClass =
   "flex h-9 items-center whitespace-nowrap rounded-lg px-3 font-medium text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted"
 const drawerLinkClass =
-  "flex min-h-12 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted"
+  "flex min-h-10 items-center justify-between rounded-lg px-3 text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=page]:bg-muted"
 
 export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
   const lang = useLang()

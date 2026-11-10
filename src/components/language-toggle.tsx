@@ -62,7 +62,7 @@ export function LanguageToggle({ className }: { className?: string }) {
               type="button"
               lang={language === "zh" ? "zh-Hant" : "en"}
               aria-current={isEn === (language === "en") ? "true" : undefined}
-              className="flex min-h-12 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
+              className="flex min-h-10 items-center justify-between rounded-lg px-3 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-ring aria-[current=true]:bg-muted"
               onClick={() => {
                 setOpen(false)
                 changeLanguage(language)
