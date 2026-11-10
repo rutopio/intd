@@ -15,7 +15,7 @@
   "include": [
     "**/*.ts",
     "../src/lib/render-og-image.ts",
-    "../src/lib/paper-mono-font.ts"
+    "../src/lib/inter-og-font.ts"
   ],
   "exclude": ["node_modules"]
 }

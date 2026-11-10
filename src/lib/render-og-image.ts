@@ -1,42 +1,40 @@
 /**
  * Builds the Open Graph image SVG (1200x630) for the app: a white canvas with,
- * centered, a row of the calculator logo + a brand string in Paper Mono bold,
+ * centered, a row of the favicon mark + a brand string in Inter bold,
  * then the subtitle "Integer Decomposition Calculator". Pure and platform
  * agnostic, so the Cloudflare Pages function reuses it to rasterize a per-share
  * PNG on demand. The brand is normally "IntD" but becomes the `?p=` number.
  */
 
+import { INTD_ICON_PATH } from "./brand-icon"
+
 /** Open Graph recommended 1.91:1 canvas. */
 export const OG_WIDTH = 1200
 export const OG_HEIGHT = 630
+export const OG_IMAGE_VERSION = "2"
 
 const BG_COLOR = "#ffffff"
 const FG_COLOR = "#000000"
 const SUB_COLOR = "#525252"
 
-/** Font family name embedded in the woff2; resvg matches text to it by name. */
-export const OG_FONT_FAMILY = "Paper Mono"
+/** Font family name embedded in the TTF subsets; resvg matches it by name. */
+export const OG_FONT_FAMILY = "Inter Variable Display"
 
 const SUBTITLE = "Integer Decomposition Calculator"
 
-/** The calculator logo used for Open Graph images, drawn black. */
-const LOGO = `<g transform="translate(0 0) scale(0.5859375)">\
-<rect x="80" y="64" width="96" height="48" opacity="0.2"/>\
-<rect x="80" y="64" width="96" height="48" fill="none" stroke="${FG_COLOR}" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>\
-<rect x="32" y="48.01" width="192" height="160" rx="8" transform="translate(256.01 0.01) rotate(90)" fill="none" stroke="${FG_COLOR}" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>\
-<circle cx="88" cy="148" r="12"/><circle cx="128" cy="148" r="12"/><circle cx="168" cy="148" r="12"/>\
-<circle cx="88" cy="188" r="12"/><circle cx="128" cy="188" r="12"/><circle cx="168" cy="188" r="12"/>\
-</g>`
+/** Fit the 701 × 800 favicon path in the existing 150 × 150 logo slot. */
+const LOGO = `<g transform="translate(9.28125 0) scale(0.1875)"><path d="${INTD_ICON_PATH}"/></g>`
 
-// Layout constants (OG pixels). The logo viewBox is 256; scaled to 150 above.
+// Layout constants (OG pixels).
 const LOGO_SIZE = 150
 const GAP = 32 // space between logo and brand
 const BRAND_SIZE = 120
 const SUB_SIZE = 26
 const ROW_SUB_GAP = 24 // vertical space between the logo row and the subtitle
 
-/** Approx advance width of Paper Mono glyphs at a given font size (monospace). */
-const MONO_ADVANCE = 0.6
+// Inter at 700 weight. Digits in the embedded OG font use the tnum glyphs.
+const INTD_ADVANCE = 1.914
+const TABULAR_DIGIT_ADVANCE = 0.6445
 
 function escapeXml(s: string): string {
   return s.replace(
@@ -60,7 +58,9 @@ export function renderOgSvg(brand: string): string {
   const safeBrand = escapeXml(brand)
 
   // Width of the logo row, to center it horizontally.
-  const brandWidth = brand.length * BRAND_SIZE * MONO_ADVANCE
+  const brandWidth =
+    BRAND_SIZE *
+    (brand === "IntD" ? INTD_ADVANCE : brand.length * TABULAR_DIGIT_ADVANCE)
   const rowWidth = LOGO_SIZE + GAP + brandWidth
   const rowX = (OG_WIDTH - rowWidth) / 2
 
@@ -81,7 +81,7 @@ export function renderOgSvg(brand: string): string {
     `<svg xmlns="http://www.w3.org/2000/svg" width="${OG_WIDTH}" height="${OG_HEIGHT}" viewBox="0 0 ${OG_WIDTH} ${OG_HEIGHT}">` +
     `<rect width="${OG_WIDTH}" height="${OG_HEIGHT}" fill="${BG_COLOR}"/>` +
     `<g transform="translate(${logoX} ${logoY})" fill="${FG_COLOR}">${LOGO}</g>` +
-    `<text x="${brandX}" y="${brandBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="700" font-size="${BRAND_SIZE}" fill="${FG_COLOR}">${safeBrand}</text>` +
+    `<text x="${brandX}" y="${brandBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="700" font-size="${BRAND_SIZE}" font-variant-numeric="tabular-nums" fill="${FG_COLOR}">${safeBrand}</text>` +
     `<text x="${OG_WIDTH / 2}" y="${subBaseline}" font-family="${OG_FONT_FAMILY}" font-weight="400" font-size="${SUB_SIZE}" fill="${SUB_COLOR}" text-anchor="middle">${SUBTITLE}</text>` +
     `</svg>`
   )

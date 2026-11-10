@@ -11,7 +11,12 @@
  * Only the HTML app shell is rewritten; /og and static assets pass through.
  */
 
-import { OG_HEIGHT, OG_WIDTH, parseBrand } from "../src/lib/render-og-image"
+import {
+  OG_HEIGHT,
+  OG_IMAGE_VERSION,
+  OG_WIDTH,
+  parseBrand,
+} from "../src/lib/render-og-image"
 import { metaFor, OG_LOCALE, pathFor, resolveRoute } from "./seo-meta"
 
 class AttrRewriter {
@@ -75,8 +80,8 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const brand = parseBrand(url.search)
   const hasAmount = brand !== "IntD"
   const imageUrl = hasAmount
-    ? `${url.origin}/og?p=${encodeURIComponent(brand)}`
-    : `${url.origin}/og.png`
+    ? `${url.origin}/og?p=${encodeURIComponent(brand)}&v=${OG_IMAGE_VERSION}`
+    : `${url.origin}/og.png?v=${OG_IMAGE_VERSION}`
   const imageW = OG_WIDTH
   const imageH = OG_HEIGHT
   // og:url reflects the actual shared URL (keeps the ?p so the unfurl is exact).

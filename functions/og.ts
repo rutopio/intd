@@ -14,17 +14,23 @@ import { initWasm, Resvg } from "@resvg/resvg-wasm"
 // The .wasm is imported as a module so Wrangler bundles it with the function.
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm"
 
-import { PAPER_MONO_WOFF2_BASE64 } from "../src/lib/paper-mono-font"
+import {
+  INTER_OG_BOLD_TTF_BASE64,
+  INTER_OG_REGULAR_TTF_BASE64,
+} from "../src/lib/inter-og-font"
 import { OG_WIDTH, parseBrand, renderOgSvg } from "../src/lib/render-og-image"
 
-// Decode the embedded Paper Mono woff2 once per isolate.
+// Decode the embedded Inter OG subsets once per isolate.
 function base64ToBytes(b64: string): Uint8Array {
   const bin = atob(b64)
   const bytes = new Uint8Array(bin.length)
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i)
   return bytes
 }
-const FONT_BYTES = base64ToBytes(PAPER_MONO_WOFF2_BASE64)
+const FONT_BYTES = [
+  base64ToBytes(INTER_OG_REGULAR_TTF_BASE64),
+  base64ToBytes(INTER_OG_BOLD_TTF_BASE64),
+]
 
 // initWasm must run once per isolate; guard with a shared promise.
 let wasmReady: Promise<void> | null = null
@@ -43,7 +49,7 @@ export const onRequestGet: PagesFunction = async ({ request }) => {
   await ensureWasm()
   const resvg = new Resvg(svg, {
     fitTo: { mode: "width", value: OG_WIDTH },
-    font: { fontBuffers: [FONT_BYTES], loadSystemFonts: false },
+    font: { fontBuffers: FONT_BYTES, loadSystemFonts: false },
   })
   const png = resvg.render().asPng()
 

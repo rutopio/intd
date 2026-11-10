@@ -10,7 +10,7 @@ import {
 } from "../functions/seo-meta"
 import i18n from "./lib/i18n"
 import { getLangFromPath } from "./lib/language"
-import { parseBrand } from "./lib/render-og-image"
+import { OG_IMAGE_VERSION, parseBrand } from "./lib/render-og-image"
 import { getRouter } from "./router"
 import "katex/dist/katex.min.css"
 import "./styles.css"
@@ -31,8 +31,8 @@ function syncMetadata(pathname: string) {
   const brand = parseBrand(window.location.search)
   const image =
     brand === "IntD"
-      ? `${origin}/og.png`
-      : `${origin}/og?p=${encodeURIComponent(brand)}`
+      ? `${origin}/og.png?v=${OG_IMAGE_VERSION}`
+      : `${origin}/og?p=${encodeURIComponent(brand)}&v=${OG_IMAGE_VERSION}`
   const setContent = (selector: string, value: string) => {
     document
       .querySelector<HTMLMetaElement>(selector)
@@ -84,7 +84,7 @@ router.subscribe("onResolved", ({ fromLocation, toLocation }) => {
   syncMetadata(toLocation.pathname)
   if (fromLocation && fromLocation.pathname !== toLocation.pathname) {
     requestAnimationFrame(() =>
-      document.getElementById("main-content")?.focus(),
+      document.getElementById("main-content")?.focus({ preventScroll: true }),
     )
   }
   window.gtag?.("event", "page_view", {
