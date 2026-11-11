@@ -1,7 +1,7 @@
 import {
   Article,
-  articleComponents,
   articleLinkClassName,
+  articleMdxComponents,
 } from "@rutopio/ui/article";
 
 export { Article };
@@ -48,7 +48,7 @@ function Muted({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export const mdxComponents = {
-  ...articleComponents,
+  ...articleMdxComponents,
   a: A,
   Muted,
   GithubRepoLink,

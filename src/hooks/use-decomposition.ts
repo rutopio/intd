@@ -6,21 +6,25 @@ import { toast } from "sonner";
 import { useLang } from "@/hooks/use-lang";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useSettings } from "@/hooks/use-settings";
+import { clearCalculationSession } from "@/lib/calculation-session";
 import {
+  type DecompositionResult,
   decompose,
-  type Item,
-  isItem,
-  keyOf,
+  getResultKey,
+  isDecompositionResult,
   type SortMode,
-} from "@/lib/decompose";
+} from "@/lib/decomposition";
 import { createAmountSchema } from "@/lib/schema";
-import { clearSession } from "@/lib/session";
 
-type ModeState = { results: Item[]; seen: string[]; offset: number };
+type ModeState = {
+  results: DecompositionResult[];
+  seen: string[];
+  offset: number;
+};
 type ByMode = Record<SortMode, ModeState | null>;
 const EMPTY_BY_MODE: ByMode = { bags: null, balance: null };
 
-export function useDecomposer() {
+export function useDecomposition() {
   const { t } = useTranslation();
   const lang = useLang();
   const isEn = lang === "en";
@@ -33,7 +37,9 @@ export function useDecomposer() {
   const [runId, setRunId] = useState(0);
   const [spin, setSpin] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [shareItem, setShareItem] = useState<Item | null>(null);
+  const [resultToCopy, setResultToCopy] = useState<DecompositionResult | null>(
+    null
+  );
   const [target, setTarget] = useLocalStorage<number | null>(
     "idc:target",
     null
@@ -51,23 +57,23 @@ export function useDecomposer() {
   const results = current?.results ?? null;
   const seen = current?.seen ?? [];
   const offset = current?.offset ?? 0;
-  const safeResults = results?.every(isItem) ? results : null;
+  const safeResults = results?.every(isDecompositionResult) ? results : null;
   const nameColCh =
     Math.max(...items.map((it) => it.name.length), bagName.length) + 1;
 
   // bumpRun: true for a fresh decompose (replay enter + flip); false for strategy change (update in place).
   const runDecompose = (
-    tt: number,
+    targetAmount: number,
     mode: SortMode = sortMode,
     bumpRun = true
   ) => {
-    const picks = decompose(tt, items, undefined, mode);
+    const picks = decompose(targetAmount, items, undefined, mode);
     const next: ModeState = {
       results: picks,
-      seen: picks.map(keyOf),
+      seen: picks.map(getResultKey),
       offset: 0,
     };
-    setTarget(tt);
+    setTarget(targetAmount);
     setByMode((prev) =>
       bumpRun ? { ...EMPTY_BY_MODE, [mode]: next } : { ...prev, [mode]: next }
     );
@@ -89,7 +95,7 @@ export function useDecomposer() {
 
   const handleSubmit = () => {
     if (amount.trim() === "") {
-      clearSession();
+      clearCalculationSession();
       setError(null);
       navigate({ to: ".", search: {}, replace: true });
       toast.success(t("home.clearedToast"));
@@ -101,9 +107,9 @@ export function useDecomposer() {
       return;
     }
     setError(null);
-    const tt = parsed.data;
-    runDecompose(tt);
-    navigate({ to: ".", search: { p: tt }, replace: true });
+    const targetAmount = parsed.data;
+    runDecompose(targetAmount);
+    navigate({ to: ".", search: { p: targetAmount }, replace: true });
   };
 
   const handleShuffle = () => {
@@ -111,7 +117,7 @@ export function useDecomposer() {
     const seenSet = new Set(seen);
     const picks = decompose(target, items, seenSet, sortMode);
     if (picks.length === 0) return;
-    for (const pick of picks) seenSet.add(keyOf(pick));
+    for (const pick of picks) seenSet.add(getResultKey(pick));
     setByMode((prev) => ({
       ...prev,
       [sortMode]: {
@@ -150,8 +156,8 @@ export function useDecomposer() {
     offset,
     nameColCh,
     bagName,
-    shareItem,
-    setShareItem,
+    resultToCopy,
+    setResultToCopy,
     handleAmountChange,
     handleSubmit,
     handleSortModeChange,

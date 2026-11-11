@@ -1,5 +1,5 @@
+import { BreakpointIndicator } from "@rutopio/ui/breakpoint-indicator";
 import { PageTransition } from "@rutopio/ui/page-transition";
-import { ScreenSize } from "@rutopio/ui/screen-size";
 import { SiteLayout } from "@rutopio/ui/site-layout";
 import { Toaster } from "@rutopio/ui/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
@@ -45,7 +45,7 @@ function RootLayout() {
       <Header className="bg-background" />
       <AnimatedOutlet />
       <Footer className="bg-background" />
-      {import.meta.env.DEV && <ScreenSize />}
+      {import.meta.env.DEV && <BreakpointIndicator />}
       <Toaster position="top-center" closeButton />
     </SiteLayout>
   );

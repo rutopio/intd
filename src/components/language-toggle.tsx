@@ -1,5 +1,5 @@
 import { LanguageToggle as BaseLanguageToggle } from "@rutopio/ui/language-toggle";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { getLangFromPath } from "@/lib/language";
 
@@ -13,14 +13,14 @@ export function LanguageToggle({ className }: { className?: string }) {
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });
   const current = getLangFromPath(pathname);
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
 
   return (
     <BaseLanguageToggle
       label={current === "en" ? "Language" : "語言"}
       current={current}
       options={options}
-      isMobile={isMobile}
+      isNarrowViewport={isNarrowViewport}
       className={className}
       onChange={(language) => {
         if (language === current) return;

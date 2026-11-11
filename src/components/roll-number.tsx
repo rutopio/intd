@@ -6,7 +6,7 @@ import {
   useTransform,
 } from "motion/react";
 import { useEffect } from "react";
-import { fmt } from "@/lib/rows";
+import { formatNumber } from "@/lib/result-rows";
 
 // Animates an integer to a new value by rolling (tweening) the displayed number,
 // formatted the same way as the static cells. Used when shuffling keeps the cards
@@ -20,7 +20,10 @@ export function RollNumber({
 }) {
   const reduce = useReducedMotion();
   const mv = useMotionValue(value);
-  const text = useTransform(mv, (v) => `${prefix}${fmt(Math.round(v))}`);
+  const text = useTransform(
+    mv,
+    (v) => `${prefix}${formatNumber(Math.round(v))}`
+  );
 
   useEffect(() => {
     if (reduce) {

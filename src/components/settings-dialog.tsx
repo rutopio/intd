@@ -16,7 +16,7 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@rutopio/ui/input-group";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useForm } from "@tanstack/react-form";
 import { useId, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -36,13 +36,18 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useSettings } from "@/hooks/use-settings";
 import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants";
-import type { ItemConfig } from "@/lib/decompose";
+import type { DecompositionItemConfig } from "@/lib/decomposition";
 import { createSettingsSchema } from "@/lib/schema";
 
 // Display order of the last-digit toggles: 1-9 then 0.
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] };
+const NEW_ITEM: DecompositionItemConfig = {
+  name: "",
+  min: 0,
+  max: 0,
+  digits: [],
+};
 
 const numInputClass =
   "flex-1 [-moz-appearance:_textfield] tabular-nums focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none";
@@ -52,7 +57,7 @@ export function SettingsDialog() {
   const { items, setItems, bagName, setBagName } = useSettings();
   const [open, setOpen] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
   const fieldId = useId();
 
   const settingsSchema = useMemo(() => createSettingsSchema(t), [t]);
@@ -411,7 +416,7 @@ export function SettingsDialog() {
     </AlertDialog>
   );
 
-  if (isMobile) {
+  if (isNarrowViewport) {
     return (
       <>
         <Drawer open={open} onOpenChange={handleOpenChange}>

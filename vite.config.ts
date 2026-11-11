@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 import mdx from "@mdx-js/rollup";
-import { rehypeCode } from "@rutopio/ui/rehype-code";
+import { rehypeCodeHighlighting } from "@rutopio/ui/rehype-code-highlighting";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
@@ -25,7 +25,7 @@ export default defineConfig({
         rehypePlugins: [
           rehypeKatex,
           rehypeSlug,
-          rehypeCode,
+          rehypeCodeHighlighting,
           rehypeArticleSections,
         ],
       }),

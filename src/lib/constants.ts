@@ -1,7 +1,7 @@
 // Shared business constants used across routes and components. Keep values here
 // when the same number means the same rule in more than one place.
 
-import type { ItemConfig } from "@/lib/decompose";
+import type { DecompositionItemConfig } from "@/lib/decomposition";
 
 // Upper bound for the target amount. Enforced by the input validation, the
 // settings price caps, and the ?p= search param schema.
@@ -14,7 +14,7 @@ export const MAX_ITEMS = 6;
 // Max plastic bags ($1 each) used to cover the remaining change.
 export const MAX_BAGS = 9;
 
-export const DEFAULT_ITEMS: ItemConfig[] = [
+export const DEFAULT_ITEMS: DecompositionItemConfig[] = [
   { name: "便當", min: 90, max: 150, digits: [0, 5, 9] },
   { name: "飲料", min: 40, max: 90, digits: [0, 5] },
 ];

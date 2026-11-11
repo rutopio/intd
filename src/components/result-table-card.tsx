@@ -13,19 +13,19 @@ import { useTranslation } from "react-i18next";
 import { GlowCard } from "@/components/glow-card";
 import { RollNumber } from "@/components/roll-number";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { type Item, keyOf } from "@/lib/decompose";
-import { toRows } from "@/lib/rows";
+import { type DecompositionResult, getResultKey } from "@/lib/decomposition";
+import { getResultRows } from "@/lib/result-rows";
 
 // A single decomposition result rendered as a numbered card with its line-item
 // table. position is the 1-based label shown in the badge.
 export function ResultTableCard({
-  item,
+  result,
   position,
   nameColCh,
   bagName,
   onCopy,
 }: {
-  item: Item;
+  result: DecompositionResult;
   position: number;
   nameColCh: number;
   bagName: string;
@@ -33,7 +33,7 @@ export function ResultTableCard({
 }) {
   const { t } = useTranslation();
   return (
-    <GlowCard signature={keyOf(item)}>
+    <GlowCard signature={getResultKey(result)}>
       <Card className="h-full w-full rounded-md lg:w-auto lg:min-w-72">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
@@ -80,7 +80,7 @@ export function ResultTableCard({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {toRows(item, bagName).map((row) => (
+              {getResultRows(result, bagName).map((row) => (
                 <TableRow key={row.name}>
                   <TableCell className="whitespace-nowrap">
                     {row.name}

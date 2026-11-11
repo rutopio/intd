@@ -13,7 +13,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@rutopio/ui/drawer";
-import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -22,21 +22,21 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSettings } from "@/hooks/use-settings";
-import type { Item } from "@/lib/decompose";
-import { formats } from "@/lib/format";
+import type { DecompositionResult } from "@/lib/decomposition";
+import { formats } from "@/lib/result-formatters";
 
 export function CopyDialog({
-  item,
+  result,
   onClose,
 }: {
-  item: Item | null;
+  result: DecompositionResult | null;
   onClose: () => void;
 }) {
   const { t } = useTranslation();
   const [tab, setTab] = useState("markdown");
   const [showTotal, setShowTotal] = useState(true);
   const [showUnit, setShowUnit] = useState(true);
-  const isMobile = useIsMobile();
+  const isNarrowViewport = useIsNarrowViewport();
   const { bagName } = useSettings();
 
   // Display names for the copied-format toast, keyed by tab value.
@@ -48,9 +48,9 @@ export function CopyDialog({
   };
 
   const handleCopy = async () => {
-    if (!item) return;
+    if (!result) return;
     const text = formats[tab as keyof typeof formats](
-      item,
+      result,
       showTotal,
       showUnit,
       bagName,
@@ -78,15 +78,15 @@ export function CopyDialog({
         </TabsList>
         {(["markdown", "table", "list", "json"] as const).map((v) => (
           <TabsContent key={v} value={v} className="w-full min-w-0">
-            {item &&
+            {result &&
               (v === "json" ? (
                 <JsonHighlight
-                  code={formats[v](item, showTotal, showUnit, bagName, t)}
+                  code={formats[v](result, showTotal, showUnit, bagName, t)}
                 />
               ) : (
                 <>
                   <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-xs">
-                    {formats[v](item, showTotal, showUnit, bagName, t)}
+                    {formats[v](result, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (
                     <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
@@ -124,9 +124,9 @@ export function CopyDialog({
     </>
   );
 
-  if (isMobile) {
+  if (isNarrowViewport) {
     return (
-      <Drawer open={item !== null} onOpenChange={(o) => !o && onClose()}>
+      <Drawer open={result !== null} onOpenChange={(o) => !o && onClose()}>
         <DrawerContent className="text-left">
           <DrawerHeader className="text-left">
             <DrawerTitle>{t("copy.title")}</DrawerTitle>
@@ -143,7 +143,7 @@ export function CopyDialog({
   }
 
   return (
-    <Dialog open={item !== null} onOpenChange={(o) => !o && onClose()}>
+    <Dialog open={result !== null} onOpenChange={(o) => !o && onClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{t("copy.title")}</DialogTitle>

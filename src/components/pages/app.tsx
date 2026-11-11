@@ -1,4 +1,4 @@
-import { transitions } from "@rutopio/ui/motion";
+import { motionTransitions } from "@rutopio/ui/motion-tokens";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { AmountInWords } from "@/components/amount-in-words";
 import { AmountInput } from "@/components/amount-input";
@@ -9,7 +9,7 @@ import { SettingsDialog } from "@/components/settings-dialog";
 import { ShareButton } from "@/components/share-button";
 import { ShuffleButton } from "@/components/shuffle-button";
 import { StrategySelector } from "@/components/strategy-selector";
-import { useDecomposer } from "@/hooks/use-decomposer";
+import { useDecomposition } from "@/hooks/use-decomposition";
 
 // Shared home page, rendered by both the zh (/) and en (/en) routes. Language is
 // read from the path via useLang; search params are read route-agnostically.
@@ -27,13 +27,13 @@ export function App() {
     offset,
     nameColCh,
     bagName,
-    shareItem,
-    setShareItem,
+    resultToCopy,
+    setResultToCopy,
     handleAmountChange,
     handleSubmit,
     handleSortModeChange,
     handleShuffle,
-  } = useDecomposer();
+  } = useDecomposition();
 
   return (
     <main className="flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-6 py-6 sm:py-12 lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:self-center">
@@ -70,18 +70,18 @@ export function App() {
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? undefined : { opacity: 0, y: -8 }}
-                  transition={transitions.content}
+                  transition={motionTransitions.content}
                 >
-                  {safeResults.map((item, idx) => (
+                  {safeResults.map((result, idx) => (
                     <ResultTableCard
                       // Stable by position so shuffle updates content in place (no remount/enter).
                       // biome-ignore lint/suspicious/noArrayIndexKey: position is the stable identity here
                       key={idx}
-                      item={item}
+                      result={result}
                       position={offset + idx + 1}
                       nameColCh={nameColCh}
                       bagName={bagName}
-                      onCopy={() => setShareItem(item)}
+                      onCopy={() => setResultToCopy(result)}
                     />
                   ))}
                 </motion.div>
@@ -109,7 +109,7 @@ export function App() {
           ))}
       </motion.div>
 
-      <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
+      <CopyDialog result={resultToCopy} onClose={() => setResultToCopy(null)} />
     </main>
   );
 }

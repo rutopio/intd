@@ -1,25 +1,26 @@
 import type { TFunction } from "i18next";
-import type { Item } from "@/lib/decompose";
-import { toRows } from "@/lib/rows";
+import type { DecompositionResult } from "@/lib/decomposition";
+import { getResultRows } from "@/lib/result-rows";
 
 // Pure formatters that turn a decomposition result into copyable text. No React
 // here; the localized column labels come in via the passed t function.
 
 export function toMarkdown(
-  item: Item,
+  result: DecompositionResult,
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
   t: TFunction
 ): string {
-  const d = showUnit ? "$" : "";
-  const rows = toRows(item, bagName);
+  const currencyPrefix = showUnit ? "$" : "";
+  const rows = getResultRows(result, bagName);
   const header = `| ${t("copy.colName")} | ${t("copy.colQty")} | ${t("copy.colPrice")} | ${t("copy.colTotal")} |`;
   const divider = "| --- | ---: | ---: | ---: |";
   const body = rows.map(
-    (r) => `| ${r.name} | ${r.qty} | ${d}${r.price} | ${d}${r.total} |`
+    (r) =>
+      `| ${r.name} | ${r.qty} | ${currencyPrefix}${r.price} | ${currencyPrefix}${r.total} |`
   );
-  const total = `| ${t("copy.total")} |  |  | ${d}${item.total} |`;
+  const total = `| ${t("copy.total")} |  |  | ${currencyPrefix}${result.total} |`;
   return [header, divider, ...body, ...(showTotal ? [total] : [])].join("\n");
 }
 
@@ -38,13 +39,13 @@ function pad(s: string, width: number, align: "left" | "right"): string {
 }
 
 export function toBoxTable(
-  item: Item,
+  result: DecompositionResult,
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
   t: TFunction
 ): string {
-  const d = showUnit ? "$" : "";
+  const currencyPrefix = showUnit ? "$" : "";
   const headers = [
     t("copy.colName"),
     t("copy.colQty"),
@@ -52,13 +53,18 @@ export function toBoxTable(
     t("copy.colTotal"),
   ];
   const aligns = ["left", "right", "right", "right"] as const;
-  const body = toRows(item, bagName).map((r) => [
+  const body = getResultRows(result, bagName).map((r) => [
     r.name,
     String(r.qty),
-    `${d}${r.price}`,
-    `${d}${r.total}`,
+    `${currencyPrefix}${r.price}`,
+    `${currencyPrefix}${r.total}`,
   ]);
-  const totalRow = [t("copy.total"), "", "", `${d}${item.total}`];
+  const totalRow = [
+    t("copy.total"),
+    "",
+    "",
+    `${currencyPrefix}${result.total}`,
+  ];
   const all = [headers, ...body, ...(showTotal ? [totalRow] : [])];
   const widths = headers.map((_, c) =>
     Math.max(...all.map((row) => displayWidth(row[c] ?? "")))
@@ -78,29 +84,31 @@ export function toBoxTable(
 }
 
 export function toList(
-  item: Item,
+  result: DecompositionResult,
   showTotal: boolean,
   showUnit: boolean,
   bagName: string,
   t: TFunction
 ): string {
-  const d = showUnit ? "$" : "";
-  const lines = toRows(item, bagName).map(
-    (r) => `- ${r.name}: ${r.qty} x ${d}${r.price} = ${d}${r.total}`
+  const currencyPrefix = showUnit ? "$" : "";
+  const lines = getResultRows(result, bagName).map(
+    (r) =>
+      `- ${r.name}: ${r.qty} x ${currencyPrefix}${r.price} = ${currencyPrefix}${r.total}`
   );
-  if (showTotal) lines.push(`- ${t("copy.total")}: ${d}${item.total}`);
+  if (showTotal)
+    lines.push(`- ${t("copy.total")}: ${currencyPrefix}${result.total}`);
   return lines.join("\n");
 }
 
 // JSON output has no total row, so showTotal is ignored.
 export function toJson(
-  item: Item,
+  result: DecompositionResult,
   _showTotal: boolean,
   showUnit: boolean,
   bagName: string,
   _t: TFunction
 ): string {
-  const data = toRows(item, bagName).map((r) => ({
+  const data = getResultRows(result, bagName).map((r) => ({
     item: r.name,
     price: showUnit ? `$${r.price}` : r.price,
     amount: r.qty,

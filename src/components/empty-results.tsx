@@ -1,5 +1,5 @@
 import { XCircleIcon } from "@phosphor-icons/react";
-import { transitions } from "@rutopio/ui/motion";
+import { motionTransitions } from "@rutopio/ui/motion-tokens";
 import { motion, useReducedMotion } from "motion/react";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,7 +17,7 @@ export function EmptyResults() {
     <motion.div
       initial={reduce ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={transitions.content}
+      transition={motionTransitions.content}
     >
       <Empty>
         <EmptyHeader>

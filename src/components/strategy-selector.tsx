@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import type { SortMode } from "@/lib/decompose";
+import type { SortMode } from "@/lib/decomposition";
 
 // Two-way segmented control for the decomposition strategy, plus its hint line.
 export function StrategySelector({

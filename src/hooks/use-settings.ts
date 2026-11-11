@@ -1,9 +1,9 @@
 import { DEFAULT_BAG_NAME, DEFAULT_ITEMS } from "@/lib/constants";
-import type { ItemConfig } from "@/lib/decompose";
+import type { DecompositionItemConfig } from "@/lib/decomposition";
 import { useLocalStorage } from "./use-local-storage";
 
 export function useSettings() {
-  const [items, setItems] = useLocalStorage<ItemConfig[]>(
+  const [items, setItems] = useLocalStorage<DecompositionItemConfig[]>(
     "idc:settings",
     DEFAULT_ITEMS
   );

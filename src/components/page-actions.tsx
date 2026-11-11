@@ -9,9 +9,9 @@ import {
   DrawerTrigger,
 } from "@rutopio/ui/drawer";
 import { OutlineList, type OutlineListItem } from "@rutopio/ui/outline-list";
-import { ReadingProgressRing } from "@rutopio/ui/outline-nav";
+import { ReadingProgressRing } from "@rutopio/ui/outline-menu";
 import { PageActionRail } from "@rutopio/ui/page-action-rail";
-import { navigateToSection } from "@rutopio/ui/section-navigation";
+import { scrollToSection } from "@rutopio/ui/section-navigation";
 import { useMountEffect } from "@rutopio/ui/use-mount-effect";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -109,7 +109,7 @@ export function PageActions({
   }, [outlineOpen]);
 
   const navigateToHeading = (id: string) => {
-    navigateToSection(id, () => setOutlineOpen(false));
+    scrollToSection(id, () => setOutlineOpen(false));
   };
 
   const utilities = (

@@ -1,16 +1,16 @@
 import { MAX_BAGS } from "@/lib/constants";
 
-export type ItemConfig = {
+export type DecompositionItemConfig = {
   name: string;
   min: number;
   max: number;
   digits: number[];
 };
 
-export type Line = { name: string; price: number; qty: number };
+export type DecompositionLine = { name: string; price: number; qty: number };
 
-export type Item = {
-  lines: Line[]; // includes qty=0 lines; filtered when displayed
+export type DecompositionResult = {
+  lines: DecompositionLine[]; // includes qty=0 lines; filtered when displayed
   bags: number; // built-in plastic bags, $1 each, 0..9
   total: number;
   balanceScore: number; // max-min of the quantities; smaller is more balanced
@@ -18,14 +18,16 @@ export type Item = {
 
 // Guard against old persisted data that predates the lines field, so rendering
 // such leftovers does not crash.
-export function isItem(x: unknown): x is Item {
+export function isDecompositionResult(x: unknown): x is DecompositionResult {
   return (
-    typeof x === "object" && x !== null && Array.isArray((x as Item).lines)
+    typeof x === "object" &&
+    x !== null &&
+    Array.isArray((x as DecompositionResult).lines)
   );
 }
 
 // Legal prices for an item: values in [min,max] whose last digit is in digits.
-function pricesFor(config: ItemConfig): number[] {
+function getAllowedPrices(config: DecompositionItemConfig): number[] {
   const prices: number[] = [];
   for (let p = config.min; p <= config.max; p++) {
     if (config.digits.includes(p % 10)) prices.push(p);
@@ -33,11 +35,14 @@ function pricesFor(config: ItemConfig): number[] {
   return prices;
 }
 
-function solve(target: number, items: ItemConfig[]): Item[] {
-  const results: Item[] = [];
+function findDecompositions(
+  target: number,
+  items: DecompositionItemConfig[]
+): DecompositionResult[] {
+  const results: DecompositionResult[] = [];
   if (items.length === 0) return results;
-  const priceLists = items.map(pricesFor);
-  const lines: Line[] = items.map((it) => ({
+  const priceLists = items.map(getAllowedPrices);
+  const lines: DecompositionLine[] = items.map((it) => ({
     name: it.name,
     price: 0,
     qty: 0,
@@ -63,38 +68,38 @@ function solve(target: number, items: ItemConfig[]): Item[] {
       return;
     }
 
-    const item = items[i];
+    const itemConfig = items[i];
     const prices = priceLists[i];
-    if (!item || !prices) return;
-    lines[i] = { name: item.name, price: 0, qty: 0 };
+    if (!itemConfig || !prices) return;
+    lines[i] = { name: itemConfig.name, price: 0, qty: 0 };
     dfs(i + 1, remaining);
 
     for (const price of prices) {
       const maxQty = Math.floor(remaining / price);
       for (let q = 1; q <= maxQty; q++) {
-        lines[i] = { name: item.name, price, qty: q };
+        lines[i] = { name: itemConfig.name, price, qty: q };
         dfs(i + 1, remaining - price * q);
       }
     }
 
-    lines[i] = { name: item.name, price: 0, qty: 0 };
+    lines[i] = { name: itemConfig.name, price: 0, qty: 0 };
   }
 
   dfs(0, target);
   return results;
 }
 
-export function keyOf(item: Item): string {
-  const parts = item.lines
+export function getResultKey(result: DecompositionResult): string {
+  const parts = result.lines
     .filter((l) => l.qty > 0)
     .map((l) => `${l.name}@${l.price}x${l.qty}`)
     .sort();
-  return `${parts.join("_")}|bags${item.bags}`;
+  return `${parts.join("_")}|bags${result.bags}`;
 }
 
 // Price-only signature (ignores quantities), used for diversity when picking.
-function comboOf(item: Item): string {
-  return item.lines
+function getPriceCombinationKey(result: DecompositionResult): string {
+  return result.lines
     .filter((l) => l.qty > 0)
     .map((l) => `${l.name}@${l.price}`)
     .sort()
@@ -104,14 +109,14 @@ function comboOf(item: Item): string {
 // Sort priority: "bags" prefers fewer plastic bags; "balance" prefers more even quantities.
 export type SortMode = "bags" | "balance";
 
-function pickThree(
-  candidates: Item[],
+function selectThreeDiverseResults(
+  candidates: DecompositionResult[],
   exclude: Set<string>,
   mode: SortMode
-): Item[] {
+): DecompositionResult[] {
   // Drop already-seen solutions, then sort by the chosen primary key (the other is the tiebreaker).
-  const avail = candidates
-    .filter((c) => !exclude.has(keyOf(c)))
+  const availableResults = candidates
+    .filter((c) => !exclude.has(getResultKey(c)))
     .sort((a, b) => {
       if (mode === "bags") {
         if (a.bags !== b.bags) return a.bags - b.bags;
@@ -121,15 +126,17 @@ function pickThree(
         return a.balanceScore - b.balanceScore;
       return a.bags - b.bags;
     });
-  if (avail.length === 0) return [];
+  if (availableResults.length === 0) return [];
 
   // Take three, preferring distinct price combos; relax that to fill if short.
-  const picks: Item[] = [];
+  const picks: DecompositionResult[] = [];
   const fill = (allowSameCombo: boolean) => {
-    for (const c of avail) {
+    for (const c of availableResults) {
       if (picks.length >= 3) return;
-      if (picks.some((p) => keyOf(p) === keyOf(c))) continue;
-      const sameCombo = picks.some((p) => comboOf(p) === comboOf(c));
+      if (picks.some((p) => getResultKey(p) === getResultKey(c))) continue;
+      const sameCombo = picks.some(
+        (p) => getPriceCombinationKey(p) === getPriceCombinationKey(c)
+      );
       if (!allowSameCombo && sameCombo) continue;
       picks.push(c);
     }
@@ -143,9 +150,13 @@ function pickThree(
 // exclude holds already-seen solution keys; pass it to get a fresh batch.
 export function decompose(
   target: number,
-  items: ItemConfig[],
+  items: DecompositionItemConfig[],
   exclude?: Set<string>,
   mode: SortMode = "bags"
-): Item[] {
-  return pickThree(solve(target, items), exclude ?? new Set(), mode);
+): DecompositionResult[] {
+  return selectThreeDiverseResults(
+    findDecompositions(target, items),
+    exclude ?? new Set(),
+    mode
+  );
 }
