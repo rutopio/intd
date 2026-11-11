@@ -17,6 +17,7 @@ import {
 import { createAmountSchema } from "@/lib/schema";
 import {
   type ByMode,
+  compatibleMode,
   storedAmount,
   storedByMode,
   storedSortMode,
@@ -57,7 +58,7 @@ export function useDecomposition() {
     storedByMode
   );
 
-  const current = byMode[sortMode];
+  const current = compatibleMode(byMode, sortMode, target, items);
   const results = current?.results ?? null;
   const seen = current?.seen ?? [];
   const offset = current?.offset ?? 0;
@@ -87,7 +88,7 @@ export function useDecomposition() {
 
   const handleSortModeChange = (mode: SortMode) => {
     setSortMode(mode);
-    if (target !== null && byMode[mode] === null)
+    if (target !== null && compatibleMode(byMode, mode, target, items) === null)
       runDecompose(target, mode, false);
     else setSpin((n) => n + 1);
   };

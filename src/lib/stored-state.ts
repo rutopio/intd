@@ -63,3 +63,31 @@ export function parseStoredValue<T>(
     return initial;
   }
 }
+
+/** Separate storage keys can be observed between writes, including in another tab. */
+export function compatibleMode(
+  byMode: ByMode,
+  mode: "bags" | "balance",
+  target: number | null,
+  items: { name: string; min: number; max: number; digits: number[] }[]
+) {
+  const cached = byMode[mode];
+  if (target === null || !cached) return null;
+  const compatible = cached.results.every(
+    (result) =>
+      result.total === target &&
+      result.lines.length === items.length &&
+      result.lines.every((line, index) => {
+        const item = items[index];
+        return (
+          item !== undefined &&
+          line.name === item.name &&
+          (line.qty === 0 ||
+            (line.price >= item.min &&
+              line.price <= item.max &&
+              item.digits.includes(line.price % 10)))
+        );
+      })
+  );
+  return compatible ? cached : null;
+}

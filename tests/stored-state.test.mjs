@@ -150,3 +150,27 @@ test("storage hooks tolerate malformed data, clear failed removals, and invalida
     await window.happyDOM.abort();
   }
 });
+
+test("interleaved target and settings writes cannot reuse incompatible results or shuffle history", () => {
+  const items = [{ name: "item", min: 10, max: 20, digits: [0] }];
+  const mode = {
+    results: [
+      {
+        lines: [{ name: "item", price: 10, qty: 2 }],
+        bags: 1,
+        total: 21,
+        balanceScore: 0,
+      },
+    ],
+    seen: ["old"],
+    offset: 10,
+  };
+  const byMode = { bags: mode, balance: null };
+  assert.equal(stored.compatibleMode(byMode, "bags", 21, items), mode);
+  assert.equal(stored.compatibleMode(byMode, "bags", 31, items), null);
+  assert.equal(
+    stored.compatibleMode(byMode, "bags", 21, [{ ...items[0], min: 15 }]),
+    null
+  );
+  assert.equal(stored.compatibleMode(byMode, "bags", null, items), null);
+});
