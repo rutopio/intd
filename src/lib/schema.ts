@@ -1,4 +1,3 @@
-import type { TFunction } from "i18next";
 import { z } from "zod";
 import { MAX_AMOUNT, MAX_ITEMS } from "@/lib/constants";
 
@@ -23,7 +22,9 @@ export const searchSchema = z.object({
 const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" });
 const graphemeCount = (s: string) => [...segmenter.segment(s)].length;
 
-export function createSettingsSchema(t: TFunction) {
+export function createSettingsSchema(
+  t: (key: string, options?: { max: number }) => string
+) {
   const rangeSchema = z
     .object({
       name: z
@@ -41,7 +42,9 @@ export function createSettingsSchema(t: TFunction) {
         .int()
         .min(1, t("settings.errPosInt"))
         .max(MAX_AMOUNT, t("settings.errMaxLimit", { max: MAX_AMOUNT })),
-      digits: z.array(z.number()).min(1, t("settings.errDigitMin")),
+      digits: z
+        .array(z.number().int().min(0).max(9))
+        .min(1, t("settings.errDigitMin")),
     })
     .refine((d) => d.max >= d.min, {
       message: t("settings.errMaxGteMin"),

@@ -15,13 +15,14 @@ import {
   type SortMode,
 } from "@/lib/decomposition";
 import { createAmountSchema } from "@/lib/schema";
+import {
+  type ByMode,
+  storedAmount,
+  storedByMode,
+  storedSortMode,
+  storedTarget,
+} from "@/lib/stored-state";
 
-type ModeState = {
-  results: DecompositionResult[];
-  seen: string[];
-  offset: number;
-};
-type ByMode = Record<SortMode, ModeState | null>;
 const EMPTY_BY_MODE: ByMode = { bags: null, balance: null };
 
 export function useDecomposition() {
@@ -33,7 +34,7 @@ export function useDecomposition() {
   const navigate = useNavigate();
   const { p } = useSearch({ strict: false }) as { p?: number };
 
-  const [amount, setAmount] = useLocalStorage("idc:amount", "");
+  const [amount, setAmount] = useLocalStorage("idc:amount", "", storedAmount);
   const [runId, setRunId] = useState(0);
   const [spin, setSpin] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -42,15 +43,18 @@ export function useDecomposition() {
   );
   const [target, setTarget] = useLocalStorage<number | null>(
     "idc:target",
-    null
+    null,
+    storedTarget
   );
   const [sortMode, setSortMode] = useLocalStorage<SortMode>(
     "idc:sortMode",
-    "bags"
+    "bags",
+    storedSortMode
   );
   const [byMode, setByMode] = useLocalStorage<ByMode>(
     "idc:byMode",
-    EMPTY_BY_MODE
+    EMPTY_BY_MODE,
+    storedByMode
   );
 
   const current = byMode[sortMode];
@@ -68,7 +72,7 @@ export function useDecomposition() {
     bumpRun = true
   ) => {
     const picks = decompose(targetAmount, items, undefined, mode);
-    const next: ModeState = {
+    const next: NonNullable<ByMode[SortMode]> = {
       results: picks,
       seen: picks.map(getResultKey),
       offset: 0,

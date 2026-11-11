@@ -60,7 +60,13 @@ export function SettingsDialog() {
   const isNarrowViewport = useIsNarrowViewport();
   const fieldId = useId();
 
-  const settingsSchema = useMemo(() => createSettingsSchema(t), [t]);
+  const settingsSchema = useMemo(
+    () =>
+      createSettingsSchema((key, options) =>
+        options ? t(key, options) : t(key)
+      ),
+    [t]
+  );
 
   const form = useForm({
     defaultValues: { items, bagName },
