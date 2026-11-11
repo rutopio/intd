@@ -22,6 +22,83 @@ function Probe({ read, publish }) {
   return null;
 }
 
+test("calculation results are validated at the storage boundary before reaching the UI", async () => {
+  const window = new Window();
+  Object.assign(globalThis, {
+    window,
+    document: window.document,
+    IS_REACT_ACT_ENVIRONMENT: true,
+  });
+  const { createRoot } = await import("react-dom/client");
+  const hooks = await loadSource(
+    new URL("../src/hooks/use-local-storage.ts", import.meta.url),
+    {
+      globals: { window, CustomEvent: window.CustomEvent },
+      imports: { react: React, "@/lib/stored-state": stored },
+    }
+  );
+  const solver = await loadSource(
+    new URL("../src/lib/decomposition.ts", import.meta.url),
+    { imports: { "@/lib/constants": constants } }
+  );
+  const items = [{ name: "item", min: 10, max: 10, digits: [0] }];
+  const { useDecomposition } = await loadSource(
+    new URL("../src/hooks/use-decomposition.ts", import.meta.url),
+    {
+      imports: {
+        react: React,
+        "@tanstack/react-router": { useNavigate: () => () => {} },
+        "react-i18next": { useTranslation: () => ({ t: (key) => key }) },
+        sonner: { toast: {} },
+        "@/hooks/use-lang": { useLang: () => "en" },
+        "@/hooks/use-local-storage": hooks,
+        "@/hooks/use-settings": {
+          useSettings: () => ({ items, bagName: "bag" }),
+        },
+        "@/lib/calculation-session": { clearCalculationSession: () => {} },
+        "@/lib/decomposition": solver,
+        "@/lib/schema": schema,
+        "@/lib/stored-state": stored,
+      },
+    }
+  );
+  const results = solver.decompose(21, items);
+  const mode = { results, seen: results.map(solver.getResultKey), offset: 0 };
+  hooks.writeLocalStorageValue("idc:target", 21);
+  hooks.writeLocalStorageValue("idc:byMode", { bags: mode, balance: null });
+  let state;
+  const root = createRoot(window.document.createElement("div"));
+  try {
+    await React.act(() =>
+      root.render(
+        React.createElement(Probe, {
+          read: useDecomposition,
+          publish: (next) => {
+            state = next;
+          },
+        })
+      )
+    );
+    assert.ok(state.results.length > 0);
+    assert.equal(state.results[0].total, 21);
+    const { lines: _lines, ...withoutLines } = results[0];
+    await React.act(() =>
+      hooks.writeLocalStorageValue("idc:byMode", {
+        bags: { ...mode, results: [withoutLines] },
+        balance: null,
+      })
+    );
+    assert.equal(state.results, null);
+    await React.act(() =>
+      hooks.writeLocalStorageValue("idc:byMode", { bags: mode, balance: null })
+    );
+    assert.equal(state.results[0].total, 21);
+  } finally {
+    await React.act(() => root.unmount());
+    await window.happyDOM.abort();
+  }
+});
+
 test("stored schemas reject valid JSON with unusable calculation shapes", () => {
   const initial = { bags: null, balance: null };
   for (const value of [

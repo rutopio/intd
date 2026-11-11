@@ -16,16 +16,6 @@ export type DecompositionResult = {
   balanceScore: number; // max-min of the quantities; smaller is more balanced
 };
 
-// Guard against old persisted data that predates the lines field, so rendering
-// such leftovers does not crash.
-export function isDecompositionResult(x: unknown): x is DecompositionResult {
-  return (
-    typeof x === "object" &&
-    x !== null &&
-    Array.isArray((x as DecompositionResult).lines)
-  );
-}
-
 // Legal prices for an item: values in [min,max] whose last digit is in digits.
 function getAllowedPrices(config: DecompositionItemConfig): number[] {
   const prices: number[] = [];

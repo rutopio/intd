@@ -10,7 +10,6 @@ import {
   type DecompositionResult,
   decompose,
   getResultKey,
-  isDecompositionResult,
   type SortMode,
 } from "@/lib/decomposition";
 import { createAmountSchema } from "@/lib/schema";
@@ -60,7 +59,6 @@ export function useDecomposition() {
   const results = current?.results ?? null;
   const seen = current?.seen ?? [];
   const offset = current?.offset ?? 0;
-  const safeResults = results?.every(isDecompositionResult) ? results : null;
   const nameColCh =
     Math.max(...items.map((it) => it.name.length), bagName.length) + 1;
 
@@ -139,7 +137,6 @@ export function useDecomposition() {
     runId,
     spin,
     sortMode,
-    safeResults,
     results,
     offset,
     nameColCh,

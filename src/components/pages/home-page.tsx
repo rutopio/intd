@@ -22,7 +22,6 @@ export function HomePage() {
     runId,
     spin,
     sortMode,
-    safeResults,
     results,
     offset,
     nameColCh,
@@ -58,8 +57,8 @@ export function HomePage() {
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="flex min-h-[26rem] w-full flex-col items-center gap-6"
       >
-        {safeResults !== null &&
-          (safeResults.length === 0 ? (
+        {results !== null &&
+          (results.length === 0 ? (
             <EmptyResults />
           ) : (
             <>
@@ -72,7 +71,7 @@ export function HomePage() {
                   exit={reduce ? undefined : { opacity: 0, y: -8 }}
                   transition={motionTransitions.content}
                 >
-                  {safeResults.map((result, idx) => (
+                  {results.map((result, idx) => (
                     <ResultTableCard
                       // Stable by position so shuffle updates content in place (no remount/enter).
                       // biome-ignore lint/suspicious/noArrayIndexKey: position is the stable identity here
@@ -98,9 +97,9 @@ export function HomePage() {
                 />
               </motion.div>
               {/* Chinese uppercase amount block: a zh-only convention, hidden in English. */}
-              {!isEn && safeResults[0] && (
+              {!isEn && results[0] && (
                 <AmountInWords
-                  total={safeResults[0].total}
+                  total={results[0].total}
                   runId={runId}
                   reduce={!!reduce}
                 />
