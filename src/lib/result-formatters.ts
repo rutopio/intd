@@ -2,6 +2,8 @@ import type { TFunction } from "i18next";
 import type { DecompositionResult } from "@/lib/decomposition";
 import { getResultRows } from "@/lib/result-rows";
 
+const WIDE_CHARACTER_RE = /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦]/;
+
 // Pure formatters that turn a decomposition result into copyable text. No React
 // here; the localized column labels come in via the passed t function.
 
@@ -28,7 +30,7 @@ export function toMarkdown(
 function displayWidth(s: string): number {
   let w = 0;
   for (const ch of s) {
-    w += /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦]/.test(ch) ? 2 : 1;
+    w += WIDE_CHARACTER_RE.test(ch) ? 2 : 1;
   }
   return w;
 }

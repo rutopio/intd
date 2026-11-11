@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+const NUMBER_START_RE = /^-?\d/;
+
 const TOKEN_RE = /"(?:\\.|[^"\\])*"|-?\d+(?:\.\d+)?|true|false|null|[{}[\]:,]/g;
 
 function highlightLine(line: string) {
@@ -16,7 +18,7 @@ function highlightLine(line: string) {
       cls = rest.startsWith(":")
         ? "text-violet-600 dark:text-violet-400"
         : "text-emerald-600 dark:text-emerald-400";
-    } else if (/^-?\d/.test(tok)) {
+    } else if (NUMBER_START_RE.test(tok)) {
       cls = "text-amber-600 dark:text-amber-400";
     } else if (tok === "true" || tok === "false" || tok === "null") {
       cls = "text-violet-600 dark:text-violet-400";

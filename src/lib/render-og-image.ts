@@ -8,6 +8,9 @@
 
 import { INTD_ICON_PATH } from "./brand-icon";
 
+const XML_SPECIAL_CHARACTER_RE = /[<>&'"]/g;
+const POSITIVE_INTEGER_RE = /^[1-9][0-9]*$/;
+
 /** Open Graph recommended 1.91:1 canvas. */
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
@@ -38,7 +41,7 @@ const TABULAR_DIGIT_ADVANCE = 0.6445;
 
 function escapeXml(s: string): string {
   return s.replace(
-    /[<>&'"]/g,
+    XML_SPECIAL_CHARACTER_RE,
     (c) =>
       ({
         "<": "&lt;",
@@ -93,6 +96,6 @@ export function renderOgSvg(brand: string): string {
  */
 export function parseBrand(search: string): string {
   const p = new URLSearchParams(search).get("p");
-  if (p && /^[1-9][0-9]*$/.test(p) && Number(p) <= 99999) return p;
+  if (p && POSITIVE_INTEGER_RE.test(p) && Number(p) <= 99999) return p;
   return "IntD";
 }

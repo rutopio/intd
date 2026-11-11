@@ -3,6 +3,8 @@ import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { getLangFromPath } from "@/lib/language";
 
+const ENGLISH_PREFIX_RE = /^\/en/;
+
 const options = [
   { value: "zh", label: "繁體中文", htmlLang: "zh-Hant" },
   { value: "en", label: "English", htmlLang: "en" },
@@ -26,7 +28,7 @@ export function LanguageToggle({ className }: { className?: string }) {
         if (language === current) return;
         const next =
           language === "zh"
-            ? pathname.replace(/^\/en/, "") || "/"
+            ? pathname.replace(ENGLISH_PREFIX_RE, "") || "/"
             : `/en${pathname === "/" ? "" : pathname}`;
         navigate({ to: next, search: true });
       }}

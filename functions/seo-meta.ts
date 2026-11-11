@@ -1,3 +1,4 @@
+const TRAILING_SLASHES_RE = /\/+$/;
 /**
  * Per-route SEO metadata for the OG/Twitter/title rewrite in _middleware.ts.
  *
@@ -78,7 +79,8 @@ export function pathFor(lang: Lang, page: Page): string {
 /** Resolve a URL pathname to its language, page, and canonical path. */
 export function resolveRoute(pathname: string): RouteMeta {
   // Strip trailing slash (except root) for stable matching.
-  const p = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  const p =
+    pathname.length > 1 ? pathname.replace(TRAILING_SLASHES_RE, "") : pathname;
   const isEn = p === "/en" || p.startsWith("/en/");
   const lang: Lang = isEn ? "en" : "zh";
   // Bare path within the language (drop the /en prefix).
