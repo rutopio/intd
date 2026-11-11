@@ -3,6 +3,7 @@ import mdx from "@mdx-js/rollup"
 import tailwindcss from "@tailwindcss/vite"
 import { tanstackRouter } from "@tanstack/router-plugin/vite"
 import viteReact from "@vitejs/plugin-react"
+import { rehypeCode } from "@rutopio/ui/rehype-code"
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
@@ -21,7 +22,7 @@ export default defineConfig({
       enforce: "pre",
       ...mdx({
         remarkPlugins: [remarkGfm, remarkMath],
-        rehypePlugins: [rehypeKatex, rehypeSlug, rehypeArticleSections],
+        rehypePlugins: [rehypeKatex, rehypeSlug, rehypeCode, rehypeArticleSections],
       }),
     },
     tanstackRouter({ target: "react", autoCodeSplitting: true }),
