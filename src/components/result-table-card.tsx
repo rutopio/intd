@@ -1,10 +1,6 @@
 import { CopyIcon } from "@phosphor-icons/react"
+import { Badge } from "@rutopio/base-component/badge"
 import { Button } from "@rutopio/base-component/button"
-import { useTranslation } from "react-i18next"
-import { GlowCard } from "@/components/glow-card"
-import { RollNumber } from "@/components/roll-number"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -12,7 +8,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@rutopio/base-component/table"
+import { useTranslation } from "react-i18next"
+import { GlowCard } from "@/components/glow-card"
+import { RollNumber } from "@/components/roll-number"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { type Item, keyOf } from "@/lib/decompose"
 import { toRows } from "@/lib/rows"
 

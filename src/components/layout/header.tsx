@@ -42,7 +42,6 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
     <SiteHeader
       className={cn("font-heading", className)}
       label={lang === "en" ? "Main navigation" : "主要導覽"}
-      compactActions
       brand={
         <Link
           to={homePath}
@@ -73,7 +72,6 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
           items={items}
           label={t("nav.menu")}
           title="IntD"
-          titleClassName="font-heading"
           menuIcon={<ListIcon aria-hidden="true" />}
           selectedIcon={<CheckIcon aria-hidden="true" />}
           renderLink={(item, props) => (

@@ -1,96 +1,22 @@
+import {
+  Article,
+  articleComponents,
+  articleLinkClassName,
+} from "@rutopio/base-component/article"
+
+export { Article }
+
 import { GithubMarkIcon } from "@rutopio/base-component/github-mark-icon"
-import { SectionHeadingAnchor } from "@rutopio/base-component/section-heading-anchor"
 import { isValidElement } from "react"
 import { Pseudocode } from "@/components/pseudocode"
 import { cn } from "@/lib/utils"
-
-// Writing's article typography, shared by /algo and /about. Inline math is
-// handled at build time by rehype-katex ($...$).
-
-export function Article({
-  className,
-  ...props
-}: React.ComponentProps<"article">) {
-  return (
-    <article
-      className={cn(
-        // min-w-0 lets flex children shrink so wide math scrolls inside
-        // .katex-display instead of widening the page.
-        "flex min-w-0 flex-col gap-6 text-base text-neutral-800 tabular-nums leading-[1.65] dark:text-neutral-300",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function H1({ className, ...props }: React.ComponentProps<"h1">) {
-  return (
-    <h1
-      className={cn(
-        "scroll-m-20 text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function H2({ className, id, children, ...props }: React.ComponentProps<"h2">) {
-  return (
-    <h2
-      id={id}
-      className={cn(
-        "group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
-        className,
-      )}
-      {...props}
-    >
-      <SectionHeadingAnchor id={id}>{children}</SectionHeadingAnchor>
-      <span
-        aria-hidden="true"
-        className="ml-4 h-0.5 min-w-4 flex-1 scale-y-50 bg-border"
-      />
-    </h2>
-  )
-}
-
-function H3({ className, id, children, ...props }: React.ComponentProps<"h3">) {
-  return (
-    <h3
-      id={id}
-      className={cn(
-        "group flex scroll-mt-14 items-center text-balance font-bold font-heading text-lg text-neutral-950 leading-[1.65] dark:text-neutral-50",
-        className,
-      )}
-      {...props}
-    >
-      <SectionHeadingAnchor id={id}>{children}</SectionHeadingAnchor>
-    </h3>
-  )
-}
-
-function P({ className, ...props }: React.ComponentProps<"p">) {
-  return (
-    <p
-      className={cn(
-        "text-pretty text-base text-neutral-800 leading-[1.65] dark:text-neutral-300",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
 
 function A({ className, href, ...props }: React.ComponentProps<"a">) {
   const external = href?.startsWith("http")
   return (
     <a
       href={href}
-      className={cn(
-        "break-words font-normal text-primary underline decoration-[0.5px] underline-offset-4 transition-[color,text-decoration-thickness] duration-150 hover:text-neutral-950 hover:decoration-[1px] dark:hover:text-neutral-50",
-        className,
-      )}
+      className={cn(articleLinkClassName, className)}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...props}
     />
@@ -123,44 +49,6 @@ function Muted({ className, ...props }: React.ComponentProps<"p">) {
   )
 }
 
-function Ul({ className, ...props }: React.ComponentProps<"ul">) {
-  return (
-    <ul
-      className={cn("ml-6 flex list-disc flex-col gap-1", className)}
-      {...props}
-    />
-  )
-}
-
-function Ol({ className, ...props }: React.ComponentProps<"ol">) {
-  return (
-    <ol
-      className={cn("ml-6 flex list-decimal flex-col gap-1", className)}
-      {...props}
-    />
-  )
-}
-
-function Li({ className, ...props }: React.ComponentProps<"li">) {
-  return (
-    <li
-      className={cn(
-        "text-pretty text-base text-neutral-800 leading-[1.65] dark:text-neutral-300",
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function Strong({ className, ...props }: React.ComponentProps<"strong">) {
-  return <strong className={cn("font-semibold", className)} {...props} />
-}
-
-function InlineCode({ className, ...props }: React.ComponentProps<"code">) {
-  return <code className={cn("font-[inherit]", className)} {...props} />
-}
-
 // Plain monospace block for ASCII diagrams (e.g. the decision tree); no syntax
 // highlighting, so digits/arrows render as-is.
 function CodeBlock({ children }: { children: string }) {
@@ -181,16 +69,8 @@ function Pre({ children }: { children?: React.ReactNode }) {
 }
 
 export const mdxComponents = {
-  h1: H1,
-  h2: H2,
-  h3: H3,
-  p: P,
+  ...articleComponents,
   a: A,
-  ul: Ul,
-  ol: Ol,
-  li: Li,
-  strong: Strong,
-  code: InlineCode,
   pre: Pre,
   Muted,
   Pseudocode,

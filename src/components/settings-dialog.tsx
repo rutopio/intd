@@ -9,6 +9,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@rutopio/base-component/drawer"
+import { Input } from "@rutopio/base-component/input"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@rutopio/base-component/input-group"
+import { useIsMobile } from "@rutopio/base-component/use-mobile"
 import { useForm } from "@tanstack/react-form"
 import { useId, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
@@ -25,15 +33,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Card, CardContent } from "@/components/ui/card"
 import { Field, FieldError, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { useIsMobile } from "@/hooks/use-mobile"
 import { useSettings } from "@/hooks/use-settings"
 import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants"
 import type { ItemConfig } from "@/lib/decompose"
@@ -374,9 +374,7 @@ export function SettingsDialog() {
     >
       <DrawerContent className="text-left">
         <DrawerHeader className="text-left">
-          <DrawerTitle className="font-heading">
-            {t("settings.resetConfirmTitle")}
-          </DrawerTitle>
+          <DrawerTitle>{t("settings.resetConfirmTitle")}</DrawerTitle>
           <DrawerDescription>
             {t("settings.resetConfirmDesc")}
           </DrawerDescription>
@@ -430,9 +428,7 @@ export function SettingsDialog() {
           />
           <DrawerContent className="max-h-[80vh] text-left">
             <DrawerHeader className="text-left">
-              <DrawerTitle className="font-heading">
-                {t("settings.title")}
-              </DrawerTitle>
+              <DrawerTitle>{t("settings.title")}</DrawerTitle>
               <DrawerDescription>{t("settings.desc")}</DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col gap-4 overflow-y-auto px-4 py-1">

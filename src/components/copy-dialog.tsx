@@ -13,6 +13,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@rutopio/base-component/drawer"
+import { useIsMobile } from "@rutopio/base-component/use-mobile"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"
@@ -20,7 +21,6 @@ import { JsonHighlight } from "@/components/json-highlight"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useIsMobile } from "@/hooks/use-mobile"
 import { useSettings } from "@/hooks/use-settings"
 import type { Item } from "@/lib/decompose"
 import { formats } from "@/lib/format"
@@ -129,9 +129,7 @@ export function CopyDialog({
       <Drawer open={item !== null} onOpenChange={(o) => !o && onClose()}>
         <DrawerContent className="text-left">
           <DrawerHeader className="text-left">
-            <DrawerTitle className="font-heading">
-              {t("copy.title")}
-            </DrawerTitle>
+            <DrawerTitle>{t("copy.title")}</DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col gap-4 px-4">{body}</div>
           <DrawerFooter>
@@ -148,7 +146,7 @@ export function CopyDialog({
     <Dialog open={item !== null} onOpenChange={(o) => !o && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="font-heading">{t("copy.title")}</DialogTitle>
+          <DialogTitle>{t("copy.title")}</DialogTitle>
         </DialogHeader>
         {body}
       </DialogContent>

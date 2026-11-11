@@ -1,6 +1,6 @@
 import { LanguageToggle as BaseLanguageToggle } from "@rutopio/base-component/language-toggle"
+import { useIsMobile } from "@rutopio/base-component/use-mobile"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { useIsMobile } from "@/hooks/use-mobile"
 import { getLangFromPath } from "@/lib/language"
 
 const options = [
@@ -22,7 +22,6 @@ export function LanguageToggle({ className }: { className?: string }) {
       options={options}
       isMobile={isMobile}
       className={className}
-      titleClassName="font-heading"
       onChange={(language) => {
         if (language === current) return
         const next =

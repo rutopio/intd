@@ -1,3 +1,4 @@
+import { transitions } from "@rutopio/base-component/motion"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { AmountInWords } from "@/components/amount-in-words"
 import { AmountInput } from "@/components/amount-input"
@@ -69,7 +70,7 @@ export function App() {
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? undefined : { opacity: 0, y: -8 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  transition={transitions.content}
                 >
                   {safeResults.map((item, idx) => (
                     <ResultTableCard

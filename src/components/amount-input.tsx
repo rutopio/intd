@@ -1,11 +1,11 @@
 import { CurrencyCircleDollarIcon } from "@phosphor-icons/react"
-import { useTranslation } from "react-i18next"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group"
+} from "@rutopio/base-component/input-group"
+import { useTranslation } from "react-i18next"
 
 // Amount field with the inline decompose button and its inline error message.
 export function AmountInput({

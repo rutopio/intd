@@ -2,7 +2,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@rutopio/base-component/styles.css";
+@import "@rutopio/base-component/article.css";
 @import "@rutopio/base-component/neutral-theme.css";
+@import "@rutopio/base-component/cjk-fonts.css";
 @import "./generated-fonts.css";
 
 @font-face {
@@ -12,11 +14,6 @@
     src: url('/fonts/PaperMono[wght].woff2') format('woff2');
 }
 
-@theme inline {
-    --font-sans: "Inter Variable", "Noto Sans TC Variable", ui-sans-serif, system-ui, sans-serif;
-    --font-heading: var(--font-sans);
-    --font-mono: 'Paper Mono', monospace;
-}
 
 @layer base {
   /* Long display math must scroll within itself, not widen the whole page. */

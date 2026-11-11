@@ -1,10 +1,11 @@
+import { PageTransition } from "@rutopio/base-component/page-transition"
+import { SiteLayout } from "@rutopio/base-component/site-layout"
+import { Toaster } from "@rutopio/base-component/sonner"
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router"
-import { motion, useReducedMotion } from "motion/react"
 import { useTranslation } from "react-i18next"
 import { Footer } from "@/components/layout/footer"
 import { Header } from "@/components/layout/header"
 import { ScreenSize } from "@/components/screen-size"
-import { Toaster } from "@/components/ui/sonner"
 import { useLang } from "@/hooks/use-lang"
 
 // Soft fade-in on route change: the new page mounts at opacity 0 and animates to
@@ -12,20 +13,17 @@ import { useLang } from "@/hooks/use-lang"
 // blank first — no flash. Keyed on pathname so changing ?p on a page does not
 // re-trigger. Honours prefers-reduced-motion.
 function AnimatedOutlet() {
-  const pathname = useLocation({ select: (l) => l.pathname })
-  const reduce = useReducedMotion()
+  const pathname = useLocation({ select: (location) => location.pathname })
   return (
-    <motion.div
-      key={pathname}
-      id="main-content"
-      tabIndex={-1}
-      initial={reduce ? false : { opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      className="flex min-w-0 flex-auto flex-col"
-    >
-      <Outlet />
-    </motion.div>
+    <PageTransition key={pathname}>
+      <div
+        id="main-content"
+        tabIndex={-1}
+        className="flex min-w-0 flex-auto flex-col"
+      >
+        <Outlet />
+      </div>
+    </PageTransition>
   )
 }
 
@@ -37,7 +35,7 @@ export const Route = createRootRoute({
 function RootLayout() {
   const lang = useLang()
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-3 min-[360px]:px-6">
+    <SiteLayout>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-background focus:px-3 focus:py-2 focus:outline-2 focus:outline-ring"
@@ -49,7 +47,7 @@ function RootLayout() {
       <Footer className="bg-background" />
       <ScreenSize />
       <Toaster position="top-center" closeButton />
-    </div>
+    </SiteLayout>
   )
 }
 

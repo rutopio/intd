@@ -1,3 +1,4 @@
+import { transitions } from "@rutopio/base-component/motion"
 import { motion } from "motion/react"
 import { cnSlots } from "@/lib/cn-amount"
 
@@ -46,7 +47,7 @@ export function AmountInWords({
       layout={!reduce}
       initial={reduce ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.18, ease: "easeOut" }}
+      transition={transitions.content}
       className="flex w-full max-w-md flex-col gap-2 lg:w-auto lg:max-w-none"
     >
       <div className="flex w-full flex-col items-start lg:w-auto lg:flex-row">
