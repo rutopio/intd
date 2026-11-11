@@ -36,7 +36,10 @@ const FONT_BYTES = [
 let wasmReady: Promise<void> | null = null;
 function ensureWasm(): Promise<void> {
   if (!wasmReady) {
-    wasmReady = initWasm(resvgWasm as WebAssembly.Module);
+    wasmReady = initWasm(resvgWasm as WebAssembly.Module).catch((error) => {
+      wasmReady = null;
+      throw error;
+    });
   }
   return wasmReady;
 }
