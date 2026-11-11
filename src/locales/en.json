@@ -33,7 +33,7 @@
   },
   "settings": {
     "title": "Settings",
-    "desc": "Adjust each item's price range and last digits (up to 7 items)",
+    "desc": "Adjust each item’s price range and last digits (up to 7 items)",
     "itemName": "Name",
     "priceRange": "Price range",
     "priceMin": "Min",
