@@ -16,38 +16,38 @@ import {
   OG_IMAGE_VERSION,
   OG_WIDTH,
   parseBrand,
-} from "../src/lib/render-og-image"
-import { metaFor, OG_LOCALE, pathFor, resolveRoute } from "./seo-meta"
+} from "../src/lib/render-og-image";
+import { metaFor, OG_LOCALE, pathFor, resolveRoute } from "./seo-meta";
 
 class AttrRewriter {
   constructor(
     private readonly attr: string,
-    private readonly value: string,
+    private readonly value: string
   ) {}
   element(el: Element) {
-    el.setAttribute(this.attr, this.value)
+    el.setAttribute(this.attr, this.value);
   }
 }
 
 class TextRewriter {
   constructor(private readonly value: string) {}
   element(el: Element) {
-    el.setInnerContent(this.value)
+    el.setInnerContent(this.value);
   }
 }
 
 class LangRewriter {
   constructor(private readonly lang: string) {}
   element(el: Element) {
-    el.setAttribute("lang", this.lang)
+    el.setAttribute("lang", this.lang);
   }
 }
 
-const setContent = (v: string) => new AttrRewriter("content", v)
-const setHref = (v: string) => new AttrRewriter("href", v)
+const setContent = (v: string) => new AttrRewriter("content", v);
+const setHref = (v: string) => new AttrRewriter("href", v);
 
 export const onRequest: PagesFunction = async ({ request, next }) => {
-  const url = new URL(request.url)
+  const url = new URL(request.url);
 
   // Canonical-host redirect. Any *.pages.dev host (<project>.pages.dev and every
   // <hash>.<project>.pages.dev preview URL) is 301'd to the custom domain, path +
@@ -55,41 +55,41 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   if (url.hostname.endsWith(".pages.dev")) {
     const target = new URL(
       url.pathname + url.search,
-      "https://intd.chingru.com",
-    )
-    return Response.redirect(target.toString(), 301)
+      "https://intd.chingru.com"
+    );
+    return Response.redirect(target.toString(), 301);
   }
 
   // Don't touch the image function or anything that isn't the HTML shell.
-  if (url.pathname.startsWith("/og")) return next()
+  if (url.pathname.startsWith("/og")) return next();
 
-  const response = await next()
-  const contentType = response.headers.get("content-type") || ""
-  if (!contentType.includes("text/html")) return response
+  const response = await next();
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("text/html")) return response;
 
-  const route = resolveRoute(url.pathname)
-  const { title, description } = metaFor(route)
-  const canonical = `${url.origin}${route.path}`
-  const locale = OG_LOCALE[route.lang]
+  const route = resolveRoute(url.pathname);
+  const { title, description } = metaFor(route);
+  const canonical = `${url.origin}${route.path}`;
+  const locale = OG_LOCALE[route.lang];
 
   // hreflang alternates: same page in each language. x-default points to zh.
-  const zhAlt = `${url.origin}${pathFor("zh", route.page)}`
-  const enAlt = `${url.origin}${pathFor("en", route.page)}`
+  const zhAlt = `${url.origin}${pathFor("zh", route.page)}`;
+  const enAlt = `${url.origin}${pathFor("en", route.page)}`;
 
   // Default image is the static og.png; a valid ?p= shares the dynamic number.
-  const brand = parseBrand(url.search)
-  const hasAmount = brand !== "IntD"
+  const brand = parseBrand(url.search);
+  const hasAmount = brand !== "IntD";
   const imageUrl = hasAmount
     ? `${url.origin}/og?p=${encodeURIComponent(brand)}&v=${OG_IMAGE_VERSION}`
-    : `${url.origin}/og.png?v=${OG_IMAGE_VERSION}`
-  const imageW = OG_WIDTH
-  const imageH = OG_HEIGHT
+    : `${url.origin}/og.png?v=${OG_IMAGE_VERSION}`;
+  const imageW = OG_WIDTH;
+  const imageH = OG_HEIGHT;
   // og:url reflects the actual shared URL (keeps the ?p so the unfurl is exact).
-  const ogUrl = hasAmount ? url.href : canonical
+  const ogUrl = hasAmount ? url.href : canonical;
   const imageAlt =
     route.lang === "en"
       ? "IntD integer decomposition calculator"
-      : "IntD 整數拆解計算器"
+      : "IntD 整數拆解計算器";
 
   return new HTMLRewriter()
     .on("html", new LangRewriter(route.lang === "en" ? "en" : "zh-Hant"))
@@ -111,5 +111,5 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     .on('meta[name="twitter:description"]', setContent(description))
     .on('meta[name="twitter:image"]', setContent(imageUrl))
     .on('meta[name="twitter:image:alt"]', setContent(imageAlt))
-    .transform(response)
-}
+    .transform(response);
+};

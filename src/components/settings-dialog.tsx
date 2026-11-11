@@ -1,5 +1,5 @@
-import { GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/ui/button"
+import { GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/ui/button";
 import {
   Drawer,
   DrawerContent,
@@ -8,18 +8,18 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@rutopio/ui/drawer"
-import { Input } from "@rutopio/ui/input"
+} from "@rutopio/ui/drawer";
+import { Input } from "@rutopio/ui/input";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@rutopio/ui/input-group"
-import { useIsMobile } from "@rutopio/ui/use-mobile"
-import { useForm } from "@tanstack/react-form"
-import { useId, useMemo, useState } from "react"
-import { useTranslation } from "react-i18next"
+} from "@rutopio/ui/input-group";
+import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useForm } from "@tanstack/react-form";
+import { useId, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,42 +30,42 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Card, CardContent } from "@/components/ui/card"
-import { Field, FieldError, FieldLabel } from "@/components/ui/field"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { useSettings } from "@/hooks/use-settings"
-import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants"
-import type { ItemConfig } from "@/lib/decompose"
-import { createSettingsSchema } from "@/lib/schema"
+} from "@/components/ui/alert-dialog";
+import { Card, CardContent } from "@/components/ui/card";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useSettings } from "@/hooks/use-settings";
+import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants";
+import type { ItemConfig } from "@/lib/decompose";
+import { createSettingsSchema } from "@/lib/schema";
 
 // Display order of the last-digit toggles: 1-9 then 0.
-const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] }
+const NEW_ITEM: ItemConfig = { name: "", min: 0, max: 0, digits: [] };
 
 const numInputClass =
-  "flex-1 [-moz-appearance:_textfield] tabular-nums focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
+  "flex-1 [-moz-appearance:_textfield] tabular-nums focus:z-10 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none";
 
 export function SettingsDialog() {
-  const { t } = useTranslation()
-  const { items, setItems, bagName, setBagName } = useSettings()
-  const [open, setOpen] = useState(false)
-  const [confirmReset, setConfirmReset] = useState(false)
-  const isMobile = useIsMobile()
-  const fieldId = useId()
+  const { t } = useTranslation();
+  const { items, setItems, bagName, setBagName } = useSettings();
+  const [open, setOpen] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const isMobile = useIsMobile();
+  const fieldId = useId();
 
-  const settingsSchema = useMemo(() => createSettingsSchema(t), [t])
+  const settingsSchema = useMemo(() => createSettingsSchema(t), [t]);
 
   const form = useForm({
     defaultValues: { items, bagName },
     validators: { onSubmit: settingsSchema },
     onSubmit: ({ value }) => {
-      setItems(value.items)
-      setBagName(value.bagName)
-      setOpen(false)
+      setItems(value.items);
+      setBagName(value.bagName);
+      setOpen(false);
     },
-  })
+  });
 
   // base-ui Drawer has no `dismissible` prop; instead it reports the close
   // reason. Reject user-driven dismissals (outside press, Esc, swipe) so the
@@ -75,29 +75,29 @@ export function SettingsDialog() {
     "outside-press",
     "escape-key",
     "swipe",
-  ])
+  ]);
 
   const handleOpenChange = (
     next: boolean,
-    eventDetails?: { reason?: string },
+    eventDetails?: { reason?: string }
   ) => {
     if (
       !next &&
       eventDetails &&
       NON_DISMISSIBLE_REASONS.has(eventDetails.reason ?? "")
     ) {
-      return
+      return;
     }
-    if (next) form.reset({ items, bagName })
-    setOpen(next)
-  }
+    if (next) form.reset({ items, bagName });
+    setOpen(next);
+  };
 
   const renderItem = (
     index: number,
     onRemove: () => void,
-    canRemove: boolean,
+    canRemove: boolean
   ) => {
-    const label = t("settings.itemLabel", { index: index + 1 })
+    const label = t("settings.itemLabel", { index: index + 1 });
     return (
       // Form fields are addressed by array index; keep the React key in sync.
       <Card key={index} size="sm" className="relative shrink-0 rounded-md">
@@ -107,7 +107,7 @@ export function SettingsDialog() {
           aria-label={t("settings.deleteItem", { label })}
           disabled={!canRemove}
           onClick={onRemove}
-          className="absolute top-2 right-2 text-muted-foreground hover:text-destructive"
+          className="text-muted-foreground hover:text-destructive absolute top-2 right-2"
         >
           <XIcon aria-hidden="true" />
         </Button>
@@ -163,7 +163,7 @@ export function SettingsDialog() {
                               minField.handleChange(
                                 e.target.value === ""
                                   ? 0
-                                  : Number(e.target.value),
+                                  : Number(e.target.value)
                               )
                             }
                           />
@@ -184,7 +184,7 @@ export function SettingsDialog() {
                         onBlur={maxField.handleBlur}
                         onChange={(e) =>
                           maxField.handleChange(
-                            e.target.value === "" ? 0 : Number(e.target.value),
+                            e.target.value === "" ? 0 : Number(e.target.value)
                           )
                         }
                       />
@@ -219,7 +219,7 @@ export function SettingsDialog() {
                         key={d}
                         value={String(d)}
                         aria-label={t("settings.aDigit", { digit: d })}
-                        className="w-9 px-0 tabular-nums aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground lg:flex-1 lg:basis-0"
+                        className="aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:hover:bg-primary aria-pressed:hover:text-primary-foreground w-9 px-0 tabular-nums lg:flex-1 lg:basis-0"
                       >
                         {d}
                       </ToggleGroupItem>
@@ -232,8 +232,8 @@ export function SettingsDialog() {
           </form.Field>
         </CardContent>
       </Card>
-    )
-  }
+    );
+  };
 
   // Built-in $1 filler item: only the display name is editable; no delete, no digit toggles.
   const bagCard = (
@@ -278,7 +278,7 @@ export function SettingsDialog() {
         </Field>
       </CardContent>
     </Card>
-  )
+  );
 
   const formFields = (
     <form.Field name="items" mode="array">
@@ -289,8 +289,8 @@ export function SettingsDialog() {
             renderItem(
               index,
               () => itemsField.removeValue(index),
-              itemsField.state.value.length > 1,
-            ),
+              itemsField.state.value.length > 1
+            )
           )}
           <Button
             variant="outline"
@@ -306,23 +306,23 @@ export function SettingsDialog() {
         </>
       )}
     </form.Field>
-  )
+  );
 
   const body = (
     <div className="flex flex-col gap-4 overflow-y-auto p-6 max-lg:max-h-none lg:max-h-[50vh]">
       {formFields}
     </div>
-  )
+  );
 
   const desktopFooter = (
     <AlertDialogFooter className="px-6 py-4 sm:justify-between">
       <Button
         variant="ghost"
-        className="text-base text-destructive"
+        className="text-destructive text-base"
         onClick={() => {
           // Close settings first so only the reset confirmation dialog is open at once.
-          setOpen(false)
-          setConfirmReset(true)
+          setOpen(false);
+          setConfirmReset(true);
         }}
       >
         {t("settings.reset")}
@@ -339,7 +339,7 @@ export function SettingsDialog() {
         </Button>
       </div>
     </AlertDialogFooter>
-  )
+  );
 
   const mobileFooter = (
     <DrawerFooter>
@@ -349,14 +349,14 @@ export function SettingsDialog() {
         {t("settings.cancel")}
       </Button>
     </DrawerFooter>
-  )
+  );
 
   const doReset = () => {
-    setItems(DEFAULT_ITEMS)
-    setBagName(DEFAULT_BAG_NAME)
-    form.reset({ items: DEFAULT_ITEMS, bagName: DEFAULT_BAG_NAME })
-    setConfirmReset(false)
-  }
+    setItems(DEFAULT_ITEMS);
+    setBagName(DEFAULT_BAG_NAME);
+    form.reset({ items: DEFAULT_ITEMS, bagName: DEFAULT_BAG_NAME });
+    setConfirmReset(false);
+  };
 
   const mobileResetConfirm = (
     <Drawer
@@ -367,9 +367,9 @@ export function SettingsDialog() {
           eventDetails &&
           NON_DISMISSIBLE_REASONS.has(eventDetails.reason ?? "")
         ) {
-          return
+          return;
         }
-        setConfirmReset(next)
+        setConfirmReset(next);
       }}
     >
       <DrawerContent className="text-left">
@@ -390,7 +390,7 @@ export function SettingsDialog() {
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
-  )
+  );
 
   const resetConfirm = (
     <AlertDialog open={confirmReset} onOpenChange={setConfirmReset}>
@@ -409,7 +409,7 @@ export function SettingsDialog() {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 
   if (isMobile) {
     return (
@@ -435,11 +435,11 @@ export function SettingsDialog() {
               {formFields}
               <Button
                 variant="ghost"
-                className="shrink-0 text-destructive text-sm"
+                className="text-destructive shrink-0 text-sm"
                 onClick={() => {
                   // Close the settings drawer first so only one drawer is open at once.
-                  setOpen(false)
-                  setConfirmReset(true)
+                  setOpen(false);
+                  setConfirmReset(true);
                 }}
               >
                 {t("settings.reset")}
@@ -450,7 +450,7 @@ export function SettingsDialog() {
         </Drawer>
         {mobileResetConfirm}
       </>
-    )
+    );
   }
 
   return (
@@ -480,5 +480,5 @@ export function SettingsDialog() {
       </AlertDialog>
       {resetConfirm}
     </>
-  )
+  );
 }

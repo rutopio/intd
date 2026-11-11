@@ -1,43 +1,43 @@
-import { CopyIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/ui/button"
+import { CopyIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@rutopio/ui/dialog"
+} from "@rutopio/ui/dialog";
 import {
   Drawer,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@rutopio/ui/drawer"
-import { useIsMobile } from "@rutopio/ui/use-mobile"
-import { useState } from "react"
-import { useTranslation } from "react-i18next"
-import { toast } from "sonner"
-import { JsonHighlight } from "@/components/json-highlight"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useSettings } from "@/hooks/use-settings"
-import type { Item } from "@/lib/decompose"
-import { formats } from "@/lib/format"
+} from "@rutopio/ui/drawer";
+import { useIsMobile } from "@rutopio/ui/use-mobile";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
+import { JsonHighlight } from "@/components/json-highlight";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSettings } from "@/hooks/use-settings";
+import type { Item } from "@/lib/decompose";
+import { formats } from "@/lib/format";
 
 export function CopyDialog({
   item,
   onClose,
 }: {
-  item: Item | null
-  onClose: () => void
+  item: Item | null;
+  onClose: () => void;
 }) {
-  const { t } = useTranslation()
-  const [tab, setTab] = useState("markdown")
-  const [showTotal, setShowTotal] = useState(true)
-  const [showUnit, setShowUnit] = useState(true)
-  const isMobile = useIsMobile()
-  const { bagName } = useSettings()
+  const { t } = useTranslation();
+  const [tab, setTab] = useState("markdown");
+  const [showTotal, setShowTotal] = useState(true);
+  const [showUnit, setShowUnit] = useState(true);
+  const isMobile = useIsMobile();
+  const { bagName } = useSettings();
 
   // Display names for the copied-format toast, keyed by tab value.
   const FORMAT_LABELS: Record<string, string> = {
@@ -45,27 +45,27 @@ export function CopyDialog({
     table: t("copy.tabTable"),
     list: t("copy.tabList"),
     json: t("copy.tabJson"),
-  }
+  };
 
   const handleCopy = async () => {
-    if (!item) return
+    if (!item) return;
     const text = formats[tab as keyof typeof formats](
       item,
       showTotal,
       showUnit,
       bagName,
-      t,
-    )
+      t
+    );
     try {
-      await navigator.clipboard.writeText(text)
+      await navigator.clipboard.writeText(text);
       toast.success(t("copy.copied"), {
         description: t("copy.formatLabel", { format: FORMAT_LABELS[tab] }),
-      })
-      onClose()
+      });
+      onClose();
     } catch {
-      toast.error(t("copy.copyFailed"))
+      toast.error(t("copy.copyFailed"));
     }
-  }
+  };
 
   const body = (
     <>
@@ -85,11 +85,11 @@ export function CopyDialog({
                 />
               ) : (
                 <>
-                  <pre className="max-h-64 max-w-full overflow-auto rounded-md bg-muted p-3 font-mono text-xs">
+                  <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-xs">
                     {formats[v](item, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (
-                    <p className="mt-2 text-muted-foreground text-xs leading-relaxed">
+                    <p className="text-muted-foreground mt-2 text-xs leading-relaxed">
                       {t("copy.monoHint")}
                     </p>
                   )}
@@ -122,7 +122,7 @@ export function CopyDialog({
         {t("copy.copy")}
       </Button>
     </>
-  )
+  );
 
   if (isMobile) {
     return (
@@ -139,7 +139,7 @@ export function CopyDialog({
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    )
+    );
   }
 
   return (
@@ -151,5 +151,5 @@ export function CopyDialog({
         {body}
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -1,18 +1,18 @@
-import { XCircleIcon } from "@phosphor-icons/react"
-import { transitions } from "@rutopio/ui/motion"
-import { motion, useReducedMotion } from "motion/react"
-import { useTranslation } from "react-i18next"
+import { XCircleIcon } from "@phosphor-icons/react";
+import { transitions } from "@rutopio/ui/motion";
+import { motion, useReducedMotion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import {
   Empty,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty"
+} from "@/components/ui/empty";
 
 export function EmptyResults() {
-  const { t } = useTranslation()
-  const reduce = useReducedMotion()
+  const { t } = useTranslation();
+  const reduce = useReducedMotion();
   return (
     <motion.div
       initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -29,5 +29,5 @@ export function EmptyResults() {
         </EmptyHeader>
       </Empty>
     </motion.div>
-  )
+  );
 }

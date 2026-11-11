@@ -1,20 +1,20 @@
-import { transitions } from "@rutopio/ui/motion"
-import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import { AmountInWords } from "@/components/amount-in-words"
-import { AmountInput } from "@/components/amount-input"
-import { CopyDialog } from "@/components/copy-dialog"
-import { EmptyResults } from "@/components/empty-results"
-import { ResultTableCard } from "@/components/result-table-card"
-import { SettingsDialog } from "@/components/settings-dialog"
-import { ShareButton } from "@/components/share-button"
-import { ShuffleButton } from "@/components/shuffle-button"
-import { StrategySelector } from "@/components/strategy-selector"
-import { useDecomposer } from "@/hooks/use-decomposer"
+import { transitions } from "@rutopio/ui/motion";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AmountInWords } from "@/components/amount-in-words";
+import { AmountInput } from "@/components/amount-input";
+import { CopyDialog } from "@/components/copy-dialog";
+import { EmptyResults } from "@/components/empty-results";
+import { ResultTableCard } from "@/components/result-table-card";
+import { SettingsDialog } from "@/components/settings-dialog";
+import { ShareButton } from "@/components/share-button";
+import { ShuffleButton } from "@/components/shuffle-button";
+import { StrategySelector } from "@/components/strategy-selector";
+import { useDecomposer } from "@/hooks/use-decomposer";
 
 // Shared home page, rendered by both the zh (/) and en (/en) routes. Language is
 // read from the path via useLang; search params are read route-agnostically.
 export function App() {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotion();
   const {
     isEn,
     amount,
@@ -33,7 +33,7 @@ export function App() {
     handleSubmit,
     handleSortModeChange,
     handleShuffle,
-  } = useDecomposer()
+  } = useDecomposer();
 
   return (
     <main className="flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-6 py-6 sm:py-12 lg:w-[calc(100vw-3rem)] lg:max-w-5xl lg:self-center">
@@ -98,7 +98,7 @@ export function App() {
                 />
               </motion.div>
               {/* Chinese uppercase amount block: a zh-only convention, hidden in English. */}
-              {!isEn && (
+              {!isEn && safeResults[0] && (
                 <AmountInWords
                   total={safeResults[0].total}
                   runId={runId}
@@ -111,5 +111,5 @@ export function App() {
 
       <CopyDialog item={shareItem} onClose={() => setShareItem(null)} />
     </main>
-  )
+  );
 }

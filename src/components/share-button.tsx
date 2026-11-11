@@ -4,29 +4,26 @@ import {
   ShareNetworkIcon,
   ThreadsLogoIcon,
   XLogoIcon,
-} from "@phosphor-icons/react"
-import { Button } from "@rutopio/ui/button"
+} from "@phosphor-icons/react";
+import { Button } from "@rutopio/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@rutopio/ui/dialog"
-import { Input } from "@rutopio/ui/input"
-import {
-  openShareWindow,
-  usePageShare,
-} from "@rutopio/ui/page-share"
-import { useTranslation } from "react-i18next"
-import { toast } from "sonner"
+} from "@rutopio/ui/dialog";
+import { Input } from "@rutopio/ui/input";
+import { openShareWindow, usePageShare } from "@rutopio/ui/page-share";
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 export function ShareButton({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { open, setOpen, shareUrl, targets, copy, share } = usePageShare({
     onCopied: (url) => toast.success(t("share.copied"), { description: url }),
     onCopyError: () => toast.error(t("share.copyFailed")),
-  })
+  });
 
   return (
     <>
@@ -88,5 +85,5 @@ export function ShareButton({ size = "icon" }: { size?: "icon" | "icon-lg" }) {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }

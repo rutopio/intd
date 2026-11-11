@@ -3,6 +3,7 @@
 import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+
 type TabsVariant = "default" | "underline";
 type TabsSize = "default" | "lg" | "sm";
 
@@ -29,7 +30,7 @@ export function Tabs({
     <TabsPrimitive.Root
       className={cn(
         "flex flex-col gap-2 data-[orientation=vertical]:flex-row",
-        className,
+        className
       )}
       data-slot="tabs"
       {...props}
@@ -50,12 +51,12 @@ export function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        "relative z-0 flex w-fit items-center justify-center gap-x-0.5 text-muted-foreground",
+        "text-muted-foreground relative z-0 flex w-fit items-center justify-center gap-x-0.5",
         "data-[orientation=vertical]:flex-col",
         variant === "default"
-          ? "rounded-lg bg-muted p-0.5 text-muted-foreground/72"
-          : "data-[orientation=vertical]:px-1 data-[orientation=horizontal]:py-1 *:data-[slot=tabs-tab]:hover:bg-accent",
-        className,
+          ? "bg-muted text-muted-foreground/72 rounded-lg p-0.5"
+          : "*:data-[slot=tabs-tab]:hover:bg-accent data-[orientation=horizontal]:py-1 data-[orientation=vertical]:px-1",
+        className
       )}
       data-size={size}
       data-slot="tabs-list"
@@ -68,8 +69,8 @@ export function TabsList({
         className={cn(
           "absolute bottom-0 left-0 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom) transition-[width,translate] duration-200 ease-in-out motion-reduce:transition-none",
           variant === "underline"
-            ? "z-10 bg-primary data-[orientation=horizontal]:h-0.5 data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-px data-[orientation=horizontal]:translate-y-px"
-            : cn("-z-1", tabIndicatorSurfaceClassName),
+            ? "bg-primary z-10 data-[orientation=horizontal]:h-0.5 data-[orientation=horizontal]:translate-y-px data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-px"
+            : cn("-z-1", tabIndicatorSurfaceClassName)
         )}
         data-slot="tab-indicator"
       />
@@ -90,10 +91,10 @@ export function TabsTab({
   return (
     <TabsPrimitive.Tab
       className={cn(
-        "relative flex shrink-0 grow items-center justify-center whitespace-nowrap rounded-md border border-transparent font-semibold text-base outline-none transition-[color,background-color,box-shadow] hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring data-disabled:pointer-events-none data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start data-active:text-foreground data-disabled:opacity-64 sm:text-sm",
+        "hover:text-muted-foreground focus-visible:ring-ring data-active:text-foreground relative flex shrink-0 grow items-center justify-center rounded-md border border-transparent text-base font-semibold whitespace-nowrap transition-[color,background-color,box-shadow] outline-none focus-visible:ring-2 data-disabled:pointer-events-none data-disabled:opacity-64 data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start sm:text-sm",
         tabItemLayoutClassName,
         tabSizeClassNames[resolvedSize],
-        className,
+        className
       )}
       data-size={resolvedSize}
       data-slot="tabs-tab"
@@ -116,9 +117,9 @@ export function TabsPanel({
 }
 
 export {
-  TabsPrimitive,
-  TabsTab as TabsTrigger,
   TabsPanel as TabsContent,
+  TabsPrimitive,
   type TabsSize,
+  TabsTab as TabsTrigger,
   type TabsVariant,
 };

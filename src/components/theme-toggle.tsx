@@ -1,14 +1,14 @@
-import { ThemeToggle as BaseThemeToggle } from "@rutopio/ui/theme-toggle"
-import type { ComponentProps } from "react"
-import { useTranslation } from "react-i18next"
+import { ThemeToggle as BaseThemeToggle } from "@rutopio/ui/theme-toggle";
+import type { ComponentProps } from "react";
+import { useTranslation } from "react-i18next";
 
 export function ThemeToggle(props: ComponentProps<typeof BaseThemeToggle>) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <BaseThemeToggle
       toLightLabel={t("theme.toLight")}
       toDarkLabel={t("theme.toDark")}
       {...props}
     />
-  )
+  );
 }

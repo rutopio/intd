@@ -1,18 +1,18 @@
-import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/ui/button"
-import { motion } from "motion/react"
-import { useTranslation } from "react-i18next"
+import { ArrowsClockwiseIcon } from "@phosphor-icons/react";
+import { Button } from "@rutopio/ui/button";
+import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 
 export function ShuffleButton({
   spin,
   disabled,
   onClick,
 }: {
-  spin: number
-  disabled: boolean
-  onClick: () => void
+  spin: number;
+  disabled: boolean;
+  onClick: () => void;
 }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <Button
       variant="outline"
@@ -31,5 +31,5 @@ export function ShuffleButton({
       </motion.span>
       {t("home.shuffle")}
     </Button>
-  )
+  );
 }

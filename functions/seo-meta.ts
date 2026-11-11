@@ -7,21 +7,21 @@
  * it stays out of the client bundle.
  */
 
-export type Lang = "zh" | "en"
-export type Page = "home" | "algo" | "about"
+export type Lang = "zh" | "en";
+export type Page = "home" | "algo" | "about";
 
 export interface RouteMeta {
-  lang: Lang
-  page: Page
+  lang: Lang;
+  page: Page;
   /** Canonical path (no origin), e.g. "/" or "/en/algo". */
-  path: string
+  path: string;
 }
 
-const SITE = "IntD"
+const SITE = "IntD";
 
 interface Copy {
-  title: string
-  description: string
+  title: string;
+  description: string;
 }
 
 // Title/description per (lang, page). Titles suffix the site name except home,
@@ -61,36 +61,36 @@ const COPY: Record<Lang, Record<Page, Copy>> = {
         "IntD is a small tool that demonstrates an integer decomposition algorithm: enter a total and list sensible combinations of items and a one-dollar item.",
     },
   },
-}
+};
 
 /** OG locale code per language. */
 export const OG_LOCALE: Record<Lang, string> = {
   zh: "zh_TW",
   en: "en_US",
-}
+};
 
 /** Canonical path for a page in a given language. zh is bare, en is /en-prefixed. */
 export function pathFor(lang: Lang, page: Page): string {
-  if (lang === "en") return page === "home" ? "/en" : `/en/${page}`
-  return page === "home" ? "/" : `/${page}`
+  if (lang === "en") return page === "home" ? "/en" : `/en/${page}`;
+  return page === "home" ? "/" : `/${page}`;
 }
 
 /** Resolve a URL pathname to its language, page, and canonical path. */
 export function resolveRoute(pathname: string): RouteMeta {
   // Strip trailing slash (except root) for stable matching.
-  const p = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname
-  const isEn = p === "/en" || p.startsWith("/en/")
-  const lang: Lang = isEn ? "en" : "zh"
+  const p = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  const isEn = p === "/en" || p.startsWith("/en/");
+  const lang: Lang = isEn ? "en" : "zh";
   // Bare path within the language (drop the /en prefix).
-  const bare = isEn ? p.slice(3) || "/" : p
+  const bare = isEn ? p.slice(3) || "/" : p;
   const page: Page =
-    bare === "/algo" ? "algo" : bare === "/about" ? "about" : "home"
-  return { lang, page, path: pathFor(lang, page) }
+    bare === "/algo" ? "algo" : bare === "/about" ? "about" : "home";
+  return { lang, page, path: pathFor(lang, page) };
 }
 
 /** Title and description for a resolved route. */
 export function metaFor(route: RouteMeta): Copy {
-  return COPY[route.lang][route.page]
+  return COPY[route.lang][route.page];
 }
 
-export { SITE }
+export { SITE };

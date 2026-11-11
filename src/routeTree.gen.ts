@@ -10,25 +10,15 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as EnIndexRouteImport } from './routes/en/index'
-import { Route as AlgoIndexRouteImport } from './routes/algo/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
-import { Route as EnAlgoIndexRouteImport } from './routes/en/algo/index'
+import { Route as AlgoIndexRouteImport } from './routes/algo/index'
+import { Route as EnIndexRouteImport } from './routes/en/index'
 import { Route as EnAboutIndexRouteImport } from './routes/en/about/index'
+import { Route as EnAlgoIndexRouteImport } from './routes/en/algo/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EnIndexRoute = EnIndexRouteImport.update({
-  id: '/en/',
-  path: '/en/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlgoIndexRoute = AlgoIndexRouteImport.update({
-  id: '/algo/',
-  path: '/algo/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
@@ -36,14 +26,24 @@ const AboutIndexRoute = AboutIndexRouteImport.update({
   path: '/about/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EnAlgoIndexRoute = EnAlgoIndexRouteImport.update({
-  id: '/en/algo/',
-  path: '/en/algo/',
+const AlgoIndexRoute = AlgoIndexRouteImport.update({
+  id: '/algo/',
+  path: '/algo/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en/',
+  path: '/en/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnAboutIndexRoute = EnAboutIndexRouteImport.update({
   id: '/en/about/',
   path: '/en/about/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAlgoIndexRoute = EnAlgoIndexRouteImport.update({
+  id: '/en/algo/',
+  path: '/en/algo/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -105,11 +105,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/en/': {
-      id: '/en/'
-      path: '/en'
-      fullPath: '/en/'
-      preLoaderRoute: typeof EnIndexRouteImport
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about/'
+      preLoaderRoute: typeof AboutIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/algo/': {
@@ -119,18 +119,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlgoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about/': {
-      id: '/about/'
-      path: '/about'
-      fullPath: '/about/'
-      preLoaderRoute: typeof AboutIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/en/algo/': {
-      id: '/en/algo/'
-      path: '/en/algo'
-      fullPath: '/en/algo/'
-      preLoaderRoute: typeof EnAlgoIndexRouteImport
+    '/en/': {
+      id: '/en/'
+      path: '/en'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/about/': {
@@ -138,6 +131,13 @@ declare module '@tanstack/react-router' {
       path: '/en/about'
       fullPath: '/en/about/'
       preLoaderRoute: typeof EnAboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/algo/': {
+      id: '/en/algo/'
+      path: '/en/algo'
+      fullPath: '/en/algo/'
+      preLoaderRoute: typeof EnAlgoIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

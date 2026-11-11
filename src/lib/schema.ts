@@ -1,13 +1,13 @@
-import type { TFunction } from "i18next"
-import { z } from "zod"
-import { MAX_AMOUNT, MAX_ITEMS } from "@/lib/constants"
+import type { TFunction } from "i18next";
+import { z } from "zod";
+import { MAX_AMOUNT, MAX_ITEMS } from "@/lib/constants";
 
 export function createAmountSchema(t: (key: string) => string) {
   return z.coerce
     .number({ message: t("home.errRequired") })
     .int(t("home.errInt"))
     .positive(t("home.errPositive"))
-    .max(MAX_AMOUNT, t("home.errMax"))
+    .max(MAX_AMOUNT, t("home.errMax"));
 }
 
 export const searchSchema = z.object({
@@ -18,10 +18,10 @@ export const searchSchema = z.object({
     .max(MAX_AMOUNT)
     .optional()
     .catch(undefined),
-})
+});
 
-const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" })
-const graphemeCount = (s: string) => [...segmenter.segment(s)].length
+const segmenter = new Intl.Segmenter("zh", { granularity: "grapheme" });
+const graphemeCount = (s: string) => [...segmenter.segment(s)].length;
 
 export function createSettingsSchema(t: TFunction) {
   const rangeSchema = z
@@ -46,7 +46,7 @@ export function createSettingsSchema(t: TFunction) {
     .refine((d) => d.max >= d.min, {
       message: t("settings.errMaxGteMin"),
       path: ["max"],
-    })
+    });
 
   return z.object({
     bagName: z
@@ -58,5 +58,5 @@ export function createSettingsSchema(t: TFunction) {
       .array(rangeSchema)
       .min(1, t("settings.errAtLeastOne"))
       .max(MAX_ITEMS, t("settings.errAtMost", { max: MAX_ITEMS })),
-  })
+  });
 }

@@ -1,5 +1,5 @@
-import { AttributionFooter } from "@rutopio/ui/footer"
-import { AUTHOR_PROFILE_URL } from "@/lib/constants"
+import { AttributionFooter } from "@rutopio/ui/footer";
+import { AUTHOR_PROFILE_URL } from "@/lib/constants";
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -11,5 +11,5 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
       }}
       author={{ href: AUTHOR_PROFILE_URL, label: "Created by ChingRu" }}
     />
-  )
+  );
 }

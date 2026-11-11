@@ -1,11 +1,11 @@
-import { CurrencyCircleDollarIcon } from "@phosphor-icons/react"
+import { CurrencyCircleDollarIcon } from "@phosphor-icons/react";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@rutopio/ui/input-group"
-import { useTranslation } from "react-i18next"
+} from "@rutopio/ui/input-group";
+import { useTranslation } from "react-i18next";
 
 // Amount field with the inline decompose button and its inline error message.
 export function AmountInput({
@@ -14,12 +14,12 @@ export function AmountInput({
   onChange,
   onSubmit,
 }: {
-  amount: string
-  error: string | null
-  onChange: (value: string) => void
-  onSubmit: () => void
+  amount: string;
+  error: string | null;
+  onChange: (value: string) => void;
+  onSubmit: () => void;
 }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div className="flex flex-1 flex-col gap-1">
       <InputGroup className="w-full" aria-invalid={error !== null}>
@@ -52,12 +52,12 @@ export function AmountInput({
       {error && (
         <p
           id="amount-error"
-          className="px-1 text-destructive text-sm"
+          className="text-destructive px-1 text-sm"
           role="alert"
         >
           {error}
         </p>
       )}
     </div>
-  )
+  );
 }

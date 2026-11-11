@@ -1,6 +1,6 @@
-import { CopyIcon } from "@phosphor-icons/react"
-import { Badge } from "@rutopio/ui/badge"
-import { Button } from "@rutopio/ui/button"
+import { CopyIcon } from "@phosphor-icons/react";
+import { Badge } from "@rutopio/ui/badge";
+import { Button } from "@rutopio/ui/button";
 import {
   Table,
   TableBody,
@@ -8,13 +8,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@rutopio/ui/table"
-import { useTranslation } from "react-i18next"
-import { GlowCard } from "@/components/glow-card"
-import { RollNumber } from "@/components/roll-number"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { type Item, keyOf } from "@/lib/decompose"
-import { toRows } from "@/lib/rows"
+} from "@rutopio/ui/table";
+import { useTranslation } from "react-i18next";
+import { GlowCard } from "@/components/glow-card";
+import { RollNumber } from "@/components/roll-number";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { type Item, keyOf } from "@/lib/decompose";
+import { toRows } from "@/lib/rows";
 
 // A single decomposition result rendered as a numbered card with its line-item
 // table. position is the 1-based label shown in the badge.
@@ -25,13 +25,13 @@ export function ResultTableCard({
   bagName,
   onCopy,
 }: {
-  item: Item
-  position: number
-  nameColCh: number
-  bagName: string
-  onCopy: () => void
+  item: Item;
+  position: number;
+  nameColCh: number;
+  bagName: string;
+  onCopy: () => void;
 }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <GlowCard signature={keyOf(item)}>
       <Card className="h-full w-full rounded-md lg:w-auto lg:min-w-72">
@@ -85,13 +85,13 @@ export function ResultTableCard({
                   <TableCell className="whitespace-nowrap">
                     {row.name}
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
+                  <TableCell className="pl-4 text-right whitespace-nowrap tabular-nums">
                     <RollNumber value={row.qty} />
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
+                  <TableCell className="pl-4 text-right whitespace-nowrap tabular-nums">
                     <RollNumber value={row.price} prefix="$" />
                   </TableCell>
-                  <TableCell className="whitespace-nowrap pl-4 text-right tabular-nums">
+                  <TableCell className="pl-4 text-right whitespace-nowrap tabular-nums">
                     <RollNumber value={row.total} prefix="$" />
                   </TableCell>
                 </TableRow>
@@ -101,5 +101,5 @@ export function ResultTableCard({
         </CardContent>
       </Card>
     </GlowCard>
-  )
+  );
 }

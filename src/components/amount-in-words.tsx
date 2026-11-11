@@ -1,6 +1,6 @@
-import { transitions } from "@rutopio/ui/motion"
-import { motion } from "motion/react"
-import { cnSlots } from "@/lib/cn-amount"
+import { transitions } from "@rutopio/ui/motion";
+import { motion } from "motion/react";
+import { cnSlots } from "@/lib/cn-amount";
 
 // Chinese uppercase amount strip (新台幣…元整). A zh-only convention; the caller
 // hides it on the English page. runId replays the enter animation on a fresh run.
@@ -9,11 +9,11 @@ export function AmountInWords({
   runId,
   reduce,
 }: {
-  total: number
-  runId: number
-  reduce: boolean
+  total: number;
+  runId: number;
+  reduce: boolean;
 }) {
-  const s = cnSlots(total)
+  const s = cnSlots(total);
   // One cell per character forming a grid: [digit, unit, digit, unit, ...].
   // Digit cells are bold, unit cells font-normal, empty stays blank. id is a stable key.
   const cells: { id: string; char: string; unit?: boolean }[] = [
@@ -31,15 +31,15 @@ export function AmountInWords({
     { id: "dollar-digit", char: s.yuan },
     { id: "dollar", char: "元", unit: true },
     { id: "exact", char: "整", unit: true },
-  ]
+  ];
   // On mobile, wrap after "仟"; join both rows into one strip on desktop.
-  const rows = [cells.slice(0, 7), cells.slice(7)]
+  const rows = [cells.slice(0, 7), cells.slice(7)];
   // Join adjacent cells across the row boundary on desktop.
   const msClass = (ri: number, ci: number) => {
-    if (ri === 0 && ci === 0) return ""
-    if (ci === 0) return "ms-0 lg:-ms-px"
-    return "-ms-px"
-  }
+    if (ri === 0 && ci === 0) return "";
+    if (ci === 0) return "ms-0 lg:-ms-px";
+    return "-ms-px";
+  };
   return (
     <motion.div
       // Replay the enter on a fresh decompose, like the cards above.
@@ -61,7 +61,7 @@ export function AmountInWords({
                 className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
                   c.unit
                     ? "bg-secondary font-normal"
-                    : "font-bold text-foreground"
+                    : "text-foreground font-bold"
                 }`}
               >
                 {c.char}
@@ -71,5 +71,5 @@ export function AmountInWords({
         ))}
       </div>
     </motion.div>
-  )
+  );
 }
