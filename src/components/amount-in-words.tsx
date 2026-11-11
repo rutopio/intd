@@ -15,7 +15,7 @@ export function AmountInWords({
 }) {
   const s = cnSlots(total)
   // One cell per character forming a grid: [digit, unit, digit, unit, ...].
-  // Digit cells are bold, unit cells font-light, empty stays blank. id is a stable key.
+  // Digit cells are bold, unit cells font-normal, empty stays blank. id is a stable key.
   const cells: { id: string; char: string; unit?: boolean }[] = [
     { id: "currency-1", char: "新", unit: true },
     { id: "currency-2", char: "台", unit: true },
@@ -60,7 +60,7 @@ export function AmountInWords({
                 // Mobile cells fill their row; desktop cells have a fixed size.
                 className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
                   c.unit
-                    ? "bg-secondary font-light"
+                    ? "bg-secondary font-normal"
                     : "font-bold text-foreground"
                 }`}
               >

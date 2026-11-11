@@ -38,7 +38,7 @@ function highlightCode(line: string) {
       parts.push(
         <span
           key={`${idx}-${tok}`}
-          className="font-medium text-violet-600 dark:text-violet-400"
+          className="font-semibold text-violet-600 dark:text-violet-400"
         >
           {tok}
         </span>,
