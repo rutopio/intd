@@ -59,3 +59,4 @@ Desktop.ini
 
 # Downloaded font sources used by the subset workflow
 /.font-source-cache/
+/docs

@@ -8,6 +8,7 @@ This script is deliberately not part of the Vite build.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import re
 import urllib.request
@@ -48,6 +49,8 @@ AXES = {
     "inter-italic": {"opsz": (14, 32), "wght": (100, 900)},
     "noto-tc": {"wght": (100, 900)},
 }
+PAPER_SOURCE = ROOT / "assets/fonts/PaperMono-original.woff2"
+PAPER_OUTPUT = OUTPUT / "PaperMono[wght].woff2"
 
 
 def source(name: str) -> Path:
@@ -83,6 +86,53 @@ def unicode_range(codepoints: set[int]) -> str:
     return ",".join(f"U+{a:X}" if a == b else f"U+{a:X}-{b:X}" for a, b in runs)
 
 
+def remove_empty_layout_tables(font: TTFont) -> None:
+    """Discard empty layout tables only when the encoded WOFF2 gets smaller."""
+    for tag in ("GSUB", "GPOS"):
+        if tag not in font:
+            continue
+        layout = font[tag].table
+        if layout.FeatureList and layout.FeatureList.FeatureRecord:
+            continue
+        if layout.LookupList and layout.LookupList.Lookup:
+            continue
+        original = io.BytesIO()
+        font.save(original)
+        empty = font[tag]
+        del font[tag]
+        cleaned = io.BytesIO()
+        font.save(cleaned)
+        if len(cleaned.getvalue()) >= len(original.getvalue()):
+            font[tag] = empty
+
+
+def make_paper_mono() -> None:
+    # Keep every glyph, original glyph ID, axis, hint, and default feature.
+    # The earlier glyph/axis subset changed pixels on the algorithm article.
+    font = TTFont(PAPER_SOURCE)
+    options = subset.Options()
+    options.flavor = "woff2"
+    options.hinting = True
+    options.glyph_names = True
+    options.retain_gids = True
+    options.layout_features = ["ccmp", "locl", "rvrn", "mark", "mkmk"]
+    options.name_IDs = ["*"]
+    options.name_languages = ["*"]
+    options.recalc_bounds = False
+    worker = subset.Subsetter(options=options)
+    worker.populate(glyphs=font.getGlyphOrder())
+    worker.subset(font)
+    font.flavor = "woff2"
+    font.recalcTimestamp = False
+    font.save(PAPER_OUTPUT)
+    check = TTFont(PAPER_OUTPUT)
+    original = TTFont(PAPER_SOURCE)
+    if check.getGlyphOrder() != original.getGlyphOrder() or check.getBestCmap() != original.getBestCmap():
+        raise ValueError("Paper Mono glyph order or coverage changed")
+    print(f"{PAPER_OUTPUT.relative_to(ROOT)}: {PAPER_OUTPUT.stat().st_size} bytes, "
+          f"{len(check.getBestCmap())} mapped characters")
+
+
 def make_font(name: str, part: str, selected: set[int]) -> tuple[set[int], str]:
     font = TTFont(source(name))
     available = set(font.getBestCmap())
@@ -111,6 +161,7 @@ def make_font(name: str, part: str, selected: set[int]) -> tuple[set[int], str]:
     font.flavor = "woff2"
     font.recalcTimestamp = False
     font["head"].modified = 3600000000
+    remove_empty_layout_tables(font)
     target = OUTPUT / f"{name}-{part}.woff2"
     font.save(target)
     check = TTFont(target)
@@ -123,6 +174,7 @@ def make_font(name: str, part: str, selected: set[int]) -> tuple[set[int], str]:
 
 def main() -> None:
     OUTPUT.mkdir(exist_ok=True)
+    make_paper_mono()
     for stale in OUTPUT.glob("paper-mono-*.woff2"):
         stale.unlink()
     content = content_codepoints()

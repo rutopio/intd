@@ -1,5 +1,9 @@
 # Web font audit and reproducible comparison
 
+The [2026-11-11 incremental audit](incremental/README.md) compares the current
+content with the latest font output. The measurements below describe the
+earlier full audit and remain as its historical baseline.
+
 Measured on 2026-11-11 against the same page content and CSS text scale at 1280 × 720 in Chromium. The baseline came from commit `c8b5bf2`; the concurrent footer and text-size edits were copied into the temporary baseline so the comparison isolates font changes. Browser cache was cleared before each route. Byte counts below are uncompressed WOFF2 file bytes for each distinct font URL requested, not transfer compression. Every observed font response was HTTP 200.
 
 The full [before inventory](before-inventory.json) and [after inventory](after-inventory.json) list **each WOFF2 file** (140 before, 28 after), its size, glyph count, mapped codepoints, variable axes, GSUB/GPOS feature tags, and hinting tables/instructions. The 20 KaTeX WOFF2 files are included in both inventories; alternate KaTeX WOFF/TTF assets are build outputs but were not requested by these browser pages. The [per-page record](page-metrics.json) lists every requested file and preload.
