@@ -4,9 +4,6 @@ import { getResultRows } from "@/lib/result-rows";
 
 const WIDE_CHARACTER_RE = /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦]/;
 
-// Pure formatters that turn a decomposition result into copyable text. No React
-// here; the localized column labels come in via the passed t function.
-
 export function toMarkdown(
   result: DecompositionResult,
   showTotal: boolean,

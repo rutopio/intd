@@ -11,8 +11,6 @@ import { StrategySelector } from "@/components/calculator/strategy-selector";
 import { ShareButton } from "@/components/navigation/share-button";
 import { useDecomposition } from "@/hooks/use-decomposition";
 
-// Shared home page, rendered by both the zh (/) and en (/en) routes. Language is
-// read from the path via useLang; search params are read route-agnostically.
 export function HomePage() {
   const reduce = useReducedMotion();
   const {
@@ -73,7 +71,6 @@ export function HomePage() {
                 >
                   {results.map((result, idx) => (
                     <ResultTableCard
-                      // Stable by position so shuffle updates content in place (no remount/enter).
                       // biome-ignore lint/suspicious/noArrayIndexKey: position is the stable identity here
                       key={idx}
                       result={result}

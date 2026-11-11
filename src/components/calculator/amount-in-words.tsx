@@ -2,8 +2,6 @@ import { motionTransitions } from "@rutopio/ui/motion-tokens";
 import { motion } from "motion/react";
 import { cnSlots } from "@/lib/cn-amount";
 
-// Chinese uppercase amount strip (新台幣…元整). A zh-only convention; the caller
-// hides it on the English page. runId replays the enter animation on a fresh run.
 export function AmountInWords({
   total,
   runId,
@@ -14,8 +12,6 @@ export function AmountInWords({
   reduce: boolean;
 }) {
   const s = cnSlots(total);
-  // One cell per character forming a grid: [digit, unit, digit, unit, ...].
-  // Digit cells are bold, unit cells font-normal, empty stays blank. id is a stable key.
   const cells: { id: string; char: string; unit?: boolean }[] = [
     { id: "currency-1", char: "新", unit: true },
     { id: "currency-2", char: "台", unit: true },
@@ -34,7 +30,6 @@ export function AmountInWords({
   ];
   // On mobile, wrap after "仟"; join both rows into one strip on desktop.
   const rows = [cells.slice(0, 7), cells.slice(7)];
-  // Join adjacent cells across the row boundary on desktop.
   const msClass = (ri: number, ci: number) => {
     if (ri === 0 && ci === 0) return "";
     if (ci === 0) return "ms-0 lg:-ms-px";
@@ -42,7 +37,6 @@ export function AmountInWords({
   };
   return (
     <motion.div
-      // Replay the enter on a fresh decompose, like the cards above.
       key={runId}
       layout={!reduce}
       initial={reduce ? false : { opacity: 0, y: 8 }}
@@ -57,7 +51,6 @@ export function AmountInWords({
             {row.map((c, ci) => (
               <span
                 key={c.id}
-                // Mobile cells fill their row; desktop cells have a fixed size.
                 className={`flex aspect-square flex-1 items-center justify-center border text-[clamp(1.125rem,5vw,1.875rem)] leading-none lg:aspect-auto lg:size-16 lg:flex-none lg:text-3xl ${msClass(ri, ci)} ${
                   c.unit
                     ? "bg-secondary font-normal"

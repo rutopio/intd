@@ -1,17 +1,4 @@
-/**
- * Cloudflare Pages Function: on-demand Open Graph image.
- *
- *   GET /og?p=8133
- *
- * Reuses the app's pure OG renderer to build a 1200x630 SVG (logo + brand +
- * subtitle), then rasterizes it to PNG with resvg-wasm. The brand is the `?p=`
- * amount when valid, otherwise "IntD". Cached at the edge so repeated shares are
- * cheap. Crawlers (Facebook, Discord, Twitter) fetch this via the rewritten meta
- * in _middleware.ts.
- */
-
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
-// The .wasm is imported as a module so Wrangler bundles it with the function.
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
 
 import {
@@ -20,7 +7,6 @@ import {
 } from "../src/lib/inter-og-font";
 import { OG_WIDTH, parseBrand, renderOgSvg } from "../src/lib/render-og-image";
 
-// Decode the embedded Inter OG subsets once per isolate.
 function base64ToBytes(b64: string): Uint8Array {
   const bin = atob(b64);
   const bytes = new Uint8Array(bin.length);
@@ -32,7 +18,7 @@ const FONT_BYTES = [
   base64ToBytes(INTER_OG_BOLD_TTF_BASE64),
 ];
 
-// initWasm must run once per isolate; guard with a shared promise.
+// Share initialization across concurrent requests; a failed attempt remains retryable.
 let wasmReady: Promise<void> | null = null;
 function ensureWasm(): Promise<void> {
   if (!wasmReady) {
@@ -59,7 +45,6 @@ export const onRequestGet: PagesFunction = async ({ request }) => {
   return new Response(png.buffer as ArrayBuffer, {
     headers: {
       "content-type": "image/png",
-      // Cache aggressively at the edge; the image is a pure function of ?p=.
       "cache-control": "public, max-age=86400, s-maxage=2592000, immutable",
     },
   });

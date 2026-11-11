@@ -39,7 +39,6 @@ export function CopyDialog({
   const isNarrowViewport = useIsNarrowViewport();
   const { bagName } = useSettings();
 
-  // Display names for the copied-format toast, keyed by tab value.
   const FORMAT_LABELS: Record<string, string> = {
     markdown: t("copy.tabMarkdown"),
     table: t("copy.tabTable"),

@@ -8,9 +8,6 @@ import {
 import { useEffect } from "react";
 import { formatNumber } from "@/lib/result-rows";
 
-// Animates an integer to a new value by rolling (tweening) the displayed number,
-// formatted the same way as the static cells. Used when shuffling keeps the cards
-// in place but their quantities/prices change.
 export function RollNumber({
   value,
   prefix = "",

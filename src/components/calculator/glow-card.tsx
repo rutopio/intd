@@ -1,12 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
-// Wraps a result card and flashes a glowing ring around it when its contents
-// change in place (shuffle / strategy switch). The flash runs in lockstep with
-// the RollNumber roll-up: same start, same end, signalling "price updated".
-//
-// The glow is a separate absolutely-positioned overlay whose opacity is
-// animated. boxShadow strings (and color-mix) don't interpolate smoothly in
-// motion, so animating a plain opacity is what gives a real fade in/out.
+// Fade a separate overlay because Motion cannot interpolate this color-mix shadow.
 const ROLL_DURATION = 0.4; // keep in sync with RollNumber
 
 export function GlowCard({

@@ -4,9 +4,7 @@ import { getLangFromPath } from "@/lib/language";
 import en from "@/locales/en.json";
 import zh from "@/locales/zh.json";
 
-// The URL is the source of truth for language (zh = bare path, en = /en prefix);
-// the language detector is intentionally omitted. changeLanguage is driven by the
-// route on entry. zh maps to the existing zh_tw content.
+// Route entry controls language; browser detection would disagree with shared URLs.
 i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },

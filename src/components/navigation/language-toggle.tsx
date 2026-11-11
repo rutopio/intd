@@ -10,7 +10,6 @@ const options = [
   { value: "en", label: "English", htmlLang: "en" },
 ] as const;
 
-// zh uses the bare path; en uses the /en prefix.
 export function LanguageToggle({ className }: { className?: string }) {
   const navigate = useNavigate();
   const pathname = useLocation({ select: (l) => l.pathname });

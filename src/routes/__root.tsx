@@ -8,10 +8,7 @@ import { Header } from "@/components/layout/header";
 import { NotFound } from "@/components/layout/not-found";
 import { useLang } from "@/hooks/use-lang";
 
-// Soft fade-in on route change: the new page mounts at opacity 0 and animates to
-// 1. No exit animation and no AnimatePresence, so the old page is never faded to
-// blank first — no flash. Keyed on pathname so changing ?p on a page does not
-// re-trigger. Honours prefers-reduced-motion.
+// Query and hash updates retain page state and do not restart the entrance animation.
 function AnimatedOutlet() {
   const pathname = useLocation({ select: (location) => location.pathname });
   return (

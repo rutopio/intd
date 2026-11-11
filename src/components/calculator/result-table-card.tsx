@@ -16,8 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type DecompositionResult, getResultKey } from "@/lib/decomposition";
 import { getResultRows } from "@/lib/result-rows";
 
-// A single decomposition result rendered as a numbered card with its line-item
-// table. position is the 1-based label shown in the badge.
+// position is the one-based result label.
 export function ResultTableCard({
   result,
   position,

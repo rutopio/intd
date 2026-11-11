@@ -49,7 +49,7 @@ export interface StoredValueSchema<T> {
   safeParse(value: unknown): { success: true; data: T } | { success: false };
 }
 
-/** Storage is external input, including valid JSON left by an older version. */
+/** Treat persisted JSON as untrusted input, regardless of its source. */
 export function parseStoredValue<T>(
   raw: string | null,
   initial: T,

@@ -1,17 +1,10 @@
-// Shared business constants used across routes and components. Keep values here
-// when the same number means the same rule in more than one place.
-
 import type { DecompositionItemConfig } from "@/lib/decomposition";
 
-// Upper bound for the target amount. Enforced by the input validation, the
-// settings price caps, and the ?p= search param schema.
 export const MAX_AMOUNT = 99999;
 
-// Upper bound on user-configurable item types. The built-in plastic bag counts
-// toward a total cap of 7, so custom items max out at 6 (6 + bag = 7).
+// Six custom items plus the built-in bag fit the seven-item limit.
 export const MAX_ITEMS = 6;
 
-// Max plastic bags ($1 each) used to cover the remaining change.
 export const MAX_BAGS = 9;
 
 export const DEFAULT_ITEMS: DecompositionItemConfig[] = [
@@ -22,8 +15,6 @@ export const DEFAULT_ITEMS: DecompositionItemConfig[] = [
 // Built-in $1 filler item; only its display name is user-configurable.
 export const DEFAULT_BAG_NAME = "塑膠袋";
 
-// Project repository (header link).
 export const GITHUB_URL = "https://github.com/rutopio/intd";
 
-// Author's GitHub profile (footer credit).
 export const AUTHOR_PROFILE_URL = "https://chingru.com";

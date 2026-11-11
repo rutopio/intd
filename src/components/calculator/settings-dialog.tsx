@@ -39,7 +39,6 @@ import { DEFAULT_BAG_NAME, DEFAULT_ITEMS, MAX_ITEMS } from "@/lib/constants";
 import type { DecompositionItemConfig } from "@/lib/decomposition";
 import { createSettingsSchema } from "@/lib/schema";
 
-// Display order of the last-digit toggles: 1-9 then 0.
 const DIGITS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
 const NEW_ITEM: DecompositionItemConfig = {
@@ -78,10 +77,7 @@ export function SettingsDialog() {
     },
   });
 
-  // base-ui Drawer has no `dismissible` prop; instead it reports the close
-  // reason. Reject user-driven dismissals (outside press, Esc, swipe) so the
-  // settings form can only be closed via its own buttons, matching the old
-  // vaul `dismissible={false}`.
+  // Only the form buttons may close settings; reject outside presses, Escape and swipes.
   const NON_DISMISSIBLE_REASONS = new Set([
     "outside-press",
     "escape-key",
@@ -167,7 +163,7 @@ export function SettingsDialog() {
                             id={`${fieldId}-${index}-min`}
                             placeholder={t("settings.priceMin")}
                             type="number"
-                            // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
+                            // Render zero as empty so deleting input does not leave a leading zero.
                             value={minField.state.value || ""}
                             onBlur={minField.handleBlur}
                             onChange={(e) =>
@@ -190,7 +186,7 @@ export function SettingsDialog() {
                         className={numInputClass}
                         placeholder={t("settings.priceMax")}
                         type="number"
-                        // Show 0 as empty and store empty as 0, so clearing does not leave a stuck leading 0.
+                        // Render zero as empty so deleting input does not leave a leading zero.
                         value={maxField.state.value || ""}
                         onBlur={maxField.handleBlur}
                         onChange={(e) =>
@@ -220,7 +216,7 @@ export function SettingsDialog() {
                     variant="outline"
                     spacing={0}
                     className="w-max lg:w-full"
-                    // base-ui Toggle only accepts string values; convert at the boundary and keep number state internally.
+                    // Toggle values are strings; the settings model stores numeric digits.
                     value={field.state.value.map(String)}
                     onValueChange={(v) => field.handleChange(v.map(Number))}
                     aria-label={t("settings.aDigitsOf", { label })}
@@ -246,7 +242,7 @@ export function SettingsDialog() {
     );
   };
 
-  // Built-in $1 filler item: only the display name is editable; no delete, no digit toggles.
+  // The built-in bag always costs $1; only its name is editable.
   const bagCard = (
     <Card size="sm" className="relative shrink-0 rounded-md">
       <CardContent className="flex gap-3">
@@ -331,7 +327,7 @@ export function SettingsDialog() {
         variant="ghost"
         className="text-destructive text-base"
         onClick={() => {
-          // Close settings first so only the reset confirmation dialog is open at once.
+          // Avoid showing the settings and reset dialogs together.
           setOpen(false);
           setConfirmReset(true);
         }}
@@ -448,7 +444,7 @@ export function SettingsDialog() {
                 variant="ghost"
                 className="text-destructive shrink-0 text-sm"
                 onClick={() => {
-                  // Close the settings drawer first so only one drawer is open at once.
+                  // Avoid showing both drawers together.
                   setOpen(false);
                   setConfirmReset(true);
                 }}

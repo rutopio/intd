@@ -4,8 +4,6 @@ import EnContent from "@/content/en/algo.mdx";
 import ZhContent from "@/content/zh_tw/algo.mdx";
 import { useLang } from "@/hooks/use-lang";
 
-// Shared Algorithm page, rendered by both / (zh) and /en routes. Picks the MDX
-// body by language; both are statically imported so each ships in its own chunk.
 export function AlgorithmPage() {
   const lang = useLang();
   const Content = lang === "en" ? EnContent : ZhContent;

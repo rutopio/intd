@@ -1,15 +1,4 @@
-/**
- * Cloudflare Pages middleware: inject per-route SEO metadata into the served
- * HTML. The app is a single index.html shell whose static head only describes
- * the zh home page, and crawlers don't run JS, so the correct title /
- * description / canonical / locale / OG tags for each route (and language) must
- * be written here.
- *
- * On top of that, when a shared URL carries a valid `?p=` amount, the OG/Twitter
- * image is swapped for the on-demand /og image of that number.
- *
- * Only the HTML app shell is rewritten; /og and static assets pass through.
- */
+// Crawlers need route and shared-amount metadata before the SPA runs.
 
 import {
   OG_HEIGHT,
@@ -49,9 +38,7 @@ const setHref = (v: string) => new AttrRewriter("href", v);
 export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url);
 
-  // Canonical-host redirect. Any *.pages.dev host (<project>.pages.dev and every
-  // <hash>.<project>.pages.dev preview URL) is 301'd to the custom domain, path +
-  // query preserved, so the pages.dev origin never gets indexed or linked.
+  // Keep preview hosts out of search indexes.
   if (url.hostname.endsWith(".pages.dev")) {
     return Response.redirect(
       `https://intd.chingru.com${url.pathname}${url.search}`,
@@ -59,7 +46,6 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     );
   }
 
-  // Don't touch the image function or anything that isn't the HTML shell.
   if (url.pathname.startsWith("/og")) return next();
 
   const response = await next();
@@ -71,11 +57,9 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const canonical = `${url.origin}${route.path}`;
   const locale = OG_LOCALE[route.lang];
 
-  // hreflang alternates: same page in each language. x-default points to zh.
   const zhAlt = `${url.origin}${pathFor("zh", route.page)}`;
   const enAlt = `${url.origin}${pathFor("en", route.page)}`;
 
-  // Default image is the static og.png; a valid ?p= shares the dynamic number.
   const brand = parseBrand(url.search);
   const hasAmount = brand !== "IntD";
   const imageUrl = hasAmount
@@ -83,7 +67,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     : `${url.origin}/og.png?v=${OG_IMAGE_VERSION}`;
   const imageW = OG_WIDTH;
   const imageH = OG_HEIGHT;
-  // og:url reflects the actual shared URL (keeps the ?p so the unfurl is exact).
+  // Preserve the amount query in share metadata.
   const ogUrl = hasAmount ? url.href : canonical;
   const imageAlt =
     route.lang === "en"

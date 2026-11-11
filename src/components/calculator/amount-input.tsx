@@ -7,7 +7,6 @@ import {
 } from "@rutopio/ui/input-group";
 import { useTranslation } from "react-i18next";
 
-// Amount field with the inline decompose button and its inline error message.
 export function AmountInput({
   amount,
   error,

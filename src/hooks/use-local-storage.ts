@@ -1,8 +1,7 @@
 import { useCallback, useMemo, useSyncExternalStore } from "react";
 import { parseStoredValue, type StoredValueSchema } from "@/lib/stored-state";
 
-// A raw string is a stable snapshot for useSyncExternalStore. Parsed objects
-// would be new on every read and trigger repeated renders.
+// Parsed objects would create a new snapshot on every read and cause repeated renders.
 const volatileValues = new Map<string, string | null>();
 
 function readRaw(key: string): string | null {
@@ -48,8 +47,6 @@ export function writeLocalStorageValue<T>(key: string, value: T) {
   notify(key);
 }
 
-// Subscribe to changes from this tab and other tabs without mirroring storage
-// into React state through an effect.
 export function useLocalStorage<T>(
   key: string,
   initial: T,

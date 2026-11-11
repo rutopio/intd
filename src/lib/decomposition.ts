@@ -16,7 +16,6 @@ export type DecompositionResult = {
   balanceScore: number; // max-min of the quantities; smaller is more balanced
 };
 
-// Legal prices for an item: values in [min,max] whose last digit is in digits.
 function getAllowedPrices(config: DecompositionItemConfig): number[] {
   const prices: number[] = [];
   for (let p = config.min; p <= config.max; p++) {
@@ -38,8 +37,6 @@ function findDecompositions(
     qty: 0,
   }));
 
-  // For each item, pick "skip (qty=0)" or "a price x a positive quantity".
-  // Whatever remains is covered by plastic bags (0..MAX_BAGS).
   function dfs(i: number, remaining: number) {
     if (i === items.length) {
       const bags = remaining;
@@ -96,7 +93,6 @@ function getPriceCombinationKey(result: DecompositionResult): string {
     .join("_");
 }
 
-// Sort priority: "bags" prefers fewer plastic bags; "balance" prefers more even quantities.
 export type SortMode = "bags" | "balance";
 
 function selectThreeDiverseResults(
@@ -104,7 +100,6 @@ function selectThreeDiverseResults(
   exclude: Set<string>,
   mode: SortMode
 ): DecompositionResult[] {
-  // Drop already-seen solutions, then sort by the chosen primary key (the other is the tiebreaker).
   const availableResults = candidates
     .filter((c) => !exclude.has(getResultKey(c)))
     .sort((a, b) => {
@@ -118,7 +113,7 @@ function selectThreeDiverseResults(
     });
   if (availableResults.length === 0) return [];
 
-  // Take three, preferring distinct price combos; relax that to fill if short.
+  // Prefer distinct price combinations, then fill any remaining slots.
   const picks: DecompositionResult[] = [];
   const fill = (allowSameCombo: boolean) => {
     for (const c of availableResults) {
@@ -137,7 +132,6 @@ function selectThreeDiverseResults(
   return picks;
 }
 
-// exclude holds already-seen solution keys; pass it to get a fresh batch.
 export function decompose(
   target: number,
   items: DecompositionItemConfig[],
