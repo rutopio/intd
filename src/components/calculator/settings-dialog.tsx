@@ -306,7 +306,7 @@ export function SettingsDialog() {
             onClick={() => itemsField.pushValue(NEW_ITEM)}
           >
             <PlusIcon aria-hidden="true" />
-            {/* Count includes the built-in plastic bag: custom items + 1 over the total cap. */}
+            {/* Include the built-in bag in both the count and the limit. */}
             {t("settings.addItem")} ({itemsField.state.value.length + 1}/
             {MAX_ITEMS + 1})
           </Button>

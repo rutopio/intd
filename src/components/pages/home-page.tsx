@@ -93,7 +93,6 @@ export function HomePage() {
                   onClick={handleShuffle}
                 />
               </motion.div>
-              {/* Chinese uppercase amount block: a zh-only convention, hidden in English. */}
               {!isEn && results[0] && (
                 <AmountInWords
                   total={results[0].total}
