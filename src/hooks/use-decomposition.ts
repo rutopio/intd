@@ -1,6 +1,5 @@
-import { useMountEffect } from "@rutopio/ui/use-mount-effect";
-import { useNavigate, useSearch } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 import { useLang } from "@/hooks/use-lang";
@@ -33,7 +32,6 @@ export function useDecomposition() {
   const amountSchema = createAmountSchema(t);
   const { items, bagName } = useSettings();
   const navigate = useNavigate();
-  const { p } = useSearch({ strict: false }) as { p?: number };
 
   const [amount, setAmount] = useLocalStorage("idc:amount", "", storedAmount);
   const [runId, setRunId] = useState(0);
@@ -133,21 +131,6 @@ export function useDecomposition() {
     }));
     setSpin((n) => n + 1);
   };
-
-  const didInit = useRef(false);
-  useMountEffect(() => {
-    if (didInit.current) return;
-    didInit.current = true;
-    if (p !== undefined) {
-      setAmount(String(p));
-      setError(null);
-      runDecompose(p);
-      return;
-    }
-    if (target !== null) {
-      navigate({ to: ".", search: { p: target }, replace: true });
-    }
-  });
 
   return {
     isEn,

@@ -14,7 +14,7 @@ export function About() {
       <Article>
         <Content components={mdxComponents} />
       </Article>
-      <PageActions drawerTitleKey="nav.about" />
+      <PageActions key={lang} drawerTitleKey="nav.about" />
     </main>
   );
 }

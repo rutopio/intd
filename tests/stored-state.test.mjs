@@ -174,3 +174,98 @@ test("interleaved target and settings writes cannot reuse incompatible results o
   );
   assert.equal(stored.compatibleMode(byMode, "bags", null, items), null);
 });
+
+test("route initialization honors URL state, retains compatible history, and skips preloads", async () => {
+  const window = new Window();
+  const hooks = await loadSource(
+    new URL("../src/hooks/use-local-storage.ts", import.meta.url),
+    {
+      globals: { window, CustomEvent: window.CustomEvent },
+      imports: { react: React, "@/lib/stored-state": stored },
+    }
+  );
+  let calls = 0;
+  const solver = {
+    decompose(target) {
+      calls++;
+      return [
+        {
+          lines: [{ name: "item", price: target - 1, qty: 1 }],
+          bags: 1,
+          total: target,
+          balanceScore: 0,
+        },
+      ];
+    },
+    getResultKey(result) {
+      return String(result.total);
+    },
+  };
+  const { prepareCalculationRoute: prepare } = await loadSource(
+    new URL("../src/lib/prepare-calculation-route.ts", import.meta.url),
+    {
+      globals: { window },
+      imports: {
+        "@tanstack/react-router": {
+          redirect: (options) => ({ redirect: options }),
+        },
+        "@/hooks/use-local-storage": hooks,
+        "./constants": constants,
+        "./decomposition": solver,
+        "./stored-state": stored,
+      },
+    }
+  );
+  const run = (p, preload = false) =>
+    prepare({ search: { p }, preload, location: { pathname: "/en/" } });
+  try {
+    hooks.writeLocalStorageValue("idc:settings", [
+      { name: "item", min: 10, max: 90, digits: [0] },
+    ]);
+    run(21, true);
+    assert.equal(calls, 0);
+    assert.equal(window.localStorage.getItem("idc:target"), null);
+    run(21);
+    assert.equal(calls, 1);
+    assert.equal(
+      hooks.readLocalStorageValue("idc:amount", "", stored.storedAmount),
+      "21"
+    );
+    const byMode = hooks.readLocalStorageValue(
+      "idc:byMode",
+      null,
+      stored.storedByMode
+    );
+    byMode.bags.offset = 12;
+    byMode.bags.seen.push("history");
+    hooks.writeLocalStorageValue("idc:byMode", byMode);
+    run(21);
+    assert.equal(calls, 1);
+    assert.equal(
+      hooks.readLocalStorageValue("idc:byMode", null, stored.storedByMode).bags
+        .offset,
+      12
+    );
+    run(31);
+    assert.equal(calls, 2);
+    assert.equal(
+      hooks.readLocalStorageValue("idc:target", null, stored.storedTarget),
+      31
+    );
+    assert.throws(
+      () => run(undefined),
+      (error) =>
+        error.redirect.to === "/en" &&
+        error.redirect.search.p === 31 &&
+        error.redirect.replace
+    );
+    hooks.removeLocalStorageKey("idc:target");
+    run(undefined);
+    assert.equal(calls, 2);
+    hooks.writeLocalStorageValue("idc:byMode", null);
+    run(41);
+    assert.equal(calls, 3);
+  } finally {
+    await window.happyDOM.abort();
+  }
+});

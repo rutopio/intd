@@ -13,7 +13,7 @@ import { ReadingProgressRing } from "@rutopio/ui/outline-menu";
 import { PageActionRail } from "@rutopio/ui/page-action-rail";
 import { scrollToSection } from "@rutopio/ui/section-navigation";
 import { useMountEffect } from "@rutopio/ui/use-mount-effect";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ShareButton } from "@/components/share-button";
 
@@ -32,29 +32,41 @@ export function PageActions({
   const [progress, setProgress] = useState(0);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const selectedId = activeId || items[0]?.id || "";
-  const drawerScrollRef = useRef<HTMLElement>(null);
+  const setDrawerScrollRef = useCallback((viewport: HTMLElement | null) => {
+    if (!viewport) return;
+    const frame = requestAnimationFrame(() => {
+      const active = viewport.querySelector<HTMLElement>("[data-active]");
+      if (!active) return;
+      const viewportRect = viewport.getBoundingClientRect();
+      const activeRect = active.getBoundingClientRect();
+      viewport.scrollTop +=
+        activeRect.top -
+        viewportRect.top -
+        viewport.clientHeight / 2 +
+        activeRect.height / 2;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   useMountEffect(() => {
     const article = document.querySelector("main article");
     if (!article) return;
-    setItems(
-      Array.from(article.querySelectorAll<HTMLElement>("h2[id], h3[id]"))
-        .map((heading) => {
-          const visibleHeading = heading.cloneNode(true) as HTMLElement;
-          visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
-            node.remove();
-          });
-          return {
-            id: heading.id,
-            label: visibleHeading.textContent?.trim() ?? "",
-            depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
-          };
-        })
-        .filter((item) => item.label)
-    );
-  });
-
-  useEffect(() => {
+    const headings = Array.from(
+      article.querySelectorAll<HTMLElement>("h2[id], h3[id]")
+    )
+      .map((heading) => {
+        const visibleHeading = heading.cloneNode(true) as HTMLElement;
+        visibleHeading.querySelectorAll(".katex-mathml").forEach((node) => {
+          node.remove();
+        });
+        return {
+          id: heading.id,
+          label: visibleHeading.textContent?.trim() ?? "",
+          depth: heading.tagName === "H3" ? (3 as const) : (2 as const),
+        };
+      })
+      .filter((item) => item.label);
+    setItems(headings);
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -67,12 +79,12 @@ export function PageActions({
       );
       const line = scrollY + Math.max(120, Math.round(window.innerHeight / 3));
       let current = "";
-      for (const item of items) {
+      for (const item of headings) {
         const heading = document.getElementById(item.id);
         if (heading && heading.getBoundingClientRect().top + scrollY <= line)
           current = item.id;
       }
-      if (scrollY >= scrollable - 2) current = items.at(-1)?.id ?? current;
+      if (scrollY >= scrollable - 2) current = headings.at(-1)?.id ?? current;
       setActiveId(current);
     };
     const schedule = () => {
@@ -89,24 +101,7 @@ export function PageActions({
       window.removeEventListener("resize", schedule);
       observer.disconnect();
     };
-  }, [items]);
-
-  useEffect(() => {
-    if (!outlineOpen) return;
-    const frame = requestAnimationFrame(() => {
-      const viewport = drawerScrollRef.current;
-      const active = viewport?.querySelector<HTMLElement>("[data-active]");
-      if (!viewport || !active) return;
-      const viewportRect = viewport.getBoundingClientRect();
-      const activeRect = active.getBoundingClientRect();
-      viewport.scrollTop +=
-        activeRect.top -
-        viewportRect.top -
-        viewport.clientHeight / 2 +
-        activeRect.height / 2;
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [outlineOpen]);
+  });
 
   const navigateToHeading = (id: string) => {
     scrollToSection(id, () => setOutlineOpen(false));
@@ -153,7 +148,7 @@ export function PageActions({
                 <DrawerTitle>{t(drawerTitleKey)}</DrawerTitle>
               </DrawerHeader>
               <nav
-                ref={drawerScrollRef}
+                ref={setDrawerScrollRef}
                 aria-label={t("pageActions.outline")}
                 className="min-h-0 flex-1 overflow-y-auto px-4 pt-4 pb-6"
               >

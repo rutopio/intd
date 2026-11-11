@@ -14,7 +14,7 @@ export function Algo() {
       <Article>
         <Content components={mdxComponents} />
       </Article>
-      <PageActions />
+      <PageActions key={lang} />
     </main>
   );
 }

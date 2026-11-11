@@ -29,6 +29,25 @@ export function removeLocalStorageKey(key: string) {
   notify(key);
 }
 
+export function readLocalStorageValue<T>(
+  key: string,
+  initial: T,
+  schema: StoredValueSchema<T>
+): T {
+  return parseStoredValue(readRaw(key), initial, schema);
+}
+
+export function writeLocalStorageValue<T>(key: string, value: T) {
+  const serialized = JSON.stringify(value);
+  try {
+    window.localStorage.setItem(key, serialized);
+    volatileValues.delete(key);
+  } catch {
+    volatileValues.set(key, serialized);
+  }
+  notify(key);
+}
+
 // Subscribe to changes from this tab and other tabs without mirroring storage
 // into React state through an effect.
 export function useLocalStorage<T>(
@@ -64,14 +83,7 @@ export function useLocalStorage<T>(
         typeof action === "function"
           ? (action as (previous: T) => T)(previous)
           : action;
-      const serialized = JSON.stringify(next);
-      try {
-        window.localStorage.setItem(key, serialized);
-        volatileValues.delete(key);
-      } catch {
-        volatileValues.set(key, serialized);
-      }
-      notify(key);
+      writeLocalStorageValue(key, next);
     },
     [key, initial, schema]
   );
