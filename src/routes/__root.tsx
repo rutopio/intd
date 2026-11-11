@@ -1,11 +1,11 @@
 import { PageTransition } from "@rutopio/ui/page-transition"
+import { ScreenSize } from "@rutopio/ui/screen-size"
 import { SiteLayout } from "@rutopio/ui/site-layout"
 import { Toaster } from "@rutopio/ui/sonner"
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router"
-import { useTranslation } from "react-i18next"
+import { NotFound } from "@/components/not-found"
 import { Footer } from "@/components/layout/footer"
 import { Header } from "@/components/layout/header"
-import { ScreenSize } from "@/components/screen-size"
 import { useLang } from "@/hooks/use-lang"
 
 // Soft fade-in on route change: the new page mounts at opacity 0 and animates to
@@ -45,18 +45,8 @@ function RootLayout() {
       <Header className="bg-background" />
       <AnimatedOutlet />
       <Footer className="bg-background" />
-      <ScreenSize />
+      {import.meta.env.DEV && <ScreenSize />}
       <Toaster position="top-center" closeButton />
     </SiteLayout>
-  )
-}
-
-function NotFound() {
-  const { t } = useTranslation()
-  return (
-    <main className="flex w-full min-w-0 flex-col py-16">
-      <h1>{t("notFound.title")}</h1>
-      <p>{t("notFound.desc")}</p>
-    </main>
   )
 }
