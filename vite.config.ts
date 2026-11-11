@@ -9,7 +9,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import { defineConfig } from "vite";
-import { rehypeArticleSections } from "./src/lib/rehype-article-sections.ts";
+import { rehypeArticleSections } from "./src/lib/mdx/rehype-article-sections.ts";
 
 export default defineConfig({
   resolve: {

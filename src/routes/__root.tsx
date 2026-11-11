@@ -5,7 +5,7 @@ import { Toaster } from "@rutopio/ui/sonner";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
-import { NotFound } from "@/components/not-found";
+import { NotFound } from "@/components/layout/not-found";
 import { useLang } from "@/hooks/use-lang";
 
 // Soft fade-in on route change: the new page mounts at opacity 0 and animates to

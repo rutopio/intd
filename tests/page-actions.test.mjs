@@ -41,7 +41,7 @@ test("outline subscriptions follow the keyed page and drawer frames end on close
   const DrawerContent = ({ children }) =>
     React.use(DrawerState).open ? children : null;
   const { PageActions } = await loadSource(
-    new URL("../src/components/page-actions.tsx", import.meta.url),
+    new URL("../src/components/navigation/page-actions.tsx", import.meta.url),
     {
       globals: {
         window,
@@ -104,7 +104,7 @@ test("outline subscriptions follow the keyed page and drawer frames end on close
         },
         "@rutopio/ui/section-navigation": { scrollToSection() {} },
         "@rutopio/ui/use-mount-effect": { useMountEffect },
-        "@/components/share-button": { ShareButton: nothing },
+        "@/components/navigation/share-button": { ShareButton: nothing },
       },
     }
   );
@@ -163,7 +163,7 @@ test("changing the glow signature remounts only the overlay and respects reduced
   let presenceInitial;
   let animation;
   const { GlowCard } = await loadSource(
-    new URL("../src/components/glow-card.tsx", import.meta.url),
+    new URL("../src/components/calculator/glow-card.tsx", import.meta.url),
     {
       imports: {
         "react/jsx-runtime": jsx,

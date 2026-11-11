@@ -10,8 +10,8 @@ import {
   TableRow,
 } from "@rutopio/ui/table";
 import { useTranslation } from "react-i18next";
-import { GlowCard } from "@/components/glow-card";
-import { RollNumber } from "@/components/roll-number";
+import { GlowCard } from "@/components/calculator/glow-card";
+import { RollNumber } from "@/components/calculator/roll-number";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { type DecompositionResult, getResultKey } from "@/lib/decomposition";
 import { getResultRows } from "@/lib/result-rows";

@@ -1,14 +1,14 @@
 import { motionTransitions } from "@rutopio/ui/motion-tokens";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { AmountInWords } from "@/components/amount-in-words";
-import { AmountInput } from "@/components/amount-input";
-import { CopyDialog } from "@/components/copy-dialog";
-import { EmptyResults } from "@/components/empty-results";
-import { ResultTableCard } from "@/components/result-table-card";
-import { SettingsDialog } from "@/components/settings-dialog";
-import { ShareButton } from "@/components/share-button";
-import { ShuffleButton } from "@/components/shuffle-button";
-import { StrategySelector } from "@/components/strategy-selector";
+import { AmountInWords } from "@/components/calculator/amount-in-words";
+import { AmountInput } from "@/components/calculator/amount-input";
+import { CopyDialog } from "@/components/calculator/copy-dialog";
+import { EmptyResults } from "@/components/calculator/empty-results";
+import { ResultTableCard } from "@/components/calculator/result-table-card";
+import { SettingsDialog } from "@/components/calculator/settings-dialog";
+import { ShuffleButton } from "@/components/calculator/shuffle-button";
+import { StrategySelector } from "@/components/calculator/strategy-selector";
+import { ShareButton } from "@/components/navigation/share-button";
 import { useDecomposition } from "@/hooks/use-decomposition";
 
 // Shared home page, rendered by both the zh (/) and en (/en) routes. Language is

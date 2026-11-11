@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { App } from "@/components/pages/app";
+import { App } from "@/components/pages/home-page";
 import { prepareCalculationRoute } from "@/lib/prepare-calculation-route";
 import { searchSchema } from "@/lib/schema";
 

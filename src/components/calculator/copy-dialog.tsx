@@ -17,7 +17,7 @@ import { useIsNarrowViewport } from "@rutopio/ui/use-is-narrow-viewport";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
-import { JsonHighlight } from "@/components/json-highlight";
+import { JsonHighlight } from "@/components/calculator/json-highlight";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
