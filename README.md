@@ -1,73 +1,61 @@
 <div align="center">
 
-# IntD — Integer Decomposition Calculator
+# IntD: Integer decomposition calculator
 
 ![](public/og.png)
 
-An algorithm demo about Constrained **Int**eger **D**ecomposition Problem.
+An interactive demonstration of constrained integer decomposition. Choose a total and price rules to find matching item combinations.
 
 Live at [https://intd.chingru.com](https://intd.chingru.com).
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-7-3178C6?logo=typescript&logoColor=white)
 ![TanStack Router](https://img.shields.io/badge/TanStack_Router-1-FF4154?logo=react-query&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
-![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-Base_UI-000000?logo=shadcnui&logoColor=white)
-![Motion](https://img.shields.io/badge/Motion-12-EE4B96?logo=framer&logoColor=white)
-![Cloudflare Pages](https://img.shields.io/badge/Host_on-Cloudflare_Pages-F38020?logo=cloudflare&logoColor=white)
+[![Rutopio UI](https://img.shields.io/badge/Rutopio_UI-2-000000)](https://github.com/rutopio/ui)
+![Motion](https://img.shields.io/badge/Motion-14-EE4B96?logo=framer&logoColor=white)
+![Cloudflare Pages](https://img.shields.io/badge/Hosted_on-Cloudflare_Pages-F38020?logo=cloudflare&logoColor=white)
 
 </div>
 
-## Project Structure
+## Project structure
 
 ```
 src/
-├── components/       # UI components (pages/, layout/, ui/)
+├── components/       # Page and layout components
 ├── content/          # Per-locale MDX content (zh_tw/, en/)
 ├── hooks/            # Custom hooks
-├── lib/              # Pure logic (decompose, schema, format, …)
+├── lib/              # Calculation, validation, and formatting
 ├── locales/          # i18n strings (zh.json, en.json)
 └── routes/           # File-based routes (TanStack Router)
 ```
 
-## i18n Routing
+## Language and routes
 
-Chinese is the bare path (`/`, `/algo`, `/about`); English is prefixed with `/en`.
-The URL is the single source of truth for language — `use-lang.ts` derives it from
-the path, and `LangSync` in `__root.tsx` keeps i18next and `document.lang` in sync.
+Chinese pages use `/`, `/algo`, and `/about`. English pages use the `/en` prefix.
+`src/hooks/use-lang.ts` reads the language from the URL. The router subscription
+in `src/main.tsx` updates i18next and the HTML language attribute.
 
-UI strings live in `src/locales/{zh,en}.json`; long-form content lives as per-locale
-MDX under `src/content/{zh_tw,en}/`.
+UI translations are in `src/locales/{zh,en}.json`. Articles are stored as MDX
+in `src/content/{zh_tw,en}/`.
 
-## Development
+## Algorithm
 
-Requires Node.js 22+ and pnpm.
-
-```bash
-pnpm install  # install dependencies
-pnpm dev      # start the Vite dev server (default port)
-pnpm build    # validate and build for production
-pnpm format   # format, organize imports and apply safe lint fixes
-pnpm check    # read-only format, lint and type checks
-```
-
-## Algorithm Note
-
-See [https://intd.chingru.com/algo](https://intd.chingru.com/algo)
+Read the [algorithm explanation](https://intd.chingru.com/en/algo).
 
 ## Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request.
+Open an issue or pull request:
 
-- **Bug reports** — please include steps to reproduce and the expected behavior.
-- **New features** — open an issue first to discuss before sending a PR.
-- **i18n** — UI strings are in `src/locales/{zh,en}.json`; keep both files in key parity.
-- **Code style** — run `pnpm check` before submitting; the project uses Biome for linting and formatting.
+- for bugs, include steps to reproduce the problem and the expected result
+- discuss new features in an issue before implementing them
+- keep translation keys in `src/locales/zh.json` and `src/locales/en.json` aligned
+- run `pnpm check` before submitting changes
 
 ## License
 
-MIT - See [LICENSE](https://github.com/rutopio/intd/blob/master/LICENSE)
+[MIT License](./LICENSE)
 
 ## Development toolchain
 
@@ -79,21 +67,18 @@ Use Node.js 26.13.0 (`nvm use`) and pnpm 12.18.0, as pinned in
 | `pnpm dev` | Start the Vite development server. |
 | `pnpm build` | Run `check`, then create the production output in `dist/`. |
 | `pnpm format` | Format code, organize imports and apply safe Biome lint fixes. |
-| `pnpm check` | Check formatting, lint and browser/Functions types without modifying files. |
+| `pnpm check` | Check formatting, lint rules, and types for the browser and Pages Functions. |
 | `pnpm preview` | Serve the existing production build locally. |
 
-`format` replaces `lint:fix` and `check:fix`; `check` replaces `lint`,
-`format:check` and `check-types`. Fixes that need manual review still fail `check`.
-For dependency maintenance, use pnpm's built-in `outdated`, `update` and `audit`
-commands instead of repository aliases.
+`pnpm format` applies safe fixes. Resolve any remaining errors before running
+`pnpm check` again. Use `pnpm outdated`, `pnpm update`, and `pnpm audit` to
+maintain dependencies.
 
-The five personal sites share the same `biome.json`, `.editorconfig`,
-`.gitattributes`, `tsconfig.base.json`, Functions compiler settings and pnpm
-policy. Keep shared package versions aligned when upgrading. Project aliases,
-content pipelines and Cloudflare bindings remain specific to each site.
-CSS formatting stays outside Biome; Tailwind class sorting reads
-`src/styles/globals.css` and its shared design tokens.
+The five sites share formatting, lint, TypeScript, and pnpm settings. Keep
+shared dependency versions aligned when upgrading. Each site maintains its own
+aliases, content pipeline, and Cloudflare bindings. Biome does not format CSS.
+Tailwind class sorting uses `src/styles/globals.css` and the shared design tokens.
 
-Security overrides in `pnpm-workspace.yaml` document the advisories they fix.
-The serializer override aligns `seroval` with `seroval-plugins`; remove it once
-the upstream dependency graph consistently resolves compatible versions.
+`pnpm-workspace.yaml` records dependency overrides and the security advisories
+they address. Remove the `seroval` override when upstream dependencies resolve
+a version compatible with `seroval-plugins`.
