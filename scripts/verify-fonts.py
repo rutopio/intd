@@ -26,11 +26,11 @@ def main() -> None:
     if len(blocks) != 7:
         raise ValueError(f"Expected seven generated font faces, got {len(blocks)}")
     for block in blocks:
-        name = re.search(r'/font/([\w-]+\.woff2)', block)
+        name = re.search(r'/fonts/([\w-]+\.woff2)', block)
         declared = re.search(r'unicode-range:\s*([^;]+);', block)
         if not name or not declared or "font-display: swap;" not in block:
             raise ValueError(f"Incomplete font face: {block}")
-        path = ROOT / "public/font" / name.group(1)
+        path = ROOT / "public/fonts" / name.group(1)
         actual = set(TTFont(path).getBestCmap())
         if actual != expand_ranges(declared.group(1)):
             raise ValueError(f"Incorrect unicode-range: {path}")

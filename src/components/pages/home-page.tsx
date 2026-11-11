@@ -13,7 +13,7 @@ import { useDecomposition } from "@/hooks/use-decomposition";
 
 // Shared home page, rendered by both the zh (/) and en (/en) routes. Language is
 // read from the path via useLang; search params are read route-agnostically.
-export function App() {
+export function HomePage() {
   const reduce = useReducedMotion();
   const {
     isEn,

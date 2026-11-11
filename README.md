@@ -19,7 +19,10 @@ Live at [https://intd.chingru.com](https://intd.chingru.com).
 
 </div>
 
-## Project structure
+## Repository structure
+
+See [Repository structure](docs/repository-structure.md) for shared directory
+roles, naming rules, asset placement, and the exceptions used by these sites.
 
 ```
 src/
@@ -28,7 +31,9 @@ src/
 ├── hooks/            # Custom hooks
 ├── lib/              # Calculation, validation, and formatting
 ├── locales/          # i18n strings (zh.json, en.json)
-└── routes/           # File-based routes (TanStack Router)
+├── routes/           # File-based routes (TanStack Router)
+├── styles/           # Global styles, fonts, and generated font CSS
+└── types/            # Shared and ambient TypeScript declarations
 ```
 
 ## Language and routes

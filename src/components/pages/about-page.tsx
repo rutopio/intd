@@ -6,7 +6,7 @@ import { useLang } from "@/hooks/use-lang";
 
 // Shared About page, rendered by both / (zh) and /en routes. Picks the MDX body
 // by language; both are statically imported so each ships in its own chunk.
-export function About() {
+export function AboutPage() {
   const lang = useLang();
   const Content = lang === "en" ? EnContent : ZhContent;
   return (
