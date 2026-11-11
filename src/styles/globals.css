@@ -5,18 +5,4 @@
 @import "@rutopio/ui/neutral-theme.css";
 @import "@rutopio/ui/article.css";
 @import "./fonts.css";
-
-@layer base {
-  /* Long display math must scroll within itself, not widen the whole page. */
-  .katex-display {
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  /* KaTeX 0.18 shortens the aligned equation by 0.3em. Preserve the
-     article's original line box and the position of everything below it. */
-  main .katex-display:has(mtable) > .katex {
-    padding-bottom: 0.3em;
-  }
-}
+@import "katex/dist/katex.min.css";

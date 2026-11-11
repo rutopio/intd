@@ -12,7 +12,6 @@ import i18n from "./lib/i18n"
 import { getLangFromPath } from "./lib/language"
 import { OG_IMAGE_VERSION, parseBrand } from "./lib/render-og-image"
 import { getRouter } from "./router"
-import "katex/dist/katex.min.css"
 import "./styles/globals.css"
 
 const router = getRouter()
