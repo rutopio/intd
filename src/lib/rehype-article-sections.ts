@@ -1,4 +1,4 @@
-import { rehypeArticleSections as sharedSections } from "@rutopio/base-component/rehype-article-sections"
+import { rehypeArticleSections as sharedSections } from "@rutopio/ui/rehype-article-sections"
 
 const CONTENT_PATH = /(^|\/)src\/content\/(?:en|zh_tw)\/(?:algo|about)\.mdx$/
 

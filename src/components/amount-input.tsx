@@ -4,7 +4,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@rutopio/base-component/input-group"
+} from "@rutopio/ui/input-group"
 import { useTranslation } from "react-i18next"
 
 // Amount field with the inline decompose button and its inline error message.

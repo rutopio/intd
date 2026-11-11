@@ -1,4 +1,4 @@
-import { transitions } from "@rutopio/base-component/motion"
+import { transitions } from "@rutopio/ui/motion"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { AmountInWords } from "@/components/amount-in-words"
 import { AmountInput } from "@/components/amount-input"

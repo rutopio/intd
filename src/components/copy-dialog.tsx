@@ -1,19 +1,19 @@
 import { CopyIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/base-component/button"
+import { Button } from "@rutopio/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@rutopio/base-component/dialog"
+} from "@rutopio/ui/dialog"
 import {
   Drawer,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@rutopio/base-component/drawer"
-import { useIsMobile } from "@rutopio/base-component/use-mobile"
+} from "@rutopio/ui/drawer"
+import { useIsMobile } from "@rutopio/ui/use-mobile"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { toast } from "sonner"

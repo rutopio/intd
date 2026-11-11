@@ -1,5 +1,5 @@
-import { LanguageToggle as BaseLanguageToggle } from "@rutopio/base-component/language-toggle"
-import { useIsMobile } from "@rutopio/base-component/use-mobile"
+import { LanguageToggle as BaseLanguageToggle } from "@rutopio/ui/language-toggle"
+import { useIsMobile } from "@rutopio/ui/use-mobile"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { getLangFromPath } from "@/lib/language"
 

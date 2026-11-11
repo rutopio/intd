@@ -1,5 +1,5 @@
 import { XCircleIcon } from "@phosphor-icons/react"
-import { transitions } from "@rutopio/base-component/motion"
+import { transitions } from "@rutopio/ui/motion"
 import { motion, useReducedMotion } from "motion/react"
 import { useTranslation } from "react-i18next"
 import {

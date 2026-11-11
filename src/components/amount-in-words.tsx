@@ -1,4 +1,4 @@
-import { transitions } from "@rutopio/base-component/motion"
+import { transitions } from "@rutopio/ui/motion"
 import { motion } from "motion/react"
 import { cnSlots } from "@/lib/cn-amount"
 

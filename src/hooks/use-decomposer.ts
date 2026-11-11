@@ -1,4 +1,4 @@
-import { useMountEffect } from "@rutopio/base-component/use-mount-effect"
+import { useMountEffect } from "@rutopio/ui/use-mount-effect"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useRef, useState } from "react"
 import { useTranslation } from "react-i18next"

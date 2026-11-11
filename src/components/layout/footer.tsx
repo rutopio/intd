@@ -1,4 +1,4 @@
-import { AttributionFooter } from "@rutopio/base-component/footer"
+import { AttributionFooter } from "@rutopio/ui/footer"
 import { AUTHOR_PROFILE_URL } from "@/lib/constants"
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {

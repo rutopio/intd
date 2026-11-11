@@ -2,11 +2,11 @@ import {
   Article,
   articleComponents,
   articleLinkClassName,
-} from "@rutopio/base-component/article"
+} from "@rutopio/ui/article"
 
 export { Article }
 
-import { GithubMarkIcon } from "@rutopio/base-component/github-mark-icon"
+import { GithubMarkIcon } from "@rutopio/ui/github-mark-icon"
 import { isValidElement } from "react"
 import { Pseudocode } from "@/components/pseudocode"
 import { cn } from "@/lib/utils"

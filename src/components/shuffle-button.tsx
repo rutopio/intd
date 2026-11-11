@@ -1,5 +1,5 @@
 import { ArrowsClockwiseIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/base-component/button"
+import { Button } from "@rutopio/ui/button"
 import { motion } from "motion/react"
 import { useTranslation } from "react-i18next"
 

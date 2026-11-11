@@ -1,5 +1,5 @@
 import { GearIcon, PlusIcon, XIcon } from "@phosphor-icons/react"
-import { Button } from "@rutopio/base-component/button"
+import { Button } from "@rutopio/ui/button"
 import {
   Drawer,
   DrawerContent,
@@ -8,15 +8,15 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@rutopio/base-component/drawer"
-import { Input } from "@rutopio/base-component/input"
+} from "@rutopio/ui/drawer"
+import { Input } from "@rutopio/ui/input"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from "@rutopio/base-component/input-group"
-import { useIsMobile } from "@rutopio/base-component/use-mobile"
+} from "@rutopio/ui/input-group"
+import { useIsMobile } from "@rutopio/ui/use-mobile"
 import { useForm } from "@tanstack/react-form"
 import { useId, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
