@@ -16,3 +16,16 @@ todos.json
 /tasks
 .font-source-cache/
 __pycache__/
+
+# Local credentials and machine-specific metadata
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
