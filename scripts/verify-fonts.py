@@ -9,7 +9,7 @@ from pathlib import Path
 from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
-CSS = (ROOT / "src/generated-fonts.css").read_text(encoding="utf-8")
+CSS = (ROOT / "src/styles/generated-fonts.css").read_text(encoding="utf-8")
 
 
 def expand_ranges(value: str) -> set[int]:

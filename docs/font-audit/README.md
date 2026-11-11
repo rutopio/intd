@@ -66,6 +66,6 @@ python3 scripts/verify-fonts.py
 pnpm build
 ```
 
-The optimizer downloads checksum-pinned Inter 4.1 and Noto Sans TC sources into ignored `.font-source-cache`, reads the checked-in original coverage maps, writes WOFF2 files and `src/generated-fonts.css`, and updates core preload hashes in `index.html`. It is **not** part of the build. Rerunning without a source or content change is byte-for-byte deterministic. Rerun it when visible copy, translations, MDX/code examples, component text, font families, weights, variable-axis settings, or OpenType feature settings change. Repeat the browser pixel and network checks after any regenerated output; the checked-in audit describes this measured state, not future content.
+The optimizer downloads checksum-pinned Inter 4.1 and Noto Sans TC sources into ignored `.font-source-cache`, reads the checked-in original coverage maps, writes WOFF2 files and `src/styles/generated-fonts.css`, and updates core preload hashes in `index.html`. It is **not** part of the build. Rerunning without a source or content change is byte-for-byte deterministic. Rerun it when visible copy, translations, MDX/code examples, component text, font families, weights, variable-axis settings, or OpenType feature settings change. Repeat the browser pixel and network checks after any regenerated output; the checked-in audit describes this measured state, not future content.
 
 Embedding core fonts in the global CSS and idle precaching of extended fonts remain future experiments; neither is applied here.

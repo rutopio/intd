@@ -20,7 +20,7 @@ from fontTools.varLib.instancer import instantiateVariableFont
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".font-source-cache"
 OUTPUT = ROOT / "public/font"
-CSS = ROOT / "src/generated-fonts.css"
+CSS = ROOT / "src/styles/generated-fonts.css"
 SOURCES = {
     "inter-normal": (
         "https://raw.githubusercontent.com/rsms/inter/v4.1/docs/font-files/InterVariable.woff2",

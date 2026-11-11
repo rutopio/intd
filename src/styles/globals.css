@@ -1,19 +1,10 @@
-@source "../node_modules/@rutopio/ui/dist";
+@source "../../node_modules/@rutopio/ui/dist";
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@rutopio/ui/styles.css";
-@import "@rutopio/ui/article.css";
+@import "@rutopio/ui/globals.css";
 @import "@rutopio/ui/neutral-theme.css";
-@import "@rutopio/ui/cjk-fonts.css";
-@import "./generated-fonts.css";
-
-@font-face {
-    font-family: 'Paper Mono';
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('/fonts/PaperMono[wght].woff2') format('woff2');
-}
-
+@import "@rutopio/ui/article.css";
+@import "./fonts.css";
 
 @layer base {
   /* Long display math must scroll within itself, not widen the whole page. */
