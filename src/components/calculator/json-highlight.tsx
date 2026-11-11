@@ -40,7 +40,7 @@ function highlightLine(line: string) {
 export function JsonHighlight({ code }: { code: string }) {
   const lines = code.split("\n");
   return (
-    <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-xs">
+    <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-base">
       <code>
         {lines.map((line, i) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: line order is fixed, index is a stable key

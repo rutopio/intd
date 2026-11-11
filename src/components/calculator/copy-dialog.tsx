@@ -84,7 +84,7 @@ export function CopyDialog({
                 />
               ) : (
                 <>
-                  <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-xs">
+                  <pre className="bg-muted max-h-64 max-w-full overflow-auto rounded-md p-3 font-mono text-base">
                     {formats[v](result, showTotal, showUnit, bagName, t)}
                   </pre>
                   {v === "table" && (
