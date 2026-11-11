@@ -46,9 +46,10 @@ Requires Node.js 22+ and pnpm.
 
 ```bash
 pnpm install  # install dependencies
-pnpm dev      # start dev server at localhost:3000
-pnpm build    # production build
-pnpm check    # format + lint + type-check
+pnpm dev      # start the Vite dev server (default port)
+pnpm build    # validate and build for production
+pnpm format   # format, organize imports and apply safe lint fixes
+pnpm check    # read-only format, lint and type checks
 ```
 
 ## Algorithm Note
@@ -73,11 +74,18 @@ MIT - See [LICENSE](https://github.com/rutopio/intd/blob/master/LICENSE)
 Use Node.js 26.13.0 (`nvm use`) and pnpm 12.18.0, as pinned in
 `.nvmrc` and `package.json`. Install with `pnpm install --frozen-lockfile`.
 
-- `pnpm check`: read-only Biome formatting/lint and browser/Functions type checks
-- `pnpm check:fix`: apply safe Biome fixes
-- `pnpm format`: format source files
-- `pnpm build`: create the production output
-- `pnpm audit`: check direct and transitive dependencies
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Start the Vite development server. |
+| `pnpm build` | Run `check`, then create the production output in `dist/`. |
+| `pnpm format` | Format code, organize imports and apply safe Biome lint fixes. |
+| `pnpm check` | Check formatting, lint and browser/Functions types without modifying files. |
+| `pnpm preview` | Serve the existing production build locally. |
+
+`format` replaces `lint:fix` and `check:fix`; `check` replaces `lint`,
+`format:check` and `check-types`. Fixes that need manual review still fail `check`.
+For dependency maintenance, use pnpm's built-in `outdated`, `update` and `audit`
+commands instead of repository aliases.
 
 The five personal sites share the same `biome.json`, `.editorconfig`,
 `.gitattributes`, `tsconfig.base.json`, Functions compiler settings and pnpm
