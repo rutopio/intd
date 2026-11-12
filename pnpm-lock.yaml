@@ -182,8 +182,8 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
       '@rutopio/ui':
-        specifier: github:rutopio/ui#v2.0.3
-        version: ui@https://codeload.github.com/rutopio/ui/tar.gz/e5e17ba92bd29ea52d4b746dba4787fed740a592(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))
+        specifier: github:rutopio/ui#v2.0.4
+        version: ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))
       '@tanstack/react-form':
         specifier: 1.33.5
         version: 1.33.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -2409,9 +2409,6 @@ packages:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
     engines: {node: '>=18'}
 
-  tailwind-merge@3.7.0:
-    resolution: {integrity: sha512-XPPUyAc+cvspz3lHTcR/QgPfW2A0lv/xQNIjX3HGhLR+Nq2lHaLq5MtTesHn8GUr3W3DguT2KT5x3NVgRtYwmA==}
-
   tailwindcss@4.3.5:
     resolution: {integrity: sha512-FcQk9BuffmEHJP2G0XmB2SplU1aLTI7j07Kunk+U74Ny+XiWOtzXz9aujFZ/avntw1e2cOv/3PkgzflQ7gX2vQ==}
 
@@ -2440,9 +2437,9 @@ packages:
     engines: {node: '>=16.20.0'}
     hasBin: true
 
-  ui@https://codeload.github.com/rutopio/ui/tar.gz/e5e17ba92bd29ea52d4b746dba4787fed740a592:
-    resolution: {gitHosted: true, integrity: sha512-r4vx1pN2gb+coqt8yzeDFxsG8hDkLZMPtx62ICpAxB6szhhNcSLnde4hJPaAsUeeyt0GkL+CQfK/wgr5cbpvEw==, tarball: https://codeload.github.com/rutopio/ui/tar.gz/e5e17ba92bd29ea52d4b746dba4787fed740a592}
-    version: 2.0.3
+  ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b:
+    resolution: {gitHosted: true, integrity: sha512-qt1DhQIXdk1PkExAgQAMIKTx9oN1vw4jKb7QGGOG6TzVjeF8a3tDlHH8Lzael8vke2SaK9MMcAycQ86ufrrXOA==, tarball: https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b}
+    version: 2.0.4
     engines: {node: '>=26.13.0 <27', pnpm: '>=12.18.0 <13'}
     peerDependencies:
       '@base-ui/react': ^1.9.0
@@ -4909,8 +4906,6 @@ snapshots:
 
   supports-color@10.2.2: {}
 
-  tailwind-merge@3.7.0: {}
-
   tailwindcss@4.3.5: {}
 
   tapable@2.3.3: {}
@@ -4951,17 +4946,16 @@ snapshots:
       '@typescript/typescript-win32-arm64': 7.0.2
       '@typescript/typescript-win32-x64': 7.0.2
 
-  ui@https://codeload.github.com/rutopio/ui/tar.gz/e5e17ba92bd29ea52d4b746dba4787fed740a592(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)):
+  ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)):
     dependencies:
       '@base-ui/react': 1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@phosphor-icons/react': 2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       class-variance-authority: 0.7.1
-      clsx: 2.1.1
+      cn: 0.5.2
       motion: 14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next-themes: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tailwind-merge: 3.7.0
     optionalDependencies:
       '@shikijs/transformers': 4.6.0
       rehype-pretty-code: 0.14.6(shiki@4.6.0)
