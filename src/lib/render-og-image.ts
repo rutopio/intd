@@ -5,7 +5,7 @@ const POSITIVE_INTEGER_RE = /^[1-9][0-9]*$/;
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
-export const OG_IMAGE_VERSION = "4";
+export const OG_IMAGE_VERSION = "7";
 
 const BG_COLOR = "#ffffff";
 const FG_COLOR = "#000000";
@@ -16,8 +16,8 @@ export const OG_FONT_FAMILY = "Inter Variable Display";
 
 const SUBTITLE = "Integer Decomposition Calculator";
 
-/** Fit the 701 × 800 favicon path in the existing 150 × 150 logo slot. */
-const LOGO = `<g transform="translate(9.28125 0) scale(0.1875)"><path d="${INTD_ICON_PATH}"/></g>`;
+/** Fit the 811 × 800 icon in the 150 × 150 logo slot. */
+const LOGO = `<g transform="translate(0.3875 1.4) scale(0.184)"><g transform="translate(81.1 80) scale(0.8)"><path d="${INTD_ICON_PATH}"/></g></g>`;
 
 const LOGO_SIZE = 150;
 const GAP = 32; // space between logo and brand

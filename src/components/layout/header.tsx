@@ -49,17 +49,14 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
           <span className="flex size-12 items-center justify-center">
             <svg
               aria-hidden="true"
-              className="text-foreground h-8 w-7"
+              className="text-foreground h-8 w-8"
               fill="currentColor"
-              viewBox="0 0 701 800"
+              viewBox="0 0 811 800"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d={INTD_ICON_PATH}
-                stroke="currentColor"
-                strokeWidth="0.5"
-                vectorEffect="non-scaling-stroke"
-              />
+              <g transform="translate(81.1 80) scale(0.8)">
+                <path d={INTD_ICON_PATH} />
+              </g>
             </svg>
           </span>
         </Link>
