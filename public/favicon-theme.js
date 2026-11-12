@@ -4,8 +4,8 @@
 
   const update = () => {
     const href = document.documentElement.classList.contains("dark")
-      ? "/favicon-dark.svg"
-      : "/favicon.svg";
+      ? "/favicon-dark.svg?v=7"
+      : "/favicon.svg?v=7";
     if (icon.getAttribute("href") !== href) icon.setAttribute("href", href);
   };
 
