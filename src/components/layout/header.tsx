@@ -1,4 +1,4 @@
-import { CheckIcon, GithubLogoIcon, ListIcon } from "@phosphor-icons/react";
+import { GithubLogoIcon, ListIcon } from "@phosphor-icons/react";
 import { buttonVariants } from "@rutopio/ui/button";
 import { HeaderNavigation, SiteHeader } from "@rutopio/ui/site-header";
 import { Link, useLocation } from "@tanstack/react-router";
@@ -67,7 +67,6 @@ export function Header({ className }: React.HTMLAttributes<HTMLElement>) {
           label={t("nav.menu")}
           title="IntD"
           menuIcon={<ListIcon aria-hidden="true" />}
-          selectedIcon={<CheckIcon aria-hidden="true" />}
           renderLink={(item, props) => (
             <Link
               to={item.href}

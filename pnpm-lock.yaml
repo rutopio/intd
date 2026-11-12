@@ -182,8 +182,8 @@ importers:
         specifier: 2.6.2
         version: 2.6.2
       '@rutopio/ui':
-        specifier: github:rutopio/ui#v2.0.4
-        version: ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))
+        specifier: github:rutopio/ui#v2.0.5
+        version: ui@https://codeload.github.com/rutopio/ui/tar.gz/eb1feaee8cbbfa13d8275fffc9f9ff8160019d93(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))
       '@tanstack/react-form':
         specifier: 1.33.5
         version: 1.33.5(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -2437,9 +2437,9 @@ packages:
     engines: {node: '>=16.20.0'}
     hasBin: true
 
-  ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b:
-    resolution: {gitHosted: true, integrity: sha512-qt1DhQIXdk1PkExAgQAMIKTx9oN1vw4jKb7QGGOG6TzVjeF8a3tDlHH8Lzael8vke2SaK9MMcAycQ86ufrrXOA==, tarball: https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b}
-    version: 2.0.4
+  ui@https://codeload.github.com/rutopio/ui/tar.gz/eb1feaee8cbbfa13d8275fffc9f9ff8160019d93:
+    resolution: {gitHosted: true, integrity: sha512-6mPJXYze9Qj3fKYm07hqzR5ZfnAvWgvwB4UhgiTW4O6N36FDjXnpppBlj87WzcsqbWn++Klea0G1BqgFuhZPrQ==, tarball: https://codeload.github.com/rutopio/ui/tar.gz/eb1feaee8cbbfa13d8275fffc9f9ff8160019d93}
+    version: 2.0.5
     engines: {node: '>=26.13.0 <27', pnpm: '>=12.18.0 <13'}
     peerDependencies:
       '@base-ui/react': ^1.9.0
@@ -4946,7 +4946,7 @@ snapshots:
       '@typescript/typescript-win32-arm64': 7.0.2
       '@typescript/typescript-win32-x64': 7.0.2
 
-  ui@https://codeload.github.com/rutopio/ui/tar.gz/2a69e5a7181f79fd708aee1479b30d6a45321e1b(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)):
+  ui@https://codeload.github.com/rutopio/ui/tar.gz/eb1feaee8cbbfa13d8275fffc9f9ff8160019d93(@base-ui/react@1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@phosphor-icons/react@2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@shikijs/transformers@4.6.0)(motion@14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(next-themes@0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(rehype-pretty-code@0.14.6(shiki@4.6.0))(shiki@4.6.0)(sonner@2.0.8(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)):
     dependencies:
       '@base-ui/react': 1.9.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@phosphor-icons/react': 2.1.10(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
